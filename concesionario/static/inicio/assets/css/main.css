@@ -1043,9 +1043,9 @@
 
 	}
 
-/* Signup Form */
+/* Index Form */
 
-	#signup-form {
+	.index-form {
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -1053,40 +1053,40 @@
 		position: relative;
 	}
 
-		#signup-form input[type="text"],
-		#signup-form input[type="password"],
-		#signup-form input[type="email"] {
+		.index-form input[type="text"],
+		.index-form input[type="password"],
+		.index-form input[type="email"] {
 			width: 18em;
 		}
 
-		#signup-form > * {
+		.index-form > * {
 			margin: 0 0 0 1em;
 		}
 
-		#signup-form > :first-child {
+		.index-form > :first-child {
 			margin: 0 0 0 0;
 		}
 
 		@media screen and (max-width: 480px) {
 
-			#signup-form {
+			.index-form {
 				-moz-flex-direction: column;
 				-webkit-flex-direction: column;
 				-ms-flex-direction: column;
 				flex-direction: column;
 			}
 
-				#signup-form input[type="type"],
-				#signup-form input[type="password"],
-				#signup-form input[type="email"] {
+				.index-form input[type="type"],
+				.index-form input[type="password"],
+				.index-form input[type="email"] {
 					width: 100%;
 				}
 
-				#signup-form > * {
+				.index-form > * {
 					margin: 1.25em 0 0 0;
 				}
 
-				#signup-form .message {
+				.index-form .message {
 					bottom: -1.5em;
 					font-size: 0.9em;
 					height: 1em;
@@ -1097,6 +1097,11 @@
 				}
 
 		}
+
+
+
+
+
 
 /* Footer */
 
