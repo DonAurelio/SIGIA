@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse 
-from django.template import Context 
+from django.template import Context
+from django.views.generic import TemplateView 
+
+class Inicio(TemplateView):
+	template_name = 'inicio/inicio.html'
 
 
-# Create your views here.
-def hola_mundo(request):
-	return render(request,'inicio/inicio.html',Context())
