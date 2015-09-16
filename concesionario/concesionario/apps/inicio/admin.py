@@ -7,7 +7,7 @@ from django.contrib import admin
 #Example:
 #http://doomatel.web-profile.org/entries/show/using-django-auth-useradmin-for-a-custom-user-model/
 
-UserAdmin.list_display = ('identificacion','email', 'first_name', 'last_name', 'direccion','telefono','is_active', 'date_joined', 'is_staff')
+UserAdmin.list_display = ('identificacion','tipousuario','email', 'first_name', 'last_name', 'direccion','telefono','is_active', 'date_joined', 'is_staff')
 UserAdmin.fieldsets = (
         (('Additional information'), {'fields': ('identificacion','direccion','telefono','tipousuario',)}),
     ) + UserAdmin.fieldsets 
