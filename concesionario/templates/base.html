@@ -1,0 +1,232 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>SIGIA | Principal</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link href="{% static 'color_admin/assets/plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/plugins/bootstrap-3.2.0/css/bootstrap.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/plugins/font-awesome-4.2.0/css/font-awesome.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/css/animate.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/css/style.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/css/style-responsive.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/css/theme/default.css' %}" rel="stylesheet" id="theme" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
+    <link href="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css' %}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/morris/morris.css' %}" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL CSS STYLE ================== -->
+</head>
+<body>
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+	<!-- end #page-loader -->
+	
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+		<!-- begin #header -->
+		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+			<!-- begin container-fluid -->
+			<div class="container-fluid">
+				<!-- begin mobile sidebar expand / collapse button -->
+				<div class="navbar-header">
+					<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> SIGIA</a>
+					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- end mobile sidebar expand / collapse button -->
+				
+				<!-- begin header navigation right -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown navbar-user">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="{% static 'color_admin/assets/img/user-13.jpg' %}" alt="" /> 
+							<span class="hidden-xs">{{ user.first_name }} {{ user.last_name }}</span> <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu animated fadeInLeft">
+							<li class="arrow"></li>
+							<li><a href="javascript:;">Editar perfil</a></li>
+							<li><a href="javascript:;">Calendario</a></li>
+							<li class="divider"></li>
+							<li><a href="javascript:;">Cerrar sesion</a></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- end header navigation right -->
+			</div>
+			<!-- end container-fluid -->
+		</div>
+		<!-- end #header -->
+		
+		<!-- begin #sidebar -->
+		<div id="sidebar" class="sidebar">
+			<!-- begin sidebar scrollbar -->
+			<div data-scrollbar="true" data-height="100%">
+				<!-- begin sidebar user -->
+				<ul class="nav">
+					<li class="nav-profile">
+						<div class="image">
+							<a href="javascript:;"><img src="{% static 'color_admin/assets/img/user-13.jpg' %}" alt="" /></a>
+						</div>
+						<div class="info">
+							{{ user.first_name }} {{ user.last_name }}
+							<small>{{ user.tipousuario }}</small>
+						</div>
+					</li>
+				</ul>
+				<!-- end sidebar user -->
+
+				<!-- begin sidebar nav -->
+				<!-- Aurelio: Incio barra de navegacion -->
+				<ul class="nav">
+					<li class="nav-header">Navegacion</li>
+
+					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+			        <!-- end sidebar minify button -->
+				</ul>
+				<!-- Aurelio: Fin barra de navegacion -->
+				<!-- end sidebar nav -->
+			
+			</div>
+			<!-- end sidebar scrollbar -->
+		</div>
+		<div class="sidebar-bg"></div>
+		<!-- end #sidebar -->
+		
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<!-- begin page-header -->
+			<h1 class="page-header">Herramientas <small>header small text goes here...</small></h1>
+			<!-- end page-header -->
+			<!-- begin row -->
+
+			<div class="row">
+			    <!-- begin col-3 -->
+			    <div class="col-md-3 col-sm-6">
+			        <div class="widget widget-stats bg-green">
+			            <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+			            <div class="stats-title underline">TODAY'S VISITS</div>
+			            <div class="stats-number">7,842,900</div>
+			            <div class="stats-progress progress">
+                            <div class="progress-bar" style="width: 70.1%;"></div>
+                        </div>
+                        <div class="stats-desc">Better than last week (70.1%)</div>
+			        </div>
+			    </div>
+			    <!-- end col-3 -->
+			    <!-- begin col-3 -->
+			    <div class="col-md-3 col-sm-6">
+			        <div class="widget widget-stats bg-blue">
+			            <div class="stats-icon stats-icon-lg"><i class="fa fa-tags fa-fw"></i></div>
+			            <div class="stats-title">TODAY'S PROFIT</div>
+			            <div class="stats-number">180,200</div>
+			            <div class="stats-progress progress">
+                            <div class="progress-bar" style="width: 40.5%;"></div>
+                        </div>
+                        <div class="stats-desc">Better than last week (40.5%)</div>
+			        </div>
+			    </div>
+			    <!-- end col-3 -->
+			    <!-- begin col-3 -->
+			    <div class="col-md-3 col-sm-6">
+			        <div class="widget widget-stats bg-purple">
+			            <div class="stats-icon stats-icon-lg"><i class="fa fa-shopping-cart fa-fw"></i></div>
+			            <div class="stats-title">NEW ORDERS</div>
+			            <div class="stats-number">38,900</div>
+			            <div class="stats-progress progress">
+                            <div class="progress-bar" style="width: 76.3%;"></div>
+                        </div>
+                        <div class="stats-desc">Better than last week (76.3%)</div>
+			        </div>
+			    </div>
+			    <!-- end col-3 -->
+			    <!-- begin col-3 -->
+			    <div class="col-md-3 col-sm-6">
+			        <div class="widget widget-stats bg-black">
+			            <div class="stats-icon stats-icon-lg"><i class="fa fa-comments fa-fw"></i></div>
+			            <div class="stats-title">NEW COMMENTS</div>
+			            <div class="stats-number">3,988</div>
+			            <div class="stats-progress progress">
+                            <div class="progress-bar" style="width: 54.9%;"></div>
+                        </div>
+                        <div class="stats-desc">Better than last week (54.9%)</div>
+			        </div>
+			    </div>
+			    <!-- end col-3 -->
+			</div>
+			<!-- end row -->
+			
+			<!-- begin row -->
+			<!-- Aurelio: Primear fila de componentes (Ej tablas, graficos)-->
+			<div class="row">
+			    
+			</div>
+			<!-- Aurelio: fin primera fila de componentes -->
+			<!-- end row -->
+
+			<!-- begin row -->
+			<!-- Aurelio: segunda fila de componentes (Ej tablas, graficos)-->
+			<div class="row">
+			    {% include "calendario.html" %}
+			    {% include "calendario.html" %}
+			</div>
+			<!-- Aurelio: fin segunda fila de componentes -->
+			<!-- end row -->
+
+
+		</div>
+		<!-- end #content -->
+	
+		
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{% static 'color_admin/assets/plugins/jquery-1.8.2/jquery-1.8.2.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/bootstrap-3.2.0/js/bootstrap.min.js' %}"></script>
+	<!--[if lt IE 9]>
+		<script src="{% static 'color_admin/assets/crossbrowserjs/html5shiv.js' %}"></script>
+		<script src="{% static 'color_admin/assets/crossbrowserjs/respond.min.js' %}"></script>
+		<script src="{% static 'color_admin/assets/crossbrowserjs/excanvas.min.js' %}"></script>
+	<![endif]-->
+	<script src="{% static 'color_admin/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-cookie/jquery.cookie.js' %}"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{% static 'color_admin/assets/plugins/morris/raphael.min.js' %}"></script>
+    <script src="{% static 'color_Admin/assets/plugins/morris/morris.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/gritter/js/jquery.gritter.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/dashboard-v2.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	<script>
+		$(document).ready(function() {
+			App.init();
+			DashboardV2.init();
+		});
+	</script>
+</body>
+</html>
