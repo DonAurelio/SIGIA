@@ -1,6 +1,6 @@
-from django.shortcuts import render 
+from django.shortcuts import render , render_to_response
 from django.http import HttpResponse , HttpResponseRedirect
-from django.template import Context
+from django.template import Context, RequestContext
 from django.views.generic import TemplateView
 from django.views.generic.base import View
 from django.contrib.auth import authenticate, login
@@ -22,8 +22,10 @@ class IniciarSesion(TemplateView):
 	
 	def dispatch(self,request,*args,**kwargs):
 		
-		username = request.POST['username']
-		password = request.POST['password']
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+
+		print username
 
 		user = authenticate(username=username, password=password)
 		if user is not None:
@@ -37,11 +39,12 @@ class IniciarSesion(TemplateView):
 				elif user.tipousuario == JEFE_TALLER:
 					return HttpResponseRedirect('/perfil_jefe_taller/')
 			else:
-				# Return a 'disabled account' error message
-				pass
+				context = {'error':True}
+				return render_to_response('inicio/inicio.html',context,context_instance=RequestContext(request))
+				
 		else:
-			# Return an 'invalid login' error message.
-			pass
+			context = {'error':True}
+			return render_to_response('inicio/inicio.html',context,context_instance=RequestContext(request))
 	
 
 

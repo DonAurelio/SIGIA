@@ -1,259 +1,165 @@
 {% load staticfiles %}
-<!DOCTYPE HTML>
-<!--
-	Eventually by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>SIGIA</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="{% static 'inicio/assets/css/main.css' %}" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>SIGIA | Iniciar Sesion</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link href="{% static 'color_admin/assets/plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/plugins/bootstrap-3.2.0/css/bootstrap.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/plugins/font-awesome-4.2.0/css/font-awesome.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/css/animate.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/css/style.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/css/style-responsive.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/css/theme/default.css' %}" rel="stylesheet" id="theme" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+</head>
+<body>
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+	<!-- end #page-loader -->
+	
+	<div class="login-cover">
+	    <div class="login-cover-image"><img src="{% static 'color_admin/assets/img/login-bg/bg-1.jpg' %}" data-id="login-cover-image" alt="" /></div>
+	    <div class="login-cover-bg"></div>
+	</div>
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade">
+	    <!-- begin login -->
+        <div class="login login-v2" data-pageload-addclass="animated flipInX">
+            <!-- begin brand -->
+            <div class="login-header">
+                <div class="brand">
+                    <span class="logo"></span> SIGIA
+                    <small>Sistema de Gestion de Inventario Automotriz</small>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-sign-in"></i>
+                </div>
+            </div>
+            <!-- end brand -->
+            <div class="login-content">
+                <form action="{% url 'inicio:iniciar_sesion' %}" method="POST" class="margin-bottom-0">{% csrf_token %}
+                    <div class="form-group m-b-20">
+                        <input name="username" type="text" class="form-control input-lg" placeholder="Email Address" />
+                    </div>
+                    <div class="form-group m-b-20">
+                        <input name="password" type="password" class="form-control input-lg" placeholder="Password" />
+                    </div>
+                    <div class="checkbox m-b-20">
+                        <label>
+                            {% if error %}
+                                Por favor verifique su usuario y contraseña
+                            {% endif %}
+                        </label>
+                    </div>
+                    <div class="login-buttons">
+                        <button type="submit" class="btn btn-success btn-block btn-lg">Iniciar</button>
+                    </div>
+                    <div class="m-t-20">
+                        No eres miembro aun? Click <a href="#">aqui</a> para registrar.
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end login -->
+        
+        <ul class="login-bg-list">
+            <li class="active"><a href="#" data-click="change-bg"><img src="{% static 'color_admin/assets/img/login-bg/bg-1.jpg' %}" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="{% static 'color_admin/assets/img/login-bg/bg-2.jpg' %}" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="{% static 'color_admin/assets/img/login-bg/bg-3.jpg' %}" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="{% static 'color_admin/assets/img/login-bg/bg-4.jpg' %}" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="{% static 'color_admin/assets/img/login-bg/bg-5.jpg' %}" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="{% static 'color_admin/assets/img/login-bg/bg-6.jpg' %}" alt="" /></a></li>
+        </ul>
+        
+        <!-- begin theme-panel -->
+        <div class="theme-panel">
+            <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a>
+            <div class="theme-panel-content">
+                <h5 class="m-t-0">Color Theme</h5>
+                <ul class="theme-list clearfix">
+                    <li class="active"><a href="javascript:;" class="bg-green" data-theme="default" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-red" data-theme="red" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-blue" data-theme="blue" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Blue">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-purple" data-theme="purple" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-orange" data-theme="orange" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Orange">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-black" data-theme="black" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
+                </ul>
+                <div class="divider"></div>
+                <div class="row m-t-10">
+                    <div class="col-md-5 control-label double-line">Header Styling</div>
+                    <div class="col-md-7">
+                        <select name="header-styling" class="form-control input-sm">
+                            <option value="1">default</option>
+                            <option value="2">inverse</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row m-t-10">
+                    <div class="col-md-5 control-label">Header</div>
+                    <div class="col-md-7">
+                        <select name="header-fixed" class="form-control input-sm">
+                            <option value="1">fixed</option>
+                            <option value="2">default</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row m-t-10">
+                    <div class="col-md-5 control-label double-line">Sidebar Styling</div>
+                    <div class="col-md-7">
+                        <select name="sidebar-styling" class="form-control input-sm">
+                            <option value="1">default</option>
+                            <option value="2">grid</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row m-t-10">
+                    <div class="col-md-5 control-label">Sidebar</div>
+                    <div class="col-md-7">
+                        <select name="sidebar-fixed" class="form-control input-sm">
+                            <option value="1">fixed</option>
+                            <option value="2">default</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end theme-panel -->
+	</div>
+	<!-- end page container -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{% static 'color_admin/assets/plugins/jquery-1.8.2/jquery-1.8.2.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/bootstrap-3.2.0/js/bootstrap.min.js' %}"></script>
+	<!--[if lt IE 9]>
+		<script src="assets/crossbrowserjs/html5shiv.js"></script>
+		<script src="assets/crossbrowserjs/respond.min.js"></script>
+		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+	<script src="{% static 'color_admin/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-cookie/jquery.cookie.js' %}"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{% static 'color_admin/assets/js/login-v2.demo.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
 
-
-	</head>
-	<body>
-
-		<!-- Header -->
-			<header id="header">
-				<h1>Sistema de Gestion de Inventario Automotor</h1>
-				<p>
-				Un nuevo sistema de inventarios donde tu experiencia de navegación sera distinta.
-				<br>
-				Si desea consultar el estado de su vehiculo en reparacion por favor digite la 
-				<br>
-				orden de trabajo despues del formulario de inicio de sesión
-				<!--<a href="http://html5up.net">HTML5 UP</a>.-->
-				</p>
-			</header>
-
-		<!-- Signup Form -->
-			<form id="signup-form" class="index-form" method="post" action="{% url 'inicio:iniciar_sesion' %}">{% csrf_token %}
-				<input type="text" name="username" id="username" placeholder="Nombre de usuario" />
-				<input type="password" name="password" id="password" placeholder="Contraseña"/>
-				<input type="submit" value="Ingresar" />
-				
-			</form>
-
-			<form id="workorder-form" class="index-form" method="post" action="{% url 'inicio:iniciar_sesion' %}">{% csrf_token %}
-				<input type="text" name="workorder" id="workorder" placeholder="Número orden de trabajo" />
-				<input type="submit" value="Consultar" />
-			</form>
-			
-			
-
-		<!-- Footer -->
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
-			</footer>
-
-		<!-- Scripts -->
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<!--<script src="{% static 'inicio/assets/js/main.js' %}"></script>-->
-			
-			<script type="text/javascript">
-				/*
-					Eventually by HTML5 UP
-					html5up.net | @n33co
-					Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-				*/
-
-				(function() {
-
-					"use strict";
-
-					// Methods/polyfills.
-
-						// classList | (c) @remy | github.com/remy/polyfills | rem.mit-license.org
-							!function(){function t(t){this.el=t;for(var n=t.className.replace(/^\s+|\s+$/g,"").split(/\s+/),i=0;i<n.length;i++)e.call(this,n[i])}function n(t,n,i){Object.defineProperty?Object.defineProperty(t,n,{get:i}):t.__defineGetter__(n,i)}if(!("undefined"==typeof window.Element||"classList"in document.documentElement)){var i=Array.prototype,e=i.push,s=i.splice,o=i.join;t.prototype={add:function(t){this.contains(t)||(e.call(this,t),this.el.className=this.toString())},contains:function(t){return-1!=this.el.className.indexOf(t)},item:function(t){return this[t]||null},remove:function(t){if(this.contains(t)){for(var n=0;n<this.length&&this[n]!=t;n++);s.call(this,n,1),this.el.className=this.toString()}},toString:function(){return o.call(this," ")},toggle:function(t){return this.contains(t)?this.remove(t):this.add(t),this.contains(t)}},window.DOMTokenList=t,n(Element.prototype,"classList",function(){return new t(this)})}}();
-
-						// canUse
-							window.canUse=function(p){if(!window._canUse)window._canUse=document.createElement("div");var e=window._canUse.style,up=p.charAt(0).toUpperCase()+p.slice(1);return p in e||"Moz"+up in e||"Webkit"+up in e||"O"+up in e||"ms"+up in e};
-
-						// window.addEventListener
-							(function(){if("addEventListener"in window)return;window.addEventListener=function(type,f){window.attachEvent("on"+type,f)}})();
-
-					// Vars.
-						var	$body = document.querySelector('body');
-
-					// Disable animations/transitions until everything's loaded.
-						$body.classList.add('is-loading');
-
-						window.addEventListener('load', function() {
-							window.setTimeout(function() {
-								$body.classList.remove('is-loading');
-							}, 100);
-						});
-
-					// Slideshow Background.
-						(function() {
-
-							// Settings.
-								var settings = {
-
-									// Images (in the format of 'url': 'alignment').
-										images: {
-
-											//'images/bg01.jpg': 'center',
-											//'images/bg02.jpg': 'center',
-											//'images/bg03.jpg': 'center'
-
-											//'inicio/images/bg01.jpg': 'center',
-											//'inicio/images/bg02.jpg': 'center',
-											//'inicio/images/bg03.jpg': 'center'
-
-											"{% static 'inicio/images/bg01.jpg'%}":'center',
-											"{% static 'inicio/images/bg02.jpg'%}":'center',
-											"{% static 'inicio/images/bg03.jpg'%}":'center'
-
-											//'{% static 'inicio/images/bg01.jpg'%}':'center',
-											//'{% static 'inicio/images/bg02.jpg'%}':'center',
-											//'{% static 'inicio/images/bg03.jpg'%}':'center'
-										},
-
-									// Delay.
-										delay: 6000
-
-								};
-
-							// Vars.
-								var	pos = 0, lastPos = 0,
-									$wrapper, $bgs = [], $bg,
-									k, v;
-
-							// Create BG wrapper, BGs.
-								$wrapper = document.createElement('div');
-									$wrapper.id = 'bg';
-									$body.appendChild($wrapper);
-
-								for (k in settings.images) {
-
-									// Create BG.
-										$bg = document.createElement('div');
-											$bg.style.backgroundImage = 'url("' + k + '")';
-											$bg.style.backgroundPosition = settings.images[k];
-											$wrapper.appendChild($bg);
-
-									// Add it to array.
-										$bgs.push($bg);
-
-								}
-
-							// Main loop.
-								$bgs[pos].classList.add('visible');
-								$bgs[pos].classList.add('top');
-
-								// Bail if we only have a single BG or the client doesn't support transitions.
-									if ($bgs.length == 1
-									||	!canUse('transition'))
-										return;
-
-								window.setInterval(function() {
-
-									lastPos = pos;
-									pos++;
-
-									// Wrap to beginning if necessary.
-										if (pos >= $bgs.length)
-											pos = 0;
-
-									// Swap top images.
-										$bgs[lastPos].classList.remove('top');
-										$bgs[pos].classList.add('visible');
-										$bgs[pos].classList.add('top');
-
-									// Hide last image after a short delay.
-										window.setTimeout(function() {
-											$bgs[lastPos].classList.remove('visible');
-										}, settings.delay / 2);
-
-								}, settings.delay);
-
-						})();
-
-					// Signup Form.
-						(function() {
-
-							// Vars.
-								var $form = document.querySelectorAll('#signup-form')[0],
-									$submit = document.querySelectorAll('#signup-form input[type="submit"]')[0],
-									$message;
-
-							// Bail if addEventListener isn't supported.
-								if (!('addEventListener' in $form))
-									return;
-
-							// Message.
-								$message = document.createElement('span');
-									$message.classList.add('message');
-									$form.appendChild($message);
-
-								$message._show = function(type, text) {
-
-									$message.innerHTML = text;
-									$message.classList.add(type);
-									$message.classList.add('visible');
-
-									window.setTimeout(function() {
-										$message._hide();
-									}, 3000);
-
-								};
-
-								$message._hide = function() {
-									$message.classList.remove('visible');
-								};
-
-							// Events.
-							// Note: If you're *not* using AJAX, get rid of this event listener.
-								$form.addEventListener('submit', function(event) {
-
-									event.stopPropagation();
-									event.preventDefault();
-
-									// Hide message.
-										$message._hide();
-
-									// Disable submit.
-										$submit.disabled = true;
-
-									// Process form.
-									// Note: Doesn't actually do anything yet (other than report back with a "thank you"),
-									// but there's enough here to piece together a working AJAX submission call that does.
-										window.setTimeout(function() {
-
-											// Reset form.
-												$form.reset();
-
-											// Enable submit.
-												$submit.disabled = false;
-
-											// Show message.
-												$message._show('success', 'Thank you!');
-												//$message._show('failure', 'Something went wrong. Please try again.');
-
-										}, 750);
-
-								});
-
-						})();
-
-				})();
-
-			</script>
-
-	</body>
+	<script>
+		$(document).ready(function() {
+			App.init();
+			LoginV2.init();
+		});
+	</script>
+</body>
 </html>
