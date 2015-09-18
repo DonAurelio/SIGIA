@@ -28,6 +28,17 @@
     <link href="{% static 'color_admin/assets/plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />
     <link href="{% static 'color_admin/assets/plugins/morris/morris.css' %}" rel="stylesheet" />
 	<!-- ================== END PAGE LEVEL CSS STYLE ================== -->
+
+	<!-- LIBRERIAS ADICIONALES CALENDARIO -->
+		
+	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+	<link href="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css' %}" rel="stylesheet" />
+	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL STYLE ================== -->
+
+	
 </head>
 <body>
 	<!-- begin #page-loader -->
@@ -95,7 +106,9 @@
 				<!-- Aurelio: Incio barra de navegacion -->
 				<ul class="nav">
 					<li class="nav-header">Navegacion</li>
+					{% block navigation %}
 
+					{% endblock %}
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
 			        <!-- end sidebar minify button -->
 				</ul>
@@ -174,21 +187,17 @@
 			<!-- begin row -->
 			<!-- Aurelio: Primear fila de componentes (Ej tablas, graficos)-->
 			<div class="row">
-			    
+				<!-- begin col-8 -->
+				<div class="col-md-8">
+				{% block content %}
+				
+				{% endblock %}
+				</div>
+				{% include "includes/calendario.html" %}
+				
 			</div>
 			<!-- Aurelio: fin primera fila de componentes -->
 			<!-- end row -->
-
-			<!-- begin row -->
-			<!-- Aurelio: segunda fila de componentes (Ej tablas, graficos)-->
-			<div class="row">
-			    {% include "calendario.html" %}
-			    {% include "calendario.html" %}
-			</div>
-			<!-- Aurelio: fin segunda fila de componentes -->
-			<!-- end row -->
-
-
 		</div>
 		<!-- end #content -->
 	
@@ -222,9 +231,27 @@
 	<script src="{% static 'color_admin/assets/js/dashboard-v2.min.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
+
+	<!-- LIBRERIAS ADICIONALES CALENDARIO -->
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{% static 'assets/plugins/gritter/js/jquery.gritter.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/flot/jquery.flot.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/flot/jquery.flot.time.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/flot/jquery.flot.resize.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/flot/jquery.flot.pie.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/sparkline/jquery.sparkline.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/dashboard.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+
+	
 	<script>
 		$(document).ready(function() {
 			App.init();
+			Dashboard.init();
 			DashboardV2.init();
 		});
 	</script>

@@ -17,6 +17,7 @@ class PerfilJefeTaller(TemplateView):
 
 class PerfilVendedor(TemplateView):
 	template_name = 'inicio/perfil_vendedor.html'
+	#template_name = 'calendario.html'
 
 class IniciarSesion(TemplateView):
 	
