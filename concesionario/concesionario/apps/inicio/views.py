@@ -1,27 +1,20 @@
-from django.shortcuts import render , render_to_response
-from django.http import HttpResponse , HttpResponseRedirect
-from django.template import Context, RequestContext
+from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
+from django.template import RequestContext
 from django.views.generic import TemplateView
-from django.views.generic.base import View
-from django.contrib.auth import authenticate, login
-from .models import VENDEDOR, GERENTE, JEFE_TALLER
+from django.contrib.auth import authenticate, login, logout
+from concesionario.apps.cuenta.models import VENDEDOR,JEFE_TALLER,GERENTE 
 
-class Inicio(TemplateView):
-	template_name = 'inicio/inicio.html'
-
-class PerfilGerente(TemplateView):
-	template_name = 'inicio/perfil_gerente.html'
-
-class PerfilJefeTaller(TemplateView):
-	template_name = 'inicio/perfil_jefe_taller.html'
-
-class PerfilVendedor(TemplateView):
-	template_name = 'inicio/perfil_vendedor.html'
-	
 
 class IniciarSesion(TemplateView):
-	
-	def dispatch(self,request,*args,**kwargs):
+
+	template_name = 'inicio/inicio.html'
+
+	def get(self,request,*args,**kwargs):
+		return render_to_response(self.template_name,{},context_instance=RequestContext(request))
+		
+
+	def post(self,request,*args,**kwargs):
 		
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -41,16 +34,18 @@ class IniciarSesion(TemplateView):
 					return HttpResponseRedirect('/perfil_jefe_taller/')
 			else:
 				context = {'error':True}
-				return render_to_response('inicio/inicio.html',context,context_instance=RequestContext(request))
+				return render_to_response(self.template_name,context,context_instance=RequestContext(request))
 				
 		else:
 			context = {'error':True}
-			return render_to_response('inicio/inicio.html',context,context_instance=RequestContext(request))
+			return render_to_response(self.template_name,context,context_instance=RequestContext(request))
 	
 
+class CerrarSesion(TemplateView): 
 
-
-
+	def dispatch(self,request,*args,**kwargs):
+		logout(request)
+		return HttpResponseRedirect('iniciar_sesion')
 
 	
    

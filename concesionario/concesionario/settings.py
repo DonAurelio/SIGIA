@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 
     #Apps
     'concesionario.apps.inicio',
+    'concesionario.apps.cuenta',
 )
 
 MIDDLEWARE_CLASSES = (
