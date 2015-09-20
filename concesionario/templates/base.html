@@ -105,7 +105,7 @@
 				<!-- Aurelio: Incio barra de navegacion -->
 				<ul class="nav">
 					<li class="nav-header">Navegacion</li>
-					{% block navigation %}
+					{% block navigation_menu %}
 
 					{% endblock %}
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
@@ -123,7 +123,7 @@
 		<!-- begin #content -->
 		<div id="content" class="content">
 			<!-- begin page-header -->
-			<h1 class="page-header">Herramientas <small>header small text goes here...</small></h1>
+			<h1 class="page-header">{% block section_name %} {% endblock %}</h1>
 			<!-- end page-header -->
 			<!-- begin row -->
 

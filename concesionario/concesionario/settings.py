@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #Para utilizar imagekit
+    'imagekit',
 
     #Apps
     'concesionario.apps.inicio',
@@ -111,3 +114,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+#MEDIA_URL = 'http://localhost:8000/media/'
+MEDIA_URL = '/media/'
