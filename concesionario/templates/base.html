@@ -66,7 +66,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown navbar-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{% static 'color_admin/assets/img/user-13.jpg' %}" alt="" /> 
+							<img src={{ user.foto.url }} alt="" />
 							<span class="hidden-xs">{{ user.first_name }} {{ user.last_name }}</span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu animated fadeInLeft">
@@ -91,7 +91,7 @@
 				<ul class="nav">
 					<li class="nav-profile">
 						<div class="image">
-							<a href="javascript:;"><img src="{% static 'color_admin/assets/img/user-13.jpg' %}" alt="" /></a>
+							<a href="javascript:;"> <img src={{ user.foto.url }} alt="" /> </a>
 						</div>
 						<div class="info">
 							{{ user.first_name }} {{ user.last_name }}
