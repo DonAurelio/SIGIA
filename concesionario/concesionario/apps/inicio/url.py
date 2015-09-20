@@ -9,8 +9,5 @@ urlpatterns = [
     # url(r'^$', 'concesionario.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', IniciarSesion.as_view(), name="inicio"),
-    url(r'^iniciar_sesion/$', IniciarSesion.as_view(), name="iniciar_sesion"),
     url(r'^cerrar_sesion/$', CerrarSesion.as_view(), name="cerrar_sesion"),
-      
-    
 ]
