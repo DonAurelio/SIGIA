@@ -8,7 +8,8 @@ urlpatterns = [
     # Examples:
     # url(r'^$', 'concesionario.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^cuenta/perfil_gerente/$', PerfilGerente.as_view(), name="perfil_gerente"),
-    url(r'^cuenta/perfil_jefe_taller/$', PerfilJefeTaller.as_view(), name="perfil_jefe_taller"),
-    url(r'^cuenta/perfil_vendedor/$', PerfilVendedor.as_view(), name="perfil_vendedor"),
+    #url(r'^admin/', include( admin.site.urls ) name="admin"),
+    url(r'^cuenta/gerente/$', PerfilGerente.as_view(), name="gerente"),
+    url(r'^cuenta/jefe_taller/$', PerfilJefeTaller.as_view(), name="jefe_taller"),
+    url(r'^cuenta/vendedor/$', PerfilVendedor.as_view(), name="vendedor"),
 ]

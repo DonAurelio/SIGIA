@@ -47,6 +47,8 @@
 	
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+		
+		
 		<!-- begin #header -->
 		<div id="header" class="header navbar navbar-default navbar-fixed-top">
 			<!-- begin container-fluid -->
@@ -69,18 +71,23 @@
 							<img src={{ user.foto.url }} alt="" />
 							<span class="hidden-xs">{{ user.first_name }} {{ user.last_name }}</span> <b class="caret"></b>
 						</a>
+
+						{% block user_menu %}
 						<ul class="dropdown-menu animated fadeInLeft">
 							<li class="arrow"></li>
 							<li><a href="javascript:;">Editar perfil</a></li>
 							<li class="divider"></li>
 							<li><a href="{% url 'inicio:cerrar_sesion' %}">Cerrar sesion</a></li>
 						</ul>
+						{% endblock %}
+						
 					</li>
 				</ul>
 				<!-- end header navigation right -->
 			</div>
 			<!-- end container-fluid -->
 		</div>
+
 		<!-- end #header -->
 		
 		<!-- begin #sidebar -->

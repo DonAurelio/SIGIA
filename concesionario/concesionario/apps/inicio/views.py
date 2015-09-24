@@ -27,14 +27,16 @@ class IniciarSesion(TemplateView):
 			if user.is_active:
 				login(request, user)
 
-				if user.tipousuario == VENDEDOR:
-					return HttpResponseRedirect('cuenta/perfil_vendedor/')
+				if user.is_staff and user.is_superuser:
+					return HttpResponseRedirect(reverse_lazy('admin:index'))
+				elif user.tipousuario == VENDEDOR:
+					return HttpResponseRedirect('cuenta/vendedor/')
 					
 				elif user.tipousuario == GERENTE:
-					return HttpResponseRedirect('cuenta/perfil_gerente/')
+					return HttpResponseRedirect('cuenta/gerente/')
 					
 				elif user.tipousuario == JEFE_TALLER:
-					return HttpResponseRedirect('cuenta/perfil_jefe_taller/')
+					return HttpResponseRedirect('cuenta/jefe_taller/')
 			else:
 				context = {'error':True}
 				return render_to_response(self.template_name,context,context_instance=RequestContext(request))

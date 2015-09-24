@@ -10,4 +10,6 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', IniciarSesion.as_view(), name="inicio"),
     url(r'^cerrar_sesion/$', CerrarSesion.as_view(), name="cerrar_sesion"),
+   
+
 ]

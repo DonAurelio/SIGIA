@@ -44,6 +44,14 @@ INSTALLED_APPS = (
     #Apps
     'concesionario.apps.inicio',
     'concesionario.apps.cuenta',
+    'concesionario.apps.cliente',
+    'concesionario.apps.cotizacion',
+    'concesionario.apps.reportes',
+    'concesionario.apps.repuesto',
+    'concesionario.apps.sucursal',
+    'concesionario.apps.vehiculo',
+    'concesionario.apps.vendedor',
+    'concesionario.apps.venta',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -74,9 +82,6 @@ TEMPLATES = [
         },
     },
 ]
-
-print os.path.join(BASE_DIR,  'templates')
-
 
 WSGI_APPLICATION = 'concesionario.wsgi.application'
 
