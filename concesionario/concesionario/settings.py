@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'concesionario.apps.vehiculo',
     'concesionario.apps.vendedor',
     'concesionario.apps.venta',
+    'concesionario.apps.orden_trabajo',
 )
 
 MIDDLEWARE_CLASSES = (

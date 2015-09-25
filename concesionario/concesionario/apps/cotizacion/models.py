@@ -9,19 +9,18 @@ class Cotizacion(models.models):
 	empleado = models.OneToOneField(User)
 	cliente = models.OneToOneField(Cliente)
 	vehiculo = models.OneToOneField(Vehiculo)
-	fecha = models.DateTimeField()
-	fecha_vencimiento = models.DateTimeField()
+	fecha = models.DateField()
+	fecha_vencimiento = models.DateField()
 
-	CREDITO = 'Credito'
 	EFECTIVO = 'Efectivo'
 	TARJETA_CREDITO = 'Tarjeta_credito'
 	TARJETA_DEBITO = 'Tarjeta_debito'
 
 	tipo = (
-		(CREDITO, 'Credito'),
+		
 		(EFECTIVO, 'Efectivo'),
 		(TARJETA_CREDITO, 'Tarjeta de credito'),
 		(TARJETA_DEBITO, 'Tarjeta de debito'),
 	)
 
-	forma_pago = models.CharField(max_length=20, choices=tipo, default=EFECTIVO
+	forma_pago = models.CharField(max_length=20, choices=tipo, default=EFECTIVO)
