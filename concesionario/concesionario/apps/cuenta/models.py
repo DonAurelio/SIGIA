@@ -6,7 +6,7 @@ from imagekit.processors import ResizeToFill
 
 # Create your models here.
 
-User.add_to_class('identificacion',models.PositiveIntegerField(primary_key=True,null=True,blank=True))
+User.add_to_class('identificacion',models.CharField(max_length=20,null=True,blank=True))
 User.add_to_class('sucursal', models.OneToOneField(Sucursal))
 User.add_to_class('direccion', models.CharField(null=True,blank=True,max_length=200))
 User.add_to_class('telefono', models.CharField(null=True,blank=True,max_length=10))

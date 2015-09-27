@@ -4,7 +4,7 @@ from concesionario.apps.cliente.models import Cliente
 from concesionario.apps.vehiculo.models import Vehiculo
 
 # Create your models here.
-class Cotizacion(models.models):
+class Cotizacion(models.Model):
 	id_cotizacion = models.AutoField(primary_key=True)
 	empleado = models.OneToOneField(User)
 	cliente = models.OneToOneField(Cliente)
@@ -23,4 +23,4 @@ class Cotizacion(models.models):
 		(TARJETA_DEBITO, 'Tarjeta de debito'),
 	)
 
-	forma_pago = models.CharField(max_length=20, choices=tipo, default=EFECTIVO)
+	forma_pago = models.CharField(max_length=20,choices=tipo,default=EFECTIVO)

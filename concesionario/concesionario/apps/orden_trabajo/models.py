@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from concesionario.apps.cliente import Cliente
-from concesionario.apps.repuesto import Repuesto
+from concesionario.apps.cliente.models import Cliente
+from concesionario.apps.repuesto.models import Repuesto
 
 # Create your models here.
 class OrdenTrabajo(models.Model):
+	id_orden_trabajo = models.AutoField(primary_key=True)
 	empleado = models.OneToOneField(User)
 	cliente = models.OneToOneField(Cliente)
 	placa_vehiculo = models.CharField(max_length=7,null=True,blank=True)
@@ -15,7 +16,7 @@ class OrdenTrabajo(models.Model):
 	
 
 class FacturaOrdenTrabajo(models.Model):
-	id_factura_orden_trabajo = models.AutoField()
+	id_factura_orden_trabajo = models.AutoField(primary_key=True)
 	orden_trabajo = models.OneToOneField(OrdenTrabajo)
 	repuestos = models.ManyToManyField(Repuesto)
 	costo_mano_obra = models.BigIntegerField()

@@ -5,7 +5,7 @@ class Venta(models.Model):
 	id_venta = models.AutoField(primary_key=True)
 	fecha_compra = models.DateTimeField(auto_now=True,null=True,blank=True)
 	precio_venta = models.BigIntegerField(null=True,blank=True)
-	descuento = FloatField(null=True,blank=True)
+	descuento = models.FloatField(null=True,blank=True)
 	EFECTIVO = 'Efectivo'
 	TARJETA_CREDITO = 'Tarjeta_credito'
 	TARJETA_DEBITO = 'Tarjeta_debito'
