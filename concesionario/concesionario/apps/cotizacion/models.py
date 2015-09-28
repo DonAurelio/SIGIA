@@ -7,7 +7,7 @@ from concesionario.apps.vehiculo.models import Vehiculo
 class Cotizacion(models.Model):
 	id_cotizacion = models.AutoField(primary_key=True)
 	empleado = models.OneToOneField(User)
-	cliente = models.OneToOneField(Cliente)
+	cliente = models.OneToOneField(Cliente,default=None)
 	vehiculo = models.OneToOneField(Vehiculo)
 	fecha = models.DateField()
 	fecha_vencimiento = models.DateField()

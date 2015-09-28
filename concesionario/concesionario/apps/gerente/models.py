@@ -18,14 +18,14 @@ from imagekit.processors import ResizeToFill
 #last_login
 #date_joined
 
-class Vendedor(models.Model):
+class Gerente(models.Model):
 	user = models.OneToOneField(User)
 	identificacion = models.CharField(max_length=20,null=True,blank=True)
 	direccion = models.CharField(null=True,blank=True,max_length=200)
 	telefono = models.CharField(null=True,blank=True,max_length=10)
 	salario =  models.BigIntegerField(null=True,blank=True)
 	sucursal = models.OneToOneField(Sucursal,default=None)
-	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/cuenta/vendedor")
+	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/cuenta/gerente")
 	thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(100, 50)],
 									  format='JPEG',
