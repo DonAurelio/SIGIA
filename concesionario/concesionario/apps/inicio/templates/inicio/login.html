@@ -47,7 +47,9 @@
             </div>
             <!-- end brand -->
             <div class="login-content">
-                <form action="{% url 'inicio:inicio' %}" method="POST" class="margin-bottom-0">{% csrf_token %}
+
+                <!-- LOGIN FORM -->
+                <form action="" method="POST" class="margin-bottom-0">{% csrf_token %}
                     <div class="form-group m-b-20">
                         <input name="username" type="text" class="form-control input-lg" placeholder="Email Address" />
                     </div>
@@ -68,6 +70,8 @@
                         No eres miembro aun? Click <a href="#">aqui</a> para registrar.
                     </div>
                 </form>
+
+
             </div>
         </div>
         <!-- end login -->

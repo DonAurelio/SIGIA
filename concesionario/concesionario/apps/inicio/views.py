@@ -17,11 +17,15 @@ class Login(TemplateView):
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 
+		#Usando el la función authenticate, obtenemos el usuario que corresponde con los datos 
+		#pasados como argumentos
 		user = authenticate(username=username,password=password)
 		if user is not None:
 			if user.is_active:
 				login(request,user)
-				#Redirect to profile page
+				#Redireccionamos a la pagina de perfil del usuario
+				
+
 			else:
 				context = {'messaje':'Su usuario no esta activo'}
 		else:
@@ -29,6 +33,11 @@ class Login(TemplateView):
 
 		return render_to_response('inicio/login.html',context,context_instance=RequestContext(request))
 
+class Logout(TemplateView):
 
+	def dispatch(self,request,*args,**kwargs):
+		logout(request)
+		context = {}
+		return render_to_response('inicio/login.html',context)
 
 

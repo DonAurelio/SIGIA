@@ -42,7 +42,14 @@ INSTALLED_APPS = (
     'imagekit',
 
     #Apps
+    #Administra el inicio y cierre de sesion
     'concesionario.apps.inicio',
+    #Administra la presentacion de los perfiles de cada usuario
+    'concesionario.apps.cuenta',
+    #Administra el crud del empleado
+    'concesionario.apps.empleado',
+    #Administra el crud de la sucursal
+    'concesionario.apps.sucursal',
     
 )
 
