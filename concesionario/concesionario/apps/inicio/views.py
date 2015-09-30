@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
 from django.template import RequestContext
 from django.contrib.auth import authenticate,login,logout
+from concesionario.apps.empleado.models import Empleado
 
 # Create your views here.
 
@@ -24,8 +25,15 @@ class Login(TemplateView):
 			if user.is_active:
 				login(request,user)
 				#Redireccionamos a la pagina de perfil del usuario
-				
 
+
+				#Obtenemos el empleado que corresponde con el usuario logeado
+				empleado = Empleado.objects.get(user_id=user.id)
+
+				#Introducimos el empleado en el contexto para que pueda ser usado en el template
+				context = {'empleado':empleado}
+				#Retornamos una respuesta con el perfil del usuario
+				return render_to_response('cuenta/empleado.html',context)
 			else:
 				context = {'messaje':'Su usuario no esta activo'}
 		else:
