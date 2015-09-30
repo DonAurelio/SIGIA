@@ -1,10 +1,10 @@
 from django.contrib import admin
-from apps.Repuesto.models import *
+from concesionario.apps.repuesto.models import Repuesto
 # Register your models here.
 class AdminRepuesto(admin.ModelAdmin):
 	#atributos
 	list_display = ('id', 'nombre', 'precio',
-		 'marca', 'clasificacion', 'unidad', 'imagen', 'provedor', 'descripcion' )
+		 'marca', 'clasificacion', 'cantidad', 'imagen', 'provedor', 'descripcion' )
 	#atributos por los que se buscara
 	search_fields = ('id', 'nombre')
 

@@ -7,32 +7,31 @@ from imagekit.processors import ResizeToFill
 #Nombre
 #Precio
 #Marca
-#Clasificación
+#Clasificacion
 #Unidad
 #Imagen	
 #Provedor
-#Descripción
+#Descripcion
 
 #Define la organizacion del los datos de un repuesto en la base de datos
 class Repuesto(models.Model):
 #Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
-
 #Nombre del repuesto
-nombre = models.CharField(null=True,blank=True,max_length=20)
-#precio del repuesto
-precio =  FloatField(max_digits=32,decimal_places=2)
-#marca del repuesto
-marca = models.CharField(null=True,blank=True,max_length=20) 
-#categorias de repuesto
-AUTOMOTRIZ = 'Automotriz'
-FERRETERIA= 'Ferreteria'
-PINTURAS='Pinturas'
-RODAMIENTOS='Rodamientos'
-SOLVENTES='Solventes'
-BANDAS_CADENAS='Bandas_cadenas'
-LIMPIEZA='Limpieza'
-AUTOPARTES='Autopartes'
-SELLOS_EMPAQUES='Sellos_empaques'
+	nombre = models.CharField(null=True,blank=True,max_length=20)
+	#precio del repuesto
+	precio = models.FloatField(null=True,blank=True)
+	#marca del repuesto
+	marca = models.CharField(null=True,blank=True,max_length=20) 
+	#categorias de repuesto
+	AUTOMOTRIZ = 'Automotriz'
+	FERRETERIA= 'Ferreteria'
+	PINTURAS='Pinturas'
+	RODAMIENTOS='Rodamientos'
+	SOLVENTES='Solventes'
+	BANDAS_CADENAS='Bandas_cadenas'
+	LIMPIEZA='Limpieza'
+	AUTOPARTES='Autopartes'
+	SELLOS_EMPAQUES='Sellos_empaques'
 
 	tipo_choice = (
 		(AUTOMOTRIZ, 'Automotriz'),
@@ -46,24 +45,24 @@ SELLOS_EMPAQUES='Sellos_empaques'
 		(SELLOS_EMPAQUES, 'Sellos_empaques'),
 	 )
 	 
-Clasificacion = models.CharField(max_length=20, choices=tipo_choice,default=SELLOS_EMPAQUES)
+	clasificacion = models.CharField(null=True,blank=True, max_length=20, choices=tipo_choice,default=SELLOS_EMPAQUES)
 
-#Cantidad disponible de repuesto
-unidad =  FloatField(max_digits=3,decimal_places=2)
-#Imagen del repuesto
-imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/repuestos/")
-	#Thumbnail que permite reducir la imagen del empleado 
+	#Cantidad disponible de repuesto
+	cantidad = models.IntegerField(null=True,blank=True)
+	#Imagen del repuesto
+	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/repuestos/")
+		#Thumbnail que permite reducir la imagen del repuesto 
 	thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(100, 50)],
 									  format='JPEG',
 									  options={'quality': 60})
 
-#Provedor del repuesto
-provedor = models.CharField(null=True,blank=True,max_length=20)
-#Descripción del repuesto
-descripcion = models.CharField(null=True,blank=True,max_length=100)
+	#Provedor del repuesto
+	provedor = models.CharField(null=True,blank=True,max_length=20)
+	#Descripcion del repuesto
+	descripcion = models.CharField(null=True,blank=True,max_length=100)
 
-#Permite hacer modificaciones agregadas a la representacion del modelo 
+	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['nombre']
 		verbose_name_plural = "Repuestos"
