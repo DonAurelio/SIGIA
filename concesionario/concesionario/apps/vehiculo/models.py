@@ -37,6 +37,4 @@ class Vehiculo(models.Model):
 		(TRACTO_CAMION, 'Tracto camion'),
 	)
 
-	tipo = models.CharField(max_length=2,
-									  choices=TIPO_CHOICES,
-									  default=AUTOMOVIL)
+	tipo = models.CharField(max_length=2, choices=TIPO_CHOICES, default=AUTOMOVIL)
