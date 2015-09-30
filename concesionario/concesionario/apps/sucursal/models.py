@@ -1,6 +1,6 @@
 from django.db import models
-from concesionario.apps.vehiculo.models import Vehiculo
-from concesionario.apps.repuesto.models import Repuesto
+#from concesionario.apps.vehiculo.models import Vehiculo
+#from concesionario.apps.repuesto.models import Repuesto
 
 #Define la organizacion de los datos de una sucursal en la base de datos
 class Sucursal(models.Model):
@@ -16,9 +16,9 @@ class Sucursal(models.Model):
 	#Estado de la sucursa, Activa/inactiva
 	activo = models.BooleanField(default = True)
 	#Vehiculos que se venden en dicha sucursal
-	vehiculos = models.ManyToManyField(Vehiculo)
+	#vehiculos = models.ManyToManyField(Vehiculo)
 	#Repuestos que se venden y se usan en dicha sucursal
-	repuestos = models.ManyToManyField(Repuesto)
+	#repuestos = models.ManyToManyField(Repuesto)
 
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:

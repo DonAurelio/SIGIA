@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from concesionario.apps.sucursal.models import Sucursal
+#from concesionario.apps.sucursal.models import Sucursal
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
@@ -37,7 +37,7 @@ class Empleado(models.Model):
 	#Salario actual del empleado
 	salario =  models.BigIntegerField(null=True,blank=True)
 	#Sucursal a la que pertenece el empleado 
-	sucursal = models.OneToOneField(Sucursal)
+	#sucursal = models.OneToOneField(Sucursal)
 	#Imagen o foto del empleado
 	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/cuenta/empleado")
 	#Thumbnail que permite reducir la imagen del empleado 

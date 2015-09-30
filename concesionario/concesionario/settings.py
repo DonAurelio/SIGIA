@@ -49,7 +49,7 @@ INSTALLED_APPS = (
     #Administra el crud del empleado
     'concesionario.apps.empleado',
     #Administra el crud de la sucursal
-    'concesionario.apps.sucursal',
+    #'concesionario.apps.sucursal',
     
 )
 

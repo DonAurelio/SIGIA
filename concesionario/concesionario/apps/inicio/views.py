@@ -17,7 +17,7 @@ class Login(TemplateView):
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 
-		#Usando el la función authenticate, obtenemos el usuario que corresponde con los datos 
+		#Usando el la funcion authenticate, obtenemos el usuario que corresponde con los datos 
 		#pasados como argumentos
 		user = authenticate(username=username,password=password)
 		if user is not None:
