@@ -39,7 +39,7 @@ class Empleado(models.Model):
 	#Sucursal a la que pertenece el empleado 
 	#sucursal = models.OneToOneField(Sucursal)
 	#Imagen o foto del empleado
-	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/cuenta/empleado")
+	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/empleado")
 	#Thumbnail que permite reducir la imagen del empleado 
 	thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(100, 50)],
