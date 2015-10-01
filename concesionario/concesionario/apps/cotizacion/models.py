@@ -14,13 +14,13 @@ class Cotizacion(models.Model):
 #Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 
 	#Empleado que realiza la cotizacion, relacion uno a muchos 
-	#empleado= models.ForeignKey(Empleado)
+	empleado= models.ForeignKey(Empleado)
  
 	#Cliente que solicita la cotizacion, relacion uno a muchos 
-	#cliente= models.ForeignKey(Cliente)
+	cliente= models.ForeignKey(Cliente)
 
 	#Vehiculo cotizado, relacion uno a muchos 
-	#vehiculo= models.ForeignKey(Vehiculo)
+	vehiculo= models.ForeignKey(Vehiculo)
 
 	#Fecha en que se realiza la cotizacion
 	fecha=models.DateField(blank=True, null=True)
