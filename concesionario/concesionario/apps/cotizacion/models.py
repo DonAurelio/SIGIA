@@ -1,4 +1,5 @@
 from django.db import models
+from concesionario.apps.empleado import Empleado
  
 #ATRIBUTOS DE COTIZACION		
 #id_cotizacion				

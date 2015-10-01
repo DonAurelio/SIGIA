@@ -54,7 +54,12 @@ INSTALLED_APPS = (
     'concesionario.apps.vehiculo',
     #Administrad el crud de repuesto
     'concesionario.apps.repuesto',
+    #Administra el crud de cliente
     'concesionario.apps.cliente',
+    #Administra el crud de cotizacion
+    'concesionario.apps.cotizacion',
+    #Administra el crud de factura de orden de trabajo
+    'concesionario.apps.factura_orden_trabajo',
 )
 
 MIDDLEWARE_CLASSES = (
