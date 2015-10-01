@@ -49,9 +49,11 @@ INSTALLED_APPS = (
     #Administra el crud del empleado
     'concesionario.apps.empleado',
     #Administra el crud de la sucursal
-    #'concesionario.apps.sucursal',
+    'concesionario.apps.sucursal',
+    #Administra el crud de vehiculo
     'concesionario.apps.vehiculo',
-    
+    #Administrad el crud de repuesto
+    'concesionario.apps.repuesto',
 )
 
 MIDDLEWARE_CLASSES = (

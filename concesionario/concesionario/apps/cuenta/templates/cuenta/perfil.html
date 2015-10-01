@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+<!-- Template perfil de empleado -->
+<!-- Menu de la barra de navegacion -->
+{% block navigation_menu %}
+	{% if user.empleado.tipo == "Gerente" %}
+		{% include "cuenta/includes/menu_gerente.html" %}
+	{% elif  user.empleado.tipo == "Jefe de taller"%}
+		{% include "cuenta/includes/menu_jefe_taller.html" %}
+	{% elif  user.empleado.tipo == "Vendedor"%}
+		{% include "cuenta/includes/menu_vendedor.html" %}
+	{% endif %}
+{% endblock %}
+
+<!-- Enacabezado de la seccion -->
+{% block section_header %}
+{% endblock %}
+
+<!-- Contenido de la seccion  -->
+{% block section_content %}
+{% endblock %}

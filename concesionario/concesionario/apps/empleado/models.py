@@ -21,7 +21,9 @@ from imagekit.processors import ResizeToFill
 #Define la organizacion del los datos de un empleado en la base de datos
 class Empleado(models.Model):
 	#Cuenta que le corresponde al empleado por la cual se accede a los siguientes atributos
-	user = models.OneToOneField(User)
+	#related_name permite hacer una referencia desde user a empleado de la siguiente forma 
+	#user.empleado 
+	user = models.OneToOneField(User,related_name='empleado')
 	#username				
 	#first_name
 	#last_name
@@ -39,7 +41,7 @@ class Empleado(models.Model):
 	#Sucursal a la que pertenece el empleado 
 	#sucursal = models.OneToOneField(Sucursal)
 	#Imagen o foto del empleado
-	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/cuenta/empleado")
+	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/empleado")
 	#Thumbnail que permite reducir la imagen del empleado 
 	thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(100, 50)],
@@ -64,7 +66,7 @@ class Empleado(models.Model):
 
 	#Permite determinar una representacion en string del objeto empleado
 	def __str__(self):
-		return self.user.first_name
+		return self.user.first_name 
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):

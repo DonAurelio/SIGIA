@@ -47,79 +47,40 @@
 	
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
-		
-		
-		<!-- begin #header -->
-		<div id="header" class="header navbar navbar-default navbar-fixed-top">
-			<!-- begin container-fluid -->
-			<div class="container-fluid">
-				<!-- begin mobile sidebar expand / collapse button -->
-				<div class="navbar-header">
-					<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> SIGIA</a>
-					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<!-- end mobile sidebar expand / collapse button -->
 				
-				<!-- begin header navigation right -->
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown navbar-user">
-						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<img src={{ user.foto.url }} alt="" />
-							<span class="hidden-xs">{{ user.first_name }} {{ user.last_name }}</span> <b class="caret"></b>
-						</a>
-
-						{% block user_menu %}
-						<ul class="dropdown-menu animated fadeInLeft">
-							<li class="arrow"></li>
-							<li><a href="javascript:;">Editar perfil</a></li>
-							<li class="divider"></li>
-							<li><a href="{% url 'inicio:cerrar_sesion' %}">Cerrar sesion</a></li>
-						</ul>
-						{% endblock %}
-						
-					</li>
-				</ul>
-				<!-- end header navigation right -->
-			</div>
-			<!-- end container-fluid -->
-		</div>
-
+		<!-- begin #header -->
+		{% include "includes/header.html" %}
 		<!-- end #header -->
 		
 		<!-- begin #sidebar -->
 		<div id="sidebar" class="sidebar">
 			<!-- begin sidebar scrollbar -->
 			<div data-scrollbar="true" data-height="100%">
-				<!-- begin sidebar user -->
+					<!-- begin sidebar user -->
 				<ul class="nav">
 					<li class="nav-profile">
 						<div class="image">
-							<a href="javascript:;"> <img src={{ user.foto.url }} alt="" /> </a>
+							<a href="javascript:;"> <img src={{ user.empleado.imagen.url }} alt="" /> </a>
 						</div>
 						<div class="info">
 							{{ user.first_name }} {{ user.last_name }}
-							<small>{{ user.tipousuario }}</small>
+							<small>{{ user.empleado.tipo }}</small>
 						</div>
 					</li>
 				</ul>
 				<!-- end sidebar user -->
 
 				<!-- begin sidebar nav -->
-				<!-- Aurelio: Incio barra de navegacion -->
 				<ul class="nav">
 					<li class="nav-header">Navegacion</li>
 					{% block navigation_menu %}
-					
-
 					{% endblock %}
-					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">
+					<i class="fa fa-angle-double-left"></i>
+					</a>
+					</li>
 			        <!-- end sidebar minify button -->
 				</ul>
-				<!-- Aurelio: Fin barra de navegacion -->
 				<!-- end sidebar nav -->
 			
 			</div>
@@ -128,82 +89,30 @@
 		<div class="sidebar-bg"></div>
 		<!-- end #sidebar -->
 		
+		
 		<!-- begin #content -->
 		<div id="content" class="content">
-			<!-- begin page-header -->
-			<h1 class="page-header">{% block section_name %} {% endblock %}</h1>
-			<!-- end page-header -->
-			<!-- begin row -->
-
-			<div class="row">
-			    <!-- begin col-3 -->
-			    <div class="col-md-3 col-sm-6">
-			        <div class="widget widget-stats bg-green">
-			            <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-			            <div class="stats-title underline">TODAY'S VISITS</div>
-			            <div class="stats-number">7,842,900</div>
-			            <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 70.1%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (70.1%)</div>
-			        </div>
-			    </div>
-			    <!-- end col-3 -->
-			    <!-- begin col-3 -->
-			    <div class="col-md-3 col-sm-6">
-			        <div class="widget widget-stats bg-blue">
-			            <div class="stats-icon stats-icon-lg"><i class="fa fa-tags fa-fw"></i></div>
-			            <div class="stats-title">TODAY'S PROFIT</div>
-			            <div class="stats-number">180,200</div>
-			            <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 40.5%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (40.5%)</div>
-			        </div>
-			    </div>
-			    <!-- end col-3 -->
-			    <!-- begin col-3 -->
-			    <div class="col-md-3 col-sm-6">
-			        <div class="widget widget-stats bg-purple">
-			            <div class="stats-icon stats-icon-lg"><i class="fa fa-shopping-cart fa-fw"></i></div>
-			            <div class="stats-title">NEW ORDERS</div>
-			            <div class="stats-number">38,900</div>
-			            <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 76.3%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (76.3%)</div>
-			        </div>
-			    </div>
-			    <!-- end col-3 -->
-			    <!-- begin col-3 -->
-			    <div class="col-md-3 col-sm-6">
-			        <div class="widget widget-stats bg-black">
-			            <div class="stats-icon stats-icon-lg"><i class="fa fa-comments fa-fw"></i></div>
-			            <div class="stats-title">NEW COMMENTS</div>
-			            <div class="stats-number">3,988</div>
-			            <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 54.9%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (54.9%)</div>
-			        </div>
-			    </div>
-			    <!-- end col-3 -->
-			</div>
-			<!-- end row -->
 			
+			<!-- begin page-header -->
+			{% block section_header %}
+			{% endblock %}
+			<!-- end page-header -->
+			
+			<!-- begin indicators -->
+			{% include "includes/indicadores.html"%}
+			<!-- end indicators -->
+						
 			<!-- begin row -->
-			<!-- Aurelio: Primear fila de componentes (Ej tablas, graficos)-->
 			<div class="row">
 				<!-- begin col-8 -->
 				<div class="col-md-8">
-				{% block content %}
-				
+				{% block section_content %}
 				{% endblock %}
 				</div>
+				<div class="col-md-4">
 				{% include "includes/calendario.html" %}
-				
+				</div>
 			</div>
-			<!-- Aurelio: fin primera fila de componentes -->
 			<!-- end row -->
 		</div>
 		<!-- end #content -->
@@ -215,6 +124,8 @@
 	</div>
 	<!-- end page container -->
 	
+
+
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{% static 'color_admin/assets/plugins/jquery-1.8.2/jquery-1.8.2.min.js' %}"></script>
 	<script src="{% static 'color_admin/assets/plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js' %}"></script>
