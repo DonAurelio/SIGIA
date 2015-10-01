@@ -76,9 +76,9 @@ class Vehiculo(models.Model):
 
 	#Permite determinar una representacion en string del objeto empleado
 	def __str__(self):
-		return self.user.numero_serie
+		return self.numero_serie
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
-		return self.user.numero_serie
+		return self.numero_serie
 			
