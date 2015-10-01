@@ -1,5 +1,5 @@
 from django.db import models
-from concesionario.apps.repuesto import Repuesto
+from concesionario.apps.repuesto.models import Repuesto
 #from concesionario.apps.orden_trabajo import OrdenTrabajo
 
 #Define la organizacion de los datos de una factura de orden de trabajo en

@@ -1,11 +1,9 @@
 from django.db import models
-<<<<<<< HEAD
 from concesionario.apps.empleado.models import Empleado
 from concesionario.apps.cliente.models import Cliente
 from concesionario.apps.vehiculo.models import Vehiculo
-=======
-from concesionario.apps.empleado import Empleado
->>>>>>> a4d2e3875a6d27cea2b7b0af1816026143216c7e
+from concesionario.apps.empleado.models import Empleado
+
  
 #ATRIBUTOS DE COTIZACION		
 #id_cotizacion				
