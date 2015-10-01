@@ -9,7 +9,7 @@ class Vehiculo(models.Model):
 	marca = models.CharField(null=True, blank=True, max_length=100)
 	# Precio del vehiculo
 	precio = models.FloatField(null=True, blank=True)
-	# Modelo de fabricacion
+	# Modelo del coche
 	modelo = models.CharField(null=True, blank=True, max_length=100)
 	# Potencia entregada por el motor
 	potencia = models.CharField(null=True, blank=True, max_length=100)

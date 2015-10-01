@@ -6,7 +6,7 @@ class AdminCotizacion(admin.ModelAdmin):
 	#atributos
 	list_display = ('id', 'empleado', 'cliente',
 		 'vehiculo', 'fecha', 'fecha_vencimiento', 'forma_pago')
-	atributos por los que se buscara
+	#atributos por los que se buscara
 	search_fields = ('id', 'cliente')
 
 #REGISTRO DE MODELOS EN EL SITIO DE ADMINISTRACION

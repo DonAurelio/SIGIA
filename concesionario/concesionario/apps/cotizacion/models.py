@@ -1,4 +1,7 @@
 from django.db import models
+from concesionario.apps.empleado.models import Empleado
+from concesionario.apps.cliente.models import Cliente
+from concesionario.apps.vehiculo.models import Vehiculo
  
 #ATRIBUTOS DE COTIZACION		
 #id_cotizacion				
@@ -29,8 +32,20 @@ class Cotizacion(models.Model):
 	#Fecha de vencimiento de la cotizacion
 	fecha_vencimiento=models.DateField(blank=True, null=True)
 
-	#Formas de pago
-	forma_Pago = models.CharField(null=True,blank=True,max_length=50)
+	# Forma de pago en que se realiza la compra
+	CREDITO = 'Credito'
+	EFECTIVO = 'Efectivo'
+	TARJETA_CREDITO = 'Tarjeta_credito'
+	TARJETA_DEBITO = 'Tarjeta_debito'
+	
+	forma_pago_choices = (
+		(CREDITO, 'Credito'),
+		(EFECTIVO, 'Efectivo'),
+		(TARJETA_CREDITO, 'Tarjeta de credito'),
+		(TARJETA_DEBITO, 'Tarjeta de debito'),
+	)
+
+	forma_pago = models.CharField(max_length=20, choices=forma_pago_choices, default=EFECTIVO)
 
 #Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
