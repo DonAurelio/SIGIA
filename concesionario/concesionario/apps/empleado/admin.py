@@ -6,6 +6,7 @@ from .models import Empleado
 class AdminEmpleado(admin.ModelAdmin):
 	#Se establece la informacion que se mostrara en el sitio de administarcion 
 	list_display = ('user', 'identificacion', 'direccion','telefono', 'salario','imagen','thumbnail','tipo')
+	#Se establece el parametro de busqueda
 	search_fields = ('identificacion',)
 
 #se registra el AdminEmpleado 
