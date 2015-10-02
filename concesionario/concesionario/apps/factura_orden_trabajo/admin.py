@@ -5,6 +5,7 @@ from .models import FacturaOrdenTrabajo
 class AdminFacturaOrdenTrabajo(admin.ModelAdmin):
 	#Se establece la informacion que se mostrara en el sitio de administracion
 	list_display = ('id','orden_trabajo','costo_mano_obra','costo_repuestos','costo_total')
+	
 	#Se establece el parametro de busqueda
 	search_fields = ('id',)
 

@@ -28,7 +28,6 @@ class OrdenDeTrabajo(models.Model):
 	#Fecha de entrada al taller
 	fecha_entrada=models.DateField(blank=True, null=True)
 
-
 	#Fecha de salida del taller
 	fecha_salida=models.DateField(blank=True, null=True)
 

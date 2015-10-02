@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 <!-- Edicion del perfil de empleado -->
 {% block section_header %}
-<h1 class="page-header">Editar perfil<small>{{ section_message }}</small></h1>
+	<h1 class="page-header">Editar perfil<small>{{ section_message }}</small></h1>
 {% endblock %}
 {% block section_content %}
+	<form class="form-horizontal">
+	{{ user_form }}
+	{{ empleado_form }}
+	</form>
 {% endblock %}

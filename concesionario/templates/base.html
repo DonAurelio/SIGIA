@@ -11,6 +11,7 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	
+	{% block base-css %}
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<link href="{% static 'color_admin/assets/plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
@@ -37,7 +38,9 @@
 	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
     <link href="{% static 'color_admin/assets/plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
-
+	{% endblock %}
+	{% block custom-css %}
+	{% endblock %}
 	
 </head>
 <body>
@@ -92,7 +95,6 @@
 		
 		<!-- begin #content -->
 		<div id="content" class="content">
-			
 			<!-- begin page-header -->
 			{% block section_header %}
 			{% endblock %}
@@ -125,7 +127,7 @@
 	<!-- end page container -->
 	
 
-
+	{% block base-js %}
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{% static 'color_admin/assets/plugins/jquery-1.8.2/jquery-1.8.2.min.js' %}"></script>
 	<script src="{% static 'color_admin/assets/plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js' %}"></script>
@@ -164,7 +166,9 @@
 	<script src="{% static 'color_admin/assets/js/dashboard.min.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
-
+	{% endblock %}
+	{% block custon-js %}
+	{% endblock %}
 	
 	<script>
 		$(document).ready(function() {

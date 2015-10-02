@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 <!-- Template perfil de empleado -->
+
+{% block custom-css %}
+{% endblock %}
+
 <!-- Menu de la barra de navegacion -->
 {% block navigation_menu %}
 	{% if user.empleado.tipo == "Gerente" %}
@@ -17,4 +21,7 @@
 
 <!-- Contenido de la seccion  -->
 {% block section_content %}
+{% endblock %}
+
+{% block custom-js %}
 {% endblock %}
