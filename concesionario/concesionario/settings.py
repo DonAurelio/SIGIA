@@ -57,7 +57,8 @@ INSTALLED_APPS = (
     #Administra el crud de cliente
     'concesionario.apps.cliente',
     #Administrad el crud de orden de trabajo
-    'concesionario.apps.ordendetrabajo',
+    'concesionario.apps.orden_de_trabajo',
+    #Administra el crud de venta
     'concesionario.apps.venta',
     #Administra el crud de cotizacion
     'concesionario.apps.cotizacion',

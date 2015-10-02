@@ -13,7 +13,7 @@ from concesionario.apps.cliente.models import Cliente
 #estado de vehiculo
 
 #Define la organizacion del los datos de una orden de trabajo en la base de datos
-class Ordendetrabajo(models.Model):
+class OrdenDeTrabajo(models.Model):
 #Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 
 	#Empleado que realiza la orden de trabajo, relacion uno a muchos 

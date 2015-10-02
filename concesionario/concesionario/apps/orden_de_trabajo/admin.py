@@ -1,8 +1,8 @@
 from django.contrib import admin
-from concesionario.apps.ordendetrabajo.models import Ordendetrabajo
+from concesionario.apps.orden_de_trabajo.models import OrdenDeTrabajo
 # Register your models here.
 
-class AdminOrdendetrabajo (admin.ModelAdmin):
+class AdminOrdenDeTrabajo (admin.ModelAdmin):
 	#atributos
 	list_display = ('id', 'empleado', 'cliente',
 		 'placa', 'fecha_entrada', 'fecha_salida', 'descripcion','estado_reparacion')
@@ -13,4 +13,4 @@ class AdminOrdendetrabajo (admin.ModelAdmin):
 #DEL ADMINISTRADOR
 
 # Register your models here.
-admin.site.register(Ordendetrabajo, AdminOrdendetrabajo)
+admin.site.register(OrdenDeTrabajo, AdminOrdenDeTrabajo)

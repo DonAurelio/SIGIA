@@ -1,11 +1,12 @@
 from django.db import models
 from concesionario.apps.repuesto.models import Repuesto
-#from concesionario.apps.orden_trabajo import OrdenTrabajo
+from concesionario.apps.orden_de_trabajo.models import OrdenDeTrabajo
 
 #Define la organizacion de los datos de una factura de orden de trabajo en
 #la base de datos 
 class FacturaOrdenTrabajo(models.Model):
-	#orden_trabajo = = models.OneToOneField(OrdenTrabajo)
+	#Orden de trabajo a la que pertenece la factura
+	orden_trabajo = models.OneToOneField(OrdenDeTrabajo)
 	#Repuestos usados para la reparacion de un vehiculo
 	repuestos = models.ManyToManyField(Repuesto)
 	#Costo de la mano de obra 
