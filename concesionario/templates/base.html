@@ -30,10 +30,6 @@
 	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css' %}" rel="stylesheet" />
 	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
-
-	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-	<link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-	<!-- ================== END PAGE LEVEL STYLE ================== -->
 	{% endblock %}
 	{% block custom-css %}
 	{% endblock %}
@@ -150,11 +146,6 @@
 	<script src="{% static 'color_admin/assets/js/dashboard.min.js' %}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
-	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
 	{% endblock %}
 	{% block custom-js %}
 	{% endblock %}
@@ -164,7 +155,7 @@
 			App.init();
 			Dashboard.init();
 			DashboardV2.init();
-			FormWizard.init();
+			
 		});
 	</script>
 </body>

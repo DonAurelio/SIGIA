@@ -16,4 +16,4 @@ class Editar(TemplateView):
 
 		#Se colocan los formularios en el contexto
 		context = {'user_form':user_form,'empleado_form':empleado_form}
-		return render_to_response('cuenta/e.html',context,context_instance=RequestContext(request))
+		return render_to_response('cuenta/editar.html',context,context_instance=RequestContext(request))
