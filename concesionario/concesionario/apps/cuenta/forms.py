@@ -6,7 +6,7 @@ from concesionario.apps.empleado.models import Empleado
 class UserUpdateForm(forms.ModelForm):
 	class Meta:
 		model = User
-		fields = ('username','password','first_name','last_name','email')
+		fields = ('first_name','last_name','email')
 
 #Este formulario permitira actualizar la informacion de un empleado en la base de datos
 class EmpleadoUpdateForm(forms.ModelForm):
