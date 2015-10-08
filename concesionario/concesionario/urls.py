@@ -24,7 +24,14 @@ urlpatterns = [
     url(r'', include('concesionario.apps.inicio.url',namespace='inicio')),
     #Inclusion de las url que hay en la aplicacion cuenta
     url(r'', include('concesionario.apps.cuenta.url',namespace='cuenta')),
+<<<<<<< HEAD
+    #Inclusion de las url que hay en la aplicacion cotizacion
+    url(r'', include('concesionario.apps.cotizacion.url',namespace='cotizacion')),
+=======
+    #Inclusion de las url que hay en la aplicacion cliente
+    url(r'', include('concesionario.apps.cliente.url',namespace='cliente')),
+>>>>>>> 6d2668e9084a9a04b1a88e0ec43a4bc3e859ee0b
     #url para acceder a la imagenes que estan en la carpeta media del proyecto
     #se deseas colocar imagenes en tu contenido HTML, este link es necesario para que se muestren las imagenes
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}), 
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 ]

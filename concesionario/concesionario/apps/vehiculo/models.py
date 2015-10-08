@@ -45,7 +45,7 @@ class Vehiculo(models.Model):
 		(CAMION, 'Camion'),
 		(TRACTO_CAMION, 'Tracto camion'),
 	)
-	tipo = models.CharField(max_length=2, choices=TIPO_CHOICES, default=AUTOMOVIL)
+	tipo = models.CharField(max_length=50, choices=TIPO_CHOICES, default=AUTOMOVIL)
 	
 	#-- Creacion del Choices para 'color' de vehiculo
 	NEGRO = 'Negro'
@@ -67,7 +67,7 @@ class Vehiculo(models.Model):
 		(ROJO, 'Rojo'),
 		(VERDE, 'Verde'),
 	)
-	color = models.CharField(max_length=2, choices=COLOR_CHOICES, default=BEIGE)
+	color = models.CharField(max_length=50, choices=COLOR_CHOICES, default=BEIGE)
 
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
