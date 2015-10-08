@@ -24,7 +24,9 @@ urlpatterns = [
     url(r'', include('concesionario.apps.inicio.url',namespace='inicio')),
     #Inclusion de las url que hay en la aplicacion cuenta
     url(r'', include('concesionario.apps.cuenta.url',namespace='cuenta')),
+    #Inclusion de las url que hay en la aplicacion cliente
+    url(r'', include('concesionario.apps.cliente.url',namespace='cliente')),
     #url para acceder a la imagenes que estan en la carpeta media del proyecto
     #se deseas colocar imagenes en tu contenido HTML, este link es necesario para que se muestren las imagenes
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}), 
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 ]
