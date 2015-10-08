@@ -5,6 +5,10 @@ from django.template import RequestContext
 from .forms import UserUpdateForm
 from .forms import EmpleadoUpdateForm
 
+#Permite mostrar el perfil de usuario
+class Perfil(TemplateView):
+	template_name = 'cuenta/perfil.html'
+
 #Permite administrar la actualizacion de datos del perfil del empleado
 class Editar(TemplateView):
 

@@ -1,18 +1,3 @@
-"""concesionario URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
 from django.conf.urls import include, url
 from django.contrib import admin
 from concesionario import settings
@@ -24,13 +9,25 @@ urlpatterns = [
     url(r'', include('concesionario.apps.inicio.url',namespace='inicio')),
     #Inclusion de las url que hay en la aplicacion cuenta
     url(r'', include('concesionario.apps.cuenta.url',namespace='cuenta')),
-<<<<<<< HEAD
     #Inclusion de las url que hay en la aplicacion cotizacion
     url(r'', include('concesionario.apps.cotizacion.url',namespace='cotizacion')),
-=======
     #Inclusion de las url que hay en la aplicacion cliente
     url(r'', include('concesionario.apps.cliente.url',namespace='cliente')),
->>>>>>> 6d2668e9084a9a04b1a88e0ec43a4bc3e859ee0b
+    #Inclusion de las url que hay en la aplicacion empleado
+    url(r'', include('concesionario.apps.empleado.url',namespace='empleado')),
+    #Inclusion de las url que hay en la aplicacion factura_orden_trabajo
+    url(r'', include('concesionario.apps.factura_orden_trabajo.url',namespace='factura_orden_trabajo')),
+    #Inclusion de las url que hay en la aplicacion orden_de_trabajo
+    url(r'', include('concesionario.apps.orden_de_trabajo.url',namespace='orden_de_trabajo')),
+    #Inclusion de las url que hay en la aplicacion repuesto
+    url(r'', include('concesionario.apps.repuesto.url',namespace='repuesto')),
+    #Inclusion de las url que hay en la aplicacion sucursal
+    url(r'', include('concesionario.apps.sucursal.url',namespace='sucursal')),
+    #Inclusion de las url que hay en la aplicacion vehiculo
+    url(r'', include('concesionario.apps.vehiculo.url',namespace='vehiculo')),
+    #Inclusion de las url que hay en la aplicacion venta
+    url(r'', include('concesionario.apps.venta.url',namespace='venta')),
+
     #url para acceder a la imagenes que estan en la carpeta media del proyecto
     #se deseas colocar imagenes en tu contenido HTML, este link es necesario para que se muestren las imagenes
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),

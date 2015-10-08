@@ -1,8 +1,11 @@
 from django.conf.urls import include, url
 from concesionario.apps.cuenta.views import Editar
+from concesionario.apps.cuenta.views import Perfil
 
 urlpatterns = [
-	
-	url(r'^editar_perfil$', Editar.as_view(), name='editar'),
+	#Redirecciona la peticion a la vista que permite modificar el perfil del usuario de django y empleado
+	url(r'^cuenta/editar$', Editar.as_view(), name='editar'),
+	#Redirecciona la peticion a la vista que permite visualizar el perfil de usuario
+	url(r'^cuenta/perfil$', Perfil.as_view(), name='perfil'),
     
 ]

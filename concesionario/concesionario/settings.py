@@ -41,6 +41,9 @@ INSTALLED_APPS = (
     #Para utilizar imagekit
     'imagekit',
 
+    #Para dar estilos usando bootstrap a los campos de los formularios 
+    'bootstrap3',
+
     #Apps
     #Administra el inicio y cierre de sesion
     'concesionario.apps.inicio',
