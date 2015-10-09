@@ -44,8 +44,6 @@ class Editar(TemplateView):
 			#En caso de que haya algun error, se vuelve a mostrar el formulario con los errores
 			user_form = UserUpdateForm(request.POST,instance=request.user)
 			empleado_form = EmpleadoUpdateForm(request.POST,instance=request.user.empleado)
-			#user_form = UserUpdateForm(request.POST)
-			#empleado_form = EmpleadoUpdateForm(request.POST)
 			#Se coloca un mensaje en el request, para que sea mostrado en el template 
 			messages.error(request,'Hay errores en algun campo')
 			#Se colocan los formularios en el contexto

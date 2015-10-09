@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 #El RequestContext permite mantender informacion del request de la pagina que hizo la peticion 
 #y pasarsela a la nueva pagina, esto eprmite mantener datos como el usuario logeado entre otros
 from django.template import RequestContext
-
+from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from concesionario.apps.empleado.models import Empleado
 
@@ -14,7 +14,13 @@ class Login(TemplateView):
 
 	#Cuando la peticion es tipo GET, se muestra el template de login
 	def get(self,request,*args,**kwargs):
-		return render_to_response('inicio/login.html',context_instance=RequestContext(request))
+		#Si el usuario esta autenticado, se le muestra su perfil
+		if request.user.is_authenticated():
+			return render_to_response('cuenta/perfil.html',context_instance=RequestContext(request))
+		#En caso de que no este autenticado, se le muestra el formulario de login
+		else:
+			return render_to_response('inicio/login.html',context_instance=RequestContext(request))
+		
 		
 
 	#Cunado la peticion es tipo POST se hace el proceso de login con la informacion del formulario de login
