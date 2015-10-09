@@ -16,17 +16,17 @@ urlpatterns = [
     #Inclusion de las url que hay en la aplicacion empleado
     url(r'', include('concesionario.apps.empleado.url',namespace='empleado')),
     #Inclusion de las url que hay en la aplicacion factura_orden_trabajo
-    url(r'', include('concesionario.apps.factura_orden_trabajo.url',namespace='factura_orden_trabajo')),
+    #url(r'', include('concesionario.apps.factura_orden_trabajo.url',namespace='factura_orden_trabajo')),
     #Inclusion de las url que hay en la aplicacion orden_de_trabajo
-    url(r'', include('concesionario.apps.orden_de_trabajo.url',namespace='orden_de_trabajo')),
+    #url(r'', include('concesionario.apps.orden_de_trabajo.url',namespace='orden_de_trabajo')),
     #Inclusion de las url que hay en la aplicacion repuesto
-    url(r'', include('concesionario.apps.repuesto.url',namespace='repuesto')),
+    #url(r'', include('concesionario.apps.repuesto.url',namespace='repuesto')),
     #Inclusion de las url que hay en la aplicacion sucursal
-    url(r'', include('concesionario.apps.sucursal.url',namespace='sucursal')),
+    #url(r'', include('concesionario.apps.sucursal.url',namespace='sucursal')),
     #Inclusion de las url que hay en la aplicacion vehiculo
-    url(r'', include('concesionario.apps.vehiculo.url',namespace='vehiculo')),
+    #url(r'', include('concesionario.apps.vehiculo.url',namespace='vehiculo')),
     #Inclusion de las url que hay en la aplicacion venta
-    url(r'', include('concesionario.apps.venta.url',namespace='venta')),
+    #url(r'', include('concesionario.apps.venta.url',namespace='venta')),
 
     #url para acceder a la imagenes que estan en la carpeta media del proyecto
     #se deseas colocar imagenes en tu contenido HTML, este link es necesario para que se muestren las imagenes

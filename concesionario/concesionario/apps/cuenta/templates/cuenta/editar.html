@@ -38,7 +38,7 @@
                         </div>
                         <div class="panel-body">
                         	{# Display a form #}
-                            <form action="/" method="POST"> {% csrf_token %}
+                            <form action="{% url 'cuenta:editar' %}" method="POST"> {% csrf_token %}
 								<div id="wizard">
 									<!-- begin wizard step-1 -->
 									<div>
@@ -60,7 +60,8 @@
 										</fieldset>
 									</div>
 									<!-- end wizard step-2 -->
-									 <p><a class="btn btn-success btn-lg" role="button">Aceptar</a></p>
+									<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
+									
 									
 								</div>
 							</form>

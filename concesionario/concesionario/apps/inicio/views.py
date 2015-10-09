@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
 
+
 #El RequestContext permite mantender informacion del request de la pagina que hizo la peticion 
 #y pasarsela a la nueva pagina, esto eprmite mantener datos como el usuario logeado entre otros
 from django.template import RequestContext
