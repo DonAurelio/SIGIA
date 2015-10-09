@@ -42,8 +42,8 @@ class Editar(TemplateView):
 			return render_to_response('cuenta/perfil.html',context,context_instance=RequestContext(request))
 		else:
 			#En caso de que haya algun error, se vuelve a mostrar el formulario con los errores
-			user_form = UserUpdateForm(instance=request.user)
-			empleado_form = EmpleadoUpdateForm(instance=request.user.empleado)
+			user_form = UserUpdateForm(request.POST,instance=request.user)
+			empleado_form = EmpleadoUpdateForm(request.POST,instance=request.user.empleado)
 			#user_form = UserUpdateForm(request.POST)
 			#empleado_form = EmpleadoUpdateForm(request.POST)
 			#Se coloca un mensaje en el request, para que sea mostrado en el template 
