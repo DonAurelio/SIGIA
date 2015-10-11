@@ -1,16 +1,8 @@
+# -*- encoding: utf-8 -*-
+
 from django.db import models
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
-
-# ATRIBUTOS DE ORDEN DE TRABAJO
-#id_ordendetrabajo
-#empleado
-#cliente
-#placa vehiculo
-#fecha entrada
-#fecha salida
-#descripcion
-#estado de vehiculo
 
 #Define la organizacion del los datos de una orden de trabajo en la base de datos
 class OrdenDeTrabajo(models.Model):

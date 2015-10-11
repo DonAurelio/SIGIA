@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
 
@@ -41,7 +43,7 @@ class Login(TemplateView):
 				context = {'message':'Su usuario no esta activo'}
 				return render_to_response('inicio/login.html',context,context_instance=RequestContext(request))
 		else:
-			context = {'message':'Revise su usuario y clave'}
+			context = {'message':'Usuario o contraseña invalido'}
 			return render_to_response('inicio/login.html',context,context_instance=RequestContext(request))
 
 class Logout(TemplateView):

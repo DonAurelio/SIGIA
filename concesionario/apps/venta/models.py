@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.db import models
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente

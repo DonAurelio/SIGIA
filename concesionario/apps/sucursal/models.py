@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.db import models
 from apps.vehiculo.models import Vehiculo
 from apps.repuesto.models import Repuesto

@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.contrib import admin
 from .models import Repuesto
 # Register your models here.

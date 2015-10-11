@@ -1,18 +1,9 @@
+# -*- encoding: utf-8 -*-
+
 from django.db import models
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 from apps.vehiculo.models import Vehiculo
-
-
- 
-#ATRIBUTOS DE COTIZACION		
-#id_cotizacion				
-#empleado
-#cliente
-#vehiculo
-#fecha
-#fecha_vencimiento
-#forma_Pago
 
 #Define la organizacion del los datos de una cotizacion en la base de datos
 class Cotizacion(models.Model):

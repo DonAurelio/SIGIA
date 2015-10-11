@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.db import models
 
 # Modelo que representa los clientes de la sucursal

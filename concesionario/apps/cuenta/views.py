@@ -1,9 +1,12 @@
+# -*- encoding: utf-8 -*-
+
 from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
 from django.template import RequestContext
 from django.contrib import messages
-from django.contrib.auth.forms import PasswordChangeForm
+#from django.contrib.auth.forms import PasswordChangeForm
 from .forms import UserUpdateForm
+from .forms import UserPasswordUpdateForm
 from .forms import EmpleadoUpdateForm
 from apps.empleado.models import Empleado
 
@@ -18,14 +21,13 @@ class Editar(TemplateView):
 	def get(self,request,*args,**kwargs):
 		#Se instancian los formularios con la informacion actual del usuario y empleado
 		user_form = UserUpdateForm(instance=request.user)
-		user_change_password_form = PasswordChangeForm(user=request.user)
+		user_password_update_form = UserPasswordUpdateForm(user=request.user)
 		empleado_form = EmpleadoUpdateForm(instance=request.user.empleado)
-
 
 		#Se colocan los formularios en el contexto
 		context = {
 		'user_form':user_form,
-		'user_change_password_form':user_change_password_form,
+		'user_password_update_form':user_password_update_form,
 		'empleado_form':empleado_form
 		}
 		return render_to_response('cuenta/editar.html',context,context_instance=RequestContext(request))
@@ -35,7 +37,7 @@ class Editar(TemplateView):
 		#Se obtiene la informacion del formulario diligenciado en el template del request.POST
 		user_form = UserUpdateForm(request.POST,instance=request.user)
 		
-		user_change_password_form = PasswordChangeForm(user=request.user,data=request.POST)
+		user_password_update_form = UserPasswordUpdateForm(user=request.user,data=request.POST)
 
 		#Se obtienen los datos de empleado del usuario a modificar 
 		#junto con los archivos que se van a actualizar
@@ -44,9 +46,9 @@ class Editar(TemplateView):
 		#Se verifica si los formularios fueron diligenciados correctamente
 		#Antes de guardar un formulario es obligatorio que se ejecute primero el metodo is_valid()
 		#debido a que la ejecucion de este metodo activa el metodo save() de cada formulario
-		if user_form.is_valid() and empleado_form.is_valid() and user_change_password_form.is_valid():
+		if user_form.is_valid() and empleado_form.is_valid() and user_password_update_form.is_valid():
 			user_form.save()
-			user_change_password_form.save()
+			user_password_update_form.save()
 			empleado_form.save()
 
 			#Se coloca un mensaje en el request, para que sea mostrado en el template 
@@ -56,14 +58,14 @@ class Editar(TemplateView):
 		else:
 			#En caso de que haya algun error, se vuelve a mostrar el formulario con los errores
 			user_form = UserUpdateForm(request.POST,instance=request.user)
-			user_change_password_form = PasswordChangeForm(user=request.user)
+			user_password_update_form = UserPasswordUpdateForm(user=request.user,data=request.POST)
 			empleado_form = EmpleadoUpdateForm(request.POST,instance=request.user.empleado)
 			#Se coloca un mensaje en el request, para que sea mostrado en el template 
 			messages.error(request,'Hay errores en algun campo')
 			#Se colocan los formularios en el contexto
 			context = {
 			'user_form':user_form,
-			'user_change_password_form':user_change_password_form,
+			'user_password_update_form':user_password_update_form,
 			'empleado_form':empleado_form
 			}
 			return render_to_response('cuenta/editar.html',context,context_instance=RequestContext(request))

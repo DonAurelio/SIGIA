@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill

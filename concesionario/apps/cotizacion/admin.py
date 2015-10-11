@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.contrib import admin
 from .models import Cotizacion
 # Register your models here.
