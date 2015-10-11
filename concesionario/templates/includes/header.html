@@ -23,7 +23,11 @@
 
 						<!-- begin user picture and name-->
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<img src={{ user.empleado.imagen.url }} alt="" />
+							{% if  user.empleado.imagen %}
+								<img src={{ user.empleado.imagen.url }} alt="" /> 
+							{% else %}
+								<img src="{{ MEDIA_URL }}imagenes/empleado/foto_no_disponible.png">
+							{% endif %}
 							<span class="hidden-xs">{{ user.first_name }} {{ user.last_name }}</span> <b class="caret"></b>
 						</a>
 						<!-- end user picture and name -->

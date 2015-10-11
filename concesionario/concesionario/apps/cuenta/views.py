@@ -28,7 +28,9 @@ class Editar(TemplateView):
 	def post(self,request,*args,**kwargs):
 		#Se obtiene la informacion del formulario diligenciado en el template del request.POST
 		user_form = UserUpdateForm(request.POST,instance=request.user)
-		empleado_form = EmpleadoUpdateForm(request.POST,instance=request.user.empleado)
+		
+		#Se obtienen los datos de empleado del usuario a modificar 
+		empleado_form = EmpleadoUpdateForm(request.POST,request.FILES,instance=request.user.empleado)
 
 		#Se verifica si los formularios fueron diligenciados correctamente
 		#Antes de guardar un formulario es obligatorio que se ejecute primero el metodo is_valid()

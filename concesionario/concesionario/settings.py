@@ -94,6 +94,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                #This option allow to use the MEDIA_URL in templates
+                'django.template.context_processors.media',
             ],
         },
     },

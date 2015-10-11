@@ -285,7 +285,7 @@ var handleDashboardTodolist = function() {
 };
 
 var handleDashboardGritterNotification = function() {
-    $(window).load(function() {
+    /*$(window).load(function() {
         setTimeout(function() {
             $.gritter.add({
                 title: 'Bienvenido!',
@@ -297,6 +297,7 @@ var handleDashboardGritterNotification = function() {
             });
         }, 1000);
     });
+*/
 };
 
 var Dashboard = function () {

@@ -55,7 +55,13 @@
 				<ul class="nav">
 					<li class="nav-profile">
 						<div class="image">
-							<a href="javascript:;"> <img src={{ user.empleado.imagen.url }} alt="" /> </a>
+							<a href="javascript:;"> 
+							{% if  user.empleado.imagen %}
+								<img src={{ user.empleado.imagen.url }} alt="" /> 
+							{% else %}
+								<img src="{{ MEDIA_URL }}imagenes/empleado/foto_no_disponible.png">
+							{% endif %}
+							</a>
 						</div>
 						<div class="info">
 							{{ user.first_name }} {{ user.last_name }}
