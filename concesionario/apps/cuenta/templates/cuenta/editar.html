@@ -1,0 +1,85 @@
+{% extends "cuenta/perfil.html" %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block custom-css %}
+	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+	<link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL STYLE ================== -->
+{% endblock %}
+
+<!-- Edicion del perfil de empleado -->
+{% block section_header %}
+	<h1 class="page-header">Editar perfil</h1>
+{% endblock %}
+{% block section_content %}
+
+                <!-- begin col-12 -->
+			    <div class="col-md-12">
+			        <!-- begin panel -->
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Formulario</h4>
+                        </div>
+                        <div class="panel-body">
+                        	{# Display a form #}
+                        	{# the enctype="multipart/form-data" is necessary to upload files#}
+                            <form action="{% url 'cuenta:editar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+								<div id="wizard">
+									<!-- begin wizard step-1 -->
+									<div>
+                                        <fieldset>
+                                            <legend class="pull-left width-full">Informacion de la cuenta</legend>
+                                            <!-- begin row -->
+                                            {% bootstrap_form user_form %}
+                                            {% bootstrap_form user_change_password_form %}
+                                            <!-- end row -->
+										</fieldset>
+									</div>
+									<!-- end wizard step-1 -->
+									<!-- begin wizard step-2 -->
+									<div>
+										<fieldset>
+											<legend class="pull-left width-full">Informacion adicional</legend>
+                                            <!-- begin row -->
+                                            {% bootstrap_form empleado_form %}
+                                            <!-- end row -->
+										</fieldset>
+									</div>
+									<!-- end wizard step-2 -->
+									<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
+									
+									
+								</div>
+							</form>
+                        </div>
+                    </div>
+                    <!-- end panel -->
+                </div>
+                <!-- end col-12 -->
+            
+{% endblock %}
+
+{% block custom-js %}
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+{% endblock %}
+	

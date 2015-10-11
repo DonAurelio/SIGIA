@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#Email de la coorporacion o empresa
+DEFAULT_FROM_EMAIL = 'aurelio.vivas@correounivalle.edu.co'
+
 
 # Application definition
 
@@ -46,27 +49,27 @@ INSTALLED_APPS = (
 
     #Apps
     #Administra el inicio y cierre de sesion
-    'concesionario.apps.inicio',
+    'apps.inicio',
     #Administra la presentacion de los perfiles de cada usuario
-    'concesionario.apps.cuenta',
+    'apps.cuenta',
     #Administra el crud del empleado
-    'concesionario.apps.empleado',
+    'apps.empleado',
     #Administra el crud de la sucursal
-    'concesionario.apps.sucursal',
+    'apps.sucursal',
     #Administra el crud de vehiculo
-    'concesionario.apps.vehiculo',
+    'apps.vehiculo',
     #Administrad el crud de repuesto
-    'concesionario.apps.repuesto',
+    'apps.repuesto',
     #Administra el crud de cliente
-    'concesionario.apps.cliente',
+    'apps.cliente',
     #Administrad el crud de orden de trabajo
-    'concesionario.apps.orden_de_trabajo',
+    'apps.orden_de_trabajo',
     #Administra el crud de venta
-    'concesionario.apps.venta',
+    'apps.venta',
     #Administra el crud de cotizacion
-    'concesionario.apps.cotizacion',
+    'apps.cotizacion',
     #Administra el crud de factura de orden de trabajo
-    'concesionario.apps.factura_orden_trabajo',
+    'apps.factura_orden_trabajo',
 
 )
 
