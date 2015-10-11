@@ -20,7 +20,7 @@ urlpatterns = [
     #Inclusion de las url que hay en la aplicacion orden_de_trabajo
     #url(r'', include('concesionario.apps.orden_de_trabajo.url',namespace='orden_de_trabajo')),
     #Inclusion de las url que hay en la aplicacion repuesto
-    #url(r'', include('concesionario.apps.repuesto.url',namespace='repuesto')),
+    url(r'', include('concesionario.apps.repuesto.url',namespace='repuesto')),
     #Inclusion de las url que hay en la aplicacion sucursal
     #url(r'', include('concesionario.apps.sucursal.url',namespace='sucursal')),
     #Inclusion de las url que hay en la aplicacion vehiculo

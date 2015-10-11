@@ -1,9 +1,8 @@
 from django.conf.urls import include, url
-
+from concesionario.apps.repuesto.forms import CrearRepuesto
 
 urlpatterns = [
-	#url para el acceso al sitio de administracion
-    #url(r'^admin/', include(admin.site.urls)),
-    #Inclusion de las url que hay en la aplicacion inicio
-    
+
+    #url que redirecciona a la pagina de creacion de cotizaciones 
+    url(r'^repuesto/crear$', CrearRepuesto.as_view(), name='crear'),
 ]
