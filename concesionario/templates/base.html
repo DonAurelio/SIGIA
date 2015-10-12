@@ -41,91 +41,10 @@
 	<!-- end #page-loader -->
 	
 	<!-- begin #page-container -->
-	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
-				
-		<!-- begin #header -->
-		{% include "includes/header.html" %}
-		<!-- end #header -->
-		
-		<!-- begin #sidebar -->
-		<div id="sidebar" class="sidebar">
-			<!-- begin sidebar scrollbar -->
-			<div data-scrollbar="true" data-height="100%">
-					<!-- begin sidebar user -->
-				<ul class="nav">
-					<li class="nav-profile">
-						<div class="image">
-							<a href="javascript:;"> 
-							{% if  user.empleado.imagen %}
-								<img src={{ user.empleado.imagen.url }} alt="" /> 
-							{% else %}
-								<img src="{{ MEDIA_URL }}imagenes/empleado/foto_no_disponible.png">
-							{% endif %}
-							</a>
-						</div>
-						<div class="info">
-							{{ user.first_name }} {{ user.last_name }}
-							<small>{{ user.empleado.tipo }}</small>
-						</div>
-					</li>
-				</ul>
-				<!-- end sidebar user -->
-
-				<!-- begin sidebar nav -->
-				<ul class="nav">
-					<li class="nav-header">Navegacion</li>
-					{% block navigation_menu %}
-					{% endblock %}
-					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">
-					<i class="fa fa-angle-double-left"></i>
-					</a>
-					</li>
-					<!-- end sidebar minify button -->
-				</ul>
-				<!-- end sidebar nav -->
-			
-			</div>
-			<!-- end sidebar scrollbar -->
-		</div>
-		<div class="sidebar-bg"></div>
-		<!-- end #sidebar -->
-		
-		
-		<!-- begin #content -->
-		<div id="content" class="content">
-			<!-- begin page-header -->
-			{% block section_header %}
-			{% endblock %}
-			<!-- end page-header -->
-			
-			<!-- begin indicators -->
-			{% include "includes/indicadores.html"%}
-			<!-- end indicators -->
-						
-			<!-- begin row -->
-			<div class="row">
-				<!-- begin col-8 -->
-				<div class="col-md-8">
-				{% block section_content %}
-				
-				{% endblock %}
-				</div>
-				<div class="col-md-4">
-				{% include "includes/calendario.html" %}
-				</div>
-			</div>
-			<!-- end row -->
-		</div>
-		<!-- end #content -->
-	
-		
-		<!-- begin scroll to top btn -->
-		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-		<!-- end scroll to top btn -->
-	</div>
+	{% block content %}
+	{% endblock %}
 	<!-- end page container -->
 	
-
 	{% block base-js %}
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{% static 'color_admin/assets/plugins/jquery-1.8.2/jquery-1.8.2.min.js' %}"></script>

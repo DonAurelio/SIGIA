@@ -1,27 +1,57 @@
 {% extends "base.html" %}
 <!-- Template perfil de empleado -->
 
+<!-- css auxiliar -->
 {% block custom-css %}
 {% endblock %}
 
-<!-- Menu de la barra de navegacion -->
-{% block navigation_menu %}
-	{% if user.empleado.tipo == "Gerente" %}
-		{% include "cuenta/includes/menu_gerente.html" %}
-	{% elif  user.empleado.tipo == "Jefe de taller"%}
-		{% include "cuenta/includes/menu_jefe_taller.html" %}
-	{% elif  user.empleado.tipo == "Vendedor"%}
-		{% include "cuenta/includes/menu_vendedor.html" %}
-	{% endif %}
+{% block content %}
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+		
+		<!-- begin #header -->
+		{% include "includes/header.html" %}
+		<!-- end #header -->
+		
+		<!-- begin #sidebar -->
+		{% include "includes/sidebar.html" %}
+		<!-- end #sidebar -->
+		
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<!-- begin page-header -->
+			<!-- Write here section title -->
+			<!-- end page-header -->
+			
+			<!-- begin indicators -->
+			{% include "includes/indicadores.html"%}
+			<!-- end indicators -->
+						
+			<!-- begin row -->
+			<div class="row">
+				<!-- begin col-8 -->
+				<div class="col-md-8">
+				<!-- put the content section here -->
+				</div>
+
+				<!-- begin col-4 -->
+				<div class="col-md-4">
+				{% include "includes/calendario.html" %}
+				</div>
+				<!-- end col-4 -->
+			</div>
+			<!-- end row -->
+		</div>
+		<!-- end #content -->
+	
+		
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
 {% endblock %}
 
-<!-- Enacabezado de la seccion -->
-{% block section_header %}
-{% endblock %}
-
-<!-- Contenido de la seccion  -->
-{% block section_content %}
-{% endblock %}
-
+<!-- JavaScript auxiliar -->
 {% block custom-js %}
 {% endblock %}
