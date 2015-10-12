@@ -2,6 +2,7 @@
 
 from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
+from django.contrib.auth.forms import PasswordResetForm
 
 #El RequestContext permite mantender informacion del request de la pagina que hizo la peticion 
 #y pasarsela a la nueva pagina, esto eprmite mantener datos como el usuario logeado entre otros
@@ -45,6 +46,13 @@ class Login(TemplateView):
 		else:
 			context = {'message':'Usuario o contraseña invalido'}
 			return render_to_response('inicio/login.html',context,context_instance=RequestContext(request))
+
+class OlvidoLogin(TemplateView):
+
+	def get(self,request,*args,**kwargs):
+		forgot_login_form = PasswordResetForm()
+		context = {'forgot_login_form':forgot_login_form}
+		return render_to_response('inicio/olvido_login.html',context,context_instance=RequestContext(request))
 
 class Logout(TemplateView):
 

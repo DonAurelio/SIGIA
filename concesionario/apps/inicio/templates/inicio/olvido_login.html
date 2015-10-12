@@ -1,4 +1,15 @@
 {% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
@@ -51,23 +62,15 @@
                 <!-- LOGIN FORM -->
                 <form action="{% url 'inicio:login' %}" method="POST" class="margin-bottom-0">{% csrf_token %}
                     <div class="form-group m-b-20">
-                        <input name="username" type="text" class="form-control input-lg" placeholder="Email Address" />
-                    </div>
-                    <div class="form-group m-b-20">
-                        <input name="password" type="password" class="form-control input-lg" placeholder="Password" />
-                    </div>
-                    <div class="checkbox m-b-20">
-                        <label>
-                            {% if message %}
-                                <p class="text-warning">{{ message }}</p>
-                            {% endif %}
+                         <label>
+                            <p class="text-info">
+                            Por favor confirma tu correo electronico para recuperar tu cuenta
+                            </p>
                         </label>
                     </div>
+                    {% bootstrap_form forgot_login_form %}
                     <div class="login-buttons">
-                        <button type="submit" class="btn btn-success btn-block btn-lg">Iniciar</button>
-                    </div>
-                    <div class="m-t-20">
-                        Olvidaste tu contraseña? Click <a href="{% url 'inicio:olvido_login' %}">aqui</a> para recuperar.
+                        <button type="submit" class="btn btn-success btn-block btn-lg">Enviar</button>
                     </div>
                 </form>
 
