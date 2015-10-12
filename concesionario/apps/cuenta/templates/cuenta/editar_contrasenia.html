@@ -39,32 +39,19 @@
                         <div class="panel-body">
                         	{# Display a form #}
                         	{# the enctype="multipart/form-data" is necessary to upload files#}
-                            <form action="{% url 'cuenta:editar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                            <form action="{% url 'cuenta:editar_contrasenia' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 								<div id="wizard">
 									<!-- begin wizard step-1 -->
 									<div>
                                         <fieldset>
                                             <legend class="pull-left width-full">Informacion de la cuenta</legend>
                                             <!-- begin row -->
-                                            {% bootstrap_form user_form %}
-                                            <a href="{% url 'cuenta:editar_contrasenia' %}"><p class="text-info">Cambiar contraseña</p></a>
+                                            {% bootstrap_form user_password_update_form %}
                                             <!-- end row -->
 										</fieldset>
 									</div>
 									<!-- end wizard step-1 -->
-									<!-- begin wizard step-2 -->
-									<div>
-										<fieldset>
-											<legend class="pull-left width-full">Informacion adicional</legend>
-                                            <!-- begin row -->
-                                            {% bootstrap_form empleado_form %}
-                                            <!-- end row -->
-										</fieldset>
-									</div>
-									<!-- end wizard step-2 -->
 									<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
-									
-									
 								</div>
 							</form>
                         </div>
