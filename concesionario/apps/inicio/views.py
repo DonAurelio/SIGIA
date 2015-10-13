@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render, render_to_response
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import PasswordResetForm
 
@@ -10,6 +10,8 @@ from django.template import RequestContext
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from apps.empleado.models import Empleado
+from django.core.urlresolvers import reverse
+from django.contrib.auth.views import password_reset, password_reset_confirm
 
 
 class Login(TemplateView):
@@ -47,13 +49,6 @@ class Login(TemplateView):
 			context = {'message':'Usuario o contraseña invalido'}
 			return render_to_response('inicio/login.html',context,context_instance=RequestContext(request))
 
-class OlvidoLogin(TemplateView):
-
-	def get(self,request,*args,**kwargs):
-		forgot_login_form = PasswordResetForm()
-		context = {'forgot_login_form':forgot_login_form}
-		return render_to_response('inicio/olvido_login.html',context,context_instance=RequestContext(request))
-
 class Logout(TemplateView):
 
 	def dispatch(self,request,*args,**kwargs):
@@ -62,3 +57,31 @@ class Logout(TemplateView):
 		return render_to_response('inicio/login.html',context,context_instance=RequestContext(request))
 
 
+class RecuperarLogin(TemplateView):
+
+	def dispatch(self,request,*args,**kwargs):
+		return password_reset(
+			request,
+			template_name = 'inicio/recuperar_login_form.html',
+			email_template_name = 'inicio/recuperar_login_email.html',
+			subject_template_name = 'inicio/recuperar_login_email_asunto.txt',
+			post_reset_redirect = reverse('inicio:recuperar_login_email_enviado'))
+
+class RecuperarLoginEmailEnviado(TemplateView):
+
+	def dispatch(self,request,*args,**kwargs):
+		return render(request,'inicio/recuperar_login_email_enviado.html')
+
+class RecuperarLoginConfirmacion(TemplateView):
+
+	def dispatch(self,request,*args,**kwargs):
+		return password_reset_confirm(
+			request,
+			template_name = 'inicio/recuperar_login_confirmacion.html',
+			uidb36=kwargs.get('uidb36',None), token=kwargs.get('token',None), 
+			post_reset_redirect=reverse('inicio:recuperar_login_terminado'))
+
+class RecuperarLoginTerminado(TemplateView):
+
+	def dispatch(self,request,*args,**kwargs):
+		return HttpResponse('recuperar_login_terminado.html')

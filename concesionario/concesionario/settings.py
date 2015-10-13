@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 """
 Django settings for concesionario project.
 
@@ -27,8 +28,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-#Email de la coorporacion o empresa
-DEFAULT_FROM_EMAIL = 'aurelio.vivas@correounivalle.edu.co'
+# Send email for forgot password
+# Is necesary configure your account to allow django use it to send mails
+# put your allow insecure apps turn on (it puts your account more vulnerable)
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'aureliowebpages@gmail.com'
+EMAIL_HOST_PASSWORD = '1143843823'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 # Application definition

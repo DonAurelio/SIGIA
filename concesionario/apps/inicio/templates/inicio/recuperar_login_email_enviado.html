@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+
 <!-- css auxiliar -->
 {% block custom-css %}
 {% endblock %}
@@ -25,31 +26,20 @@
                 </div>
                 <!-- end brand -->
                 <div class="login-content">
-
                     <!-- LOGIN FORM -->
                     <form action="{% url 'inicio:login' %}" method="POST" class="margin-bottom-0">{% csrf_token %}
                         <div class="form-group m-b-20">
-                            <input name="username" type="text" class="form-control input-lg" placeholder="Email Address" />
-                        </div>
-                        <div class="form-group m-b-20">
-                            <input name="password" type="password" class="form-control input-lg" placeholder="Password" />
-                        </div>
-                        <div class="m-t-20">
-                            <label>
-                                {% if message %}
-                                    <p class="text-warning">{{ message }}</p>
-                                {% endif %}
+                             <label>
+                                <p class="text-info">
+                                    Hemos enviado un correo con instrucciones para hacer el cambio de password, si su cuenta existe con el email que usted ha digitado, entonces recibira el correo en breve. 
+                                </p>
+                                <p>
+                                    Si usted no recibe el correo, posiblemente el correo que usted 
+                                    digito no esta relacionado con su cuenta. Asegurese de haber escrito correctamente el correo.
+                                </p>
                             </label>
                         </div>
-                        <div class="login-buttons">
-                            <button type="submit" class="btn btn-success btn-block btn-lg">Iniciar</button>
-                        </div>
-                        <div class="m-t-20">
-                            Olvidaste tu contraseña? Click <a href="{% url 'inicio:recuperar_login' %}">aqui</a> para recuperar.
-                        </div>
                     </form>
-
-
                 </div>
             </div>
             <!-- end login -->
@@ -126,4 +116,6 @@
     <script src="{% static 'color_admin/assets/js/login-v2.demo.min.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
+
+   
 {% endblock %}
