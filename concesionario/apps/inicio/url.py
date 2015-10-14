@@ -15,7 +15,7 @@ urlpatterns = [
 	url(r'^inicio/login/$', Login.as_view(), name='login'),
 	url(r'^inicio/logout/$', Logout.as_view(), name='logout'),
 
-	#Para la recuperacion de la cuenta usando los templates de django
+	#Para la recuperacion de la cuenta 
 
     #Envia al formuario para confirmar el correo de la persona que olvido su login
     url(r'^inicio/recuperar_login/$', RecuperarLogin.as_view(), name='recuperar_login'),
@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^inicio/recuperar_login_email_enviado/$', RecuperarLoginEmailEnviado.as_view(), name='recuperar_login_email_enviado'),
     #Procesa la url generada para recuperar el login del usuario
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', RecuperarLoginConfirmacion.as_view(), name='recuperar_login_confirmacion'),
-    #muestra un mensaje donde de confirma exitosamente que se ha completado el proceso de reperación del login
+    #muestra un mensaje donde se confirma  que se ha completado el proceso de reperación del login
     url(r'^inicio/recuperar_login_terminado$', RecuperarLoginTerminado.as_view(), name='recuperar_login_terminado'),
 ]

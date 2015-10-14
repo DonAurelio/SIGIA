@@ -1,14 +1,15 @@
 {% load i18n %}{% autoescape off %}
-{% blocktrans %}You're receiving this email because you requested a password reset for your user account at {{ site_name }}.{% endblocktrans %}
+Usted ha recibido este correo porque ha solicitado la recuperacion de su cuenta de usuario en {{ site_name }}.
 
-{% trans "Please go to the following page and choose a new password:" %}
+Por favor dirijase al siguiente link para reiniciar la contraseña de su cuenta
 {% block reset_link %}
 {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
 {% endblock %}
-{% trans "Your username, in case you've forgotten:" %} {{ user.get_username }}
 
-{% trans "Thanks for using our site!" %}
+En caso de que haya olvidado su nombre de usuario: {{ user.get_username }}
 
-{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+Gracias por usar nuetro servicio web.
+
+Equipo {{ site_name }}
 
 {% endautoescape %}

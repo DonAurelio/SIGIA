@@ -38,7 +38,7 @@
                 <!-- end brand -->
                 <div class="login-content">
                     <!-- LOGIN FORM -->
-                    <form action="{% url 'inicio:login' %}" method="POST" class="margin-bottom-0">{% csrf_token %}
+                    <form action="{% url 'inicio:recuperar_login_terminado' %}" method="POST" class="margin-bottom-0">{% csrf_token %}
                         <div class="form-group m-b-20">
                              <label>
                                 <p class="text-info">
@@ -52,7 +52,10 @@
                         
                         {% else %}
 
-                        <p>{% trans "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset." %}</p>
+                        <p> 
+                            El link para recuperar la cuenta es invalido, posiblemente ya ha sido usado. 
+                            Por favor vuelva a solicitar la recuperacion de su cuenta
+                        </p>
 
                         {% endif %}
                         

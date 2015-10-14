@@ -75,13 +75,14 @@ class RecuperarLoginEmailEnviado(TemplateView):
 class RecuperarLoginConfirmacion(TemplateView):
 
 	def dispatch(self,request,*args,**kwargs):
+		
 		return password_reset_confirm(
 			request,
 			template_name = 'inicio/recuperar_login_confirmacion.html',
-			uidb36=kwargs.get('uidb36',None), token=kwargs.get('token',None), 
+			uidb64=kwargs['uidb64'], token=kwargs['token'], 
 			post_reset_redirect=reverse('inicio:recuperar_login_terminado'))
 
 class RecuperarLoginTerminado(TemplateView):
 
 	def dispatch(self,request,*args,**kwargs):
-		return HttpResponse('recuperar_login_terminado.html')
+		return render_to_response('inicio/recuperar_login_terminado.html',context_instance=RequestContext(request))
