@@ -7,4 +7,4 @@ class CrearRepuesto(CreateView):
 	template_name = 'repuesto/includes/crear.html'
 	model = Repuesto
 	fields = ['nombre', 'precio', 'marca', 'clasificacion', 'cantidad',
-	'imagen', 'provedor', 'descripcion']
+	'imagen', 'proveedor', 'descripcion']

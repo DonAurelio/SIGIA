@@ -4,11 +4,22 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+#ATRIBUTOS DE REPUESTO		
+#id_repuesto				
+#Nombre
+#Precio
+#Marca
+#Clasificacion
+#Unidad
+#Imagen	
+#Proveedor
+#Descripcion
+
 #Define la organizacion del los datos de un repuesto en la base de datos
 class Repuesto(models.Model):
 #Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 #Nombre del repuesto
-	nombre = models.CharField(null=True,blank=True,max_length=20)
+	nombre = models.CharField(null=True,blank=True,max_length=50)
 	#precio del repuesto
 	precio = models.FloatField(null=True,blank=True)
 	#marca del repuesto
@@ -23,6 +34,7 @@ class Repuesto(models.Model):
 	LIMPIEZA='Limpieza'
 	AUTOPARTES='Autopartes'
 	SELLOS_EMPAQUES='Sellos_empaques'
+	LUBRICANTES='Lubricantes'
 
 	tipo_choice = (
 		(AUTOMOTRIZ, 'Automotriz'),
@@ -30,15 +42,16 @@ class Repuesto(models.Model):
 		(PINTURAS, 'Pinturas'),
 		(RODAMIENTOS, 'Rodamientos'),
 		(SOLVENTES, 'Solventes'),
-		(BANDAS_CADENAS, 'Bandas_cadenas'),
+		(BANDAS_CADENAS, 'Bandas y cadenas'),
 		(LIMPIEZA, 'Limpieza'),
 		(AUTOPARTES, 'Autopartes'),
-		(SELLOS_EMPAQUES, 'Sellos_empaques'),
+		(SELLOS_EMPAQUES, 'Sellos y empaques'),
+		(LUBRICANTES, 'Lubricantes'),
 	 )
 	 
 	clasificacion = models.CharField(null=True,blank=True, max_length=20, choices=tipo_choice,default=SELLOS_EMPAQUES)
 
-	#Cantidad disponible de repuesto
+	#Cantidad disponible en stock del repuesto
 	cantidad = models.IntegerField(null=True,blank=True)
 	#Imagen del repuesto
 	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/repuestos/")
@@ -49,7 +62,7 @@ class Repuesto(models.Model):
 									  options={'quality': 60})
 
 	#Provedor del repuesto
-	provedor = models.CharField(null=True,blank=True,max_length=20)
+	proveedor = models.CharField(null=True,blank=True,max_length=20)
 	#Descripcion del repuesto
 	descripcion = models.CharField(null=True,blank=True,max_length=100)
 
@@ -65,4 +78,3 @@ class Repuesto(models.Model):
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
 		return self.nombre 
-

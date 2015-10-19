@@ -6,7 +6,7 @@ from .models import Repuesto
 class AdminRepuesto(admin.ModelAdmin):
 	#atributos
 	list_display = ('id', 'nombre', 'precio',
-		 'marca', 'clasificacion', 'cantidad', 'imagen', 'provedor', 'descripcion' )
+		 'marca', 'clasificacion', 'cantidad', 'imagen', 'proveedor', 'descripcion' )
 	#atributos por los que se buscara
 	search_fields = ('id', 'nombre')
 

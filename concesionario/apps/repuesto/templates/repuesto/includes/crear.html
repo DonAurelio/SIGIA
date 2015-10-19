@@ -1,4 +1,4 @@
-{% extends "cuenta/perfil.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
 
 {# Load the tag library #}
@@ -12,65 +12,75 @@
 {% bootstrap_messages %}
 
 {% block custom-css %}
-	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-	<link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-	<!-- ================== END PAGE LEVEL STYLE ================== -->
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-<!-- crear cotizacion -->
-{% block section_header %}
-	<h1 class="page-header">Crear cotización</h1>
-{% endblock %}
-{% block section_content %}
-
-                <!-- begin col-12 -->
-			    <div class="col-md-12">
-			        <!-- begin panel -->
-                    <div class="panel panel-inverse">
-                        <div class="panel-heading">
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                            </div>
-                            <h4 class="panel-title">Formulario</h4>
+<!-- crear Repuesto -->
+{% block content %}
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+        
+    <!-- begin #header -->
+    {% include "includes/header.html" %}
+    <!-- end #header -->
+    
+    <!-- begin #sidebar -->
+    {% include "includes/sidebar.html" %}
+    <!-- end #sidebar -->
+    
+    <!-- begin #content -->
+    <div id="content" class="content">
+            <!-- begin col-12 -->
+            <div class="col-md-12">
+                <!-- begin panel -->
+                <div class="panel panel-inverse">
+                    <div class="panel-heading">
+                        
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                         </div>
-                        <div class="panel-body">
-                        	{# Display a form #}
-                            <form action="{% url 'repuesto:crear' %}" method="POST"> {% csrf_token %}
-								<div id="wizard">
-									<!-- begin wizard step-1 -->
-									<div>
-                                        <fieldset>
-                                            <legend class="pull-left width-full">Cotización de un auto</legend>
-                                            <!-- begin row -->
-                                            {% bootstrap_form form %}
-                                            <!-- end row -->
-										</fieldset>
-									</div>
-									<!-- end wizard step-1 -->
-									<!-- begin wizard step-2 -->
-									<!-- end wizard step-2 -->
-									<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Generar</button>
-									
-									
-								</div>
-							</form>
-                        </div>
+                        
+                    <h4 class="panel-title">Formulario</h4>
                     </div>
-                    <!-- end panel -->
+                    <div class="panel-body">
+                        {# Display a form #}
+                        <form action="{% url 'repuesto:crear' %}" method="POST"> {% csrf_token %}
+                            <div id="wizard">
+                                <!-- begin wizard step-1 -->
+                                <div>
+                                    <fieldset>
+                                        <legend class="pull-left width-full">Creacion de un repuesto</legend>
+                                        <!-- begin row -->
+                                        {% bootstrap_form form %}
+                                        <!-- end row -->
+                                    </fieldset>
+                                </div>
+
+                                <button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Agregar</button>
+                                
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <!-- end col-12 -->
+                <!-- end panel -->
+            </div>
+            <!-- end col-12 -->
+        </div>
+        <!-- end #content -->
             
 {% endblock %}
 
 {% block custom-js %}
-	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+    <script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
+    <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
 {% endblock %}
 
 <!--
