@@ -1,11 +1,17 @@
 # -*- encoding: utf-8 -*-
 
 from django.conf.urls import include, url
-
+from .forms import CrearVehiculo
+from .forms import ActualizarVehiculo
+from .views import ListaVehiculos
 
 urlpatterns = [
-	#url para el acceso al sitio de administracion
-    #url(r'^admin/', include(admin.site.urls)),
-    #Inclusion de las url que hay en la aplicacion inicio
+
+    # redirecciona a la pagina de creacion de vehiculo
+    url(r'^vehiculo/crear$', CrearVehiculo.as_view(), name='crear-vehiculo'),
+    # redirecciona a pagina para actualizacion de un vehiculo
+    url(r'^vehiculo/(?P<pk>\d+)/$', ActualizarVehiculo.as_view(), name='actualizar-vehiculo'), 
+    # redirecciona a pagina que despliega el listado de vehiculos
+    url(r'^vehiculo/listado$', ListaVehiculos.as_view(), name='lista-vehiculos'),
     
 ]

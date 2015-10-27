@@ -1,10 +1,14 @@
 # -*- encoding: utf-8 -*-
 
-from django.views.generic.edit import CreateView 
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Repuesto
  
 class CrearRepuesto(CreateView): 
-	template_name = 'repuesto/includes/crear.html'
-	model = Repuesto
-	fields = ['nombre', 'precio', 'marca', 'clasificacion', 'cantidad',
-	'imagen', 'proveedor', 'descripcion']
+    model = Repuesto
+    fields = ['nombre', 'precio', 'marca', 'clasificacion', 'cantidad',
+    'imagen', 'proveedor', 'descripcion']
+
+class ActualizarRepuesto(UpdateView): 
+    model = Repuesto 
+    fields = ['nombre', 'precio', 'marca', 'clasificacion', 'cantidad',
+    'imagen', 'proveedor', 'descripcion']

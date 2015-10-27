@@ -4,6 +4,10 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+# ATRIBUTOS DE VEHICULO
+# numero_serie, marca, precio, modelo, potencia, motor, caracteristicas, imagen, capacidad, tipo
+
+
 class Vehiculo(models.Model):
 	# Numero de serie que identifica al vehiculo
 	numero_serie = models.CharField(null=True, blank=True, max_length=100)
