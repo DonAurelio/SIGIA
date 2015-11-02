@@ -1,8 +1,12 @@
 # -*- encoding: utf-8 -*-
 
 from django.conf.urls import include, url
-from .forms import CrearCliente
+from .forms import CrearCliente, ActualizarCliente
+from .views import ListaClientes
 
 urlpatterns = [
-	url(r'^cliente/crear$', CrearCliente.as_view(), name='crear'),	
+	#url que redirecciona a la pagina de creacion de clientes
+	url(r'^cliente/crear$', CrearCliente.as_view(), name='crear-cliente'),	
+	url(r'^cliente/(?P<pk>\d+)/$', ActualizarCliente.as_view(), name='actualizar-cliente'),
+	url(r'^cliente/listado$', ListaClientes.as_view(), name='lista-clientes'),
 ]

@@ -50,19 +50,19 @@
                     </div>
                     <div class="panel-body">
                         {# Display a form #}
-                        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                        <form method="POST"> {% csrf_token %}
                             <div id="wizard">
                                 <!-- begin wizard step-1 -->
                                 <div>
                                     <fieldset>
-                                        <legend class="pull-left width-full">Creacion de un repuesto</legend>
+                                        <legend class="pull-left width-full">Creacion de un Cliente</legend>
                                         <!-- begin row -->
                                         {% bootstrap_form form %}
                                         <!-- end row -->
                                     </fieldset>
                                 </div>
 
-                                <button type="update" class="btn btn-inverse"><i class="fa fa-cog"></i> Agregar</button>
+                                <button type="update" class="btn btn-inverse"><i class="fa fa-cog"></i> Finalizar</button>
                                 
                             </div>
                         </form>
