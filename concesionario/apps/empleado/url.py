@@ -2,10 +2,13 @@
 
 from django.conf.urls import include, url
 
+from . import views
+
 
 urlpatterns = [
-	#url para el acceso al sitio de administracion
-    #url(r'^admin/', include(admin.site.urls)),
-    #Inclusion de las url que hay en la aplicacion inicio
-    
+
+    #url que redirecciona a la pagina de creacion de cotizaciones 
+    url(r'^empleado/crear$',views.nuevo_usuario, name='crear'),
+    url(r'^empleado/crearEmpleado$', views.nuevo_empleado, name='crearEmpleado'),
+      
 ]
