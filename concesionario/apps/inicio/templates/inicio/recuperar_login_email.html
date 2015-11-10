@@ -3,7 +3,7 @@ Usted ha recibido este correo porque ha solicitado la recuperacion de su cuenta 
 
 Por favor dirijase al siguiente link para reiniciar la contraseña de su cuenta
 {% block reset_link %}
-{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+{{ protocol }}://{{ domain }}{% url 'inicio:recuperar_login_confirmacion' uidb64=uid token=token %}
 {% endblock %}
 
 En caso de que haya olvidado su nombre de usuario: {{ user.get_username }}
