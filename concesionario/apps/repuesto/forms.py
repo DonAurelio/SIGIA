@@ -12,3 +12,4 @@ class ActualizarRepuesto(UpdateView):
     model = Repuesto 
     fields = ['nombre', 'precio', 'marca', 'clasificacion', 'cantidad',
     'imagen', 'proveedor', 'descripcion']
+    #template_name_suffix = '_update_form'

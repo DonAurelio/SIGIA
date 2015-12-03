@@ -18,7 +18,7 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-<!-- crear Repuesto -->
+<!-- CREAR  -->
 {% block content %}
     <!-- begin #page-container -->
     <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
@@ -35,7 +35,7 @@
     <div id="content" class="content">
 
         <!-- begin page-header -->
-        <h1 class="page-header">Listado de Repuestos <small>Seleccione un elemento para modificar su información</small></h1>
+        <h1 class="page-header">Listado de Clientes <small>Seleccione un elemento para modificar su información</small></h1>
         <!-- end page-header -->
 
         <!-- begin row -->
@@ -58,38 +58,32 @@
                                 <table id="data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>Identificacion</th>
                                             <th>Nombre</th>
-                                            <th>Marca</th>
-                                            <th>Clasificación</th>
-                                            <th>Cant. en Stock</th>
-                                            <th>Precio</th>
-                                            <th>Proveedor</th>
-                                            <th>Descripción</th>
-                                            <th>Imágen</th>
+                                            <th>Apellido</th>
+                                            <th>Ciudad</th>
+                                            <th>Departamento</th>
+                                            <th>Telefono</th>
+                                            <th>Celular</th>
+                                            <th>Email</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if lista_repuestos %} 
-                                            {% for repuesto  in lista_repuestos %}
+                                        {% if lista_clientes %} 
+                                            {% for cliente  in lista_clientes %}
                                                 <tr>
-                                                    <td><a href="{% url 'repuesto:actualizar-repuesto' repuesto.pk %}"> {{ repuesto.nombre }}</a></td>
-                                                    <td>{{ repuesto.marca }}</td>
-                                                    <td>{{ repuesto.clasificacion }}</td>
-                                                    <td>{{ repuesto.cantidad }}</td>
-                                                    <td>{{ repuesto.precio }}</td>
-                                                    <td>{{ repuesto.proveedor }}</td>
-                                                    <td>{{ repuesto.descripcion }}</td>
-                                                    <td>
-                                                        {% if  repuesto.imagen %}
-                                                            <img src={{ repuesto.imagen.url }} width=100 height=100 /></td>
-                                                        {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/repuestos/sin_img_repuesto.jpg" width=100 height=100/>
-                                                        {% endif %}
-                                                    </tr >
+                                                    <td><a href="{% url 'cliente:actualizar-cliente' cliente.pk %}"> {{ cliente.identificacion }}</a></td>
+                                                    <td>{{ cliente.nombre }}</td>
+                                                    <td>{{ cliente.apellido }}</td>
+                                                    <td>{{ cliente.ciudad }}</td>
+                                                    <td>{{ cliente.departamento }}</td>
+                                                    <td>{{ cliente.telefono }}</td>
+                                                    <td>{{ cliente.celular }}</td>
+                                                    <td>{{ cliente.email }}</td>
                                             {% endfor %} 
                                             </ul> 
                                             {% else %} 
-                                                <p><h1>No hay Repuestos registrados.</h1></p>
+                                                <p><h1>No hay Clientes registrados.</h1></p>
                                         {% endif %} 
                                     </tbody>
                                 </table>

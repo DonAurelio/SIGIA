@@ -2,6 +2,9 @@
 
 from django.db import models
 
+# Atributos de Cliente
+# identificacion, nombre, apellido, ciudad, departamento, telefono, celular, email
+
 # Modelo que representa los clientes de la sucursal
 class Cliente(models.Model):
 	# Numero documento identificacion del cliente

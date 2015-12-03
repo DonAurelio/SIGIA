@@ -15,9 +15,6 @@
 {% block custom-css %}
 	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 	<link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css'%}" rel="stylesheet" />
- 	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css'%}" rel="stylesheet" />
-
 
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
@@ -38,7 +35,7 @@
 		<!-- begin #content -->
 		<div id="content" class="content">
 			<!-- begin page-header -->
-			<h1 class="page-header">Cotizaciones</h1>
+			<h1 class="page-header">Empleado</h1>
 			<!-- end page-header -->
 			
 			<!-- begin indicators -->
@@ -61,16 +58,17 @@
 	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 	                            </div>
-	                            <h4 class="panel-title">Nueva cotización</h4>
+	                            
+	                            <h4 class="panel-title">Información Adicional</h4>
 	                        </div>
 	                        <div class="panel-body">
 	                        	{# Display a form #}
-	                        	{# the enctype="multipart/form-data" is necessary to upload files#}
-	                            <form action="{% url 'cotizacion:crear' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+							{# the enctype="multipart/form-data" is necessary to upload files#}
+	                            <form action="{% url 'empleado:crearEmpleado' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 	                            {% bootstrap_form form %}
 									<div id="wizard">
 										
-										<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Generar</button>
+										<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
 										
 										
 									</div>
@@ -83,11 +81,7 @@
 	            </div>
 	            <!-- end col-8 -->
 
-				<!-- begin col-4 -->
-				<div class="col-md-4">
-				{% include "includes/calendario.html" %}
-				</div>
-				<!-- end col-4 -->
+			 
 			</div>
 			<!-- end row -->
 		</div>
@@ -107,17 +101,8 @@
 	<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/bootstrap-datepicker.js' %}"></script>
+ 
 
-	<script>
-		$(document).ready(function(){
-			$('#id_fecha').datepicker({todayHighlight:true,autoclose:true});
-			$('#id_fecha_vencimiento').datepicker({todayHighlight:true,autoclose:true});
-
-		});
-	</script>
-
-	 
 	
 	<!-- ================== END PAGE LEVEL JS ================== -->
 {% endblock %}

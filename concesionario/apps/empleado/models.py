@@ -33,13 +33,13 @@ class Empleado(models.Model):
 	#password
 
 	#Indentificacion del empleado, debe ser unica
-	identificacion = models.CharField(max_length=20,unique=True,null=True,blank=True)
+	identificacion = models.CharField(max_length=20,unique=True,null=False,blank=True)
 	#Direccion de residencia del empleado
-	direccion = models.CharField(null=True,blank=True,max_length=200)
+	direccion = models.CharField(null=False,blank=True,max_length=200)
 	#telefono de residencia del empleado
-	telefono = models.CharField(null=True,blank=True,max_length=10)
+	telefono = models.CharField(null=False,blank=True,max_length=10)
 	#Salario actual del empleado
-	salario =  models.BigIntegerField(null=True,blank=True)
+	salario =  models.BigIntegerField(null=False,blank=True)
 	#Sucursal a la que pertenece el empleado 
 	#sucursal = models.OneToOneField(Sucursal)
 	#Imagen o foto del empleado
@@ -59,7 +59,7 @@ class Empleado(models.Model):
 		(GERENTE, 'Gerente'),
 	 )
 	#Tipos de empleados que se puden crear
-	tipo = models.CharField(max_length=20, choices=tipo_choice,default=VENDEDOR)
+	tipo = models.CharField(null=False,max_length=20, choices=tipo_choice,default=VENDEDOR)
 
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
