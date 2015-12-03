@@ -28,13 +28,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Send email for forgot password
+# Send email for forgotten passwords
 # Is necesary configure your account to allow django use it to send mails
-# put your allow insecure apps turn on (it puts your account more vulnerable)
+# put allow insecure apps turn on in your google account (it puts your account vulnerable)
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 25
+#EMAIL_PORT = 25 #Raises an error that I can not solve yet (SMTP AUTH extension not supported by server)
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'aureliowebpages@gmail.com'
 EMAIL_HOST_PASSWORD = '1143843823'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
