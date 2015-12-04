@@ -4,6 +4,8 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+from apps.sucursal.models import Sucursal
+
 #ATRIBUTOS DE REPUESTO		
 #id_repuesto				
 #Nombre
@@ -14,6 +16,7 @@ from imagekit.processors import ResizeToFill
 #Imagen	
 #Proveedor
 #Descripcion
+#sucursal
 
 #Define la organizacion del los datos de un repuesto en la base de datos
 class Repuesto(models.Model):
@@ -78,3 +81,6 @@ class Repuesto(models.Model):
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
 		return self.nombre 
+
+	# Llave foranea a la Surcursal a la cual pertenece
+	sucursal = models.ManyToManyField(Sucursal)

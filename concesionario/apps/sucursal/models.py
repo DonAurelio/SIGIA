@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 
 from django.db import models
-from apps.vehiculo.models import Vehiculo
-from apps.repuesto.models import Repuesto
+
+# Atributos
+# nombre, direccion, telefono, ciudad, activo
 
 #Define la organizacion de los datos de una sucursal en la base de datos
 class Sucursal(models.Model):
@@ -17,10 +18,12 @@ class Sucursal(models.Model):
 	ciudad = models.CharField(null=True,blank=True,max_length = 50)
 	#Estado de la sucursa, Activa/inactiva
 	activo = models.BooleanField(default = True)
+	
+	# Desactivados y agregados en las clases respectivas
 	#Vehiculos que se venden en dicha sucursal
-	vehiculos = models.ManyToManyField(Vehiculo)
+	#vehiculos = models.ManyToManyField(Vehiculo)
 	#Repuestos que se venden y se usan en dicha sucursal
-	repuestos = models.ManyToManyField(Repuesto)
+	#repuestos = models.ManyToManyField(Repuesto)
 
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
