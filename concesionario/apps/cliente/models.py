@@ -23,6 +23,8 @@ class Cliente(models.Model):
 	celular = models.CharField(null=True, blank=True, max_length=100)
 	# Correo electronico
 	email = models.EmailField(null=True, blank=True, max_length=100)
+	#Estado de la cliente, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
 
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:

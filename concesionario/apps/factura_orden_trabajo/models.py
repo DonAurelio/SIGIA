@@ -17,3 +17,6 @@ class FacturaOrdenTrabajo(models.Model):
 	costo_repuestos =  models.FloatField(null=True,blank=True)
 	#Costo total de la reparacion 
 	costo_total =  models.FloatField(null=True,blank=True)
+	#Estado de la FacturaOrdenTrabajo, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
+

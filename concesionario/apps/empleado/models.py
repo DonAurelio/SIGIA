@@ -61,6 +61,10 @@ class Empleado(models.Model):
 	#Tipos de empleados que se puden crear
 	tipo = models.CharField(null=False,max_length=20, choices=tipo_choice,default=VENDEDOR)
 
+	#Estado de la empleado, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
+
+
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['identificacion']

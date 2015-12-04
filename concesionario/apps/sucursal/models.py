@@ -17,7 +17,7 @@ class Sucursal(models.Model):
 	#Ciudad donde queda ubicada la sucursal
 	ciudad = models.CharField(null=True,blank=True,max_length = 50)
 	#Estado de la sucursa, Activa/inactiva
-	activo = models.BooleanField(default = True)
+	habilitado = models.BooleanField(default = True)
 	
 	# Desactivados y agregados en las clases respectivas
 	#Vehiculos que se venden en dicha sucursal

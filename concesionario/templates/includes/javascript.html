@@ -1,0 +1,30 @@
+	{% load staticfiles %}
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{% static 'color_admin/assets/plugins/jquery-1.8.2/jquery-1.8.2.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/bootstrap-3.2.0/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-cookie/jquery.cookie.js' %}"></script>
+
+	<script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js' %}"></script>
+	
+	<script src="{% static 'color_admin/assets/plugins/gritter/js/jquery.gritter.js' %}"></script>
+
+	<script src="{% static 'color_admin/assets/js/dashboard-v2.min.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+	
+	<script src="{% static 'color_admin/assets/plugins/sparkline/jquery.sparkline.js' %}"></script>
+	
+	<script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+	<script src="{% static 'color_admin/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+	<script src="{% static 'color_admin/assets/js/dashboard.min.js' %}"></script>
+
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	<script>
+		$(document).ready(function() {
+			App.init();
+			Dashboard.init();
+		});
+	</script>

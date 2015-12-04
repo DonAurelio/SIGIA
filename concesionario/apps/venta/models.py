@@ -34,6 +34,10 @@ class Venta(models.Model):
 
 	forma_pago = models.CharField(max_length=20, choices=forma_pago_choices, default=EFECTIVO)
 
+	#Estado de la venta, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
+
+
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['fecha_venta']

@@ -10,7 +10,7 @@ class OrdenDeTrabajo(models.Model):
 
 	#Empleado que realiza la orden de trabajo, relacion uno a muchos 
 	empleado= models.ForeignKey(Empleado)
- 
+
 	#dueno del auto que entra al taller, relacion uno a muchos 
 	cliente= models.ForeignKey(Cliente)
 
@@ -27,7 +27,10 @@ class OrdenDeTrabajo(models.Model):
 	descripcion = models.CharField(null=True,blank=True,max_length=50)
 
 	#estado del vehiculo
-	estado_reparacion=models.CharField(null=True,blank=True,max_length=50)
+	estado_vehiculo=models.CharField(null=True,blank=True,max_length=50)
+
+	#Estado de la OrdenDeTrabajo, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
 
 
 #Permite hacer modificaciones agregadas a la representacion del modelo 

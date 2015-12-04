@@ -19,7 +19,7 @@ class Login(TemplateView):
 	#Cuando la peticion es tipo GET, se muestra el template de login
 	def get(self,request,*args,**kwargs):
 		#Si el usuario esta autenticado, se le muestra su perfil
-		if request.user.is_authenticated():
+		if request.user.is_authenticated() and not request.user.is_staff:
 			return render_to_response('cuenta/perfil.html',context_instance=RequestContext(request))
 		#En caso de que no este autenticado, se le muestra el formulario de login
 		else:

@@ -84,3 +84,6 @@ class Repuesto(models.Model):
 
 	# Llave foranea a la Surcursal a la cual pertenece
 	sucursal = models.ManyToManyField(Sucursal)
+
+	#Estado de la repuesto, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
