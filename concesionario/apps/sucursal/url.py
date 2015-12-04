@@ -1,11 +1,17 @@
 # -*- encoding: utf-8 -*-
 
 from django.conf.urls import include, url
-
+from .forms import CrearSucursal
+from .forms import ActualizarSucursal
+from .views import ListaSucursales
 
 urlpatterns = [
-	#url para el acceso al sitio de administracion
-    #url(r'^admin/', include(admin.site.urls)),
-    #Inclusion de las url que hay en la aplicacion inicio
+
+    # redirecciona a la pagina de creacion de sucursal
+    url(r'^sucursal/crear$', CrearSucursal.as_view(), name='crear-sucursal'),
+    # redirecciona a pagina para actualizacion de una sucursal
+    url(r'^sucursal/(?P<pk>\d+)/$', ActualizarSucursal.as_view(), name='actualizar-sucursal'), 
+    # redirecciona a pagina que despliega el listado de sucursales
+    url(r'^sucursal/listado$', ListaSucursales.as_view(), name='lista-sucursales'),
     
 ]

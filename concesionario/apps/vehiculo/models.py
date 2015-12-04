@@ -3,9 +3,10 @@
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from apps.sucursal.models import Sucursal
 
 # ATRIBUTOS DE VEHICULO
-# numero_serie, marca, precio, modelo, potencia, motor, caracteristicas, imagen, capacidad, tipo
+# numero_serie, marca, precio, modelo, potencia, motor, caracteristicas, imagen, capacidad, tipo, sucursal
 
 
 class Vehiculo(models.Model):
@@ -87,4 +88,6 @@ class Vehiculo(models.Model):
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
 		return self.numero_serie
-			
+
+	# Llave foranea a la Surcursal a la cual pertenece
+	sucursal = models.ManyToManyField(Sucursal)

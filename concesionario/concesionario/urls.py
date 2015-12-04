@@ -24,7 +24,7 @@ urlpatterns = [
     #Inclusion de las url que hay en la aplicacion repuesto
     url(r'', include('apps.repuesto.url',namespace='repuesto')),
     #Inclusion de las url que hay en la aplicacion sucursal
-    #url(r'', include('apps.sucursal.url',namespace='sucursal')),
+    url(r'', include('apps.sucursal.url',namespace='sucursal')),
     #Inclusion de las url que hay en la aplicacion vehiculo
     url(r'', include('apps.vehiculo.url',namespace='vehiculo')),
     #Inclusion de las url que hay en la aplicacion venta
