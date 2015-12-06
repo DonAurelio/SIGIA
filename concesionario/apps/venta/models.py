@@ -5,6 +5,9 @@ from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 from apps.vehiculo.models import Vehiculo
 
+# Atributos
+# empleado, cliente, vehiculo, fecha_venta, descuento, precio_venta, forma_pago
+
 class Venta(models.Model):
 	# Llave foranea al empleado que realiza la venta
 	empleado = models.ForeignKey(Empleado)

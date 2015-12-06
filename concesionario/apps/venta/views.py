@@ -1,5 +1,8 @@
 # -*- encoding: utf-8 -*-
 
-from django.shortcuts import render
+from django.views.generic import ListView 
+from .models import Venta 
 
-# Create your views here.
+class ListaVentas(ListView): 
+	model = Venta
+	context_object_name = 'lista_ventas'

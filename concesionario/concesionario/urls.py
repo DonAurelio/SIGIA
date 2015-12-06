@@ -28,7 +28,7 @@ urlpatterns = [
     #Inclusion de las url que hay en la aplicacion vehiculo
     url(r'', include('apps.vehiculo.url',namespace='vehiculo')),
     #Inclusion de las url que hay en la aplicacion venta
-    #url(r'', include('apps.venta.url',namespace='venta')),
+    url(r'', include('apps.venta.url',namespace='venta')),
 
     #url para acceder a la imagenes que estan en la carpeta media del proyecto
     #se deseas colocar imagenes en tu contenido HTML, este link es necesario para que se muestren las imagenes
