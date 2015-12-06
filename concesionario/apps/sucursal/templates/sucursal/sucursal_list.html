@@ -69,7 +69,7 @@
                                         {% if lista_sucursales %} 
                                             {% for sucursal  in lista_sucursales %}
                                                 <tr>
-                                                    <td><a href="{% url 'sucursal:actualizar-sucursal' sucursal.pk %}"> {{ sucursal.nombre }}</a></td>
+                                                    <td><a href="{% url 'sucursal:actualizar' sucursal.pk %}"> {{ sucursal.nombre }}</a></td>
                                                     <td>{{ sucursal.direccion }}</td>
                                                     <td>{{ sucursal.telefono }}</td>
                                                     <td>{{ sucursal.ciudad }}</td>
