@@ -49,9 +49,10 @@ class UserCreateForm(UserCreationForm):
 
  
  #creacion del form para empleado
-class CrearEmpleado(forms.ModelForm): 
+class EmpleadoCreateForm(forms.ModelForm): 
 
 	#template_name = 'empleado/includes/crearEmpleado.html'
+	user = forms.CharField(widget = forms.HiddenInput(), required = False)
 	identificacion = forms.CharField(label='Numero de Identificación')
 	direccion = forms.CharField(label='Dirección')
 	telefono = forms.CharField(label='Teléfono')
@@ -59,6 +60,6 @@ class CrearEmpleado(forms.ModelForm):
 	 
 	class Meta:
 		model = Empleado 
-		fields = ['user','identificacion', 'direccion', 'telefono','salario', 'imagen', 'tipo' ] 
+		fields = ['user','identificacion', 'direccion', 'telefono','salario','sucursal','imagen', 'tipo' ] 
 
 	 

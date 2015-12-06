@@ -25,13 +25,10 @@ class Login(TemplateView):
 		else:
 			return render_to_response('inicio/login.html',context_instance=RequestContext(request))
 		
-		
-
 	#Cunado la peticion es tipo POST se hace el proceso de login con la informacion del formulario de login
 	def post(self,request,*args,**kwargs):
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-
 
 		#Usando el la funcion authenticate, obtenemos el usuario que corresponde con los datos 
 		#pasados como argumentos

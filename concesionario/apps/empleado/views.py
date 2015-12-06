@@ -1,55 +1,52 @@
 # -*- encoding: utf-8 -*-
 
-
-
 from django.shortcuts import render_to_response, redirect, render
 from django.template import RequestContext, loader, Context, Template
 from .forms import UserCreateForm
-from .forms import CrearEmpleado
-from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse 
-from django.contrib.auth import authenticate, login, logout
-from django.http import *
+from .forms import EmpleadoCreateForm
+from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from apps.empleado.models import Empleado
+from django.views.generic import TemplateView
+from django.contrib import messages
+from django.contrib.auth.models import User
 
-#Se vaalida el formulario y se guarda
-def nuevo_usuario(request):
-	first_name = last_name = username = password = email =''
-	if request.POST:
+class EmpleadoCreateView(TemplateView):
+
+	def get(self,request,*args,**kwargs):
+		nombre_seccion = "Crear Empleado"
+		user_form = UserCreateForm(),'Informacion del Usuario'
+		empleado_form = EmpleadoCreateForm(),'Informacion del Empleado'
+		forms = [user_form,empleado_form]
+		context = {'section_name':nombre_seccion,'forms':forms}
+		return render_to_response(
+			'empleado/crear.html',
+			context,
+			context_instance=RequestContext(request))
+
+	def post(self,request,*args,**kwargs):
 		user_form = UserCreateForm(request.POST)
-		if user_form.is_valid():
-			usuario = User(first_name=request.POST['first_name'],last_name=request.POST['last_name'], username=request.POST['username'], email=request.POST['email'])
-			usuario.set_password(request.POST['password1'])
-			usuario.save()
-			#se direcciona a crear empleado para los datos adicionales
-			return HttpResponseRedirect('crearEmpleado')
-	else:
-		user_form = UserCreateForm()
+		empleado_form = EmpleadoCreateForm(request.POST,request.FILES)
 
-	dictionary = {
-		'user_form': user_form,
-		'page_title': 'Aplicacion - Register',
-		'body_class': 'register',
-	}
-	#se direcciona de nuevo a crear usuario si se encuentran errores
-	return render_to_response("empleado/includes/crear.html", dictionary, context_instance=RequestContext(request))
+		if user_form.is_valid() and empleado_form.is_valid():
+			new_user = user_form.save()
+			new_empleado = empleado_form.save()
+			new_empleado.user = new_user
+			new_empleado.save()
+			messages.info(request,'Nuevo empleado creado')
+			context = {}
+			return render_to_response(
+				"cuenta/perfil.html",
+				context,
+				RequestContext(request))
 
- 
-#Se valida  y guarda el formulario
-def nuevo_empleado(request):
-	user = identificacion = direccion = telefono = salario = imagen = tipo = ''
-	if request.POST:
-		form = CrearEmpleado(request.POST)
-		if  form.is_valid():
-			form.save()
-			return HttpResponseRedirect('crear')
-	else:
-		form = CrearEmpleado()
-
-	dictionary = {
-		'form': form,
-	}
-	#se direcciona de nuevo a crearEmpleado si se encuentran errores en el formulario
-	return render_to_response("empleado/includes/crearEmpleado.html", dictionary, context_instance=RequestContext(request))
- 
+		nombre_seccion = "Crear Empleado"
+		user_form = UserCreateForm(request.POST),'Informacion del Usuario'
+		empleado_form = EmpleadoCreateForm(request.POST),'Informacion del Empleado'
+		forms = [user_form,empleado_form]
+		messages.error(request,'Hay errores en algun campo')
+		context = {'section_name':nombre_seccion,'forms':forms}
+		return render_to_response(
+			'empleado/crear.html',
+			context,
+			context_instance=RequestContext(request))

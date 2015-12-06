@@ -1,4 +1,5 @@
 <!-- Opcione del menu para el gerente -->
+
 <!-- Empleado -->
 <li class="has-sub ">
 	<a href="javascript:;">
@@ -9,7 +10,7 @@
 		</span>
 	</a>
 	<ul class="sub-menu">
-		<li><a href=""> Crear nuevo </a></li>
+		<li><a href="{% url "empleado:crear" %}"> Crear nuevo </a></li>
 		<li><a href=""> Listar/Editar</a></li>
 	</ul>
 </li>
@@ -88,7 +89,7 @@
 	</ul>
 </li>
 
-<li class="has-sub active">
+<li class="has-sub">
 	<a href="javascript:;">
 		<b class="caret pull-right"></b>
 		<i class="fa fa-archive"></i>
@@ -117,7 +118,7 @@
 	</ul>
 </li>
 
-<li class="has-sub active">
+<li class="has-sub">
 	<a href="javascript:;">
 		<b class="caret pull-right"></b>
 		<i class="fa fa-calculator"></i>

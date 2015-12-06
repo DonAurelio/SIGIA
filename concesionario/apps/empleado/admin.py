@@ -7,7 +7,7 @@ from .models import Empleado
 #Permite administrar la visualizacion de los datos de la base de datos en el sitio de administarcion
 class AdminEmpleado(admin.ModelAdmin):
 	#Se establece la informacion que se mostrara en el sitio de administarcion 
-	list_display = ('user', 'identificacion', 'direccion','telefono', 'salario','imagen','thumbnail','tipo')
+	list_display = ('user', 'identificacion', 'direccion','telefono', 'salario','sucursal','imagen','thumbnail','tipo')
 	#Se establece el parametro de busqueda
 	search_fields = ('identificacion',)
 

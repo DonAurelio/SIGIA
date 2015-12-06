@@ -2,36 +2,35 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-#from concesionario.apps.sucursal.models import Sucursal
+from apps.sucursal.models import Sucursal
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+		
+"""
+Atributos de User
+(username,first_name,last_name,email,password,groups,user_permissions,is_staff,is_active,
+is_superuser,last_login,date_joined)
 
-#ATRIBUTOS DE USER 		#METODOS UTILES	
-#username				#email_user(subject, message, from_email=None, **kwargs)
-#first_name
-#last_name
-#email
-#password
-#groups
-#user_permissions	
-#is_staff
-#is_active
-#is_superuser
-#last_login
-#date_joined
+Metodos Utiles 
+email_user(subject, message, from_email=None, **kwargs)
+"""
+
+VENDEDOR = 'Vendedor'
+JEFE_TALLER = 'Jefe de taller'
+GERENTE = 'Gerente'
+
+tipo_choice = (
+	(VENDEDOR, 'Vendedor'),
+	(JEFE_TALLER, 'Jefe de taller'),
+	(GERENTE, 'Gerente'),
+ )
 
 #Define la organizacion del los datos de un empleado en la base de datos
 class Empleado(models.Model):
 	#Cuenta que le corresponde al empleado por la cual se accede a los siguientes atributos
 	#related_name permite hacer una referencia desde user a empleado de la siguiente forma 
 	#user.empleado 
-	user = models.OneToOneField(User,related_name='empleado')
-	#username				
-	#first_name
-	#last_name
-	#email
-	#password
-
+	user = models.OneToOneField(User,related_name='empleado',null=True)
 	#Indentificacion del empleado, debe ser unica
 	identificacion = models.CharField(max_length=20,unique=True,null=False,blank=True)
 	#Direccion de residencia del empleado
@@ -41,7 +40,7 @@ class Empleado(models.Model):
 	#Salario actual del empleado
 	salario =  models.BigIntegerField(null=False,blank=True)
 	#Sucursal a la que pertenece el empleado 
-	#sucursal = models.OneToOneField(Sucursal)
+	sucursal = models.ForeignKey(Sucursal)
 	#Imagen o foto del empleado
 	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/empleado")
 	#Thumbnail que permite reducir la imagen del empleado 
@@ -49,21 +48,12 @@ class Empleado(models.Model):
 									  processors=[ResizeToFill(100, 50)],
 									  format='JPEG',
 									  options={'quality': 60})
-	VENDEDOR = 'Vendedor'
-	JEFE_TALLER = 'Jefe de taller'
-	GERENTE = 'Gerente'
-
-	tipo_choice = (
-		(VENDEDOR, 'Vendedor'),
-		(JEFE_TALLER, 'Jefe de taller'),
-		(GERENTE, 'Gerente'),
-	 )
+	
 	#Tipos de empleados que se puden crear
 	tipo = models.CharField(null=False,max_length=20, choices=tipo_choice,default=VENDEDOR)
 
 	#Estado de la empleado, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
-
 
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
