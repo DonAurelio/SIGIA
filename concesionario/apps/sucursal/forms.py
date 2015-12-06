@@ -5,8 +5,8 @@ from .models import Sucursal
  
 class CrearSucursal(CreateView):
     model = Sucursal
-    fields = ['nombre', 'direccion', 'telefono', 'ciudad', 'activo']
+    fields = ['nombre', 'direccion', 'telefono', 'ciudad']
 
 class ActualizarSucursal(UpdateView):
     model = Sucursal
-    fields = ['nombre', 'direccion', 'telefono', 'ciudad', 'activo']
+    fields = ['nombre', 'direccion', 'telefono', 'ciudad']
