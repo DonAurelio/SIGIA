@@ -72,7 +72,7 @@
                                         {% if lista_repuestos %} 
                                             {% for repuesto  in lista_repuestos %}
                                                 <tr>
-                                                    <td><a href="{% url 'repuesto:actualizar-repuesto' repuesto.pk %}"> {{ repuesto.nombre }}</a></td>
+                                                    <td><a href="{% url 'repuesto:actualizar' repuesto.pk %}"> {{ repuesto.nombre }}</a></td>
                                                     <td>{{ repuesto.marca }}</td>
                                                     <td>{{ repuesto.clasificacion }}</td>
                                                     <td>{{ repuesto.cantidad }}</td>

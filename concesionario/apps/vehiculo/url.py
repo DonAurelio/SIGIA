@@ -8,10 +8,10 @@ from .views import ListaVehiculos
 urlpatterns = [
 
     # redirecciona a la pagina de creacion de vehiculo
-    url(r'^vehiculo/crear$', CrearVehiculo.as_view(), name='crear-vehiculo'),
+    url(r'^vehiculo/crear$', CrearVehiculo.as_view(), name='crear'),
     # redirecciona a pagina para actualizacion de un vehiculo
-    url(r'^vehiculo/(?P<pk>\d+)/$', ActualizarVehiculo.as_view(), name='actualizar-vehiculo'), 
+    url(r'^vehiculo/(?P<pk>\d+)/$', ActualizarVehiculo.as_view(), name='actualizar'), 
     # redirecciona a pagina que despliega el listado de vehiculos
-    url(r'^vehiculo/listado$', ListaVehiculos.as_view(), name='lista-vehiculos'),
+    url(r'^vehiculo/listado$', ListaVehiculos.as_view(), name='listar'),
     
 ]

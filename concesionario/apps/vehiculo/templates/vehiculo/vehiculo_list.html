@@ -74,7 +74,7 @@
                                         {% if lista_vehiculos %} 
                                             {% for vehiculo  in lista_vehiculos %}
                                                 <tr>
-                                                    <td><a href="{% url 'vehiculo:actualizar-vehiculo' vehiculo.pk %}"> {{ vehiculo.numero_serie }}</a></td>
+                                                    <td><a href="{% url 'vehiculo:actualizar' vehiculo.pk %}"> {{ vehiculo.numero_serie }}</a></td>
                                                     <td>{{ vehiculo.marca }}</td>
                                                     <td>{{ vehiculo.modelo }}</td>
                                                     <td>{{ vehiculo.motor }}</td>

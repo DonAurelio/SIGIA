@@ -10,8 +10,8 @@ urlpatterns = [
     #url que redirecciona a la pagina de creacion de cotizaciones 
     url(r'^repuesto/crear$', CrearRepuesto.as_view(), name='crear'),
     #url que redirecciona a pagina que despliega el listado de repuestos
-    url(r'^repuesto/listado$', ListaRepuestos.as_view(), name='lista-repuestos'),
+    url(r'^repuesto/listado$', ListaRepuestos.as_view(), name='listar'),
     #redirecciona a pagina para actualizacion de un repuesto
-    url(r'^repuesto/(?P<pk>\d+)/$', ActualizarRepuesto.as_view(), name='actualizar-repuesto'), 
+    url(r'^repuesto/(?P<pk>\d+)/$', ActualizarRepuesto.as_view(), name='actualizar'), 
     
 ]
