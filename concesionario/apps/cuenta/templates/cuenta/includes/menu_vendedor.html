@@ -1,6 +1,22 @@
 <!-- Opcione del menu para el vendedor -->
+
+<!-- Clientes -->
+<li class="has-sub active" >
+	<a href="javascript:;">
+		<b class="caret pull-right"></b>
+		<i class="fa fa-credit-card"></i>
+		<span>
+			Clientes
+		</span>
+	</a>
+	<ul class="sub-menu">
+		<li><a href="{% url "cliente:crear" %}"> Crear nuevo </a></li>
+		<li><a href="{% url "cliente:listar" %}"> Listar/Editar </a></li>
+	</ul>
+</li>
+
 <!-- Cotizacion -->
-<li class="has-sub active">
+<li class="has-sub">
 	<a href="javascript:;">
 		<b class="caret pull-right"></b>
 		<i class="fa fa-calculator"></i>
@@ -9,7 +25,7 @@
 		</span>
 	</a>
 	<ul class="sub-menu">
-		<li><a href=""> Crear nuevo </a></li>
+		<li><a href="{% url "cotizacion:crear" %}"> Crear nuevo </a></li>
 		<li><a href=""> Listar/Editar</a></li>
 	</ul>
 </li>
@@ -24,7 +40,7 @@
 		</span>
 	</a>
 	<ul class="sub-menu">
-		<li><a href=""> Crear nuevo </a></li>
-		<li><a href=""> Listar/Editar </a></li>
+		<li><a href="{% url "venta:crear" %}"> Crear nuevo </a></li>
+		<li><a href="{% url "venta:listar" %}"> Listar/Editar </a></li>
 	</ul>
 </li>

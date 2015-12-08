@@ -72,7 +72,7 @@
                                         {% if lista_clientes %} 
                                             {% for cliente  in lista_clientes %}
                                                 <tr>
-                                                    <td><a href="{% url 'cliente:actualizar-cliente' cliente.pk %}"> {{ cliente.identificacion }}</a></td>
+                                                    <td><a href="{% url 'cliente:actualizar' cliente.pk %}"> {{ cliente.identificacion }}</a></td>
                                                     <td>{{ cliente.nombre }}</td>
                                                     <td>{{ cliente.apellido }}</td>
                                                     <td>{{ cliente.ciudad }}</td>

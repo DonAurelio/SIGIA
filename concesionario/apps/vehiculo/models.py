@@ -54,28 +54,6 @@ class Vehiculo(models.Model):
 	)
 	tipo = models.CharField(max_length=50, choices=TIPO_CHOICES, default=AUTOMOVIL)
 	
-	#-- Creacion del Choices para 'color' de vehiculo
-	NEGRO = 'Negro'
-	BLANCO = 'Blanco'
-	BEIGE = 'Beige'
-	GRIS = 'Gris'
-	AZUL = 'Azul'
-	AMARILLO = 'Amarillo'
-	ROJO = 'Rojo'
-	VERDE = 'Verde'
-	COLOR_CHOICES = (
-		(AUTOMOVIL, 'Automovil'),
-		(NEGRO, 'Negro'),
-		(BLANCO, 'Blanco'),
-		(BEIGE, 'Beige'),
-		(GRIS, 'Gris'),
-		(AZUL, 'Azul'),
-		(AMARILLO, 'Amarillo'),
-		(ROJO, 'Rojo'),
-		(VERDE, 'Verde'),
-	)
-	color = models.CharField(max_length=50, choices=COLOR_CHOICES, default=BEIGE)
-
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['numero_serie']
@@ -89,8 +67,8 @@ class Vehiculo(models.Model):
 	def __unicode__(self):
 		return self.numero_serie
 
-	# Llave foranea a la Surcursal a la cual pertenece
-	sucursal = models.ManyToManyField(Sucursal)
-
 	#Estado de la vehiculo, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
+
+	# Sucursal a la que pertenece
+	sucursal = models.ForeignKey(Sucursal)
