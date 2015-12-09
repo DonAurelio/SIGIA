@@ -35,13 +35,14 @@
 		<!-- begin #content -->
 		<div id="content" class="content">
 			<!-- begin page-header -->
-			<h1 class="page-header">Empleado</h1>
+			<h1 class="page-header">{{ section_name }}</h1>
 			<!-- end page-header -->
 			
 			<!-- begin indicators -->
 			{% include "includes/indicadores.html"%}
 			<!-- end indicators -->
-			{% for form in forms %}						
+			<form  name="RegisterForm" id="registerForm" method="post" enctype="multipart/form-data">
+			{% for form,form_title in forms %}							
 			<!-- begin row -->
 			<div class="row">
 				<!-- begin col-8 -->
@@ -58,14 +59,16 @@
 									<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 								</div>
 								
-								<h4 class="panel-title">Cuenta Personal del Empleado</h4>
+								<h4 class="panel-title">{{ form_title }}</h4>
 							</div>
 							<div class="panel-body">
-								<form  name="RegisterForm" id="registerForm" action="{% url 'empleado:crear' %}" method="post">
+								
 								{% csrf_token %}
 								{% bootstrap_form form %}
+								{% if forloop.last %}
 								<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i>Registrar</button>
-								</form>
+								{% endif %}
+								
 							</div>
 						</div>
 						<!-- end panel -->
@@ -74,6 +77,7 @@
 				</div>
 			</div>
 			{% endfor %}
+			</form>
 			<!-- end row -->
 		</div>
 		<!-- end #content -->
@@ -92,8 +96,5 @@
 	<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
- 
-
-	
-	<!-- ================== END PAGE LEVEL JS ================== -->
+ <!-- ================== END PAGE LEVEL JS ================== -->
 {% endblock %}
