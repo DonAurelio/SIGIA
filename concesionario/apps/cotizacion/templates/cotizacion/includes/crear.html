@@ -15,9 +15,10 @@
 {% block custom-css %}
 	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 	<link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+	<!-- Para gestionar Fechas -->
 	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css'%}" rel="stylesheet" />
  	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css'%}" rel="stylesheet" />
-
+ 	<!-- fin Para gestionar Fechas -->
 
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
@@ -107,6 +108,8 @@
 	<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+	
+	<!-- Para gestionar Fechas -->
 	<script src="{% static 'color_admin/assets/js/bootstrap-datepicker.js' %}"></script>
 
 	<script>
@@ -116,8 +119,7 @@
 
 		});
 	</script>
+	<!-- fin Para gestionar Fechas -->
 
-	 
-	
 	<!-- ================== END PAGE LEVEL JS ================== -->
 {% endblock %}

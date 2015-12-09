@@ -5,7 +5,7 @@ from .models import Vehiculo
 
 class Vehiculo_Admin(admin.ModelAdmin):
 	list_display = ('numero_serie', 'marca', 'precio', 'modelo', 'potencia', 'motor',
-		'caracteristicas', 'imagen', 'capacidad', 'tipo', 'color')
-	search_fields = ('numero_serie', 'marca', 'modelo')
+		'caracteristicas', 'imagen', 'capacidad', 'tipo', 'sucursal')
+	search_fields = ('sucursal', 'vehiculo', 'unidades', 'color')
 
 admin.site.register(Vehiculo, Vehiculo_Admin)
