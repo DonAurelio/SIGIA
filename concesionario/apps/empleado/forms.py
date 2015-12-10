@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from .models import Empleado 
 
 
-class UserCreateForm(UserCreationForm):
+class UserForm(UserCreationForm):
 
     first_name = forms.CharField(label='Nombre')
     last_name = forms.CharField(label='Apellido')
@@ -20,9 +20,8 @@ class UserCreateForm(UserCreationForm):
         model = User
         fields = ( "username", "email", "first_name", "last_name")
 
-class EmpleadoCreateForm(forms.ModelForm): 
+class EmpleadoForm(forms.ModelForm): 
 
-	user = forms.CharField(widget=forms.HiddenInput(), required=False)
 	identificacion = forms.CharField(label='Numero de Identificación')
 	direccion = forms.CharField(label='Dirección')
 	telefono = forms.CharField(label='Teléfono')
@@ -30,7 +29,5 @@ class EmpleadoCreateForm(forms.ModelForm):
 	 
 	class Meta:
 		model = Empleado 
-		fields = ['user','identificacion', 'direccion', 'telefono',
+		fields = ['identificacion', 'direccion', 'telefono',
 		'salario','sucursal','imagen', 'tipo','habilitado' ] 
-
-	 

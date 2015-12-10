@@ -1,22 +1,23 @@
 # -*- encoding: utf-8 -*-
 
-from django.shortcuts import render_to_response, redirect, render
-from django.template import RequestContext, loader, Context, Template
-from .forms import UserCreateForm
-from .forms import EmpleadoCreateForm
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.models import User
-from apps.empleado.models import Empleado
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login
+
+from .forms import UserForm,EmpleadoForm
+from .models import Empleado
 
 class EmpleadoCreateView(TemplateView):
 
 	def get(self,request,*args,**kwargs):
 		nombre_seccion = "Crear Empleado"
-		user_form = UserCreateForm(),'Informacion del Usuario'
-		empleado_form = EmpleadoCreateForm(),'Informacion del Empleado'
+		user_form = UserForm(),'Informacion del Usuario'
+		empleado_form = EmpleadoForm(),'Informacion del Empleado'
 		forms = [user_form,empleado_form]
 		context = {'section_name':nombre_seccion,'forms':forms}
 		return render_to_response(
@@ -25,8 +26,8 @@ class EmpleadoCreateView(TemplateView):
 			context_instance=RequestContext(request))
 
 	def post(self,request,*args,**kwargs):
-		user_form = UserCreateForm(request.POST)
-		empleado_form = EmpleadoCreateForm(request.POST,request.FILES)
+		user_form = UserForm(request.POST)
+		empleado_form = EmpleadoForm(request.POST,request.FILES)
 
 		if user_form.is_valid() and empleado_form.is_valid():
 			new_user = user_form.save()
@@ -41,8 +42,8 @@ class EmpleadoCreateView(TemplateView):
 				RequestContext(request))
 
 		nombre_seccion = "Crear Empleado"
-		user_form = (UserCreateForm(request.POST),'Informacion del Usuario')
-		empleado_form = (EmpleadoCreateForm(request.POST),'Informacion del Empleado')
+		user_form = (UserForm(request.POST),'Informacion del Usuario')
+		empleado_form = (EmpleadoForm(request.POST),'Informacion del Empleado')
 		forms = [user_form,empleado_form]
 		messages.error(request,'Hay errores en algun campo')
 		context = {'section_name':nombre_seccion,'forms':forms}
@@ -58,8 +59,8 @@ class EmpleadoUpdateView(TemplateView):
 		empleado = Empleado.objects.get(id=kwargs['pk'])
 		user = User.objects.get(id=empleado.id)
 
-		empleado_form = (EmpleadoCreateForm(instance=empleado), 'Informacion del Empleado')
-		user_form = (UserCreateForm(instance=user), 'Informacion del Usuario')
+		empleado_form = (EmpleadoForm(instance=empleado), 'Informacion del Empleado')
+		user_form = (UserForm(instance=user), 'Informacion del Usuario')
 		nombre_seccion = 'Editar Empleado'
 		forms = [user_form, empleado_form]
 		context = {'section_name':nombre_seccion, 'forms':forms}
@@ -73,8 +74,8 @@ class EmpleadoUpdateView(TemplateView):
 		empleado = Empleado.objects.get(id=kwargs['pk'])
 		user = User.objects.get(id=empleado.id)
 
-		empleado_form = EmpleadoCreateForm(request.POST,request.FILES,instance=empleado)
-		user_form = UserCreateForm(request.POST,request.FILES,instance=user)
+		empleado_form = EmpleadoForm(request.POST,request.FILES,instance=empleado)
+		user_form = UserForm(request.POST,request.FILES,instance=user)
 
 		if user_form.is_valid() and empleado_form.is_valid():
 
@@ -98,8 +99,16 @@ class EmpleadoUpdateView(TemplateView):
 			
 			if password1 != "" and password2 != "":
 				user.set_password(user_form.cleaned_data['password1'])
-			
 			user.save()
+
+			#En caso de que el gerente este modificando su misma cuenta de empleado,
+			#es necesario que vuelva a ser logeado con los nuevos datos username
+			#y password 
+			if user.id == request.user.id:
+				user = authenticate(username=user.username,password=password1)
+				if user is not None:
+					if user.is_active:
+						login(request,user)
 
 			messages.info(request,'Empleado modificado con exito')
 			context = {}
@@ -108,10 +117,10 @@ class EmpleadoUpdateView(TemplateView):
 				context,
 				context_instance=RequestContext(request))
 		else:
-			empleado_form = (EmpleadoCreateForm(request.POST,request.FILES), 'Informacion del Empleado')
-			user_form = (UserCreateForm(instance=user), 'Informacion del Usuario')
+			empleado_form = (EmpleadoForm(request.POST,request.FILES), 'Informacion del Empleado')
+			user_form = (UserForm(instance=user), 'Informacion del Usuario')
 			nombre_seccion = 'Editar Empleado'
-			forms = [empleado_form]
+			forms = [user_form,empleado_form]
 			context = {'section_name':nombre_seccion, 'forms':forms}
 
 			return render_to_response(
