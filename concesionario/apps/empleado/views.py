@@ -127,3 +127,14 @@ class EmpleadoUpdateView(TemplateView):
 				'empleado/empleado_form.html', 
 				context,
 				context_instance=RequestContext(request))
+
+class EmpleadoListView(TemplateView):
+
+	def get(self,request,*args,**kwargs):
+		sucursal_id = kwargs['pk']
+		empleados = Empleado.objects.filter(sucursal_id=sucursal_id)
+		context = {'lista_empleados':empleados}
+		return render_to_response(
+			'empleado/empleado_list.html',
+			context,
+			RequestContext(request))

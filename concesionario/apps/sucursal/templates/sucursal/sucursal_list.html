@@ -81,7 +81,7 @@
                                                     <td>{{ sucursal.telefono }}</td>
                                                     <td>{{ sucursal.ciudad }}</td>
                                                     <td>{{ sucursal.habilitado }}</td>
-                                                    <td><a href="">
+                                                    <td><a href="{% url 'empleado:listar-empleados-sucursal' sucursal.id %}">
                                                             <button type="button" class="btn btn-info btn-xs">Empleados</button>
                                                         </a></td>
                                                     <td><a href="">
