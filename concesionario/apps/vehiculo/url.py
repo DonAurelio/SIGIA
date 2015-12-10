@@ -3,7 +3,7 @@
 from django.conf.urls import include, url
 from .forms import CrearVehiculo
 from .forms import ActualizarVehiculo
-from .views import ListaVehiculos
+from .views import ListaVehiculosSucursal
 
 urlpatterns = [
 
@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^vehiculo/crear$', CrearVehiculo.as_view(), name='crear'),
     # redirecciona a pagina para actualizacion de un vehiculo
     url(r'^vehiculo/(?P<pk>\d+)/$', ActualizarVehiculo.as_view(), name='actualizar'), 
-    # redirecciona a pagina que despliega el listado de vehiculos
-    url(r'^vehiculo/listado$', ListaVehiculos.as_view(), name='listar'),
+    # redirecciona a pagina que despliega el listado de vehiculos por sucursal
+    url(r'^vehiculo/sucursal/(?P<pk>\d+)$', ListaVehiculosSucursal.as_view(), name='listar-vehiculos-sucursal'),
     
 ]
