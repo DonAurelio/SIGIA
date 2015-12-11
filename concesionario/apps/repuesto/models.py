@@ -6,59 +6,48 @@ from imagekit.processors import ResizeToFill
 
 from apps.sucursal.models import Sucursal
 
-#ATRIBUTOS DE REPUESTO		
-#id_repuesto				
-#Nombre
-#Precio
-#Marca
-#Clasificacion
-#Unidad
-#Imagen	
-#Proveedor
-#Descripcion
-#sucursal
+#Categorias de repuesto
+AUTOMOTRIZ = 'Automotriz'
+FERRETERIA= 'Ferreteria'
+PINTURAS='Pinturas'
+RODAMIENTOS='Rodamientos'
+SOLVENTES='Solventes'
+BANDAS_CADENAS='Bandas_cadenas'
+LIMPIEZA='Limpieza'
+AUTOPARTES='Autopartes'
+SELLOS_EMPAQUES='Sellos_empaques'
+LUBRICANTES='Lubricantes'
 
-#Define la organizacion del los datos de un repuesto en la base de datos
+tipo_choice = (
+	(AUTOMOTRIZ, 'Automotriz'),
+	(FERRETERIA, 'Ferreteria'),
+	(PINTURAS, 'Pinturas'),
+	(RODAMIENTOS, 'Rodamientos'),
+	(SOLVENTES, 'Solventes'),
+	(BANDAS_CADENAS, 'Bandas y cadenas'),
+	(LIMPIEZA, 'Limpieza'),
+	(AUTOPARTES, 'Autopartes'),
+	(SELLOS_EMPAQUES, 'Sellos y empaques'),
+	(LUBRICANTES, 'Lubricantes'),
+ )
+
 class Repuesto(models.Model):
-#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
-#Nombre del repuesto
+	"""Define la organizacion del los datos de un repuesto en la base de datos."""
+	
+	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
+	#Relacion del repuesto con sucursal
+	sucursal_repuestos = models.ManyToManyField(Sucursal,through='SucursalRepuesto')
+	#Nombre del repuesto
 	nombre = models.CharField(null=True,blank=True,max_length=50)
-	#precio del repuesto
+	#Precio del repuesto
 	precio = models.FloatField(null=True,blank=True)
-	#marca del repuesto
+	#Marca del repuesto
 	marca = models.CharField(null=True,blank=True,max_length=20) 
-	#categorias de repuesto
-	AUTOMOTRIZ = 'Automotriz'
-	FERRETERIA= 'Ferreteria'
-	PINTURAS='Pinturas'
-	RODAMIENTOS='Rodamientos'
-	SOLVENTES='Solventes'
-	BANDAS_CADENAS='Bandas_cadenas'
-	LIMPIEZA='Limpieza'
-	AUTOPARTES='Autopartes'
-	SELLOS_EMPAQUES='Sellos_empaques'
-	LUBRICANTES='Lubricantes'
-
-	tipo_choice = (
-		(AUTOMOTRIZ, 'Automotriz'),
-		(FERRETERIA, 'Ferreteria'),
-		(PINTURAS, 'Pinturas'),
-		(RODAMIENTOS, 'Rodamientos'),
-		(SOLVENTES, 'Solventes'),
-		(BANDAS_CADENAS, 'Bandas y cadenas'),
-		(LIMPIEZA, 'Limpieza'),
-		(AUTOPARTES, 'Autopartes'),
-		(SELLOS_EMPAQUES, 'Sellos y empaques'),
-		(LUBRICANTES, 'Lubricantes'),
-	 )
-	 
+	#Clasificacion del repuesto
 	clasificacion = models.CharField(null=True,blank=True, max_length=20, choices=tipo_choice,default=SELLOS_EMPAQUES)
-
-	#Cantidad disponible en stock del repuesto
-	cantidad = models.IntegerField(null=True,blank=True)
 	#Imagen del repuesto
 	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/repuestos/")
-		#Thumbnail que permite reducir la imagen del repuesto 
+	#Thumbnail que permite reducir la imagen del repuesto 
 	thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(100, 50)],
 									  format='JPEG',
@@ -68,7 +57,8 @@ class Repuesto(models.Model):
 	proveedor = models.CharField(null=True,blank=True,max_length=20)
 	#Descripcion del repuesto
 	descripcion = models.CharField(null=True,blank=True,max_length=100)
-
+	#Estado de la repuesto, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['nombre']
@@ -82,8 +72,35 @@ class Repuesto(models.Model):
 	def __unicode__(self):
 		return self.nombre 
 
-	# Llave foranea a la Surcursal a la cual pertenece
-	sucursal = models.ManyToManyField(Sucursal)
+class SucursalRepuesto(models.Model):
+	"""Define la cantidad que existe de cada repuesto por sucursal."""
+	
+	#Sucursal a la que pertenece el repuesto
+	sucursal = models.ForeignKey(Sucursal)
+	#Repuesto
+	repuesto = models.ForeignKey(Repuesto)
+	#Cantidad disponible en stock del repuesto en la sucursal
+	cantidad = models.IntegerField(null=True,blank=True)
 
-	#Estado de la repuesto, Activa/inactiva
-	habilitado = models.BooleanField(default = True)
+	def nombre_sucursal(self):
+		return self.sucursal.nombre
+
+	def nombre_repuesto(self):
+		return self.repuesto.nombre
+
+	def cantidad_repuesto(self):
+		return self.cantidad
+
+	class Meta:
+		ordering = ['cantidad']
+		verbose_name_plural = 'Repuestos Sucursal'
+
+	#Permite determinar una representacion en string del objeto SucursalRepuesto
+	def __str__(self):
+		return self.sucursal.nombre + " " + self.repuesto.nombre 
+
+	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
+	def __unicode__(self):
+		return self.sucursal.nombre + " " + self.repuesto.nombre 
+	
+

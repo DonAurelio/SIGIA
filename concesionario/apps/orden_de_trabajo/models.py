@@ -4,36 +4,49 @@ from django.db import models
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 
-#Define la organizacion del los datos de una orden de trabajo en la base de datos
+#Estados de la reparacion del vehiculo
+
+#El vehiculo esta en el taller, pero no se ha revisado
+PENDIENTE = 'Pendiente'
+#El vehiculo esta en observacion
+EN_OBSERVACION = 'En observacion'
+#El vehiculo esta en reparacion
+EN_REPARACION = 'En reparacion'
+#El vehiculo ya esta reparado
+FINALIZADO = 'Finalizado'
+
+tipo_choice = (
+	(PENDIENTE, 'Pendiente'),
+	(EN_OBSERVACION, 'En observacion'),
+	(EN_REPARACION, 'En reparacion'),
+	(FINALIZADO, 'Finalizado'),
+ )
+
 class OrdenDeTrabajo(models.Model):
-#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
+	"""Define la organizacion del los datos de una orden de trabajo en la base de datos."""
+
+	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 
 	#Empleado que realiza la orden de trabajo, relacion uno a muchos 
-	empleado= models.ForeignKey(Empleado)
-
+	empleado = models.ForeignKey(Empleado)
 	#dueno del auto que entra al taller, relacion uno a muchos 
-	cliente= models.ForeignKey(Cliente)
-
+	cliente = models.ForeignKey(Cliente)
 	#placa del vehiculo que entra al taller 
-	placa= models.CharField(null=True,blank=True,max_length=6)
-
+	placa = models.CharField(null=True,blank=True,max_length=7)
 	#Fecha de entrada al taller
-	fecha_entrada=models.DateField(blank=True, null=True)
-
+	fecha_entrada = models.DateField(blank=True, null=True)
 	#Fecha de salida del taller
-	fecha_salida=models.DateField(blank=True, null=True)
-
-	#Descripcion del procedimiento realizado en el taller
+	fecha_salida = models.DateField(blank=True, null=True)
+	#Descripcion del problema que presenta el vehiculo. Dada por el cliente 
 	descripcion = models.CharField(null=True,blank=True,max_length=50)
-
-	#estado del vehiculo
-	estado_vehiculo=models.CharField(null=True,blank=True,max_length=50)
-
+	#Estado del vehiculo en el taller
+	estado_reparacion = models.CharField(null=True,blank=True,max_length=50,choices=tipo_choice,default=PENDIENTE)
+	#Observacion de los daños del vehiculo
+	observacion = models.TextField(null=True,blank=True,max_length=200)
 	#Estado de la OrdenDeTrabajo, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
-
-
-#Permite hacer modificaciones agregadas a la representacion del modelo 
+	
+	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['fecha_entrada']
 		verbose_name_plural = "ordendetrabajo"

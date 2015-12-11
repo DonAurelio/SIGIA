@@ -2,12 +2,11 @@
 
 from django.db import models
 
-# Atributos
-# nombre, direccion, telefono, ciudad, activo
-
-#Define la organizacion de los datos de una sucursal en la base de datos
 class Sucursal(models.Model):
+	"""Define la organizacion de los datos de una sucursal en la base de datos"""
+	
 	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
+	
 	#Nombre de la sucursal
 	nombre = models.CharField(null=True,blank=True,max_length=20)
 	#Direccion en la cual queda ubicada la sucursal
@@ -19,12 +18,6 @@ class Sucursal(models.Model):
 	#Estado de la sucursa, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
 	
-	# Desactivados y agregados en las clases respectivas
-	#Vehiculos que se venden en dicha sucursal
-	#vehiculos = models.ManyToManyField(Vehiculo)
-	#Repuestos que se venden y se usan en dicha sucursal
-	#repuestos = models.ManyToManyField(Repuesto)
-
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['nombre']

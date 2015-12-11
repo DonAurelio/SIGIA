@@ -5,6 +5,7 @@ from django.contrib import admin
 from concesionario import settings
 
 urlpatterns = [
+
 	#url para el acceso al sitio de administracion
     url(r'^admin/', include(admin.site.urls)),
     #Inclusion de las url que hay en la aplicacion inicio
@@ -17,8 +18,6 @@ urlpatterns = [
     url(r'', include('apps.cliente.url',namespace='cliente')),
     #Inclusion de las url que hay en la aplicacion empleado
     url(r'', include('apps.empleado.url',namespace='empleado')),
-    #Inclusion de las url que hay en la aplicacion factura_orden_trabajo
-    #url(r'', include('apps.factura_orden_trabajo.url',namespace='factura_orden_trabajo')),
     #Inclusion de las url que hay en la aplicacion orden_de_trabajo
     #url(r'', include('apps.orden_de_trabajo.url',namespace='orden_de_trabajo')),
     #Inclusion de las url que hay en la aplicacion repuesto

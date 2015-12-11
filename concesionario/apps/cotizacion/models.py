@@ -5,46 +5,40 @@ from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 from apps.vehiculo.models import Vehiculo
 
-#Define la organizacion del los datos de una cotizacion en la base de datos
-class Cotizacion(models.Model):
-#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
+# Forma de pago en que se realiza la compra
+CREDITO = 'Credito'
+EFECTIVO = 'Efectivo'
+TARJETA_CREDITO = 'Tarjeta_credito'
+TARJETA_DEBITO = 'Tarjeta_debito'
 
+forma_pago_choices = (
+	(CREDITO, 'Credito'),
+	(EFECTIVO, 'Efectivo'),
+	(TARJETA_CREDITO, 'Tarjeta de credito'),
+	(TARJETA_DEBITO, 'Tarjeta de debito'),
+)
+
+#
+class Cotizacion(models.Model):
+	"""Define la organizacion del los datos de una cotizacion en la base de datos."""
+	
+	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 	#Empleado que realiza la cotizacion, relacion uno a muchos 
 	empleado= models.ForeignKey(Empleado)
- 
 	#Cliente que solicita la cotizacion, relacion uno a muchos 
 	cliente= models.ForeignKey(Cliente)
-
 	#Vehiculo cotizado, relacion uno a muchos 
 	vehiculo= models.ForeignKey(Vehiculo)
-
 	#Fecha en que se realiza la cotizacion
-	fecha=models.DateField(blank=True, null=True)
-
-
+	fecha=models.DateField(blank=True, null=True, auto_now_add=True)
 	#Fecha de vencimiento de la cotizacion
 	fecha_vencimiento=models.DateField(blank=True, null=True)
-
-	# Forma de pago en que se realiza la compra
-	CREDITO = 'Credito'
-	EFECTIVO = 'Efectivo'
-	TARJETA_CREDITO = 'Tarjeta_credito'
-	TARJETA_DEBITO = 'Tarjeta_debito'
-	
-	forma_pago_choices = (
-		(CREDITO, 'Credito'),
-		(EFECTIVO, 'Efectivo'),
-		(TARJETA_CREDITO, 'Tarjeta de credito'),
-		(TARJETA_DEBITO, 'Tarjeta de debito'),
-	)
-
+	#Forma de pago en la que se realiza la cotizacion
 	forma_pago = models.CharField(max_length=20, choices=forma_pago_choices, default=EFECTIVO)
-
 	#Estado de la cotizacion, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
-
-
-#Permite hacer modificaciones agregadas a la representacion del modelo 
+	
+	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['fecha']
 		verbose_name_plural = "Cotizaciones"

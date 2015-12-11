@@ -2,11 +2,10 @@
 
 from django.db import models
 
-# Atributos de Cliente
-# identificacion, nombre, apellido, ciudad, departamento, telefono, celular, email
-
 # Modelo que representa los clientes de la sucursal
 class Cliente(models.Model):
+	"""Representacion del cliente en la base de datos."""
+
 	# Numero documento identificacion del cliente
 	identificacion = models.CharField(null=True, blank=True, max_length=100)
 	# Nombre(s) del cliente

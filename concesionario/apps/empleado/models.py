@@ -25,9 +25,9 @@ tipo_choice = (
 	(GERENTE, 'Gerente'),
  )
 
-#Define la organizacion del los datos de un empleado en la base de datos
 class Empleado(models.Model):
-	#Cuenta que le corresponde al empleado por la cual se accede a los siguientes atributos
+	"""Define la organizacion del los datos de un empleado en la base de datos."""
+	
 	#related_name permite hacer una referencia desde user a empleado de la siguiente forma 
 	#user.empleado 
 	user = models.OneToOneField(User,related_name='empleado',null=True)

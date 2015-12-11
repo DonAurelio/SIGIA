@@ -50,13 +50,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    #Para utilizar imagekit
+     #Para utilizar imagekit
     'imagekit',
-
     #Para dar estilos usando bootstrap a los campos de los formularios 
     'bootstrap3',
-
     #Apps
     #Administra el inicio y cierre de sesion
     'apps.inicio',
@@ -78,9 +75,6 @@ INSTALLED_APPS = (
     'apps.venta',
     #Administra el crud de cotizacion
     'apps.cotizacion',
-    #Administra el crud de factura de orden de trabajo
-    'apps.factura_orden_trabajo',
-
 )
 
 MIDDLEWARE_CLASSES = (
