@@ -20,3 +20,4 @@ class ListaVehiculosSucursal(ListView):
 		'''
 		sucursal_id = self.kwargs['pk']
 		return Vehiculo.objects.filter(sucursal_id=sucursal_id)
+

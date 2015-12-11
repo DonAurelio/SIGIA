@@ -31,16 +31,16 @@
 		<!-- begin #sidebar -->
 		{% include "includes/sidebar.html" %}
 		<!-- end #sidebar -->
-		
+
+			
 		<!-- begin #content -->
 		<div id="content" class="content">
 			<!-- begin page-header -->
-			<h1 class="page-header">{{ section_name }}</h1>
+			<h1 class="page-header">Empleado Sucursal {{ sucursal.nombre }} 
+			<small>Diligencie los datos del siguiente formulario</small></h1>
+        
 			<!-- end page-header -->
 			
-			<!-- begin indicators -->
-			{% include "includes/indicadores.html"%}
-			<!-- end indicators -->
 			<form  name="RegisterForm" id="registerForm" method="post" enctype="multipart/form-data">
 			{% for form,form_title in forms %}							
 			<!-- begin row -->

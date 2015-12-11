@@ -8,18 +8,31 @@ from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
+from django.core.urlresolvers import reverse
 
 from .forms import UserForm,EmpleadoForm
 from .models import Empleado
+from apps.sucursal.models import Sucursal
 
 class EmpleadoCreateView(TemplateView):
+	"""Crea un empleado dada una sucursal."""
 
 	def get(self,request,*args,**kwargs):
+		"""Despliega el formulario de creacion de 
+		usuario y empleado para una sucursal.
+		"""
+
+		sucursal = Sucursal.objects.get(id=kwargs['pk'])
 		nombre_seccion = "Crear Empleado"
-		user_form = UserForm(),'Informacion del Usuario'
-		empleado_form = EmpleadoForm(),'Informacion del Empleado'
+		
+		user_form = (UserForm(),'Informacion del Usuario')
+		empleado_form = (EmpleadoForm( initial={'sucursal':sucursal.id} ),'Informacion del Empleado')
+		
 		forms = [user_form,empleado_form]
-		context = {'section_name':nombre_seccion,'forms':forms}
+		context = {
+		'sucursal':sucursal,
+		'forms':forms }
+		
 		return render_to_response(
 			'empleado/empleado_form.html',
 			context,
@@ -34,19 +47,28 @@ class EmpleadoCreateView(TemplateView):
 			new_empleado = empleado_form.save()
 			new_empleado.user = new_user
 			new_empleado.save()
+			
 			messages.info(request,'Nuevo empleado creado')
-			context = {}
-			return render_to_response(
-				"cuenta/perfil.html",
-				context,
-				RequestContext(request))
+					
+			url = reverse(
+				'empleado:listar-empleados-sucursal', 
+				kwargs={'pk': new_empleado.sucursal.id})
 
-		nombre_seccion = "Crear Empleado"
+			return HttpResponseRedirect(url)
+			
+
+		sucursal = Sucursal.objects.get(id=kwargs['pk'])
 		user_form = (UserForm(request.POST),'Informacion del Usuario')
 		empleado_form = (EmpleadoForm(request.POST),'Informacion del Empleado')
+		
 		forms = [user_form,empleado_form]
+		
 		messages.error(request,'Hay errores en algun campo')
-		context = {'section_name':nombre_seccion,'forms':forms}
+		
+		context = {
+		'sucursal':sucursal,
+		'forms':forms}
+		
 		return render_to_response(
 			'empleado/empleado_form.html',
 			context,
@@ -133,7 +155,10 @@ class EmpleadoListView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		sucursal_id = kwargs['pk']
 		empleados = Empleado.objects.filter(sucursal_id=sucursal_id)
-		context = {'lista_empleados':empleados}
+		sucursal = Sucursal.objects.get(id=sucursal_id)
+		context = {
+		'sucursal':sucursal,
+		'lista_empleados':empleados}
 		return render_to_response(
 			'empleado/empleado_list.html',
 			context,
