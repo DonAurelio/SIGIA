@@ -8,6 +8,9 @@ class CrearVehiculo(CreateView):
     fields = ['numero_serie', 'marca', 'modelo', 'motor', 'potencia', 'tipo',
     'capacidad', 'caracteristicas', 'imagen', 'precio', 'sucursal']
 
+    
+
+
 class ActualizarVehiculo(UpdateView):
     model = Vehiculo 
     fields = ['numero_serie', 'marca', 'modelo', 'motor', 'potencia', 'tipo',

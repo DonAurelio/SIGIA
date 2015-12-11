@@ -68,9 +68,9 @@
                                             <th>Telefono</th>
                                             <th>Ciudad</th>
                                             <th>Activo</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>Empleados</th>
+                                            <th>Vehiculos</th>
+                                            <th>Repuestos</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,16 +84,16 @@
                                                     <td>{{ sucursal.habilitado }}</td>
                                                     <td>
                                                         <a href="{% url 'empleado:listar-empleados-sucursal' sucursal.id %}">
-                                                            <button type="button" class="btn btn-info btn-xs">Empleados</button>
+                                                            <button type="button" class="btn btn-info btn-xs">Info</button>
                                                         </a></td>
                                                     <td>
                                                         <a href="{% url 'vehiculo:listar-vehiculos-sucursal' sucursal.id %}">
-                                                            <button type="button" class="btn btn-info btn-xs">Vehiculos</button>
+                                                            <button type="button" class="btn btn-info btn-xs">Info</button>
                                                         </a>
                                                     </td>
                                                     <td>
                                                         <a href="{% url 'repuesto:listar-repuestos-sucursal' sucursal.id %}">
-                                                            <button type="button" class="btn btn-info btn-xs">Repuestos</button>
+                                                            <button type="button" class="btn btn-info btn-xs">Info</button>
                                                         </a>
                                                     </td>
                                                 </tr >
