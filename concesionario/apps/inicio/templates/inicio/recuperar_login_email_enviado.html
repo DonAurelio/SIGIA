@@ -1,9 +1,5 @@
-{% extends "base.html" %}
+{% extends "base_login.html" %}
 {% load staticfiles %}
-
-<!-- css auxiliar -->
-{% block custom-css %}
-{% endblock %}
 
 {% block content %}
         <div class="login-cover">
@@ -108,14 +104,4 @@
             <!-- end theme-panel -->
         </div>
         <!-- end page container -->
-{% endblock %}
-
-<!-- JavaScript auxiliar -->
-{% block custom-js %}
-    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="{% static 'color_admin/assets/js/login-v2.demo.min.js' %}"></script>
-    <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-    <!-- ================== END PAGE LEVEL JS ================== -->
-
-   
 {% endblock %}

@@ -1,3 +1,4 @@
+		<!-- begin #sidebar -->
 		<div id="sidebar" class="sidebar">
 			<!-- begin sidebar scrollbar -->
 			<div data-scrollbar="true" data-height="100%">
@@ -25,11 +26,11 @@
 				<ul class="nav">
 					<li class="nav-header">Navegacion</li>
 					{% if user.empleado.tipo == "Gerente" %}
-						{% include "cuenta/includes/menu_gerente.html" %}
+						{% include "includes/menu_gerente.html" %}
 					{% elif  user.empleado.tipo == "Jefe de taller"%}
-						{% include "cuenta/includes/menu_jefe_taller.html" %}
+						{% include "includes/menu_jefe_taller.html" %}
 					{% elif  user.empleado.tipo == "Vendedor"%}
-						{% include "cuenta/includes/menu_vendedor.html" %}
+						{% include "includes/menu_vendedor.html" %}
 					{% endif %}
 
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">
@@ -44,3 +45,4 @@
 			<!-- end sidebar scrollbar -->
 		</div>
 		<div class="sidebar-bg"></div>
+		<!-- end #sidebar -->

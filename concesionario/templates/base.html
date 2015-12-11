@@ -10,10 +10,8 @@
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	{% block base-css %}
+	{% block css %}
 	{% include "includes/css.html" %}
-	{% endblock %}
-	{% block custom-css %}
 	{% endblock %}
 	
 </head>
@@ -22,15 +20,36 @@
 	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
 	<!-- end #page-loader -->
 	
-	<!-- begin #page-container -->
-	{% block content %}
-	{% endblock %}
-	<!-- end page container -->
 	
-	{% block base-js %}
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+		
+		<!-- begin #header -->
+		{% include "includes/header.html" %}
+		<!-- end #header -->
+		
+		<!-- begin #sidebar -->
+		{% include "includes/sidebar.html" %}
+		<!-- end #sidebar -->
+		
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<!-- begin page-header -->
+			<h1 class="page-header">{% block section_title %}{% endblock %}<small>{% block section_subtitle %}{% endblock %}</small></h1>
+			<!-- end page-header -->
+			{% block content %}
+			{% endblock %}
+		</div>
+		<!-- end #content -->
+		
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	{% block javascript %}
 	{% include "includes/javascript.html" %}
 	{% endblock %}
-	{% block custom-js %}
-	{% endblock %}
+
 </body>
 </html>
