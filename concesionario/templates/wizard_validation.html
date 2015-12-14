@@ -174,16 +174,16 @@
 {% block javascript %}
 {{ block.super }}
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
-	<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
-	<script>
-		$(document).ready(function() {
-			App.init();
-			FormWizardValidation.init();
-		});
-	</script>
+<script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+<!-- ================== END PAGE LEVEL JS ================== -->
+<script>
+	$(document).ready(function() {
+		App.init();
+		FormWizardValidation.init();
+	});
+</script>
 
 {% endblock %}
