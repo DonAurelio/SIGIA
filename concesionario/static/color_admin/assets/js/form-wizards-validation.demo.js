@@ -5,6 +5,7 @@ Author: Sean Ngu
 Website: http://www.seantheme.com/color-admin-v1.3/
 */
 
+
 var handleBootstrapWizardsValidation = function() {
 	"use strict";
 	$("#wizard").bwizard({ validating: function (e, ui) { 
