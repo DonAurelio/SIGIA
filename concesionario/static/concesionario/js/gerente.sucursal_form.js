@@ -1,6 +1,8 @@
+
 $("button").click(function(event){
 	event.preventDefault();
-    $.post("/sucursal/crear",
+    var url = $("form").attr("action");
+    $.post(url,
     {
         csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
         nombre:$("#id_nombre").val(),
@@ -18,7 +20,4 @@ $("button").click(function(event){
     .fail(function() {
         alert( "Ha ocurrido un error al hacer la peticion post" );
     });
-    //.always(function() {
-    //    alert( "finished" );
-    //});
 });

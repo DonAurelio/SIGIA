@@ -7,8 +7,7 @@
 {% comment %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-{% endcomment %}
-
+{% endcomment %}	
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
@@ -17,7 +16,7 @@
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 
 <!-- begin page-header -->
-<h1 class="page-header">Nueva Sucursales <small>diligencie los datos del siguiente formula</small></h1>
+<h1 class="page-header">Nueva Sucursal<small> diligencie los datos del siguiente formula</small></h1>
 <!-- end page-header -->
 
 <!-- begin row -->
@@ -36,22 +35,22 @@
 				<h4 class="panel-title">Sucursal</h4>
 			</div>
 			<div class="panel-body">
-				<form action="{% url 'sucursal:crear' %}" method="POST" data-parsley-validate="true" name="form-wizard">{% csrf_token %}
+				<form action="{{ request.path }}" method="POST" data-parsley-validate="true" name="form-wizard">{% csrf_token %}
 					<div id="wizard">
 						<ol>
 							<li>
-								Identification 
-								<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
+								Informacion General
+								<small></small>
 							</li>
 						</ol>
 						<!-- begin wizard step-1 -->
 						<div class="wizard-step-1">
 							<fieldset>
-								<legend class="pull-left width-full">Identification</legend>
+								<legend class="pull-left width-full">Datos de sucursal</legend>
 								<!-- begin row -->
 								<div class="row">
-									{% bootstrap_form form layout='inline' %}
-									<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Agregar</button>
+									{% bootstrap_form form %}
+									<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i>Aceptar</button>
 								</div>
 								<!-- end row -->
 							</fieldset>

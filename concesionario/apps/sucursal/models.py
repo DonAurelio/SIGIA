@@ -8,7 +8,7 @@ class Sucursal(models.Model):
 	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 	
 	#Nombre de la sucursal
-	nombre = models.CharField(null=True,blank=True,max_length=20)
+	nombre = models.CharField(null=True,blank=True,max_length=20,unique=True)
 	#Direccion en la cual queda ubicada la sucursal
 	direccion = models.CharField(null=True,blank=True,max_length=50)
 	#Telefono de la sucursal
