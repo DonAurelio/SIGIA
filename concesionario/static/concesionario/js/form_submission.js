@@ -1,4 +1,8 @@
-/* Extraido de http://formvalidation.io/examples/ajax-submit/ */
+/* 
+    FORM JQuery Submit 
+    Copied from http://formvalidation.io/examples/ajax-submit/ 
+
+*/
 $("button").click(function ( event ){
     event.preventDefault();
     var $form = $("form");
@@ -7,7 +11,6 @@ $("button").click(function ( event ){
         url: $form.attr('action'),
         dataType: 'html',
         success: function(responseText, statusText, xhr, $form) {
-            alert(responseText);
             $("#content").html(responseText);
             // Process the response returned by the server ...
             // console.log(responseText);
