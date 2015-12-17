@@ -17,6 +17,9 @@ class Sucursal(models.Model):
 	ciudad = models.CharField(null=True,blank=True,max_length = 50)
 	#Estado de la sucursa, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
+
+	#Imagen o foto del empleado
+	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes")
 	
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:

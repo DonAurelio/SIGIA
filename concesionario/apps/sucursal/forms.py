@@ -7,13 +7,11 @@ from .models import Sucursal
  
 class CrearSucursal(CreateView):
     model = Sucursal
-    fields = ['nombre', 'direccion', 'telefono', 'ciudad', 'habilitado']
+    fields = ['nombre', 'direccion', 'telefono', 'ciudad','imagen','habilitado']
     success_url = reverse_lazy('sucursal:listar') 
 
-    #def post(self,request,*args,**kwargs):
-    #	return HttpResponse("Hola")
-
+   
 class ActualizarSucursal(UpdateView):
     model = Sucursal
-    fields = ['nombre', 'direccion', 'telefono', 'ciudad', 'habilitado']
+    fields = ['nombre', 'direccion', 'telefono', 'ciudad','imagen','habilitado']
     success_url = reverse_lazy('sucursal:listar') 

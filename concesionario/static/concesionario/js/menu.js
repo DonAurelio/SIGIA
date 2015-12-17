@@ -1,4 +1,3 @@
-
 $("a").click(function (event) {
 	event.preventDefault();
     var addressValue = $(this).attr("href");
