@@ -1,10 +1,9 @@
 {% load staticfiles %}
 
-
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html lang="en" ng-app="concesionarioApp">
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
@@ -35,14 +34,10 @@
 		<!-- end #sidebar -->
 		
 		<!-- begin #content -->
-		<div id="content" class="content">
-			{% comment %}
+		<div id="content" class="content" ng-view>
 			<!-- begin page-header -->
-			<h1 class="page-header">{% block section_title %}{% endblock %}<small>{% block section_subtitle %}{% endblock %}</small></h1>
+			<h1 class="page-header">Angular View<small></small></h1>
 			<!-- end page-header -->
-			{% endcomment %}
-			{% block content %}
-			{% endblock %}
 		</div>
 		<!-- end #content -->
 		
@@ -57,4 +52,3 @@
 
 </body>
 </html>
-
