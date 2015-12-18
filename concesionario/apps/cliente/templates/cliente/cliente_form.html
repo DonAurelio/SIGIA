@@ -1,94 +1,84 @@
-{% extends "base.html" %}
 {% load staticfiles %}
 
 {# Load the tag library #}
 {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
+{% comment %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-
+{% endcomment %}    
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
+<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+<link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<link href="{% static 'color_admin/assets/plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<!-- ================== END PAGE LEVEL STYLE ================== -->
 
-{% block custom-css %}
-    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-    <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
-{% endblock %}
+<!-- begin page-header -->
+<h1 class="page-header">Nuevo Cliente<small> diligencie los datos del siguiente formulario</small></h1>
+<!-- end page-header -->
 
-<!-- crear Repuesto -->
-{% block content %}
-    <!-- begin #page-container -->
-    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
-        
-    <!-- begin #header -->
-    {% include "includes/header.html" %}
-    <!-- end #header -->
-    
-    <!-- begin #sidebar -->
-    {% include "includes/sidebar.html" %}
-    <!-- end #sidebar -->
-    
-    <!-- begin #content -->
-    <div id="content" class="content">
-        
-            <!-- begin col-12 -->
-            <div class="col-md-12">
-                <!-- begin panel -->
-                <div class="panel panel-inverse">
-                    <div class="panel-heading">
-                        
-                        <div class="panel-heading-btn">
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                        </div>
-                        
-                    <h4 class="panel-title">Formulario</h4>
-                    </div>
-                    <div class="panel-body">
-                        {# Display a form #}
-                        <form method="POST"> {% csrf_token %}
-                            <div id="wizard">
-                                <!-- begin wizard step-1 -->
-                                <div>
-                                    <fieldset>
-                                        <legend class="pull-left width-full">Cliente</legend>
-                                        <!-- begin row -->
-                                        {% bootstrap_form form %}
-                                        <!-- end row -->
-                                    </fieldset>
-                                </div>
-
-                                <button type="update" class="btn btn-inverse"><i class="fa fa-cog"></i> Finalizar</button>
-                                
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- end panel -->
+<!-- begin row -->
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>Cliente</h4>
             </div>
-            <!-- end col-12 -->
-
-            
+            <div class="panel-body">
+                <form action="{{ request.path }}" method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data" >{% csrf_token %}
+                    <div id="wizard">
+                        <ol>
+                            <li>
+                                Informacion General
+                                <small></small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div class="wizard-step-1">
+                            <fieldset>
+                                <legend class="pull-left width-full">Datos del Cliente</legend>
+                                <!-- begin row -->
+                                <div class="row">
+                                    {% bootstrap_form form %}
+                                    <button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i>Aceptar</button>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-1 -->
+                    </div>
+                </form>
+            </div>
         </div>
-        <!-- end #content -->
-            
-{% endblock %}
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
 
-{% block custom-js %}
-    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
-    <script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
-    <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-    <!-- ================== END PAGE LEVEL JS ================== -->
-{% endblock %}
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 
-<!--
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Crear Repuesto" />
-</form>
--->
+<!-- JQUERY SUBMISSION SCRIPTS -->
+<script src="{% static 'concesionario/js/form_submission.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+
+<!-- ================== END PAGE LEVEL JS ================== -->
+<script>
+    $(document).ready(function() {
+        App.init();
+        FormWizardValidation.init();
+    });
+</script>

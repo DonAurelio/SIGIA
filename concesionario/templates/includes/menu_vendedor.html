@@ -1,18 +1,10 @@
 <!-- Opcione del menu para el vendedor -->
 
 <!-- Clientes -->
-<li class="has-sub active" >
-	<a href="javascript:;">
-		<b class="caret pull-right"></b>
-		<i class="fa fa-credit-card"></i>
-		<span>
-			Clientes
-		</span>
-	</a>
-	<ul class="sub-menu">
-		<li><a href="{% url "cliente:crear" %}"> Crear nuevo </a></li>
-		<li><a href="{% url "cliente:listar" %}"> Listar/Editar </a></li>
-	</ul>
+
+
+<li>
+	<a href="{% url 'cliente:listar' %}"><i class="fa fa-users"></i><span >Gestionar Clientes</span></a>
 </li>
 
 <!-- Cotizacion -->
