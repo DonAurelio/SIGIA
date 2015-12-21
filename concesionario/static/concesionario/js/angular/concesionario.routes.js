@@ -10,8 +10,11 @@
 	function config($routeProvider){
 		$routeProvider.
 		when('/', {
-			templateUrl:'/static/concesionario/templates/index.html',
+			templateUrl:'/static/concesionario/templates/view.html',
 			controller:'IndexController'
-		});
+		}).when('/sucursal/crear', {
+			templateUrl:'/static/concesionario/templates/view.html',
+		  	controller: 'SucursalController'
+		}).otherwise('/');
 	}
 })();
