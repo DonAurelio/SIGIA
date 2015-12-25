@@ -6,7 +6,6 @@ from django.template import RequestContext
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-#from django.contrib.auth.forms import PasswordChangeForm
 from .forms import UserUpdateForm
 from .forms import UserPasswordUpdateForm
 from .forms import EmpleadoUpdateForm
@@ -52,7 +51,7 @@ class Editar(TemplateView):
 		'user_form':user_form,
 		'empleado_form':empleado_form
 		}
-		return render_to_response('cuenta/editar.html',context,context_instance=RequestContext(request))
+		return render_to_response('form.html',context,context_instance=RequestContext(request))
 
 	#Cuando la peticion es de tipo POST es porque se ha hecho un submit en el formulario diligenciado
 	def post(self,request,*args,**kwargs):

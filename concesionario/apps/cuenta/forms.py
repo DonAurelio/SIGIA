@@ -24,8 +24,6 @@ class UserPasswordUpdateForm(PasswordChangeForm):
 	new_password2 = forms.CharField(label='Confirmacion nueva contraseña',widget=forms.PasswordInput)
 	old_password = forms.CharField(label='Contraseña antigua',widget=forms.PasswordInput)
 
-
-
 #Este formulario permitira actualizar la informacion de un empleado en la base de datos
 class EmpleadoUpdateForm(forms.ModelForm):
 	class Meta:

@@ -5,120 +5,102 @@
 {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
-{% bootstrap_css %}
 {% bootstrap_javascript %}
 
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-<!-- css auxiliar -->
-{% block custom-css %}
+{% block css %}
+{{ block.super }}
 	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 	<link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-<!-- Enacabezado de la seccion -->
+{% block section_title %}{% endblock %}
+{% block section_subtitle %}{% endblock %}
 {% block content %}
-	<!-- begin #page-container -->
-	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
-		
-		<!-- begin #header -->
-		{% include "includes/header.html" %}
-		<!-- end #header -->
-		
-		<!-- begin #sidebar -->
-		{% include "includes/sidebar.html" %}
-		<!-- end #sidebar -->
-		
-		<!-- begin #content -->
-		<div id="content" class="content">
-			<!-- begin page-header -->
-			<h1 class="page-header">Editar perfil</h1>
-			<!-- end page-header -->
-			
-			<!-- begin indicators -->
-			{% include "includes/indicadores.html"%}
-			<!-- end indicators -->
-						
-			<!-- begin row -->
-			<div class="row">
+	<!-- begin col-12 -->
+			    <div class="col-md-12">
+			    	<form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
+			    	
+			    	<div class="email-btn-row hidden-xs">
+		                <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
+					</div>
 
-				<!-- begin col-8 -->
-				<div class="col-md-8">
-					<!-- begin col-12 -->
-				    <div class="col-md-12">
-				        <!-- begin panel -->
-	                    <div class="panel panel-inverse">
-	                        <div class="panel-heading">
-	                            <div class="panel-heading-btn">
-	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-	                            </div>
-	                            <h4 class="panel-title">Formulario</h4>
-	                        </div>
-	                        <div class="panel-body">
-	                        	{# Display a form #}
-	                        	{# the enctype="multipart/form-data" is necessary to upload files#}
-	                            <form action="{% url 'cuenta:editar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-									<div id="wizard">
-										<!-- begin wizard step-1 -->
-										<div>
-	                                        <fieldset>
-	                                            <legend class="pull-left width-full">Informacion de la cuenta</legend>
-	                                            <!-- begin row -->
-	                                            {% bootstrap_form user_form %}
-	                                            <a href="{% url 'cuenta:editar_contrasenia' %}"><p class="text-info">Cambiar contraseña</p></a>
-	                                            <!-- end row -->
-											</fieldset>
-										</div>
-										<!-- end wizard step-1 -->
-										<!-- begin wizard step-2 -->
-										<div>
-											<fieldset>
-												<legend class="pull-left width-full">Informacion adicional</legend>
-	                                            <!-- begin row -->
-	                                            {% bootstrap_form empleado_form %}
-	                                            <!-- end row -->
-											</fieldset>
-										</div>
-										<!-- end wizard step-2 -->
-										<button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
+			        <!-- begin panel -->
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Editar Datos de Empleado</h4>
+                        </div>
+                        <div class="panel-body">
+ 								<div id="wizard">
+									<ol>
+										<li>
+										    Informacion de la Cuenta 
+										    <small>Diligencie los diguientes campos con los datos de usuario.</small>
+										</li>
+										<li>
+										    Informacion Adicional
+										    <small>Diligencie los siguientes datos con los datos adicionales.</small>
+										</li>
+									</ol>
+									<!-- begin wizard step-1 -->
+									<div class="wizard-step-1">
+                                        <fieldset>
+                                            <legend class="pull-left width-full">Informacion de la cuenta</legend>
+                                            <!-- begin row -->
+                                            <div class="row">
+                                            	{% bootstrap_form user_form  %}
+                                            	<a href="{% url 'cuenta:editar_contrasenia' %}" class="btn btn-white btn-block">Cambiar contraseña</a>
+	                                        </div>
+                                            <!-- end row -->
+										</fieldset>
 									</div>
-								</form>
-	                        </div>
-	                    </div>
-	                    <!-- end panel -->
-	                </div>
-	                <!-- end col-12 -->
-	            </div>
-	            <!-- end col-8 -->
-
-				<!-- begin col-4 -->
-				<div class="col-md-4">
-				{% include "includes/calendario.html" %}
-				</div>
-				<!-- end col-4 -->
-			</div>
-			<!-- end row -->
-		</div>
-		<!-- end #content -->
-	
-		
-		<!-- begin scroll to top btn -->
-		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-		<!-- end scroll to top btn -->
-	</div>
-	<!-- end page container -->
+									<!-- end wizard step-1 -->
+									<!-- begin wizard step-2 -->
+									<div class="wizard-step-2">
+										<fieldset>
+											<legend class="pull-left width-full">Informacion Adicional</legend>
+                                            <!-- begin row -->
+                                            <div class="row">
+                                                {% bootstrap_form empleado_form %}
+                                            </div>
+                                            <!-- end row -->
+										</fieldset>
+									</div>
+									<!-- end wizard step-2 -->
+								</div>
+							
+                        </div>
+                    </div>
+                    <!-- end panel -->
+                	</form>
+                </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
 {% endblock %}
 
-<!-- JavaScript auxiliar -->
-{% block custom-js %}
-	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
-	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
+{% block javascript %}
+{{ block.super }}
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+<!-- ================== END PAGE LEVEL JS ================== -->
+<script>
+	$(document).ready(function() {
+		App.init();
+		FormWizardValidation.init();
+	});
+</script>
+
 {% endblock %}
