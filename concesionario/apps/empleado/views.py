@@ -23,15 +23,15 @@ class EmpleadoCreateView(TemplateView):
 		"""
 
 		sucursal = Sucursal.objects.get(id=kwargs['pk'])
-		nombre_seccion = "Crear Empleado"
 		
-		user_form = (UserForm(),'Informacion del Usuario')
-		empleado_form = (EmpleadoForm( initial={'sucursal':sucursal.id} ),'Informacion del Empleado')
+		user_form = UserForm()
+		empleado_form = EmpleadoForm( initial={'sucursal':sucursal.id} )
 		
 		forms = [user_form,empleado_form]
 		context = {
 		'sucursal':sucursal,
-		'forms':forms }
+		'user_form':user_form,
+		'empleado_form':empleado_form }
 		
 		return render_to_response(
 			'empleado/empleado_form.html',
@@ -58,16 +58,16 @@ class EmpleadoCreateView(TemplateView):
 			
 
 		sucursal = Sucursal.objects.get(id=kwargs['pk'])
-		user_form = (UserForm(request.POST),'Informacion del Usuario')
-		empleado_form = (EmpleadoForm(request.POST),'Informacion del Empleado')
+		user_form = UserForm(request.POST)
+		empleado_form = EmpleadoForm(request.POST)
 		
-		forms = [user_form,empleado_form]
 		
 		messages.error(request,'Hay errores en algun campo')
 		
 		context = {
 		'sucursal':sucursal,
-		'forms':forms}
+		'user_form':user_form,
+		'empleado_form':empleado_form }
 		
 		return render_to_response(
 			'empleado/empleado_form.html',
@@ -81,11 +81,12 @@ class EmpleadoUpdateView(TemplateView):
 		empleado = Empleado.objects.get(id=kwargs['pk'])
 		user = User.objects.get(id=empleado.id)
 
-		empleado_form = (EmpleadoForm(instance=empleado), 'Informacion del Empleado')
-		user_form = (UserForm(instance=user), 'Informacion del Usuario')
-		nombre_seccion = 'Editar Empleado'
-		forms = [user_form, empleado_form]
-		context = {'section_name':nombre_seccion, 'forms':forms}
+		empleado_form = EmpleadoForm(instance=empleado)
+		user_form = UserForm(instance=user)
+		
+		context = {
+		'user_form':user_form,
+		'empleado_form':empleado_form }
 
 		return render_to_response(
 			'empleado/empleado_form.html', 
@@ -139,11 +140,12 @@ class EmpleadoUpdateView(TemplateView):
 				context,
 				context_instance=RequestContext(request))
 		else:
-			empleado_form = (EmpleadoForm(request.POST,request.FILES), 'Informacion del Empleado')
-			user_form = (UserForm(instance=user), 'Informacion del Usuario')
-			nombre_seccion = 'Editar Empleado'
-			forms = [user_form,empleado_form]
-			context = {'section_name':nombre_seccion, 'forms':forms}
+			empleado_form = EmpleadoForm(request.POST,request.FILES)
+			user_form = UserForm(instance=user)
+			
+			context = {
+				'user_form':user_form,
+				'empleado_form':empleado_form }
 
 			return render_to_response(
 				'empleado/empleado_form.html', 
