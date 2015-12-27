@@ -17,7 +17,7 @@
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Nuevo Empleado Sucursal {{ sucursal.nombre }} {% endblock %}
+{% block section_title %}{{ section_title }} Sucursal <strong>{{ sucursal.nombre }}</strong> {% endblock %}
 {% block section_subtitle %}Diligencie los datos del siguiente formulario{% endblock %}
 {% block content %}
 	<!-- begin col-12 -->
@@ -25,7 +25,7 @@
 			    	<form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
 			    	
 			    	<div class="email-btn-row hidden-xs">
-		                <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Crear</button>
+		                <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> {{ button_text }}</button>
 					</div>
 
 			        <!-- begin panel -->
@@ -37,7 +37,7 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
-                            <h4 class="panel-title">Datos de Empleado</h4>
+                            <h4 class="panel-title">Empleado</h4>
                         </div>
                         <div class="panel-body">
  								<div id="wizard">

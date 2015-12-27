@@ -5,10 +5,7 @@ import views
 
 
 urlpatterns = [
-
-    #url que redirecciona a la pagina de creacion de cotizaciones 
-    #url(r'^empleado/crear$',views.nuevo_usuario, name='crear'),
-    url(r'^empleado/sucursal/crear/(?P<pk>\d+)/$',views.EmpleadoCreateView.as_view(), name='crear'),
-    url(r'^empleado/(?P<pk>\d+)/$', views.EmpleadoUpdateView.as_view(), name='actualizar'),
-    url(r'^empleado/sucursal/(?P<pk>\d+)/$', views.EmpleadoListView.as_view(), name='listar-empleados-sucursal'),
+    url(r'^empleado/sucursal/crear/(?P<spk>\d+)/$',views.EmpleadoCreateView.as_view(), name='crear'),
+    url(r'^empleado/sucursal/actualizar/(?P<epk>\d+)/(?P<spk>\d)/$', views.EmpleadoUpdateView.as_view(), name='actualizar'),
+    url(r'^empleado/sucursal/listado/(?P<spk>\d+)/$', views.EmpleadoListView.as_view(), name='listar-empleados-sucursal'),
 ]

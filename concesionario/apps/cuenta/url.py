@@ -12,5 +12,4 @@ urlpatterns = [
 	url(r'^cuenta/editar_contrasenia$', EditarContrasenia.as_view(), name='editar_contrasenia'),
 	#Redirecciona la peticion a la vista que permite visualizar el perfil de usuario
 	url(r'^cuenta/perfil$', Perfil.as_view(), name='perfil'),
-    
 ]

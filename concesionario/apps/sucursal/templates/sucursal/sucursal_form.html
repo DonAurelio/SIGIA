@@ -17,7 +17,7 @@
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Nueva sucursal{% endblock %}
+{% block section_title %}{{ section_title }}{% endblock %}
 {% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
 	<!-- begin col-12 -->
@@ -25,7 +25,7 @@
 			    	<form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
 			    	
 			    	<div class="email-btn-row hidden-xs">
-		                <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
+		                <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> {{ button_text }}</button>
 					</div>
 
 			        <!-- begin panel -->
@@ -37,13 +37,13 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
-                            <h4 class="panel-title">Editar Datos de Empleado</h4>
+                            <h4 class="panel-title">Sucursal</h4>
                         </div>
                         <div class="panel-body">
  								<div id="wizard">
 									<ol>
 										<li>
-										    Nueva Sucursal 
+										    Informacion de la sucursal
 										    <small>Diligencie los diguientes campos con los datos de la sucursal.</small>
 										</li>
 									</ol>

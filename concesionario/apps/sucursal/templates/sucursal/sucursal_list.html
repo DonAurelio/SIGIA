@@ -52,19 +52,26 @@
 													<td>{{ sucursal.direccion }}</td>
 													<td>{{ sucursal.telefono }}</td>
 													<td>{{ sucursal.ciudad }}</td>
-													<td>{{ sucursal.habilitado }}</td>
+													<td>
+														{% if sucursal.habilitado %}
+														Si
+														{% else %}
+														No
+														{% endif %}
+													</td>
 													<td>
 														<a href="{% url 'empleado:listar-empleados-sucursal' sucursal.id %}">
-															<button type="button" class="btn btn-info btn-xs">Info</button>
-														</a></td>
+															<button type="button" class="btn btn-info btn-xs"><i class="fa fa-cog"></i> Administrar</button>								
+														</a>
+													</td>
 													<td>
 														<a href="{% url 'vehiculo:listar-vehiculos-sucursal' sucursal.id %}">
-															<button type="button" class="btn btn-info btn-xs">Info</button>
+															<button type="button" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Añadir</button>
 														</a>
 													</td>
 													<td>
 														<a href="{% url 'repuesto:listar-repuestos-sucursal' sucursal.id %}">
-															<button type="button" class="btn btn-info btn-xs">Info</button>
+															<button type="button" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Añadir</button>
 														</a>
 													</td>
 												</tr >

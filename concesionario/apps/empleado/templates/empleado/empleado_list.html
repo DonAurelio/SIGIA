@@ -8,7 +8,7 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Listado de Empleados{% endblock %}
+{% block section_title %}Listado de Empleados Sucursal <strong>{{ sucursal.nombre }}</strong> {% endblock %}
 {% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
 {% block content %}
                 <!-- begin col-12 -->
@@ -27,7 +27,7 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
-                            <h4 class="panel-title">Empleados Sucursal {{ sucursal.nombre }}</h4>
+                            <h4 class="panel-title">Empleados </h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -52,7 +52,7 @@
                                         {% if lista_empleados %} 
                                             {% for empleado  in lista_empleados %}
                                                 <tr>
-                                                    <td><a href="{% url 'empleado:actualizar' empleado.id %}"> {{ empleado.user.username }}</a></td>
+                                                    <td><a href="{% url 'empleado:actualizar' empleado.id sucursal.id %}"> {{ empleado.user.username }}</a></td>
                                                     <td>{{ empleado.user.first_name }}</td>
                                                     <td>{{ empleado.user.last_name }}</td>
                                                     <td>{{ empleado.user.last_login }}</td>

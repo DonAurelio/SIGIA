@@ -22,13 +22,15 @@ class EmpleadoCreateView(TemplateView):
 		usuario y empleado para una sucursal.
 		"""
 
-		sucursal = Sucursal.objects.get(id=kwargs['pk'])
+		sucursal = Sucursal.objects.get(id=kwargs['spk'])
 		
 		user_form = UserForm()
 		empleado_form = EmpleadoForm( initial={'sucursal':sucursal.id} )
 		
 		forms = [user_form,empleado_form]
 		context = {
+		'section_title':'Nuevo Empleado',
+		'button_text':'Crear',
 		'sucursal':sucursal,
 		'user_form':user_form,
 		'empleado_form':empleado_form }
@@ -57,7 +59,7 @@ class EmpleadoCreateView(TemplateView):
 			return HttpResponseRedirect(url)
 			
 
-		sucursal = Sucursal.objects.get(id=kwargs['pk'])
+		sucursal = Sucursal.objects.get(id=kwargs['spk'])
 		user_form = UserForm(request.POST)
 		empleado_form = EmpleadoForm(request.POST)
 		
@@ -65,6 +67,8 @@ class EmpleadoCreateView(TemplateView):
 		messages.error(request,'Hay errores en algun campo')
 		
 		context = {
+		'section_title':'Nuevo Empleado',
+		'button_text':'Crear',
 		'sucursal':sucursal,
 		'user_form':user_form,
 		'empleado_form':empleado_form }
@@ -78,13 +82,17 @@ class EmpleadoCreateView(TemplateView):
 class EmpleadoUpdateView(TemplateView):
 
 	def get(self, request, *args, **kwargs):
-		empleado = Empleado.objects.get(id=kwargs['pk'])
+		sucursal = Sucursal.objects.get(id=kwargs['spk'])
+		empleado = Empleado.objects.get(id=kwargs['epk'])
 		user = User.objects.get(id=empleado.id)
 
 		empleado_form = EmpleadoForm(instance=empleado)
 		user_form = UserForm(instance=user)
 		
 		context = {
+		'section_title':'Actualizar Empleado',
+		'button_text':'Actualizar',
+		'sucursal':sucursal,
 		'user_form':user_form,
 		'empleado_form':empleado_form }
 
@@ -94,7 +102,8 @@ class EmpleadoUpdateView(TemplateView):
 			context_instance=RequestContext(request))
 
 	def post(sel, request, *args, **kwargs):
-		empleado = Empleado.objects.get(id=kwargs['pk'])
+		sucursal = Sucursal.objects.get(id=kwargs['spk'])
+		empleado = Empleado.objects.get(id=kwargs['epk'])
 		user = User.objects.get(id=empleado.id)
 
 		empleado_form = EmpleadoForm(request.POST,request.FILES,instance=empleado)
@@ -144,6 +153,9 @@ class EmpleadoUpdateView(TemplateView):
 			user_form = UserForm(instance=user)
 			
 			context = {
+			'section_title':'Actualizar Empleado',
+			'button_text':'Actualizar',
+			'sucursal':sucursal,
 				'user_form':user_form,
 				'empleado_form':empleado_form }
 
@@ -155,7 +167,7 @@ class EmpleadoUpdateView(TemplateView):
 class EmpleadoListView(TemplateView):
 
 	def get(self,request,*args,**kwargs):
-		sucursal_id = kwargs['pk']
+		sucursal_id = kwargs['spk']
 		empleados = Empleado.objects.filter(sucursal_id=sucursal_id)
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		context = {
