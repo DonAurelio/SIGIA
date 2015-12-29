@@ -4,19 +4,14 @@ from django.conf.urls import include, url
 from .forms import CrearVehiculo
 from .forms import ActualizarVehiculo
 from .views import ListaVehiculosSucursal
-from .views import ParcialListaVehiculosSucursal
 
 urlpatterns = [
-	#Paginas completas
+
     # redirecciona a la pagina de creacion de vehiculo
     url(r'^vehiculo/crear$', CrearVehiculo.as_view(), name='crear'),
     # redirecciona a pagina para actualizacion de un vehiculo
     url(r'^vehiculo/(?P<pk>\d+)/$', ActualizarVehiculo.as_view(), name='actualizar'), 
     # redirecciona a pagina que despliega el listado de vehiculos por sucursal
-    url(r'^vehiculo/sucursal/(?P<pk>\d+)/$', ListaVehiculosSucursal.as_view(), name='listar-vehiculos-sucursal'),
-
-    #Paginas parciales 
-    url(r'^parciales/vehiculo/sucursal/(?P<pk>\d+)/$', ParcialListaVehiculosSucursal.as_view(), name='parciales-listar-vehiculos-sucursal'),
-
-    
+    url(r'^vehiculo/sucursal/([0-9]*)/$', ListaVehiculosSucursal.as_view(), name='listar-vehiculos-sucursal'),
+    url(r'^vehiculo/todos/$', ListaVehiculosSucursal.as_view(), name='listar-vehiculos'),
 ]

@@ -9,20 +9,38 @@
 
 {% block css %}
 {{ block.super }}
-<!-- ================== BEGIN PAGE LEVEL STYLE TABLE================== -->
+    <!-- ================== BEGIN PAGE LEVEL STYLE TABLE================== -->
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Listado de Vehiculos Sucursal <strong>{{ sucursal.nombre }}</strong> {% endblock %}
-{% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
+{% block section_title %}
+    {% if sucursal %}
+        Listado de Vehiculos en Venta Sucursal <strong>{{ sucursal.nombre }}</strong> 
+    {% else %}
+        Vehiculos Disponibles
+    {% endif %}
+{% endblock %}
+
+{% block section_subtitle %}
+    {% if sucursal %}
+        Para vincular nuevos vehiculos y ponerlos en venta en esta sucursal, presione en vincular vehiculo
+    {% else %}
+        Seleccione un elemento para modificar su información
+    {% endif %}
+
+{% endblock %}
 {% block content %}
-<!-- begin #content -->
-                 <!-- begin col-12 -->
+                <!-- begin #content -->
+                <!-- begin col-12 -->
                 <div class="col-md-12">
                     
                     <div class="email-btn-row hidden-xs">
+                        {% if sucursal %}
                         <a href="#modal-message" id="vincular-vehiculo" class="btn btn-sm btn-inverse" data-toggle="modal"><i class="fa fa-plus m-r-5"></i> Vincular Vehiculo</a>
+                        {% else %}
+                         <a href="{% url 'vehiculo:crear' %}" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i> Nuevo Vehiculo</a>
+                        {% endif %}
                     </div>
   
                     <!-- begin panel -->
@@ -57,7 +75,13 @@
                                         {% if lista_vehiculos %} 
                                             {% for vehiculo  in lista_vehiculos %}
                                                 <tr>
-                                                    <td><a href="{% url 'vehiculo:actualizar' vehiculo.pk %}"> {{ vehiculo.numero_serie }}</a></td>
+                                                    <td>
+                                                    {% if sucursal %}
+                                                    {{ vehiculo.numero_serie }}
+                                                    {% else %}
+                                                    <a href="{% url 'vehiculo:actualizar' vehiculo.pk %}"> {{ vehiculo.numero_serie }}</a>
+                                                    {% endif %}
+                                                    </td>
                                                     <td>{{ vehiculo.marca }}</td>
                                                     <td>{{ vehiculo.modelo }}</td>
                                                     <td>{{ vehiculo.motor }}</td>
@@ -86,6 +110,7 @@
                 </div>
                 <!-- end col-12 -->
 
+                {% if sucursal %}
                 <!-- #modal-message -->
                 <div class="modal modal-message fade" id="modal-message">
                     <div class="modal-dialog">
@@ -105,6 +130,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
 {% endblock %}
 
