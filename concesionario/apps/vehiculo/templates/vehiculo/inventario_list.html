@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     
                     <div class="email-btn-row hidden-xs">
-                        <a href="#modal-message" id="vincular-vehiculo" class="btn btn-sm btn-inverse" data-toggle="modal"><i class="fa fa-plus m-r-5"></i> Nuevo Vehiculo</a>
+                        <a href="#modal-message" id="btn-agregar" class="btn btn-sm btn-inverse" data-toggle="modal"><i class="fa fa-plus m-r-5"></i> Agregar Vehiculo al Inventario</a>
                     </div>
   
                     <!-- begin panel -->
@@ -49,33 +49,41 @@
                                             <th>Tipo</th>
                                             <th>Capacidad</th>
                                             <th>Características</th>
-                                            <th>Imagen</th>
                                             <th>Precio</th>
+                                            <th>Color</th>
+                                            <th>Cantidad</th>
+                                            <th>Habilitado</th>
+                                            <th>Imagen</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if lista_vehiculos %} 
-                                            {% for vehiculo  in lista_vehiculos %}
+                                        {% if sucursal_vehiculos %} 
+                                            {% for sucursal_vehiculo in sucursal_vehiculos %}
                                                 <tr>
-                                                    <td><a href="{% url 'vehiculo:actualizar' vehiculo.pk %}"> {{ vehiculo.numero_serie }}</a></td>
-                                                    <td>{{ vehiculo.marca }}</td>
-                                                    <td>{{ vehiculo.modelo }}</td>
-                                                    <td>{{ vehiculo.motor }}</td>
-                                                    <td>{{ vehiculo.potencia }}</td>
-                                                    <td>{{ vehiculo.tipo }}</td>
-                                                    <td>{{ vehiculo.capacidad }}</td>
-                                                    <td>{{ vehiculo.caracteristicas }}</td>
-                                                    <td>{% if  vehiculo.imagen %}
-                                                            <img src={{ vehiculo.imagen.url }} width=100 height=100 /> 
+                                                    <td>{{ sucursal_vehiculo.vehiculo.numero_serie }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.marca }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.modelo }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.motor }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.potencia }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.tipo }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.capacidad }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.caracteristicas }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.precio }}</td>
+                                                    <td>{{ sucursal_vehiculo.color }}</td>
+                                                    <td>{{ sucursal_vehiculo.cantidad }}</td>
+                                                    <td>{{ sucursal_vehiculo.habilitado }}</td>
+                                                    <td>{% if  sucursal_vehiculo.vehiculo.imagen %}
+                                                            <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 /> 
                                                         {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=100 height=100>
-                                                        {% endif %} </td>
-                                                    <td>{{ vehiculo.precio }}</td>
+                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50>
+                                                        {% endif %} 
+                                                    </td>
                                                 </tr >
                                             {% endfor %} 
                                             </ul> 
                                             {% else %} 
-                                                <p><h1>No hay Vehiculos registrados.</h1></p>
+                                                <p><h2>No hay Vehiculos registrados en esta sucursal.</h2></p>
                                         {% endif %} 
                                     </tbody>
                                 </table>
@@ -96,6 +104,8 @@
                             </div>
                             <div class="modal-body">
                                
+
+
             
                             </div>
                             <div class="modal-footer">
@@ -118,5 +128,13 @@
     <script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
+    <script type="text/javascript">
+        $("#btn-agregar").click(function (event) {
+            var addressValue = "/parcial/vehiculos/";
+            $.get(addressValue, function(data, status){
+                //$(".modal-body").append($(".col-md-12").html());
+            });
+        });
+    </script>
 
 {% endblock %}
