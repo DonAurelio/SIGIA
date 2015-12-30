@@ -3,10 +3,9 @@
 from django.views.generic import ListView 
 from django.views.generic.detail import DetailView 
 from .models import Vehiculo 
-from .models import SucursalVehiculo
 from apps.sucursal.models import Sucursal
 
-class ListaVehiculosSucursal(ListView): 
+class VehiculosSucursalListView(ListView): 
 	"""Lista los vehiculos por sucursal."""
 	
 	model = Vehiculo
@@ -22,9 +21,6 @@ class ListaVehiculosSucursal(ListView):
 
 		'''
 
-		if self.args == ():
-			return Vehiculo.objects.all()
-
 		sucursal_id = self.args[0]
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		vehiculos = sucursal.vehiculo_set.all()
@@ -35,11 +31,15 @@ class ListaVehiculosSucursal(ListView):
 		en el query_set."""
 
 		context = super(ListaVehiculosSucursal,self).get_context_data(**kwargs)
-
-		if self.args == ():
-			return context
-
 		sucursal_id = self.args[0]
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		context['sucursal'] = sucursal
 		return context
+
+
+class VehiculosListView(ListView):
+	"""Lista todos los vehiculos."""
+
+	model = Vehiculo
+	context_object_name = 'vehiculos'
+	template_name = 'vehiculo/vehiculo_list.html'
