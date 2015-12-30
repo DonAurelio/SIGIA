@@ -7,5 +7,3 @@ class ProveedorListView(ListView):
 	model = Proveedor
 	context_object_name = 'proveedores'
 	template_name = 'proveedor_list.html'
-
-

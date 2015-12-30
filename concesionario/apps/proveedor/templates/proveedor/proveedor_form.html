@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+{% block css %}
+{{ block.super }}
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
+{% endblock %}
+
+{% block section_title %}{{ section_title }}{% endblock %}
+{% block section_subtitle %}Diligencie los datos del siguiente formulario{% endblock %}
+
+{% block content %}
+
+<!-- begin col-12 -->
+                <div class="col-md-12">
+                    <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
+
+                    <div class="email-btn-row hidden-xs">
+                       <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> {{ button_text }}</button>
+                    </div>
+
+                    <!-- begin panel -->
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Proveedor</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div id="wizard">
+                                <ol>
+                                    <li>
+                                        Informaciín del vehiculo 
+                                        <small>Diligencie la información del nuevo vehiculo.</small>
+                                    </li>
+                                </ol>
+                                <!-- begin wizard step-1 -->
+                                <div>
+                                    <fieldset>
+                                        {% bootstrap_form form %}
+                                    </fieldset>
+                                </div>
+                                <!-- end wizard step-1 -->
+                            </div>
+                    
+                        </div>
+                    </div>
+                    <!-- end panel -->
+                    </form>
+                </div>
+                <!-- end col-12 -->
+
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+    <script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
+    <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+    <script>
+        $(document).ready(function() {
+            App.init();
+            FormWizard.init();
+        });
+    </script>
+{% endblock %}

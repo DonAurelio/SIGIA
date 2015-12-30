@@ -55,7 +55,11 @@
                                         {% if proveedores %} 
                                             {% for proveedor  in proveedores %}
                                                 <tr>
-                                                    <td><a href=""> {{ proveedor.nombre }}</a></td>
+                                                    <td>
+                                                    <a href="{% url 'proveedor:actualizar' proveedor.pk %}"> 
+                                                    {{ proveedor.nombre }}
+                                                    </a>
+                                                    </td>
                                                     <td>{{ proveedor.direccion }}</td>
                                                     <td>{{ proveedor.telefono }}</td>
                                                     <td>{{ proveedor.ciudad }}</td>
