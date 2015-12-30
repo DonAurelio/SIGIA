@@ -2,17 +2,22 @@
 
 					<!-- Sucursal -->
 					<li>
-						<a href="{% url 'sucursal:listar' %}"><i class="fa fa-building"></i><span >Gestionar Sucursales</span></a>
+						<a href="{% url 'sucursal:listar' %}"><i class="fa fa-building"></i><span >Sucursales</span></a>
 					</li>
 
-					<!-- Sucursal -->
+					<!-- Vehiculos -->
 					<li class>
-						<a href="{% url 'vehiculo:listar-vehiculos' %}"><i class="fa fa-car"></i><span>Gestionar Vehiculos</span></a>
+						<a href="{% url 'vehiculo:listar-vehiculos' %}"><i class="fa fa-car"></i><span>Vehiculos</span></a>
 					</li>
 
-					<!-- Sucursal -->
+					<!-- Repuestos -->
 					<li class>
-						<a href=""><i class="fa fa-steam-square"></i><span>Gestionar Repuestos</span></a>
+						<a href="{% url 'repuesto:listar' %}"><i class="fa fa-steam-square"></i><span>Repuestos</span></a>
+					</li>
+
+					<!-- Proveedores -->
+					<li class>
+						<a href="{% url 'proveedor:listar' %}"><i class="fa fa-steam"></i><span>Proveedores</span></a>
 					</li>
 
 					<!-- Graficas -->

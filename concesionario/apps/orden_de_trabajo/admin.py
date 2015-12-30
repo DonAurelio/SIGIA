@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import OrdenDeTrabajo
 # Register your models here.
 
-class AdminOrdenDeTrabajo (admin.ModelAdmin):
+class AdminOrdenDeTrabajo(admin.ModelAdmin):
 	#atributos
 	list_display = ('id', 'empleado', 'cliente',
 		 'placa', 'fecha_entrada', 'fecha_salida', 'descripcion','estado_reparacion')

@@ -3,7 +3,7 @@
 from django.views.generic import ListView 
 from .models import Repuesto 
 
-class ListaRepuestosSucursal(ListView): 
+class RepuestosSucursalListView(ListView): 
 	"""Lista los repuestos por sucursal. """
 	
 	model = Repuesto
@@ -20,3 +20,8 @@ class ListaRepuestosSucursal(ListView):
 		"""
 		sucursal_id = self.kwargs['pk']
 		return Repuesto.objects.filter(sucursal_id=sucursal_id)
+
+class RepuestosListView(ListView):
+
+	model = Repuesto
+	context_object_name = 'repuestos'

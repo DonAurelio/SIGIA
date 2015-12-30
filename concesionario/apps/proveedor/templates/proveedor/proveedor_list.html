@@ -16,16 +16,15 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Repuestos disponibles{% endblock %}
+{% block section_title %}Proveedores disponibles{% endblock %}
 {% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
 
 {% block content %}
-            
                 <!-- begin col-12 -->
                 <div class="col-md-12">
 
                     <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'repuesto:crear' %}" class="btn btn-sm btn-inverse" ><i class="fa fa-plus m-r-5"></i> Nuevo Repuesto</a>
+                        <a href="{% url 'proveedor:crear' %}" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i> Nuevo Proveedor</a>
                     </div>
   
                     <!-- begin panel -->
@@ -37,7 +36,7 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
-                            <h4 class="panel-title">Repuestos</h4>
+                            <h4 class="panel-title">Proveedor</h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -45,35 +44,28 @@
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Marca</th>
-                                            <th>Clasificación</th>
-                                            <th>Precio</th>
-                                            <th>Proveedor</th>
-                                            <th>Descripción</th>
-                                            <th>Imágen</th>
+                                            <th>Direccion</th>
+                                            <th>Telefono</th>
+                                            <th>Ciudad</th>
+                                            <th>Email</th>
+                                            <th>Habilitado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if repuestos %} 
-                                            {% for repuesto  in repuestos %}
+                                        {% if proveedores %} 
+                                            {% for proveedor  in proveedores %}
                                                 <tr>
-                                                    <td><a href="{% url 'repuesto:actualizar' repuesto.pk %}"> {{ repuesto.nombre }}</a></td>
-                                                    <td>{{ repuesto.marca }}</td>
-                                                    <td>{{ repuesto.clasificacion }}</td>
-                                                    <td>{{ repuesto.precio }}</td>
-                                                    <td>{{ repuesto.proveedor }}</td>
-                                                    <td>{{ repuesto.descripcion }}</td>
-                                                    <td>
-                                                        {% if  repuesto.imagen %}
-                                                            <img src={{ repuesto.imagen.url }} width=100 height=100 /></td>
-                                                        {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/repuestos/sin_img_repuesto.jpg" width=50 height=50/>
-                                                        {% endif %}
-                                                    </tr >
+                                                    <td><a href=""> {{ proveedor.nombre }}</a></td>
+                                                    <td>{{ proveedor.direccion }}</td>
+                                                    <td>{{ proveedor.telefono }}</td>
+                                                    <td>{{ proveedor.ciudad }}</td>
+                                                    <td>{{ proveedor.email }}</td>
+                                                    <td>{{ proveedor.habilitado }}</td>
+                                                    
                                             {% endfor %} 
                                             </ul> 
                                             {% else %} 
-                                                <p><h1>No hay Repuestos registrados.</h1></p>
+                                                <p><h1>No hay Proveedores registrados.</h1></p>
                                         {% endif %} 
                                     </tbody>
                                 </table>
@@ -83,7 +75,6 @@
                     <!-- end panel -->
                 </div>
                 <!-- end col-12 -->
-            
 {% endblock %}
 
 {% block javascript %}
@@ -91,4 +82,5 @@
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+
 {% endblock %}

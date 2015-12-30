@@ -55,8 +55,7 @@ class Vehiculo(models.Model):
 	capacidad = models.CharField(null=True, blank=True, max_length=50)
 	#Tipo del vehiculo	
 	tipo = models.CharField(max_length=50, choices=TIPO_CHOICES, default=AUTOMOVIL)
-	#Estado de la vehiculo, Activa/inactiva
-	habilitado = models.BooleanField(default = True)
+	
 	
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
@@ -83,6 +82,8 @@ class SucursalVehiculo(models.Model):
 	color = models.CharField(null=True,blank=True,max_length=20)
 	#Cantidad disponible en stock del repuesto en la sucursal
 	cantidad = models.IntegerField(null=True,blank=True)
+	#Estado de la vehiculo, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
 	
 	class Meta:
 		ordering = ['cantidad']

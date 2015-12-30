@@ -3,8 +3,8 @@
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
-
 from apps.sucursal.models import Sucursal
+from apps.proveedor.models import Proveedor
 
 #Categorias de repuesto
 AUTOMOTRIZ = 'Automotriz'
@@ -54,11 +54,10 @@ class Repuesto(models.Model):
 									  options={'quality': 60})
 
 	#Provedor del repuesto
-	proveedor = models.CharField(null=True,blank=True,max_length=20)
+	proveedor = models.OneToOneField(Proveedor, default=None)
 	#Descripcion del repuesto
 	descripcion = models.CharField(null=True,blank=True,max_length=100)
-	#Estado de la repuesto, Activa/inactiva
-	habilitado = models.BooleanField(default = True)
+	
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['nombre']
@@ -81,6 +80,8 @@ class SucursalRepuesto(models.Model):
 	repuesto = models.ForeignKey(Repuesto)
 	#Cantidad disponible en stock del repuesto en la sucursal
 	cantidad = models.IntegerField(null=True,blank=True)
+	#Estado de la repuesto, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
 
 	def nombre_sucursal(self):
 		return self.sucursal.nombre

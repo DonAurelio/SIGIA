@@ -29,6 +29,8 @@ urlpatterns = [
     #Inclusion de las url que hay en la aplicacion venta
     url(r'', include('apps.venta.url',namespace='venta')),
 
+    url(r'', include('apps.proveedor.url',namespace='proveedor')),
+
     #url para acceder a la imagenes que estan en la carpeta media del proyecto
     #se deseas colocar imagenes en tu contenido HTML, este link es necesario para que se muestren las imagenes
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),

@@ -44,69 +44,71 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-     #Para utilizar imagekit
-    'imagekit',
-    #Para dar estilos usando bootstrap a los campos de los formularios 
-    'bootstrap3',
-    #Apps
-    #Administra el inicio y cierre de sesion
-    'apps.inicio',
-    #Administra la presentacion de los perfiles de cada usuario
-    'apps.cuenta',
-    #Administra el crud del empleado
-    'apps.empleado',
-    #Administra el crud de la sucursal
-    'apps.sucursal',
-    #Administra el crud de vehiculo
-    'apps.vehiculo',
-    #Administrad el crud de repuesto
-    'apps.repuesto',
-    #Administra el crud de cliente
-    'apps.cliente',
-    #Administrad el crud de orden de trabajo
-    'apps.orden_de_trabajo',
-    #Administra el crud de venta
-    'apps.venta',
-    #Administra el crud de cotizacion
-    'apps.cotizacion',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	#Para utilizar imagekit
+	'imagekit',
+	#Para dar estilos usando bootstrap a los campos de los formularios 
+	'bootstrap3',
+	#Apps
+	#Administra el inicio y cierre de sesion
+	'apps.inicio',
+	#Administra la presentacion de los perfiles de cada usuario
+	'apps.cuenta',
+	#Administra el crud del empleado
+	'apps.empleado',
+	#Administra el crud de la sucursal
+	'apps.sucursal',
+	#Administra el crud de vehiculo
+	'apps.vehiculo',
+	#Administrad el crud de repuesto
+	'apps.repuesto',
+	#Administra el crud de cliente
+	'apps.cliente',
+	#Administrad el crud de orden de trabajo
+	'apps.orden_de_trabajo',
+	#Administra el crud de venta
+	'apps.venta',
+	#Administra el crud de cotizacion
+	'apps.cotizacion',
+	#Administra el crud de proveedores 
+	'apps.proveedor',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'concesionario.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,  'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [os.path.join(BASE_DIR,  'templates')],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': [
+				'django.template.context_processors.debug',
+				'django.template.context_processors.request',
+				'django.contrib.auth.context_processors.auth',
+				'django.contrib.messages.context_processors.messages',
 
-                #This option allow to use the MEDIA_URL in templates
-                'django.template.context_processors.media',
-            ],
-        },
-    },
+				#This option allow to use the MEDIA_URL in templates
+				'django.template.context_processors.media',
+			],
+		},
+	},
 ]
 
 WSGI_APPLICATION = 'concesionario.wsgi.application'
@@ -116,10 +118,10 @@ WSGI_APPLICATION = 'concesionario.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	}
 }
 
 
@@ -146,7 +148,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+	os.path.join(BASE_DIR, "static"),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
