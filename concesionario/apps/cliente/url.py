@@ -10,3 +10,6 @@ urlpatterns = [
 	url(r'^cliente/(?P<pk>\d+)/$', ActualizarCliente.as_view(), name='actualizar'),
 	url(r'^cliente/listado$', ListaClientes.as_view(), name='listar'),
 ]
+
+
+

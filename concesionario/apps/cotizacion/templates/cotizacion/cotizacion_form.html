@@ -14,11 +14,15 @@
 {{ block.super }}
     <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+
+    	<!-- Para gestionar Fechas -->
+	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css'%}" rel="stylesheet" />
+ 	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css'%}" rel="stylesheet" />
+ 	<!-- fin Para gestionar Fechas -->
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
 {% block section_title %}{{ section_title }}{% endblock %}
- 
 {% block content %}
     <!-- begin col-12 --><div class="row">
     <!-- begin col-12 -->
@@ -31,7 +35,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                </div>Nueva Venta</h4>
+                </div>Nueva Cotización</h4>
             </div>
             <div class="panel-body">
                 <form action="{{ request.path }}" method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data" >{% csrf_token %}
@@ -45,7 +49,7 @@
                         <!-- begin wizard step-1 -->
                         <div class="wizard-step-1">
                             <fieldset>
-                                <legend class="pull-left width-full">Datos del Cliente</legend>
+                                
                                 <!-- begin row -->
                                 <div class="row">
                                     {% bootstrap_form form %}
@@ -63,7 +67,7 @@
     </div>
     <!-- end col-12 -->
 </div>
-<!-- end row -->>
+<!-- end row -->
             <!-- end row -->
 {% endblock %}
 
@@ -74,12 +78,19 @@
 <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/bootstrap-datepicker.js' %}"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
         App.init();
         FormWizardValidation.init();
     });
+
+    $(document).ready(function(){
+			$('#id_fecha').datepicker({todayHighlight:true,autoclose:true});
+			$('#id_fecha_vencimiento').datepicker({todayHighlight:true,autoclose:true});
+			$
+		});
 </script>
 
 {% endblock %}

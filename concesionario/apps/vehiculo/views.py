@@ -44,3 +44,14 @@ class VehiculosSucursalListView(ListView):
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		context['sucursal'] = sucursal
 		return context
+
+class VehiculosListSucursal(ListView):
+ 	"""Lista todos los vehiculos con su respectiva sucursal."""
+	model = SucursalVehiculo
+	context_object_name = 'sucursal_vehiculos'
+	template_name = 'vehiculo/inventario_sucursal.html'
+ 	
+
+ 
+ 
+

@@ -11,6 +11,9 @@ class CrearCliente(CreateView):
 	'departamento', 'telefono', 'celular', 'email']
 	success_url = reverse_lazy('cliente:listar') 
 
+ 
+
+
 class ActualizarCliente(UpdateView): 
     model = Cliente 
     fields = ['identificacion', 'nombre', 'apellido', 'ciudad',
