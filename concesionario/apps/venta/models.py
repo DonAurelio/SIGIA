@@ -28,7 +28,7 @@ class Venta(models.Model):
 	#Vehiculo de la venta
 	vehiculo = models.ForeignKey(Vehiculo)
 	#Fecha en que se realiza la venta
-	fecha_venta = models.DateField(auto_now_add=True)
+	fecha_venta = models.DateField()
 	#Descuento aplicado a la venta
 	descuento = models.FloatField()
 	#Precio final de la venta, precio vehiculo - descuento

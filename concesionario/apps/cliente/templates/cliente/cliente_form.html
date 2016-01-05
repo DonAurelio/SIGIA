@@ -1,26 +1,26 @@
+ {% extends "base.html" %}
 {% load staticfiles %}
 
 {# Load the tag library #}
 {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
-{% comment %}
-{% bootstrap_css %}
 {% bootstrap_javascript %}
-{% endcomment %}    
+
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
-<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-<link href="{% static 'color_admin/assets/plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
-<!-- ================== END PAGE LEVEL STYLE ================== -->
 
-<!-- begin page-header -->
-<h1 class="page-header">Nuevo Cliente<small> diligencie los datos del siguiente formulario</small></h1>
-<!-- end page-header -->
+{% block css %}
+{{ block.super }}
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
+{% endblock %}
 
-<!-- begin row -->
-<div class="row">
+{% block section_title %}{{ section_title }}{% endblock %}
+{% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
+{% block content %}
+    <!-- begin col-12 --><div class="row">
     <!-- begin col-12 -->
     <div class="col-md-12">
         <!-- begin panel -->
@@ -63,18 +63,17 @@
     </div>
     <!-- end col-12 -->
 </div>
-<!-- end row -->
+<!-- end row -->>
+            <!-- end row -->
+{% endblock %}
 
+{% block javascript %}
+{{ block.super }}
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-
-<!-- JQUERY SUBMISSION SCRIPTS -->
-<script src="{% static 'concesionario/js/form_submission.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
@@ -82,3 +81,5 @@
         FormWizardValidation.init();
     });
 </script>
+
+{% endblock %}

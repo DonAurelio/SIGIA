@@ -3,7 +3,6 @@
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
-from apps.sucursal.models import Sucursal
 
 #Creacion del Choices para 'tipo' de vehiculo
 AUTOMOVIL = 'Automovil'
@@ -28,8 +27,6 @@ TIPO_CHOICES = (
 class Vehiculo(models.Model):
 	"""Define la cantidad que existe de cada repuesto por sucursal."""
 
-	#Sucursal a la que pertenece
-	sucursal_vehiculos = models.ManyToManyField(Sucursal,through='SucursalVehiculo')
 	#Numero de serie que identifica al vehiculo
 	numero_serie = models.CharField(null=True, blank=True, max_length=100)
 	#Marca del vehiculo
@@ -72,32 +69,3 @@ class Vehiculo(models.Model):
 	
 
 	
-class SucursalVehiculo(models.Model):
-	"""Define la cantidad que existe de cada vehiculo por sucursal."""
-	
-	#Sucursal a la que pertenece el vehiculo
-	sucursal = models.ForeignKey(Sucursal)
-	#Vehiculo
-	vehiculo = models.ForeignKey(Vehiculo)
-	#Color del vehiculo
-	color = models.CharField(null=True,blank=True,max_length=20)
-	#Cantidad disponible en stock del repuesto en la sucursal
-	cantidad = models.IntegerField(null=True,blank=True)
-	#Estado de la vehiculo, Activa/inactiva
-	habilitado = models.BooleanField(default = True)
-	
-	class Meta:
-		ordering = ['cantidad']
-		verbose_name_plural = 'Vehiculos Sucursal'
-
-	def nombre_sucursal(self):
-		return self.sucursal.nombre
-
-	def numero_serie(self):
-		return self.vehiculo.numero_serie
-
-	def color_vehiculo(self):
-		return self.color
-
-	def cantidad_vehiculo(self):
-		return self.cantidad

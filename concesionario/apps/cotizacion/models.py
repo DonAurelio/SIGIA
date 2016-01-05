@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
-
 from django.db import models
+from datetime import datetime    
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 from apps.vehiculo.models import Vehiculo
@@ -30,9 +30,11 @@ class Cotizacion(models.Model):
 	#Vehiculo cotizado, relacion uno a muchos 
 	vehiculo= models.ForeignKey(Vehiculo)
 	#Fecha en que se realiza la cotizacion
-	fecha=models.DateField(blank=True, null=True, auto_now_add=True)
+	fecha=models.DateField(blank=True, null=True)
+
 	#Fecha de vencimiento de la cotizacion
 	fecha_vencimiento=models.DateField(blank=True, null=True)
+
 	#Forma de pago en la que se realiza la cotizacion
 	forma_pago = models.CharField(max_length=20, choices=forma_pago_choices, default=EFECTIVO)
 	#Estado de la cotizacion, Activa/inactiva
@@ -43,16 +45,15 @@ class Cotizacion(models.Model):
 		ordering = ['fecha']
 		verbose_name_plural = "Cotizaciones"
 
-	#Permite determinar una representacion en string del objeto repuesto
-	def __str__(self):
-		return self.fecha
+	#Permite determinar una representacion en string del objeto  
+	#def __str__(self):
+	#	return self.fecha
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
-	def __unicode__(self):
-		return self.fecha 
+	#def __unicode__(self):
+	#	return self.fecha 
 
 
 
 
-
-
+ 

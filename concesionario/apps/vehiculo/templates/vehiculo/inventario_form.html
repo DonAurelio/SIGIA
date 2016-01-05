@@ -10,9 +10,8 @@
 
 {% block css %}
 {{ block.super }}
-    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
+    <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block section_title %}{{ section_title }}{% endblock %}
@@ -48,11 +47,12 @@
 	                                </ol>
 	                                <!-- begin wizard step-1 -->
 	                                <div>
-	                                    <fieldset>
-	                                    	<a href="#modal-message" class="btn btn-sm btn-primary" data-toggle="modal">Seleccionar Vehiuclo</a>
+                                        <a href="#modal-message" class="btn btn-white btn-block" data-toggle="modal">Seleccionar Vehiculo</a>
+                                        <br>
+                                        <fieldset>
 	                                        {% bootstrap_form form %}
 	                                    </fieldset>
-	                                </div>
+                                    </div>
 	                                <!-- end wizard step-1 -->
 	                            </div>
 	                    
@@ -69,14 +69,15 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">Modal Message Header</h4>
+                                <h4 class="modal-title">Seleccione el vehiculo que desea agregar al inventario</h4>
                             </div>
                             <div class="modal-body">
-                            	{% include 'vehiculo/includes/vehiculo_table.html' %}           
+                                <div class="col-md-12">
+                                    {% include 'vehiculo/includes/vehiculo_table.html' %}
+                                </div>
                             </div>
                             <div class="modal-footer">
-                                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-                                <a href="javascript:;" class="btn btn-sm btn-primary">Save Changes</a>
+                                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
                             </div>
                         </div>
                     </div>
@@ -86,11 +87,22 @@
 
 {% block javascript %}
 {{ block.super }}
-    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <!-- ================== BEGIN PAGE LEVEL JS TABLE ================== -->
+    <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
+    <script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
     <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/form-wizards.demo.min.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
+    <script type="text/javascript">
+    $("td > a").click( function (event){
+        event.preventDefault();
+        var clickedVehicleId = $(this).attr('href').split("/")[2];
+        $("#id_vehiculo").val(clickedVehicleId);
+        alert(clickedVehicleId);
+    });
+    </script>
     <script>
         $(document).ready(function() {
             App.init();

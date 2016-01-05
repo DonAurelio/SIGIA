@@ -7,32 +7,23 @@
 	<a href="{% url 'cliente:listar' %}"><i class="fa fa-users"></i><span >Gestionar Clientes</span></a>
 </li>
 
+
+
 <!-- Cotizacion -->
-<li class="has-sub">
-	<a href="javascript:;">
-		<b class="caret pull-right"></b>
-		<i class="fa fa-calculator"></i>
-		<span>
-			Cotizacion
-		</span>
-	</a>
-	<ul class="sub-menu">
-		<li><a href="{% url "cotizacion:crear" %}"> Crear nuevo </a></li>
-		<li><a href=""> Listar/Editar</a></li>
-	</ul>
+<li>
+	<a href="{% url 'cotizacion:listar' %}"><i class="fa fa-calculator"></i><span >Cotizacion</span></a>
 </li>
 
+ 
 <!-- Ventas -->
-<li class="has-sub" >
-	<a href="javascript:;">
-		<b class="caret pull-right"></b>
-		<i class="fa fa-credit-card"></i>
-		<span>
-			Ventas
-		</span>
-	</a>
-	<ul class="sub-menu">
-		<li><a href="{% url "venta:crear" %}"> Crear nuevo </a></li>
-		<li><a href="{% url "venta:listar" %}"> Listar/Editar </a></li>
-	</ul>
+<li>
+	<a href="{% url 'venta:listar' %}"><i class="fa fa-credit-card"></i><span >Ventas</span></a>
+</li>
+
+ 
+
+
+<!-- Inventario Carros-->
+<li>
+	<a href="{% url 'vehiculo:listar-vehiculos-inventario' %}"><i class="fa fa-car"></i><span >Inventario</span></a>
 </li>

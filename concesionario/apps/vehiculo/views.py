@@ -2,8 +2,8 @@
 
 from django.views.generic import ListView 
 from django.views.generic.detail import DetailView 
-from .models import Vehiculo, SucursalVehiculo
-from apps.sucursal.models import Sucursal
+from apps.sucursal.models import Sucursal, SucursalVehiculo
+from .models import Vehiculo
 
 class VehiculosListView(ListView):
 	"""Lista todos los vehiculos."""
@@ -12,7 +12,7 @@ class VehiculosListView(ListView):
 	context_object_name = 'vehiculos'
 	template_name = 'vehiculo/vehiculo_list.html'
 
-class SucursalVehiculosListView(ListView): 
+class VehiculosSucursalListView(ListView): 
 	"""Lista los vehiculos por sucursal."""
 	
 	model = SucursalVehiculo
@@ -30,7 +30,7 @@ class SucursalVehiculosListView(ListView):
 
 		sucursal_id = self.kwargs['pk']
 		sucursal = Sucursal.objects.get(id=sucursal_id)
-		vehiculos = sucursal.vehiculo_set.all()
+		vehiculos = sucursal.vehiculos.all()
 
 		sucursal_vehiculos = SucursalVehiculo.objects.filter(sucursal=sucursal)
 		return sucursal_vehiculos
@@ -39,8 +39,17 @@ class SucursalVehiculosListView(ListView):
 		"""Perime agregar al contexto la sucursal a la cual pertenecen los vehiculos listados
 		en el query_set."""
 
-		context = super(SucursalVehiculosListView,self).get_context_data(**kwargs)
+		context = super(VehiculosSucursalListView,self).get_context_data(**kwargs)
 		sucursal_id = self.kwargs['pk']
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		context['sucursal'] = sucursal
+
 		return context
+
+# Preguntar a Lisa
+class VehiculosListSucursal(ListView):
+ 	"""Lista todos los vehiculos con su respectiva sucursal."""
+
+	model = SucursalVehiculo
+	context_object_name = 'sucursal_vehiculos'
+	template_name = 'vehiculo/inventario_sucursal.html'

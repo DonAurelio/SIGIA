@@ -1,15 +1,28 @@
 # -*- encoding: utf-8 -*-
 
 from django.contrib import admin
-from .models import Sucursal
+from .models import Sucursal, SucursalRepuesto, SucursalVehiculo
 
-
-#Permite administrar la visualizacion de los datos de la base de datos en el sitio de administarcion
 class AdminSucursal(admin.ModelAdmin):
-	#Se establece la informacion que se mostrara en el sitio de administarcion 
+
 	list_display = ('id', 'nombre', 'direccion','telefono', 'ciudad','habilitado')
-	#Se establece el parametro de busqueda
+
 	search_fields = ('id','nombre')
 
-#se registra el AdminSucursal 
 admin.site.register(Sucursal,AdminSucursal)
+
+class AdminSucursalRepuesto(admin.ModelAdmin):
+	
+	list_display = ('nombre_sucursal','nombre_repuesto','cantidad_repuesto')
+
+	search_fields = ('nombre_sucursal','nombre_repuesto','cantidad_repuesto')
+	
+admin.site.register(SucursalRepuesto, AdminSucursalRepuesto)
+
+class AdminSucursalVehiculo(admin.ModelAdmin):
+
+	list_display = ('nombre_sucursal','numero_serie','color_vehiculo','cantidad_vehiculo')
+
+	search_fields = ('nombre_sucursal','numero_serie','color_vehiculo','cantidad_vehiculo')
+
+admin.site.register(SucursalVehiculo, AdminSucursalVehiculo)
