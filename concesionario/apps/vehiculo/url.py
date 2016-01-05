@@ -5,6 +5,7 @@ from .forms import VehiculoCreateView
 from .forms import VehiculoUpdateView
 from .views import VehiculosSucursalListView
 from .views import VehiculosListView
+from .views import VehiculosListSucursal
 from .forms import VehiculoSucursalCreateView
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     url(r'^vehiculos/$', VehiculosListView.as_view(), name='listar-vehiculos'),
     url(r'^vehiculos/sucursal/(?P<pk>\d+)/$', VehiculosSucursalListView.as_view(), name='listar-vehiculos-sucursal'),
     url(r'^vehiculos/sucursal/agregar/(?P<pk>\d+)/$', VehiculoSucursalCreateView.as_view(), name='agregar-vehiculo-sucursal'),
+    url(r'^vehiculos/inventario$', VehiculosListSucursal.as_view(), name='listar-vehiculos-inventario'),
 ]
