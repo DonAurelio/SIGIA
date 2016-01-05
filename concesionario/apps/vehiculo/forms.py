@@ -3,6 +3,7 @@
 from django.views.generic.edit import CreateView, UpdateView
 from django.core.urlresolvers import reverse, reverse_lazy
 from .models import Vehiculo
+from apps.sucursal.models import SucursalVehiculo
  
 class CrearVehiculo(CreateView):
 	model = Vehiculo
@@ -27,4 +28,17 @@ class ActualizarVehiculo(UpdateView):
 		context = super(ActualizarVehiculo,self).get_context_data(**kwargs)
 		context['section_title'] = 'Actualizar Vehiculo'
 		context['button_text'] = 'Actualizar'
+		return context
+
+
+class AgregarVehiculoSucursalCreateView(CreateView):
+	model = SucursalVehiculo
+	fields = ['vehiculo','sucursal','color','cantidad']
+	success_url = reverse_lazy('vehiculo:agregar-vehiculo-sucursal')
+
+	def get_context_data(self,**kwargs):
+		context = super(AgregarVehiculoSucursalCreateView,self).get_context_data(**kwargs)
+		context['section_title'] = 'Agregar Vehiculo al Inventario'
+		context['button_text'] = 'Agregar'
+		context['veiculos'] = Vehiculo.objects.all()
 		return context

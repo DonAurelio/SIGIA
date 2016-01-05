@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     
                     <div class="email-btn-row hidden-xs">
-                        <a href="#modal-message" id="btn-agregar" class="btn btn-sm btn-inverse" data-toggle="modal"><i class="fa fa-plus m-r-5"></i> Agregar Vehiculo al Inventario</a>
+                        <a id="btn-agregar" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i> Agregar Vehiculo al Inventario</a>
                     </div>
   
                     <!-- begin panel -->
@@ -93,48 +93,13 @@
                     <!-- end panel -->
                 </div>
                 <!-- end col-12 -->
-
-                <!-- #modal-message -->
-                <div class="modal modal-message fade" id="modal-message">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">Modal Message Header</h4>
-                            </div>
-                            <div class="modal-body">
-                               
-
-
-            
-                            </div>
-                            <div class="modal-footer">
-                                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-                                <a href="javascript:;" class="btn btn-sm btn-primary">Save Changes</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 {% endblock %}
 
 {% block javascript %}
 {{ block.super }}
-
-    <!-- ================== BEGIN PAGE LEVEL JS TABLE ================== -->
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-    <!-- ================== END PAGE LEVEL JS ================== -->
-    <script type="text/javascript">
-        $("#btn-agregar").click(function (event) {
-            var addressValue = "/parcial/vehiculos/";
-            $.get(addressValue, function(data, status){
-                //$(".modal-body").append($(".col-md-12").html());
-            });
-        });
-    </script>
-
 {% endblock %}

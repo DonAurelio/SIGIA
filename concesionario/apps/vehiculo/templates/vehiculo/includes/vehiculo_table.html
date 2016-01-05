@@ -1,27 +1,3 @@
-{% extends "base.html" %}
-{% load staticfiles %}
-
-{# Load the tag library #}
-{% load bootstrap3 %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
-{% block css %}
-
-{% endblock %}
-
-{% block section_title %}Vehiculos disponibles {% endblock %}
-{% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
-{% block content %}
-                <!-- begin #content -->
-                <!-- begin col-12 -->
-                <div class="col-md-12">
-                    
-                    <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'vehiculo:crear' %}" class="btn btn-sm btn-inverse" ><i class="fa fa-plus m-r-5"></i> Nuevo Vehiculo</a>
-                    </div>
-  
                     <!-- begin panel -->
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
@@ -80,12 +56,3 @@
                         </div>
                     </div>
                     <!-- end panel -->
-                </div>
-                <!-- end col-12 -->
-{% endblock %}
-
-{% block javascript %}
-
-
-
-{% endblock %}
