@@ -34,13 +34,18 @@ class VehiculoSucursalCreateView(CreateView):
 	model = SucursalVehiculo
 	template_name  = 'vehiculo/inventario_form.html'
 	fields = ['vehiculo','sucursal','color','cantidad','habilitado']
-	success_url = reverse_lazy('vehiculo:agregar-vehiculo-sucursal')
+	success_url = reverse_lazy('vehiculo:listar-vehiculos-sucursal')
 
 	def get_context_data(self,**kwargs):
 		context = super(VehiculoSucursalCreateView,self).get_context_data(**kwargs)
 		context['section_title'] = 'Agregar Vehiculo al Inventario'
-		context['button_text'] = 'Agregar'
-		context['vehiculos'] = Vehiculo.objects.all()
+		context['submit_button_text'] = 'Agregar'
+		context['search_button_text'] = 'Seleccionar vehiculo'
+		
+		# Vehiculos que no estan en la sucursal con id = self.kwargs['pk']
+		vehiculos = Vehiculo.objects.exclude(sucursalvehiculo__sucursal__id=self.kwargs['pk'])
+		context['vehiculos'] = vehiculos
+		
 		return context
 
 	def get_initial(self):

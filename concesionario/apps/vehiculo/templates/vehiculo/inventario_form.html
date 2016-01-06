@@ -23,8 +23,9 @@
                 <div class="col-md-12">
                     <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
 	                    <div class="email-btn-row hidden-xs">
-	                       <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> {{ button_text }}</button>
-	                    </div>
+                            <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> {{ submit_button_text }}</button>
+                            <a href="#modal-message" data-toggle="modal" id="btn-search" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i>  {{ search_button_text }}</a>
+                        </div>
 
 	                    <!-- begin panel -->
 	                    <div class="panel panel-inverse">
@@ -47,8 +48,6 @@
 	                                </ol>
 	                                <!-- begin wizard step-1 -->
 	                                <div>
-                                        <a href="#modal-message" class="btn btn-white btn-block" data-toggle="modal">Seleccionar Vehiculo</a>
-                                        <br>
                                         <fieldset>
 	                                        {% bootstrap_form form %}
 	                                    </fieldset>
@@ -100,9 +99,10 @@
         event.preventDefault();
         var clickedVehicleId = $(this).attr('href').split("/")[2];
         $("#id_vehiculo").val(clickedVehicleId);
-        alert(clickedVehicleId);
+        $(".modal").modal('toggle');
     });
     </script>
+    
     <script>
         $(document).ready(function() {
             App.init();
