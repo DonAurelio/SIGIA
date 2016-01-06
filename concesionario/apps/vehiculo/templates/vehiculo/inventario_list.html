@@ -72,11 +72,21 @@
                                                     <td>{{ sucursal_vehiculo.vehiculo.precio }}</td>
                                                     <td>{{ sucursal_vehiculo.color }}</td>
                                                     <td>{{ sucursal_vehiculo.cantidad }}</td>
-                                                    <td>{{ sucursal_vehiculo.habilitado }}</td>
-                                                    <td>{% if  sucursal_vehiculo.vehiculo.imagen %}
-                                                            <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 /> 
+                                                    <td>
+                                                        {% if sucursal_vehiculo.habilitado %}
+                                                        <ul class="fa-ul">
+                                                            <li><i class="fa-li fa fa-check-square text-success"></i></li>
+                                                        </ul>
                                                         {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50>
+                                                        <ul class="fa-ul">
+                                                            <li><i class="fa-li fa fa-square"></i></li>
+                                                        </ul>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{% if  sucursal_vehiculo.vehiculo.imagen %}
+                                                            <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                        {% else %}
+                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
                                                         {% endif %} 
                                                     </td>
                                                 </tr >

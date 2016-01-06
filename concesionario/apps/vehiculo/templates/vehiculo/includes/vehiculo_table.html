@@ -21,8 +21,8 @@
                                             <th>Tipo</th>
                                             <th>Capacidad</th>
                                             <th>Características</th>
-                                            <th>Imagen</th>
                                             <th>Precio</th>
+                                            <th>Imagen</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -37,21 +37,21 @@
                                                     <td>{{ vehiculo.tipo }}</td>
                                                     <td>{{ vehiculo.capacidad }}</td>
                                                     <td>{{ vehiculo.caracteristicas }}</td>
-                                                    <td>{% if  vehiculo.imagen %}
-                                                            <img src={{ vehiculo.imagen.url }} width=100 height=100 /> 
-                                                        {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=100 height=100>
-                                                        {% endif %} </td>
                                                     <td>{{ vehiculo.precio }}</td>
+                                                    <td>{% if  vehiculo.imagen %}
+                                                            <img src={{ vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner"/> 
+                                                        {% else %}
+                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
+                                                        {% endif %} </td>
                                                 </tr >
                                             {% endfor %} 
                                             </ul> 
                                             {% else %} 
-                                                <p><h1>No hay Vehiculos registrados.</h1></p>
+                                                <p><h2>No hay Vehiculos registrados.</h2></p>
                                         {% endif %} 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-        
+                                            
