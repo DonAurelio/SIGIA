@@ -7,8 +7,10 @@
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
-
-{% block section_title %}Listado de Sucursales{% endblock %}
+{% block breadcrumb %}
+Gestion de Sucursales
+{% endblock %}
+{% block section_title %}Sucursales{% endblock %}
 {% block section_subtitle %}Seleccione el nombre de la sucursal que desea editar{% endblock %}
 {% block content %}
 				<!-- begin col-12 -->
@@ -43,40 +45,39 @@
 										</tr>
 									</thead>
 									<tbody>
-										{% if lista_sucursales %} 
-											{% for sucursal  in lista_sucursales %}
-												<tr>
-													<td><a href="{% url 'sucursal:actualizar' sucursal.pk %}"> {{ sucursal.nombre }}</a></td>
-													<td>{{ sucursal.direccion }}</td>
-													<td>{{ sucursal.telefono }}</td>
-													<td>{{ sucursal.ciudad }}</td>
-													<td>
-														{% if sucursal.habilitado %}
-														Si
-														{% else %}
-														No
-														{% endif %}
-													</td>
-													<td>
-														<a href="{% url 'empleado:listar-empleados-sucursal' sucursal.id %}">
-															<button type="button" class="btn btn-info btn-xs"><i class="fa fa-cog"></i> Administrar</button>								
-														</a>
-													</td>
-													<td>
-														<a href="{% url 'vehiculo:listar-vehiculos-sucursal' sucursal.id %}">
-															<button type="button" class="btn btn-xs btn-success m-r-5"><i class="fa fa-edit"></i> Inventario</button>
-														</a>
-													</td>
-													<td>
-														<a href="{% url 'repuesto:listar-repuestos-sucursal' sucursal.id %}">
-															<button type="button" class="btn btn-xs btn-warning m-r-5"><i class="fa fa-edit"></i> Inventario</button>
-														</a>
-													</td>
-												</tr >
-											{% endfor %} 
-										{% else %} 
-											<p><h2>No hay Sucursales registradas.</h2></p>
-									{% endif %}                       
+										{% for sucursal  in lista_sucursales %}
+											<tr>
+												<td><a href="{% url 'sucursal:actualizar' sucursal.pk %}"> {{ sucursal.nombre }}</a></td>
+												<td>{{ sucursal.direccion }}</td>
+												<td>{{ sucursal.telefono }}</td>
+												<td>{{ sucursal.ciudad }}</td>
+												<td>
+													{% if sucursal.habilitado %}
+                                                    <ul class="fa-ul">
+                                                        <li><i class="fa-li fa fa-check-square text-success"></i></li>
+                                                    </ul>
+                                                    {% else %}
+                                                    <ul class="fa-ul">
+                                                        <li><i class="fa-li fa fa-square"></i></li>
+                                                    </ul>
+                                                    {% endif %}
+												<td>
+													<a href="{% url 'empleado:listar-empleados-sucursal' sucursal.id %}">
+														<button type="button" class="btn btn-info btn-xs"><i class="fa fa-cog"></i> Administrar</button>								
+													</a>
+												</td>
+												<td>
+													<a href="{% url 'vehiculo:listar-vehiculos-sucursal' sucursal.id %}">
+														<button type="button" class="btn btn-xs btn-success m-r-5"><i class="fa fa-edit"></i> Inventario</button>
+													</a>
+												</td>
+												<td>
+													<a href="{% url 'repuesto:listar-repuestos-sucursal' sucursal.id %}">
+														<button type="button" class="btn btn-xs btn-warning m-r-5"><i class="fa fa-edit"></i> Inventario</button>
+													</a>
+												</td>
+											</tr >
+										{% endfor %} 
 									</tbody>
 								</table>
 							</div>

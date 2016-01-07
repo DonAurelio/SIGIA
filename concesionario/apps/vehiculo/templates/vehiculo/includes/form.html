@@ -1,0 +1,31 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+									<div class="col-md-12">
+                                    <!-- begin panel -->
+                                        <div class="panel panel-inverse">
+                                            
+                                            <div class="panel-body">
+                                                <div id="wizard">
+                                                    <ol>
+                                                        <li>
+                                                            Información de Inventario del vehiculo 
+                                                            <small>Diligencie la información del nuevo vehiculo.</small>
+                                                        </li>
+                                                    </ol>
+                                                    <!-- begin wizard step-1 -->
+                                                    <div>
+                                                        <fieldset>
+                                                            {% bootstrap_form form %}
+                                                        </fieldset>
+                                                    </div>
+                                                    <!-- end wizard step-1 -->
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                                        <!-- end panel -->
+                                    </div>

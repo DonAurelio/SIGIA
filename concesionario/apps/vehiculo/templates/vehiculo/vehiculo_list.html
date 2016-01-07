@@ -14,19 +14,19 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Vehiculos disponibles {% endblock %}
+{% block section_title %}Vehículos{% endblock %}
 {% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
+{% block breadcrumb %}
+Gestion de Vehículos
+{% endblock %}
 {% block content %}
-                <!-- begin #content -->
-                <!-- begin col-12 -->
                 <div class="col-md-12">
                     
                     <div class="email-btn-row hidden-xs">
                         <a href="{% url 'vehiculo:crear' %}" class="btn btn-sm btn-inverse" ><i class="fa fa-plus m-r-5"></i> Nuevo Vehiculo</a>
                     </div>
-                    {% include 'vehiculo/includes/vehiculo_table.html' %}
+                    {% include 'vehiculo/includes/table.html' %}
                 </div>
-                <!-- end col-12 -->
 {% endblock %}
 
 {% block javascript %}

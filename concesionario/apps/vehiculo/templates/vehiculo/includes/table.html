@@ -26,29 +26,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if vehiculos %} 
-                                            {% for vehiculo  in vehiculos %}
-                                                <tr>
-                                                    <td><a href="{% url 'vehiculo:actualizar' vehiculo.pk %}"> {{ vehiculo.numero_serie }}</a></td>
-                                                    <td>{{ vehiculo.marca }}</td>
-                                                    <td>{{ vehiculo.modelo }}</td>
-                                                    <td>{{ vehiculo.motor }}</td>
-                                                    <td>{{ vehiculo.potencia }}</td>
-                                                    <td>{{ vehiculo.tipo }}</td>
-                                                    <td>{{ vehiculo.capacidad }}</td>
-                                                    <td>{{ vehiculo.caracteristicas }}</td>
-                                                    <td>{{ vehiculo.precio }}</td>
-                                                    <td>{% if  vehiculo.imagen %}
-                                                            <img src={{ vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner"/> 
-                                                        {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
-                                                        {% endif %} </td>
-                                                </tr >
-                                            {% endfor %} 
-                                            </ul> 
-                                            {% else %} 
-                                                <p><h2>No hay Vehiculos registrados.</h2></p>
-                                        {% endif %} 
+                                    {% for vehiculo  in vehiculos %}
+                                        <tr>
+                                            <td><a href="{% url 'vehiculo:actualizar' vehiculo.pk %}"> {{ vehiculo.numero_serie }}</a></td>
+                                            <td>{{ vehiculo.marca }}</td>
+                                            <td>{{ vehiculo.modelo }}</td>
+                                            <td>{{ vehiculo.motor }}</td>
+                                            <td>{{ vehiculo.potencia }}</td>
+                                            <td>{{ vehiculo.tipo }}</td>
+                                            <td>{{ vehiculo.capacidad }}</td>
+                                            <td>{{ vehiculo.caracteristicas }}</td>
+                                            <td>{{ vehiculo.precio }}</td>
+                                            <td>{% if  vehiculo.imagen %}
+                                                    <img src={{ vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner"/> 
+                                                {% else %}
+                                                    <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
+                                                {% endif %} </td>
+                                        </tr >
+                                    {% endfor %} 
+                                    
                                     </tbody>
                                 </table>
                             </div>

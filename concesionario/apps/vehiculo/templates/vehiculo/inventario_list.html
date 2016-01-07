@@ -14,7 +14,10 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Listado de Vehiculos Sucursal <strong>{{ sucursal.nombre }}</strong> {% endblock %}
+{% block breadcrumb %}
+Sucursal {{ sucursal.nombre }}
+{% endblock %}
+{% block section_title %}Inventario de Vehículos{% endblock %}
 {% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
 {% block content %}
                 <!-- begin #content -->
@@ -22,7 +25,10 @@
                 <div class="col-md-12">
                     
                     <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'vehiculo:agregar-vehiculo-sucursal' sucursal.id %}" id="btn-agregar" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i> Agregar Vehiculo al Inventario</a>
+                        <a href="{% url 'vehiculo:agregar-vehiculo-sucursal' sucursal.id %}" id="btn-agregar" class="btn btn-sm btn-inverse">
+                        <i class="fa fa-plus m-r-5"></i> 
+                        Agregar  al Inventario
+                        </a>
                     </div>
   
                     <!-- begin panel -->
@@ -58,10 +64,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if sucursal_vehiculos %} 
                                             {% for sucursal_vehiculo in sucursal_vehiculos %}
                                                 <tr>
-                                                    <td>{{ sucursal_vehiculo.vehiculo.numero_serie }}</td>
+                                                    <td><a href="{% url 'vehiculo:actualizar' vehiculo.pk %}"> {{ sucursal_vehiculo.vehiculo.numero_serie }}</a></td>
                                                     <td>{{ sucursal_vehiculo.vehiculo.marca }}</td>
                                                     <td>{{ sucursal_vehiculo.vehiculo.modelo }}</td>
                                                     <td>{{ sucursal_vehiculo.vehiculo.motor }}</td>
@@ -92,9 +97,6 @@
                                                 </tr >
                                             {% endfor %} 
                                             </ul> 
-                                            {% else %} 
-                                                <p><h2>No hay Vehiculos registrados en esta sucursal.</h2></p>
-                                        {% endif %} 
                                     </tbody>
                                 </table>
                             </div>

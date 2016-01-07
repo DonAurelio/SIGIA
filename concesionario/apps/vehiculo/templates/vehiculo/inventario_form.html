@@ -15,73 +15,35 @@
 {% endblock %}
 
 {% block section_title %}{{ section_title }}{% endblock %}
-{% block section_subtitle %}Diligencie los datos del siguiente formulario{% endblock %}
+{% block section_subtitle %}Seleccione el vehiculo que desea añadir al inventario{% endblock %}
+{% block breadcrumb %}
+{% endblock %}
 
 {% block content %}
-
-<!-- begin col-12 -->
                 <div class="col-md-12">
-                    <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
-	                    <div class="email-btn-row hidden-xs">
-                            <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> {{ submit_button_text }}</button>
-                            <a href="#modal-message" data-toggle="modal" id="btn-search" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i>  {{ search_button_text }}</a>
-                        </div>
-
-	                    <!-- begin panel -->
-	                    <div class="panel panel-inverse">
-	                        <div class="panel-heading">
-	                            <div class="panel-heading-btn">
-	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-	                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-	                            </div>
-	                            <h4 class="panel-title">Vehiculo</h4>
-	                        </div>
-	                        <div class="panel-body">
-	                            <div id="wizard">
-	                                <ol>
-	                                    <li>
-	                                        Información de Inventario del vehiculo 
-	                                        <small>Diligencie la información del nuevo vehiculo.</small>
-	                                    </li>
-	                                </ol>
-	                                <!-- begin wizard step-1 -->
-	                                <div>
-                                        <fieldset>
-	                                        {% bootstrap_form form %}
-	                                    </fieldset>
-                                    </div>
-	                                <!-- end wizard step-1 -->
-	                            </div>
-	                    
-	                        </div>
-	                    </div>
-                    	<!-- end panel -->
-                    </form>
+                        {% include 'vehiculo/includes/table.html' %}
                 </div>
-                <!-- end col-12 -->
-
-                <!-- #modal-message -->
-                <div class="modal modal-message fade" id="modal-message">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">Seleccione el vehiculo que desea agregar al inventario</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="col-md-12">
-                                    {% include 'vehiculo/includes/vehiculo_table.html' %}
+                <form method="post" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
+                    <!-- #modal-message -->
+                    <div class="modal modal-message fade" id="modal-message">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+                                <div class="modal-body">
+                                    <p>
+                                        {% include 'vehiculo/includes/form.html' %}
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                                    <button type="submit" class="btn btn-sm btn-success">{{ submit_button_text }}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </form>
 {% endblock %}
 
 {% block javascript %}
