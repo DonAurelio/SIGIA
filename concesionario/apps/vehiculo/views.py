@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView 
 from apps.sucursal.models import Sucursal, SucursalVehiculo
 from .models import Vehiculo
+from .forms import VehiculoSucursalCreateForm
 
 class VehiculosListView(ListView):
 	"""Lista todos los vehiculos."""
@@ -12,7 +13,7 @@ class VehiculosListView(ListView):
 	context_object_name = 'vehiculos'
 	template_name = 'vehiculo/vehiculo_list.html'
 
-class VehiculosSucursalListView(ListView): 
+class VehiculoSucursalListView(ListView): 
 	"""Lista los vehiculos por sucursal."""
 	
 	model = SucursalVehiculo
@@ -30,8 +31,7 @@ class VehiculosSucursalListView(ListView):
 
 		sucursal_id = self.kwargs['pk']
 		sucursal = Sucursal.objects.get(id=sucursal_id)
-		vehiculos = sucursal.vehiculos.all()
-
+		
 		sucursal_vehiculos = SucursalVehiculo.objects.filter(sucursal=sucursal)
 		return sucursal_vehiculos
 
@@ -39,10 +39,13 @@ class VehiculosSucursalListView(ListView):
 		"""Perime agregar al contexto la sucursal a la cual pertenecen los vehiculos listados
 		en el query_set."""
 
-		context = super(VehiculosSucursalListView,self).get_context_data(**kwargs)
+		context = super(VehiculoSucursalListView,self).get_context_data(**kwargs)
 		sucursal_id = self.kwargs['pk']
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		context['sucursal'] = sucursal
+		context['vehiculos'] = Vehiculo.objects.all()
+		context['form'] = VehiculoSucursalCreateForm()
+		context['form_mode'] = 'create'
 
 		return context
 
