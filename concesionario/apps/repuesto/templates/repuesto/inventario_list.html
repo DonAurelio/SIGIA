@@ -81,7 +81,7 @@ Sucursal {{ sucursal.nombre }}
                                                                 <td>{% if  sucursal_repuesto.repuesto.imagen %}
                                                                         <img src={{ sucursal_repuesto.repuesto.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
                                                                     {% else %}
-                                                                        <img src="{{ MEDIA_URL }}imagenes/repuestos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
+                                                                         <img src="{{ MEDIA_URL }}imagenes/repuestos/sin_img_repuesto.jpg" width=50 height=50 class="media-object rounded-corner" />
                                                                     {% endif %} 
                                                                 </td>
                                                             </tr >
@@ -137,7 +137,7 @@ Sucursal {{ sucursal.nombre }}
                                                                 <td>{% if  repuesto.imagen %}
                                                                         <img src={{ repuesto.imagen.url }} width=50 height=50 class="media-object rounded-corner"/> 
                                                                     {% else %}
-                                                                        <img src="{{ MEDIA_URL }}imagenes/repuestos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
+                                                                        <img src="{{ MEDIA_URL }}imagenes/repuestos/sin_img_repuesto.jpg" width=50 height=50 class="media-object rounded-corner" />
                                                                     {% endif %} </td>
                                                             </tr >
                                                         {% endfor %} 

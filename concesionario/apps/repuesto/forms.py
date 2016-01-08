@@ -74,4 +74,4 @@ class RepuestoSucursalUpdateView(UpdateView):
 
 	def get_success_url(self):
 		sucursal_repuesto = SucursalRepuesto.objects.get(id=self.kwargs['pk'])
-		return reverse_lazy('vehiculo:listar-repuestos-sucursal',kwargs={'pk':sucursal_repuesto.sucursal.id})
+		return reverse_lazy('repuesto:listar-repuestos-sucursal',kwargs={'pk':sucursal_repuesto.sucursal.id})

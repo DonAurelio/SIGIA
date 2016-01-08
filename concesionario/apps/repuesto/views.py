@@ -6,7 +6,6 @@ from .forms import RepuestoSucursalCreateForm
 from apps.sucursal.models import Sucursal, SucursalRepuesto
 
 
-
 class RepuestosSucursalListView(ListView): 
 	"""Lista los repuestos por sucursal. """
 	

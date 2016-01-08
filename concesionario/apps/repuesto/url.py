@@ -13,7 +13,6 @@ from .views import RepuestoSucursalListView
 urlpatterns = [
 
     url(r'^repuesto/crear$', CrearRepuesto.as_view(), name='crear'),
-    url(r'^repuesto/sucursal/(?P<pk>\d+)/$', RepuestosSucursalListView.as_view(), name='listar-repuestos-sucursal'),
     url(r'^repuesto/(?P<pk>\d+)/$', ActualizarRepuesto.as_view(), name='actualizar'), 
     url(r'^repuestos/$', RepuestosListView.as_view(), name='listar'), 
     

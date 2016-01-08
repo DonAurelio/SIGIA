@@ -8,14 +8,15 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Listado de Empleados Sucursal <strong>{{ sucursal.nombre }}</strong> {% endblock %}
+{% block breadcrumb %}Sucursal {{ sucursal.nombre }}{% endblock %}
+{% block section_title %}Empleados{% endblock %}
 {% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
 {% block content %}
                 <!-- begin col-12 -->
                 <div class="col-md-12">
                     
                     <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'empleado:crear' sucursal.id %}" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i> Nuevo empleado</a>
+                        <a href="{% url 'empleado:crear' sucursal.id %}" class="btn btn-sm btn-success"><i class="fa fa-plus m-r-5"></i> Nuevo empleado</a>
                     </div>
   
                     <!-- begin panel -->
@@ -49,31 +50,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if lista_empleados %} 
-                                            {% for empleado  in lista_empleados %}
-                                                <tr>
-                                                    <td><a href="{% url 'empleado:actualizar' empleado.id sucursal.id %}"> {{ empleado.user.username }}</a></td>
-                                                    <td>{{ empleado.user.first_name }}</td>
-                                                    <td>{{ empleado.user.last_name }}</td>
-                                                    <td>{{ empleado.user.last_login }}</td>
-                                                    <td>{{ empleado.identificacion }}</td>
-                                                    <td>{{ empleado.direccion }}</td>
-                                                    <td>{{ empleado.telefono }}</td>
-                                                    <td>{{ empleado.salario }}</td>
-                                                    <td>{{ empleado.sucursal }}</td>
-                                                    <td>{{ empleado.tipo }}</td>
-                                                    <td>{{ empleado.habilitado }}</td>
-                                                    <td>{% if  empleado.imagen %}
-                                                            <img src={{ empleado.imagen.url }} width=100 height=100 /> 
-                                                        {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=100 height=100>
-                                                        {% endif %} </td>
-                                                </tr >
-                                            {% endfor %} 
-                                            </ul> 
-                                            {% else %} 
-                                                <p><h1>No hay Empleados registrados.</h1></p>
-                                        {% endif %} 
+                                        {% for empleado  in empleados %}
+                                            <tr>
+                                                <td><a href="{% url 'empleado:actualizar' empleado.id sucursal.id %}"> {{ empleado.user.username }}</a></td>
+                                                <td>{{ empleado.user.first_name }}</td>
+                                                <td>{{ empleado.user.last_name }}</td>
+                                                <td>{{ empleado.user.last_login }}</td>
+                                                <td>{{ empleado.identificacion }}</td>
+                                                <td>{{ empleado.direccion }}</td>
+                                                <td>{{ empleado.telefono }}</td>
+                                                <td>{{ empleado.salario }}</td>
+                                                <td>{{ empleado.sucursal }}</td>
+                                                <td>{{ empleado.tipo }}</td>
+                                                <td>{{ empleado.habilitado }}</td>
+                                                <td>{% if  empleado.imagen %}
+                                                        <img src={{ empleado.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                    {% else %}
+                                                        <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=50 height=50 class="media-object rounded-corner" />
+                                                    {% endif %} </td>
+                                            </tr >
+                                        {% endfor %} 
                                     </tbody>
                                 </table>
                             </div>

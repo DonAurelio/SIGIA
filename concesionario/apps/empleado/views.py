@@ -168,11 +168,11 @@ class EmpleadoListView(TemplateView):
 
 	def get(self,request,*args,**kwargs):
 		sucursal_id = kwargs['spk']
-		empleados = Empleado.objects.filter(sucursal_id=sucursal_id)
+		empleados = Empleado.objects.filter(sucursal_id=sucursal_id).exclude(user_id=request.user.id)
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		context = {
 		'sucursal':sucursal,
-		'lista_empleados':empleados}
+		'empleados':empleados}
 		return render_to_response(
 			'empleado/empleado_list.html',
 			context,

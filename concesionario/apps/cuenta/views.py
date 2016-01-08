@@ -18,13 +18,10 @@ class Perfil(TemplateView):
 #Permite modificar la contraseña del usuario
 class EditarContrasenia(TemplateView):
 
-	def get(self,request,*args,**kwargs):
-		user_password_update_form = UserPasswordUpdateForm(user=request.user)
-		context = {'user_password_update_form':user_password_update_form}
-		return render_to_response('cuenta/editar_contrasenia.html',context,context_instance=RequestContext(request))
-
 	def post(self,request,*args,**kwargs):
-
+		
+		user_form = UserUpdateForm(instance=request.user)
+		empleado_form = EmpleadoUpdateForm(instance=request.user.empleado)
 		user_password_update_form = UserPasswordUpdateForm(user=request.user,data=request.POST)
 
 		if user_password_update_form.is_valid():
@@ -32,8 +29,12 @@ class EditarContrasenia(TemplateView):
 			return HttpResponseRedirect(reverse('inicio:login'))
 		else:
 			messages.error(request,'Hay errores en algun campo')
-			context = {'user_password_update_form':user_password_update_form}
-			return render_to_response('cuenta/editar_contrasenia.html',context,context_instance=RequestContext(request))
+			context = {
+			'user_form':user_form,
+			'empleado_form':empleado_form,
+			'user_password_update_form':user_password_update_form
+			}
+			return render_to_response('cuenta/editar.html',context,context_instance=RequestContext(request))
 			
 
 
@@ -45,11 +46,13 @@ class Editar(TemplateView):
 		#Se instancian los formularios con la informacion actual del usuario y empleado
 		user_form = UserUpdateForm(instance=request.user)
 		empleado_form = EmpleadoUpdateForm(instance=request.user.empleado)
+		user_password_update_form = UserPasswordUpdateForm(user=request.user)
 
 		#Se colocan los formularios en el contexto
 		context = {
 		'user_form':user_form,
-		'empleado_form':empleado_form
+		'empleado_form':empleado_form,
+		'user_password_update_form':user_password_update_form
 		}
 		return render_to_response('cuenta/editar.html',context,context_instance=RequestContext(request))
 
@@ -61,6 +64,8 @@ class Editar(TemplateView):
 		#Se obtienen los datos de empleado del usuario a modificar 
 		#junto con los archivos que se van a actualizar
 		empleado_form = EmpleadoUpdateForm(request.POST,request.FILES,instance=request.user.empleado)
+
+
 		
 		#Se verifica si los formularios fueron diligenciados correctamente
 		#Antes de guardar un formulario es obligatorio que se ejecute primero el metodo is_valid()
