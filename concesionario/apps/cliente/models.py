@@ -32,8 +32,8 @@ class Cliente(models.Model):
 
 	#Permite determinar una representacion en string del objeto empleado
 	def __str__(self):
-		return self.identificacion + " " + self.nombre
+		return self.nombre + " " + self.apellido
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
-		return self.identificacion + " " + self.apellido + " " + self.nombre
+		return self.nombre + " " + self.apellido

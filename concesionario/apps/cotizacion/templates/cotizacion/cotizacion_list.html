@@ -49,8 +49,8 @@
                             {% if lista_cotizaciones %} 
                             {% for cotizacion  in lista_cotizaciones %}
                                 <tr>
-                                    <td><a href="{% url 'cotizacion:actualizar' cotizacion.pk %}"> {{ cotizacion.cliente}}</a></td>
-                                    <td><a href="{% url 'vehiculo:listar-vehiculos-inventario' %}"> {{ cotizacion.vehiculo }}</a></td>
+                                    <td>{{ cotizacion.cliente}}</td>
+                                    <td>{{ cotizacion.vehiculo }}</td>
                                     <td>{{ cotizacion.fecha }}</td>
                                     <td>{{ cotizacion.fecha_vencimiento }}</td>
                                     <td>{{ cotizacion.forma_pago }}</td>
