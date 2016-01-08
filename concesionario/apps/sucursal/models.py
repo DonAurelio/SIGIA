@@ -55,6 +55,7 @@ class SucursalVehiculo(models.Model):
 	class Meta:
 		ordering = ['cantidad']
 		verbose_name_plural = 'Vehiculos Sucursal'
+		unique_together = ("sucursal", "vehiculo", "color")
 
 	def nombre_sucursal(self):
 		return self.sucursal.nombre

@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 {% block css %}
 {{ block.super }}
 <!-- ================== BEGIN PAGE LEVEL STYLE TABLE================== -->
@@ -17,7 +26,7 @@ Gestion de Sucursales
 				<div class="col-md-12">
 					
 					<div class="email-btn-row hidden-xs">
-						<a href="{% url 'sucursal:crear' %}" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i>Nueva Sucursal</a>
+						<a href="#modal-dialog" class="btn btn-sm btn-success" data-toggle="modal">Nueva Sucursal</a>
 					</div>
 
 					<!-- begin panel -->
@@ -45,7 +54,7 @@ Gestion de Sucursales
 										</tr>
 									</thead>
 									<tbody>
-										{% for sucursal  in lista_sucursales %}
+										{% for sucursal  in sucursales %}
 											<tr>
 												<td><a href="{% url 'sucursal:actualizar' sucursal.pk %}"> {{ sucursal.nombre }}</a></td>
 												<td>{{ sucursal.direccion }}</td>
@@ -84,6 +93,33 @@ Gestion de Sucursales
 						</div>
 					</div>
 					<!-- end panel -->
+
+					<!-- #modal-dialog -->
+					<div class="modal fade" id="modal-dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+							{% if form_mode == "update" %}
+							<form method="post" action="{% url 'sucursal:actualizar' sucursal.pk %}" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> 
+							{% else %}
+							<form method="post" action="{% url 'sucursal:crear' %}" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> 
+							{% endif %}
+									{% csrf_token %}
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<h4 class="modal-title">Nueva Sucursal</h4>
+									</div>
+									<div class="modal-body">
+										{% bootstrap_form form %}
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+										<button type="submit" class="btn btn-sm btn-success">Guardar</button>
+									</div>
+								</form>
+
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- end col-12 -->	
 {% endblock %}
@@ -98,5 +134,11 @@ Gestion de Sucursales
     <script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
 	<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
-
+	{% if form.errors or form_mode == "update" %}
+	<script type="text/javascript">
+		$( document ).ready(function() {
+		    $(".modal").modal('toggle');
+		});
+	</script>
+	{% endif %}
 {% endblock %}

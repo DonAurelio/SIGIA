@@ -65,6 +65,7 @@ class Vehiculo(models.Model):
 	class Meta:
 		ordering = ['numero_serie']
 		verbose_name_plural = "Vehiculos"
+		
 
 	
 

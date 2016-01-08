@@ -42,7 +42,8 @@ class VehiculoSucursalCreateView(CreateView):
 		context['search_button_text'] = 'Seleccionar vehiculo'
 		
 		# Vehiculos que no estan en la sucursal con id = self.kwargs['pk']
-		vehiculos = Vehiculo.objects.exclude(sucursalvehiculo__sucursal__id=self.kwargs['pk'])
+		#vehiculos = Vehiculo.objects.exclude(sucursalvehiculo__sucursal__id=self.kwargs['pk'])
+		vehiculos = Vehiculo.objects.all()
 		context['vehiculos'] = vehiculos
 		
 		return context
