@@ -5,6 +5,7 @@ from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 from apps.vehiculo.models import Vehiculo
 
+
 # Forma de pago en que se realiza la compra
 CREDITO = 'Credito'
 EFECTIVO = 'Efectivo'
@@ -30,7 +31,7 @@ class Cotizacion(models.Model):
 	#Vehiculo cotizado, relacion uno a muchos 
 	vehiculo= models.ForeignKey(Vehiculo)
 	#Fecha en que se realiza la cotizacion
-	fecha=models.DateField(blank=True, null=True)
+	fecha=models.DateField(auto_now_add=True, blank=True, null=True)
 
 	#Fecha de vencimiento de la cotizacion
 	fecha_vencimiento=models.DateField(blank=True, null=True)
