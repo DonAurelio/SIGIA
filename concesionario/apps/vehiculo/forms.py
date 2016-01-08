@@ -31,7 +31,6 @@ class VehiculoUpdateView(UpdateView):
 		context['button_text'] = 'Actualizar'
 		return context
 
-
 class VehiculoSucursalCreateForm(forms.ModelForm):
 	class Meta:
 		model = SucursalVehiculo
