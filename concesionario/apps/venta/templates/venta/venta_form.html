@@ -14,6 +14,10 @@
 {{ block.super }}
     <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+        <!-- Para gestionar Fechas -->
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css'%}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css'%}" rel="stylesheet" />
+    <!-- fin Para gestionar Fechas -->
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
@@ -74,12 +78,15 @@
 <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/bootstrap-datepicker.js' %}"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
         App.init();
         FormWizardValidation.init();
+        $('#id_fecha_venta').datepicker({todayHighlight:true,autoclose:true});
+        $('#id_fecha_venta').datepicker('option', {dateFormat: 'dd/mm/yy'});
     });
 </script>
 
-{% endblock %}
+{% endblock %} 

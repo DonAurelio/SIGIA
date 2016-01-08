@@ -88,8 +88,9 @@
 
     $(document).ready(function(){
 			$('#id_fecha').datepicker({todayHighlight:true,autoclose:true});
+            $('#id_fecha').datepicker('option', {dateFormat: 'dd/mm/yy'});
 			$('#id_fecha_vencimiento').datepicker({todayHighlight:true,autoclose:true});
-			$
+            $('#id_fecha_vencimiento').datepicker('option', {dateFormat: 'dd/mm/yy'});
 		});
 </script>
 
