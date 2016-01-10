@@ -54,6 +54,7 @@ INSTALLED_APPS = (
 	'imagekit',
 	#Para dar estilos usando bootstrap a los campos de los formularios 
 	'bootstrap3',
+	'django.contrib.humanize',
 	#Apps
 	#Administra el inicio y cierre de sesion
 	'apps.inicio',
@@ -155,3 +156,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 #MEDIA_URL = 'http://localhost:8000/media/'
 MEDIA_URL = '/media/'
+
+#Humanize settings 
+USE_THOUSAND_SEPARATOR = True

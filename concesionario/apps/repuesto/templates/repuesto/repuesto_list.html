@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+
 {# Load the tag library #}
 {% load bootstrap3 %}
 
@@ -19,7 +20,7 @@
 {% block breadcrumb %}
 Gestion de Repuestos
 {% endblock %}
-{% block section_title %}Repuestos disponibles{% endblock %}
+{% block section_title %}Repuestos{% endblock %}
 {% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
 
 {% block content %}
@@ -50,9 +51,9 @@ Gestion de Repuestos
                                             <th>Nombre</th>
                                             <th>Marca</th>
                                             <th>Clasificación</th>
-                                            <th>Precio</th>
                                             <th>Proveedor</th>
                                             <th>Descripción</th>
+                                            <th>Precio</th>
                                             <th>Imágen</th>
                                         </tr>
                                     </thead>
@@ -63,9 +64,9 @@ Gestion de Repuestos
                                                     <td><a href="{% url 'repuesto:actualizar' repuesto.pk %}"> {{ repuesto.nombre }}</a></td>
                                                     <td>{{ repuesto.marca }}</td>
                                                     <td>{{ repuesto.clasificacion }}</td>
-                                                    <td>{{ repuesto.precio }}</td>
                                                     <td>{{ repuesto.proveedor }}</td>
                                                     <td>{{ repuesto.descripcion }}</td>
+                                                    <td>{{ repuesto.precio }}</td>
                                                     <td>
                                                         {% if  repuesto.imagen %}
                                                             <img src={{ repuesto.imagen.url }} width=50 height=50 class="media-object rounded-corner" /></td>

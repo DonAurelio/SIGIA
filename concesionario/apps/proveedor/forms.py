@@ -15,8 +15,7 @@ class ProveedorCreateView(CreateView):
 
 	def get_context_data(self,**kwargs):
 		context = super(ProveedorCreateView,self).get_context_data(**kwargs)
-		context['section_name'] = 'Nuevo Proveedor'
-		context['button_text'] = 'Crear'
+		context['section_title'] = 'Nuevo Proveedor'
 		return context
 
 class ProveedorUpdateView(UpdateView):
@@ -30,6 +29,5 @@ class ProveedorUpdateView(UpdateView):
 
 	def get_context_data(self,**kwargs):
 		context = super(ProveedorUpdateView,self).get_context_data(**kwargs)
-		context['section_name'] = 'Nuevo Proveedor'
-		context['button_text'] = 'Actualizar'
+		context['section_title'] = 'Actualizar Proveedor'
 		return context

@@ -16,7 +16,10 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
-{% block section_title %}Proveedores disponibles{% endblock %}
+{% block breadcrumb %}
+Gestion de Provedores
+{% endblock %}
+{% block section_title %}Proveedores{% endblock %}
 {% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
 
 {% block content %}
@@ -24,7 +27,7 @@
                 <div class="col-md-12">
 
                     <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'proveedor:crear' %}" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i> Nuevo Proveedor</a>
+                        <a href="{% url 'proveedor:crear' %}" class="btn btn-sm btn-success"><i class="fa fa-plus m-r-5"></i> Nuevo Proveedor</a>
                     </div>
   
                     <!-- begin panel -->
@@ -48,7 +51,7 @@
                                             <th>Telefono</th>
                                             <th>Ciudad</th>
                                             <th>Email</th>
-                                            <th>Habilitado</th>
+                                            <th>Activo</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -64,7 +67,17 @@
                                                     <td>{{ proveedor.telefono }}</td>
                                                     <td>{{ proveedor.ciudad }}</td>
                                                     <td>{{ proveedor.email }}</td>
-                                                    <td>{{ proveedor.habilitado }}</td>
+                                                    <td>
+                                                        {% if proveedor.habilitado %}
+                                                        <ul class="fa-ul">
+                                                            <li><i class="fa-li fa fa-check-square text-success"></i></li>
+                                                        </ul>
+                                                        {% else %}
+                                                        <ul class="fa-ul">
+                                                            <li><i class="fa-li fa fa-square"></i></li>
+                                                        </ul>
+                                                        {% endif %}
+                                                    </td>
                                                     
                                             {% endfor %} 
                                             </ul> 
