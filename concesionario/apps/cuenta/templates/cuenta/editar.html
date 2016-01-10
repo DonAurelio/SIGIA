@@ -31,7 +31,7 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane fade active in" id="default-tab-1">
-							<form method="post" data-parsley-validate="true" enctype="multipart/form-data"> {% csrf_token %}
+							<form method="post" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
 				    			<h3 class="m-t-10"><i class="fa fa-cog"></i> Información Cuenta</h3>
 								<p>
 									<!-- begin panel -->
@@ -95,11 +95,11 @@
 			    <!-- end col-12 -->
 		    </div>
 
-		    <!-- #modal-dialog -->
+		    	<!-- #modal-dialog -->
 				<div class="modal fade" id="modal-dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form method="post" action="{% url 'cuenta:editar_contrasenia' %}" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> 
+							<form method="post" action="{% url 'cuenta:editar_contrasenia' %}" data-parsley-validate="true"  enctype="multipart/form-data"> 
 								{% csrf_token %}
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -117,8 +117,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- end col-12 -->	
+		
 {% endblock %}
 
 {% block javascript %}

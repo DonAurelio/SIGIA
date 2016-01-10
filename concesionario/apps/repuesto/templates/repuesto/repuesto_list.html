@@ -16,6 +16,9 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
+{% block breadcrumb %}
+Gestion de Repuestos
+{% endblock %}
 {% block section_title %}Repuestos disponibles{% endblock %}
 {% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
 
@@ -25,7 +28,7 @@
                 <div class="col-md-12">
 
                     <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'repuesto:crear' %}" class="btn btn-sm btn-inverse" ><i class="fa fa-plus m-r-5"></i> Nuevo Repuesto</a>
+                        <a href="{% url 'repuesto:crear' %}" class="btn btn-sm btn-success" ><i class="fa fa-plus m-r-5"></i> Nuevo Repuesto</a>
                     </div>
   
                     <!-- begin panel -->
@@ -65,9 +68,9 @@
                                                     <td>{{ repuesto.descripcion }}</td>
                                                     <td>
                                                         {% if  repuesto.imagen %}
-                                                            <img src={{ repuesto.imagen.url }} width=100 height=100 /></td>
+                                                            <img src={{ repuesto.imagen.url }} width=50 height=50 class="media-object rounded-corner" /></td>
                                                         {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/repuestos/sin_img_repuesto.jpg" width=50 height=50/>
+                                                            <img src="{{ MEDIA_URL }}imagenes/repuestos/sin_img_repuesto.jpg" width=50 height=50 class="media-object rounded-corner"/>
                                                         {% endif %}
                                                     </tr >
                                             {% endfor %} 
