@@ -8,15 +8,17 @@
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
-
-{% block section_title %}Listado de Clientes{% endblock %}
+{% block breadcrumb %}
+Gestion de Clientes
+{% endblock %}
+{% block section_title %}Clientes{% endblock %}
 {% block section_subtitle %}Seleccione el nombre del cliente que desea editar{% endblock %}
 {% block content %}
                 <!-- begin col-12 -->
                 <div class="col-md-12">
                     
                     <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'cliente:crear' %}" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i>Nuevo Cliente</a>
+                        <a href="{% url 'cliente:crear' %}" class="btn btn-sm btn-success"><i class="fa fa-plus m-r-5"></i>Nuevo Cliente</a>
                     </div>
 
                     <!-- begin panel -->
@@ -44,26 +46,34 @@
                                         <th>Teléfono</th>
                                         <th>Celular</th>
                                         <th>Email</th>
+                                        <th>Habilitado</th>
                                         </tr>
                                     </thead>
                                      <tbody>
-                        {% if lista_clientes %} 
-                            {% for cliente  in lista_clientes %}
-                                <tr>
-                                    <td><a href="{% url 'cliente:actualizar' cliente.pk %}"> {{ cliente.identificacion }}</a></td>
-                                    <td>{{ cliente.nombre }}</td>
-                                    <td>{{ cliente.apellido }}</td>
-                                    <td>{{ cliente.ciudad }}</td>
-                                    <td>{{ cliente.departamento }}</td>
-                                    <td>{{ cliente.telefono }}</td>
-                                    <td>{{ cliente.celular }}</td>
-                                    <td>{{ cliente.email }}</td>
-                                     
-                            {% endfor %} 
-                        {% else %} 
-                            <p><h2>No hay Clientes registrados.</h2></p>
-                    {% endif %}                       
-                    </tbody>
+                                        {% for cliente  in lista_clientes %}
+                                            <tr>
+                                                <td><a href="{% url 'cliente:actualizar' cliente.pk %}"> {{ cliente.identificacion }}</a></td>
+                                                <td>{{ cliente.nombre }}</td>
+                                                <td>{{ cliente.apellido }}</td>
+                                                <td>{{ cliente.ciudad }}</td>
+                                                <td>{{ cliente.departamento }}</td>
+                                                <td>{{ cliente.telefono }}</td>
+                                                <td>{{ cliente.celular }}</td>
+                                                <td>{{ cliente.email }}</td>
+                                                <td>
+                                                    {% if cliente.habilitado %}
+                                                    <ul class="fa-ul">
+                                                        <li><i class="fa-li fa fa-check-square text-success"></i></li>
+                                                    </ul>
+                                                    {% else %}
+                                                    <ul class="fa-ul">
+                                                        <li><i class="fa-li fa fa-square"></i></li>
+                                                    </ul>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %} 
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
