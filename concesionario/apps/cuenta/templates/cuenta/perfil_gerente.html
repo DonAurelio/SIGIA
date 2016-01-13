@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block css %}{{ block.super }}{% endblock %}
+{% block breadcrumb %} {% endblock %}
+{% block section_title %}{% endblock %}
+{% block section_subtitle %}{% endblock %}
+{% block content %}
+{% include 'includes/indicadores_v1.html' %}
+{% endblock %}
+{% block javascript %}{{ block.super }}{% endblock %}

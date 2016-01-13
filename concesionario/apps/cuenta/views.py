@@ -15,6 +15,9 @@ from apps.empleado.models import Empleado
 class Perfil(TemplateView):
 	template_name = 'cuenta/perfil.html'
 
+	def get(self,request,*args,**kwargs):
+		return HttpResponseRedirect(reverse('inicio:login'))
+
 #Permite modificar la contraseña del usuario
 class EditarContrasenia(TemplateView):
 

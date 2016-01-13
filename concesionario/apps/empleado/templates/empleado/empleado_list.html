@@ -52,7 +52,7 @@
                                     <tbody>
                                         {% for empleado  in empleados %}
                                             <tr>
-                                                <td><a href="{% url 'empleado:actualizar' empleado.id sucursal.id %}"> {{ empleado.user.username }}</a></td>
+                                                <td><a href="{% url 'empleado:actualizar' empleado.id %}"> {{ empleado.user.username }}</a></td>
                                                 <td>{{ empleado.user.first_name }}</td>
                                                 <td>{{ empleado.user.last_name }}</td>
                                                 <td>{{ empleado.user.last_login }}</td>
@@ -62,7 +62,16 @@
                                                 <td>{{ empleado.salario }}</td>
                                                 <td>{{ empleado.sucursal }}</td>
                                                 <td>{{ empleado.tipo }}</td>
-                                                <td>{{ empleado.habilitado }}</td>
+                                                <td>{% if empleado.habilitado %}
+                                                    <ul class="fa-ul">
+                                                        <li><i class="fa-li fa fa-check-square text-success"></i></li>
+                                                    </ul>
+                                                    {% else %}
+                                                    <ul class="fa-ul">
+                                                        <li><i class="fa-li fa fa-square"></i></li>
+                                                    </ul>
+                                                    {% endif %}
+                                                </td>
                                                 <td>{% if  empleado.imagen %}
                                                         <img src={{ empleado.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
                                                     {% else %}

@@ -80,7 +80,7 @@ class EmpleadoCreateView(TemplateView):
 					
 			url = reverse(
 				'empleado:listar-empleados-sucursal', 
-				kwargs={'pk': new_empleado.sucursal.id})
+				kwargs={'spk': new_empleado.sucursal.id})
 
 			return HttpResponseRedirect(url)
 			
@@ -108,8 +108,9 @@ class EmpleadoCreateView(TemplateView):
 class EmpleadoUpdateView(TemplateView):
 
 	def get(self, request, *args, **kwargs):
-		sucursal = Sucursal.objects.get(id=kwargs['spk'])
+		
 		empleado = Empleado.objects.get(id=kwargs['epk'])
+		sucursal = Sucursal.objects.get(id=empleado.sucursal.id)
 		user = empleado.user
 
 		empleado_form = EmpleadoForm(instance=empleado)
@@ -128,8 +129,8 @@ class EmpleadoUpdateView(TemplateView):
 			context_instance=RequestContext(request))
 
 	def post(sel, request, *args, **kwargs):
-		sucursal = Sucursal.objects.get(id=kwargs['spk'])
 		empleado = Empleado.objects.get(id=kwargs['epk'])
+		sucursal = Sucursal.objects.get(id=empleado.sucursal.id)
 		user = empleado.user
 
 		empleado_form = EmpleadoForm(request.POST,request.FILES,instance=empleado)
@@ -169,11 +170,8 @@ class EmpleadoUpdateView(TemplateView):
 						login(request,user)
 
 			messages.info(request,'Empleado modificado con exito')
-			context = {}
-			return render_to_response(
-				'cuenta/perfil.html',
-				context,
-				context_instance=RequestContext(request))
+			return HttpResponseRedirect(reverse('cuenta:perfil'))
+		
 		else:
 			empleado_form = EmpleadoForm(request.POST,request.FILES)
 			user_form = UserForm(instance=user)
