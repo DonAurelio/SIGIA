@@ -17,13 +17,13 @@
             <div id="options" class="m-b-10">
                 <span class="gallery-option-set" id="filter" data-option-key="filter">
                     <a href="#show-all" class="btn btn-default btn-xs active" data-option-value="*">
-                        Todos
+                        Show All
                     </a>
                     <a href="#gallery-group-1" class="btn btn-default btn-xs" data-option-value=".gallery-group-1">
-                        Ordenes
+                        Gallery Group 1
                     </a>
                     <a href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
-                        Cotizadas
+                        Gallery Group 2
                     </a>
                     <a href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
                         Gallery Group 3
@@ -34,24 +34,19 @@
                 </span>
             </div>
             <div id="gallery" class="gallery">
-                {% for orden in ordenes_de_trabajo %}
                 <div class="image gallery-group-1">
                     <div class="image-inner">
                         <a href="assets/img/gallery/gallery-1.jpg" data-lightbox="gallery-group-1">
-                            {% if orden.vehiculo.imagen %}
-                                <img src={{ orden.vehiculo.imagen.url }} alt=""/> 
-                            {% else %}
-                                <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
-                            {% endif %}
+                            <img src="assets/img/gallery/gallery-1.jpg" alt="" />
                         </a>
                         <p class="image-caption">
-                            {{ orden.vehiculo.marca }}
+                            #1382 - 3D Arch
                         </p>
                     </div>
                     <div class="image-info">
-                        <h5 class="title">{{ orden.vehiculo.modelo }}</h5>
+                        <h5 class="title">Lorem ipsum dolor sit amet</h5>
                         <div class="pull-right">
-                            <a href="javascript:;">Cotizacion</a>
+                            <small>by</small> <a href="javascript:;">Sean Ngu</a>
                         </div>
                         <div class="rating">
                             <span class="star active"></span>
@@ -61,12 +56,62 @@
                             <span class="star"></span>
                         </div>
                         <div class="desc">
-                            {{ orden.observacion }}
+                            Nunc velit urna, aliquam at interdum sit amet, lacinia sit amet ligula. Quisque et erat eros. Aenean auctor metus in tortor placerat, non luctus justo blandit.
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-                
+                <div class="image gallery-group-1">
+                    <div class="image-inner">
+                        <a href="assets/img/gallery/gallery-2.jpg" data-lightbox="gallery-group-1">
+                            <img src="assets/img/gallery/gallery-2.jpg" alt="" />
+                        </a>
+                        <p class="image-caption">
+                            #2343 - Madness Arch
+                        </p>
+                    </div>
+                    <div class="image-info">
+                        <h5 class="title">Fusce aliquet ac quam at tincidunt</h5>
+                        <div class="pull-right">
+                            <small>by</small> <a href="javascript:;">Camryn Wong</a>
+                        </div>
+                        <div class="rating">
+                            <span class="star active"></span>
+                            <span class="star active"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                        </div>
+                        <div class="desc">
+                            Fusce eu rutrum nisi, ut pretium mi. Sed mollis nisi sed auctor molestie. Vestibulum dictum pharetra leo sed euismod.
+                        </div>
+                    </div>
+                </div>
+                <div class="image gallery-group-1">
+                    <div class="image-inner">
+                        <a href="assets/img/gallery/gallery-3.jpg" data-lightbox="gallery-group-1">
+                            <img src="assets/img/gallery/gallery-3.jpg" alt="" />
+                        </a>
+                        <p class="image-caption">
+                            #3452 - Scottwills Arch
+                        </p>
+                    </div>
+                    <div class="image-info">
+                        <h5 class="title">Etiam lobortis egestas nisl</h5>
+                        <div class="pull-right">
+                            <small>by</small> <a href="javascript:;">Lelouch Wong</a>
+                        </div>
+                        <div class="rating">
+                            <span class="star active"></span>
+                            <span class="star active"></span>
+                            <span class="star active"></span>
+                            <span class="star active"></span>
+                            <span class="star active"></span>
+                        </div>
+                        <div class="desc">
+                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus eget ultricies arcu.
+                        </div>
+                    </div>
+                </div>
                 <div class="image gallery-group-2">
                     <div class="image-inner">
                         <a href="assets/img/gallery/gallery-4.jpg" data-lightbox="gallery-group-2">
