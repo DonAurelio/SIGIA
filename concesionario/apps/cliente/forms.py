@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
+
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.http import HttpResponse
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
 from .models import Cliente
 
 # Crea el registro de un cliente mediante la clase generica CreateView

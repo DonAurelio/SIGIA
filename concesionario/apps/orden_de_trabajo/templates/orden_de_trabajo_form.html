@@ -1,0 +1,96 @@
+ {% extends "base.html" %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block css %}
+{{ block.super }}
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
+{% endblock %}
+
+{% block breadcrumb %}
+Ordenes de Trabajo
+{% endblock %}
+{% block section_title %}{{ section_title }}{% endblock %}
+{% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
+{% block content %}
+    <!-- begin row -->
+            <div class="row">
+                <!-- begin col-12 -->
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#default-tab-1" data-toggle="tab">Orden de Trabajo</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="default-tab-1">
+                            <form method="post" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
+                                <h3 class="m-t-10"><i class="fa fa-cog"></i> Información Orden de Trabajo</h3>
+                                <p>
+                                    <!-- begin panel -->
+                                    <div class="panel panel-inverse">
+                                        <div class="panel-heading">
+                                            <div class="panel-heading-btn">
+                                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                            </div>Orden de Trabajo</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="wizard">
+                                                <ol>
+                                                    <li>
+                                                        Informacion General
+                                                        <small></small>
+                                                    </li>
+                                                </ol>
+                                                <!-- begin wizard step-1 -->
+                                                <div class="wizard-step-1">
+                                                    <fieldset>
+                                                        <!-- begin row -->
+                                                        <div class="row">
+                                                            {% bootstrap_form form %}
+                                                        </div>
+                                                        <!-- end row -->
+                                                    </fieldset>
+                                                </div>
+                                                <!-- end wizard step-1 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end panel -->
+                                </p>
+                                <p class="text-right m-b-0">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-cog"></i> Guardar</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-12 -->
+            </div>
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+<!-- ================== END PAGE LEVEL JS ================== -->
+<script>
+    $(document).ready(function() {
+        App.init();
+        FormWizardValidation.init();
+    });
+</script>
+
+{% endblock %}

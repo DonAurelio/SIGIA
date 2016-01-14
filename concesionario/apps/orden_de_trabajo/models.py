@@ -3,6 +3,7 @@
 from django.db import models
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
+from apps.sucursal.models import Sucursal
 from apps.vehiculo.models import Vehiculo
 
 #Estados de la reparacion del vehiculo
@@ -11,8 +12,6 @@ from apps.vehiculo.models import Vehiculo
 PENDIENTE = 'Pendiente'
 #El vehiculo esta en observacion
 EN_OBSERVACION = 'En observacion'
-#El cliente decide no reparara el vehiculo despues de hacerse la cotizacion
-NO_REPARADO = 'No reparado'
 #El vehiculo esta en reparacion
 EN_REPARACION = 'En reparacion'
 #El vehiculo ya esta reparado
@@ -21,7 +20,6 @@ FINALIZADO = 'Finalizado'
 tipo_choice = (
 	(PENDIENTE, 'Pendiente'),
 	(EN_OBSERVACION, 'En observacion'),
-	(NO_REPARADO,'No reparado'),
 	(EN_REPARACION, 'En reparacion'),
 	(FINALIZADO, 'Finalizado'),
  )
@@ -30,30 +28,31 @@ class OrdenDeTrabajo(models.Model):
 	"""Define la organizacion del los datos de una orden de trabajo en la base de datos."""
 
 	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
-
 	#Empleado que realiza la orden de trabajo, relacion uno a muchos 
 	empleado = models.ForeignKey(Empleado)
+	#Sucursal a la que ingresa el vehiculo
+	sucursal = models.ForeignKey(Sucursal)
 	#dueno del auto que entra al taller, relacion uno a muchos 
 	cliente = models.ForeignKey(Cliente)
-	#vehiculo que entra en el taller
+	#vehiculo que va a ser reparado
 	vehiculo = models.ForeignKey(Vehiculo)
 	#placa del vehiculo que entra al taller 
 	placa = models.CharField(null=True,blank=True,max_length=7)
 	#Fecha de entrada al taller
-	fecha_entrada = models.DateField(blank=True, null=True)
+	fecha_entrada = models.DateField(auto_now_add=True,blank=True, null=True)
 	#Fecha de salida del taller
 	fecha_salida = models.DateField(blank=True, null=True)
-	#Descripcion del problema que presenta el vehiculo. Dada por el cliente 
-	descripcion = models.TextField(null=True,blank=True,max_length=50)
 	#Estado del vehiculo en el taller
-	estado_reparacion = models.CharField(null=True,blank=True,max_length=50,choices=tipo_choice,default=PENDIENTE)
+	estado_reparacion = models.TextField(null=True,blank=True,max_length=50,choices=tipo_choice,default=PENDIENTE)
+	#Observacion de los daños del vehiculo
+	observacion = models.TextField(null=True,blank=True,max_length=200)
 	#Estado de la OrdenDeTrabajo, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
 	
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
 		ordering = ['fecha_entrada']
-		verbose_name_plural = "Ordenes de Trabajo"
+		verbose_name_plural = "Orden de Trabajo"
 
 	#Permite determinar una representacion en string del objeto repuesto
 	def __str__(self):

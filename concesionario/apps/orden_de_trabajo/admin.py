@@ -7,7 +7,7 @@ from .models import OrdenDeTrabajo
 class AdminOrdenDeTrabajo(admin.ModelAdmin):
 	#atributos
 	list_display = ('id', 'empleado', 'cliente',
-		 'placa', 'fecha_entrada', 'fecha_salida', 'descripcion','estado_reparacion')
+		 'placa', 'fecha_entrada', 'fecha_salida','estado_reparacion')
 	#atributos por los que se buscara
 	search_fields = ('id', 'placa')
 
