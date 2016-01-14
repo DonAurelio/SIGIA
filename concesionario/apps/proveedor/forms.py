@@ -17,6 +17,7 @@ class ProveedorCreateView(CreateView):
 		context = super(ProveedorCreateView,self).get_context_data(**kwargs)
 		context['section_title'] = 'Nuevo Proveedor'
 		return context
+		
 
 class ProveedorUpdateView(UpdateView):
 	model = Proveedor

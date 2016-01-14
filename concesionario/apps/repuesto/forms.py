@@ -12,7 +12,6 @@ class CrearRepuesto(CreateView):
 	'imagen', 'proveedor', 'descripcion']
 	success_url = reverse_lazy('repuesto:listar')
 
-
 	def get_context_data(self,**kwargs):
 		context = super(CreateView,self).get_context_data(**kwargs)
 		context['section_title'] = 'Nuevo Repuesto'
@@ -30,7 +29,6 @@ class ActualizarRepuesto(UpdateView):
 		context['section_title'] = 'Actualizar Repuesto'
 		context['button_text'] = 'Actualizar'
 		return context
-
 
 class RepuestoSucursalCreateForm(forms.ModelForm):
 	class Meta:

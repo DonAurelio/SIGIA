@@ -42,15 +42,15 @@ class SucursalVehiculo(models.Model):
 	"""Define la cantidad que existe de cada vehiculo por sucursal."""
 	
 	#Sucursal a la que pertenece el vehiculo
-	sucursal = models.ForeignKey(Sucursal)
+	sucursal = models.ForeignKey(Sucursal,default=None)
 	#Vehiculo
-	vehiculo = models.ForeignKey(Vehiculo)
+	vehiculo = models.ForeignKey(Vehiculo,default=None)
 	#Color del vehiculo
 	color = models.CharField(null=True,blank=True,max_length=20)
 	#Cantidad disponible en stock del repuesto en la sucursal
 	cantidad = models.IntegerField(null=True,blank=True)
 	#Estado de la vehiculo, Activa/inactiva
-	habilitado = models.BooleanField(default = True)
+	habilitado = models.BooleanField(default=True)
 	
 	class Meta:
 		ordering = ['cantidad']
@@ -74,9 +74,9 @@ class SucursalRepuesto(models.Model):
 	"""Define la cantidad que existe de cada repuesto por sucursal."""
 	
 	#Sucursal a la que pertenece el repuesto
-	sucursal = models.ForeignKey(Sucursal)
+	sucursal = models.ForeignKey(Sucursal,default=None)
 	#Repuesto
-	repuesto = models.ForeignKey(Repuesto)
+	repuesto = models.ForeignKey(Repuesto,default=None)
 	#Cantidad disponible en stock del repuesto en la sucursal
 	cantidad = models.IntegerField(null=True,blank=True)
 	#Estado de la repuesto, Activa/inactiva

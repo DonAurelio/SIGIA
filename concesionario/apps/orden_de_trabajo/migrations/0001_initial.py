@@ -7,8 +7,8 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cliente', '0001_initial'),
-        ('empleado', '0003_auto_20150930_1938'),
+        ('cliente', '0002_cliente_habilitado'),
+        ('empleado', '0001_initial'),
     ]
 
     operations = [
@@ -16,17 +16,18 @@ class Migration(migrations.Migration):
             name='OrdenDeTrabajo',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('placa', models.CharField(max_length=6, null=True, blank=True)),
-                ('fecha_entrada', models.DateField(null=True, blank=True)),
+                ('placa', models.CharField(max_length=7, null=True, blank=True)),
+                ('fecha_entrada', models.DateField(auto_now_add=True, null=True)),
                 ('fecha_salida', models.DateField(null=True, blank=True)),
-                ('descripcion', models.CharField(max_length=50, null=True, blank=True)),
-                ('estado_reparacion', models.CharField(max_length=50, null=True, blank=True)),
-                ('cliente', models.ForeignKey(to='cliente.Cliente')),
-                ('empleado', models.ForeignKey(to='empleado.Empleado')),
+                ('estado_reparacion', models.TextField(default=b'Pendiente', max_length=50, null=True, blank=True, choices=[(b'Pendiente', b'Pendiente'), (b'En observacion', b'En observacion'), (b'En reparacion', b'En reparacion'), (b'Finalizado', b'Finalizado')])),
+                ('observacion', models.TextField(max_length=200, null=True, blank=True)),
+                ('habilitado', models.BooleanField(default=True)),
+                ('cliente', models.ForeignKey(default=None, to='cliente.Cliente')),
+                ('empleado', models.ForeignKey(default=None, to='empleado.Empleado')),
             ],
             options={
                 'ordering': ['fecha_entrada'],
-                'verbose_name_plural': 'ordendetrabajo',
+                'verbose_name_plural': 'Orden de Trabajo',
             },
         ),
     ]

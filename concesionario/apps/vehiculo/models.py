@@ -42,16 +42,16 @@ class Vehiculo(models.Model):
 	#Caracteristicas adicionales del vehiculo
 	caracteristicas = models.TextField(null=True, blank=True)
 	#Imagen representativa del vehiculo
+	#Capacidad expresada en carga o pasajeros
+	capacidad = models.CharField(null=True, blank=True, max_length=50)
+	#Tipo del vehiculo	
+	tipo = models.CharField(max_length=50, choices=TIPO_CHOICES, default=AUTOMOVIL)
 	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/vehiculos/")
 	#Thumbnail que permite reducir la imagen del repuesto 
 	thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(100, 50)],
 									  format='JPEG',
 									  options={'quality': 60})
-	#Capacidad expresada en carga o pasajeros
-	capacidad = models.CharField(null=True, blank=True, max_length=50)
-	#Tipo del vehiculo	
-	tipo = models.CharField(max_length=50, choices=TIPO_CHOICES, default=AUTOMOVIL)
 	
 	#Permite determinar una representacion en string del objeto empleado
 	def __str__(self):

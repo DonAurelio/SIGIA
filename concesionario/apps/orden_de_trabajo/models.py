@@ -27,15 +27,14 @@ tipo_choice = (
 class OrdenDeTrabajo(models.Model):
 	"""Define la organizacion del los datos de una orden de trabajo en la base de datos."""
 
-	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 	#Empleado que realiza la orden de trabajo, relacion uno a muchos 
-	empleado = models.ForeignKey(Empleado)
+	empleado = models.ForeignKey(Empleado,default=None)
 	#Sucursal a la que ingresa el vehiculo
-	sucursal = models.ForeignKey(Sucursal)
+	sucursal = models.ForeignKey(Sucursal,default=None)
 	#dueno del auto que entra al taller, relacion uno a muchos 
-	cliente = models.ForeignKey(Cliente)
+	cliente = models.ForeignKey(Cliente,default=None)
 	#vehiculo que va a ser reparado
-	vehiculo = models.ForeignKey(Vehiculo)
+	vehiculo = models.ForeignKey(Vehiculo,default=None)
 	#placa del vehiculo que entra al taller 
 	placa = models.CharField(null=True,blank=True,max_length=7)
 	#Fecha de entrada al taller

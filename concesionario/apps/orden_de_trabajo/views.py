@@ -1,5 +1,11 @@
 # -*- encoding: utf-8 -*-
 
-from django.shortcuts import render
+from django.views.generic import ListView
+from .models import OrdenDeTrabajo
 
-# Create your views here.
+class OrdenDeTrabajoListView(ListView):
+	model = OrdenDeTrabajo
+	context_object_name = 'ordenes_de_trabajo'
+	template_name = 'orden_de_trabajo/list.html'
+
+

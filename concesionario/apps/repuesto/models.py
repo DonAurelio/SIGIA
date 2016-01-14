@@ -43,6 +43,10 @@ class Repuesto(models.Model):
 	marca = models.CharField(null=True,blank=True,max_length=20) 
 	#Clasificacion del repuesto
 	clasificacion = models.CharField(null=True,blank=True, max_length=20, choices=tipo_choice,default=SELLOS_EMPAQUES)
+	#Provedor del repuesto
+	proveedor = models.ForeignKey(Proveedor,default=None)
+	#Descripcion del repuesto
+	descripcion = models.CharField(null=True,blank=True,max_length=100)
 	#Imagen del repuesto
 	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/repuestos/")
 	#Thumbnail que permite reducir la imagen del repuesto 
@@ -50,11 +54,6 @@ class Repuesto(models.Model):
 									  processors=[ResizeToFill(100, 50)],
 									  format='JPEG',
 									  options={'quality': 60})
-
-	#Provedor del repuesto
-	proveedor = models.OneToOneField(Proveedor, default=None)
-	#Descripcion del repuesto
-	descripcion = models.CharField(null=True,blank=True,max_length=100)
 	
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:

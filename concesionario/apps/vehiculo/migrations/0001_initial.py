@@ -19,11 +19,15 @@ class Migration(migrations.Migration):
                 ('precio', models.FloatField(null=True, blank=True)),
                 ('modelo', models.CharField(max_length=100, null=True, blank=True)),
                 ('potencia', models.CharField(max_length=100, null=True, blank=True)),
-                ('motor', models.CharField(max_length=100, null=True, blank=True)),
+                ('motor', models.CharField(max_length=200, null=True, blank=True)),
                 ('caracteristicas', models.TextField(null=True, blank=True)),
                 ('imagen', models.ImageField(null=True, upload_to=b'imagenes/vehiculos/', blank=True)),
                 ('capacidad', models.CharField(max_length=50, null=True, blank=True)),
-                ('tipo', models.CharField(default=b'Automovil', max_length=2, choices=[(b'Automovil', b'Automovil'), (b'Campero', b'Campero'), (b'Camioneta', b'Camioneta'), (b'Microbus', b'Microbus'), (b'Buseta', b'Buseta'), (b'Bus', b'Bus'), (b'Camion', b'Camion'), (b'Tracto camion', b'Tracto camion')])),
+                ('tipo', models.CharField(default=b'Automovil', max_length=50, choices=[(b'Automovil', b'Automovil'), (b'Campero', b'Campero'), (b'Camioneta', b'Camioneta'), (b'Microbus', b'Microbus'), (b'Buseta', b'Buseta'), (b'Bus', b'Bus'), (b'Camion', b'Camion'), (b'Tracto camion', b'Tracto camion')])),
             ],
+            options={
+                'ordering': ['numero_serie'],
+                'verbose_name_plural': 'Vehiculos',
+            },
         ),
     ]

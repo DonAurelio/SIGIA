@@ -7,9 +7,9 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vehiculo', '0002_auto_20151001_0431'),
-        ('cliente', '0001_initial'),
-        ('empleado', '0003_auto_20150930_1938'),
+        ('empleado', '0002_auto_20160114_2042'),
+        ('vehiculo', '0001_initial'),
+        ('cliente', '0002_cliente_habilitado'),
     ]
 
     operations = [
@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('descuento', models.FloatField()),
                 ('precio_venta', models.FloatField()),
                 ('forma_pago', models.CharField(default=b'Efectivo', max_length=20, choices=[(b'Credito', b'Credito'), (b'Efectivo', b'Efectivo'), (b'Tarjeta_credito', b'Tarjeta de credito'), (b'Tarjeta_debito', b'Tarjeta de debito')])),
+                ('habilitado', models.BooleanField(default=True)),
                 ('cliente', models.ForeignKey(to='cliente.Cliente')),
                 ('empleado', models.ForeignKey(to='empleado.Empleado')),
                 ('vehiculo', models.ForeignKey(to='vehiculo.Vehiculo')),

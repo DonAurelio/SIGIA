@@ -23,21 +23,18 @@ forma_pago_choices = (
 class Cotizacion(models.Model):
 	"""Define la organizacion del los datos de una cotizacion en la base de datos."""
 	
-	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 	#Empleado que realiza la cotizacion, relacion uno a muchos 
-	empleado= models.ForeignKey(Empleado)
+	empleado= models.ForeignKey(Empleado,default=None)
 	#Cliente que solicita la cotizacion, relacion uno a muchos 
-	cliente= models.ForeignKey(Cliente)
+	cliente= models.ForeignKey(Cliente,default=None)
 	#Vehiculo cotizado, relacion uno a muchos 
-	vehiculo= models.ForeignKey(Vehiculo)
+	vehiculo= models.ForeignKey(Vehiculo,default=None)
 	#Fecha en que se realiza la cotizacion
-	fecha=models.DateField(auto_now_add=True, blank=True, null=True)
-
+	fecha=models.DateField(auto_now_add=True,blank=True,null=True)
 	#Fecha de vencimiento de la cotizacion
-	fecha_vencimiento=models.DateField(blank=True, null=True)
-
+	fecha_vencimiento=models.DateField(blank=True,null=True)
 	#Forma de pago en la que se realiza la cotizacion
-	forma_pago = models.CharField(max_length=20, choices=forma_pago_choices, default=EFECTIVO)
+	forma_pago = models.CharField(max_length=20,choices=forma_pago_choices, default=EFECTIVO)
 	#Estado de la cotizacion, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
 	
@@ -47,12 +44,12 @@ class Cotizacion(models.Model):
 		verbose_name_plural = "Cotizaciones"
 
 	#Permite determinar una representacion en string del objeto  
-	#def __str__(self):
-	#	return self.fecha
+	def __str__(self):
+		return self.fecha
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
-	#def __unicode__(self):
-	#	return self.fecha 
+	def __unicode__(self):
+		return self.fecha 
 
 
 

@@ -28,8 +28,7 @@ tipo_choice = (
 class Empleado(models.Model):
 	"""Define la organizacion del los datos de un empleado en la base de datos."""
 	
-	#related_name permite hacer una referencia desde user a empleado de la siguiente forma 
-	#user.empleado 
+	#related_name permite hacer una referencia desde user a empleado de la siguiente forma user.empleado
 	user = models.OneToOneField(User,related_name='empleado',null=True)
 	#Indentificacion del empleado, debe ser unica
 	identificacion = models.CharField(max_length=20,unique=True,null=False,blank=True)
@@ -40,20 +39,19 @@ class Empleado(models.Model):
 	#Salario actual del empleado
 	salario =  models.BigIntegerField(null=False,blank=True)
 	#Sucursal a la que pertenece el empleado 
-	sucursal = models.ForeignKey(Sucursal)
+	sucursal = models.ForeignKey(Sucursal,default=None)
 	#Imagen o foto del empleado
+	#Tipos de empleados que se puden crear
+	tipo = models.CharField(null=False,max_length=20, choices=tipo_choice,default=VENDEDOR)
+	#Estado de la empleado, Activa/inactiva
+	habilitado = models.BooleanField(default = True)
+	#Foto de perfil del empleado
 	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/empleado")
 	#Thumbnail que permite reducir la imagen del empleado 
 	thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(100, 50)],
 									  format='JPEG',
 									  options={'quality': 60})
-	
-	#Tipos de empleados que se puden crear
-	tipo = models.CharField(null=False,max_length=20, choices=tipo_choice,default=VENDEDOR)
-
-	#Estado de la empleado, Activa/inactiva
-	habilitado = models.BooleanField(default = True)
 
 	#Permite hacer modificaciones agregadas a la representacion del modelo 
 	class Meta:
