@@ -1,9 +1,12 @@
 # -*- encoding: utf-8 -*-
 
 from django.db import models
+from datetime import datetime 
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 from apps.vehiculo.models import Vehiculo
+
+
 
 # Forma de pago en que se realiza la compra
 CREDITO = 'Credito'
@@ -28,7 +31,7 @@ class Venta(models.Model):
 	#Vehiculo de la venta
 	vehiculo = models.ForeignKey(Vehiculo)
 	#Fecha en que se realiza la venta
-	fecha_venta = models.DateField()
+	fecha_venta=models.DateField(auto_now_add=True, blank=True, null=True)
 	#Descuento aplicado a la venta
 	descuento = models.FloatField()
 	#Precio final de la venta, precio vehiculo - descuento
