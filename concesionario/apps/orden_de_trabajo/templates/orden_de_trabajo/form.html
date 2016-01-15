@@ -4,9 +4,6 @@
 {# Load the tag library #}
 {% load bootstrap3 %}
 
-{# Load CSS and JavaScript #}
-{% bootstrap_javascript %}
-
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
@@ -209,12 +206,10 @@ Gestión Ordenes de Trabajo
 <script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
-<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
 <script>
     $(document).ready(function() {
-        App.init();
         FormWizardValidation.init();
         $('.table').DataTable();
     });

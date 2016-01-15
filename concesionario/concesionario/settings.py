@@ -72,6 +72,7 @@ INSTALLED_APPS = (
 	'apps.cliente',
 	#Administrad el crud de orden de trabajo
 	'apps.orden_de_trabajo',
+	'apps.cotizacion_orden_de_trabajo',
 	#Administra el crud de venta
 	'apps.venta',
 	#Administra el crud de cotizacion

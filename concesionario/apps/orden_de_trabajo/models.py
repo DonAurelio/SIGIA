@@ -10,18 +10,18 @@ from apps.vehiculo.models import Vehiculo
 
 #El vehiculo esta en el taller, pero no se ha revisado
 PENDIENTE = 'Pendiente'
-#El vehiculo esta en observacion
-EN_OBSERVACION = 'En observacion'
-#El vehiculo esta en reparacion
-EN_REPARACION = 'En reparacion'
-#El vehiculo ya esta reparado
-FINALIZADO = 'Finalizado'
+#Ya esta la cotización de los daños del vehiculo
+COTIZADO = 'Cotizado'
+#El vehiculo esta reparado
+REPARADO = 'Reparado'
+#El vehiculo fue retirado ya que el cliente no acepto su reparacion
+RETIRADO = 'Retirado'
 
 tipo_choice = (
 	(PENDIENTE, 'Pendiente'),
-	(EN_OBSERVACION, 'En observacion'),
-	(EN_REPARACION, 'En reparacion'),
-	(FINALIZADO, 'Finalizado'),
+	(COTIZADO, 'Cotizado'),
+	(REPARADO, 'Reparado'),
+	(RETIRADO, 'Retirado'),
  )
 
 class OrdenDeTrabajo(models.Model):
@@ -55,11 +55,11 @@ class OrdenDeTrabajo(models.Model):
 
 	#Permite determinar una representacion en string del objeto repuesto
 	def __str__(self):
-		return self.fecha_entrada
+		return self.vehiculo.marca
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
-		return self.fecha_entrada 
+		return self.vehiculo.marca 
 
 
 

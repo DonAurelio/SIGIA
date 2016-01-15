@@ -4,9 +4,7 @@
 
 {% block css %}
 {{ block.super }}
-<!-- ================== BEGIN PAGE LEVEL STYLE TABLE================== -->
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 {% block breadcrumb %}
 Gestion de Clientes
@@ -16,11 +14,6 @@ Gestion de Clientes
 {% block content %}
                 <!-- begin col-12 -->
                 <div class="col-md-12">
-                    
-                    <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'cliente:crear' %}" class="btn btn-sm btn-success"><i class="fa fa-plus m-r-5"></i>Nuevo Cliente</a>
-                    </div>
-
                     <!-- begin panel -->
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
@@ -85,13 +78,6 @@ Gestion de Clientes
 
 {% block javascript %}
 {{ block.super }}
-
-    <!-- ================== BEGIN PAGE LEVEL JS TABLE ================== -->
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
-    <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-    <script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
-    <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-    <!-- ================== END PAGE LEVEL JS ================== -->
-
 {% endblock %}

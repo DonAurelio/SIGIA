@@ -26,8 +26,8 @@ class CotizacionOrdenDeTrabajo(models.Model):
 		verbose_name_plural = "Cotizaciones Ordenes de Trabajo"
 
 	def __str__(self):
-		return "Cotizacion", self.id
+		return "Cotizacion"
 
 	def __unicode__(self):
-		return "Cotizacion", self.id
+		return u"Cotizacion"
 

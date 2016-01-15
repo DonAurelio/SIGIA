@@ -51,7 +51,7 @@
                     <div class="image-info">
                         <h5 class="title">{{ orden.vehiculo.modelo }}</h5>
                         <div class="pull-right">
-                            <a href="javascript:;">Cotizacion</a>
+                            <a href="{% url 'cotizacion_orden_de_trabajo:crear' orden.id %}">Cotizacion</a>
                         </div>
                         <div class="rating">
                             <span class="star active"></span>

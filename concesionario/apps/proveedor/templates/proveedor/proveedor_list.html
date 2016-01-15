@@ -10,10 +10,8 @@
 
 {% block css %}
 {{ block.super }}
-    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
 {% block breadcrumb %}
@@ -25,11 +23,6 @@ Gestion de Provedores
 {% block content %}
                 <!-- begin col-12 -->
                 <div class="col-md-12">
-
-                    <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'proveedor:crear' %}" class="btn btn-sm btn-success"><i class="fa fa-plus m-r-5"></i> Nuevo Proveedor</a>
-                    </div>
-  
                     <!-- begin panel -->
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
@@ -98,6 +91,4 @@ Gestion de Provedores
 {{ block.super }}
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
-    <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
-
 {% endblock %}

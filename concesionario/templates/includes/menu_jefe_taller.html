@@ -1,10 +1,15 @@
-<li>
-	<a href="{% url 'cliente:listar' %}">
+<li class="has-sub">
+	<a href="javascript:;">
+		<b class="caret pull-right"></b>
 		<i class="fa fa-users"></i>
 		<span >Clientes</span>
 	</a>
+	<ul class="sub-menu">
+		<li><a href="{% url 'cliente:crear' %}"> Nuevo </a></li>
+		<li><a href="{% url 'cliente:listar' %}"> Listar/Editar</a></li>
+	</ul>
 </li>
-<li class="has-sub active">
+<li class="has-sub">
 	<a href="javascript:;">
 		<b class="caret pull-right"></b>
 		<i class="fa fa-archive"></i>
@@ -14,7 +19,7 @@
 	</a>
 	<ul class="sub-menu">
 		<li><a href="{% url 'orden_de_trabajo:crear' %}"> Nuevo </a></li>
-		<li><a href="{% url 'orden_de_trabajo:listar' %}"> Listar/Editar</a></li>
+		<li><a href="{% url 'orden_de_trabajo:listar' user.empleado.sucursal.id %}"> Listar/Editar</a></li>
 	</ul>
 </li>
 <!-- Factura orden de trabajo -->

@@ -1,25 +1,57 @@
 					<!-- Opcione del menu para el gerente -->
 
 					<!-- Sucursal -->
-					<li>
-						<a href="{% url 'sucursal:listar' %}"><i class="fa fa-building"></i><span >Sucursales</span></a>
+					<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-building"></i>
+							<span >Sucursales</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#modal-dialog" data-toggle="modal">Nuevo</a></li>
+							<li><a href="{% url 'sucursal:listar' %}">Listar/Editar</a></li>
+						</ul>
 					</li>
 
 					<!-- Vehiculos -->
-					<li class>
-						<a href="{% url 'vehiculo:listar-vehiculos' %}"><i class="fa fa-car"></i><span>Vehiculos</span></a>
+					<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-car"></i>
+							<span >Vehículos</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'vehiculo:crear' %}">Nuevo</a></li>
+							<li><a href="{% url 'vehiculo:listar-vehiculos' %}">Listar/Editar</a></li>
+						</ul>
 					</li>
 
 					<!-- Repuestos -->
-					<li class>
-						<a href="{% url 'repuesto:listar' %}"><i class="fa fa-steam-square"></i><span>Repuestos</span></a>
+					<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-steam-square"></i>
+							<span >Repuestos</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'repuesto:crear' %}">Nuevo</a></li>
+							<li><a href="{% url 'repuesto:listar' %}">Listar/Editar</a></li>
+						</ul>
 					</li>
-
+					
 					<!-- Proveedores -->
-					<li class>
-						<a href="{% url 'proveedor:listar' %}"><i class="fa fa-steam"></i><span>Proveedores</span></a>
+					<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-steam"></i>
+							<span >Proveedores</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'proveedor:crear' %}">Nuevo</a></li>
+							<li><a href="{% url 'proveedor:listar' %}">Listar/Editar</a></li>
+						</ul>
 					</li>
-
+					
 					<!-- Graficas -->
 					<li class="has-sub">
 						<a href="javascript:;">
