@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block breadcrumb %} Gestión Ordenes de Trabajo{% endblock %}
-{% block section_title %} Ordenes Pendientes{% endblock %}
+{% block section_title %} Ordenes {% endblock %}
 {% block section_subtitle %} Seleccione la orden de trabajo que desea revisar{% endblock %}
 
 {% block content %}
@@ -23,10 +23,10 @@
                         Ordenes
                     </a>
                     <a href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
-                        Cotizadas
+                        Ordenes Cotizadas
                     </a>
                     <a href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
-                        Gallery Group 3
+                        Ordenes Realizadas
                     </a>
                     <a href="#gallery-group-4" class="btn btn-default btn-xs" data-option-value=".gallery-group-4">
                         Gallery Group 4
@@ -45,20 +45,18 @@
                             {% endif %}
                         </a>
                         <p class="image-caption">
-                            {{ orden.vehiculo.marca }}
+                            {{ orden.cliente.nombre }}
                         </p>
                     </div>
                     <div class="image-info">
-                        <h5 class="title">{{ orden.vehiculo.modelo }}</h5>
+                        <h5 class="title">
+                        {{ orden.vehiculo.marca }}
+                        {{ orden.vehiculo.modelo }}
+                        </h5>
                         <div class="pull-right">
-                            <a href="{% url 'cotizacion_orden_de_trabajo:crear' orden.id %}">Cotizacion</a>
-                        </div>
-                        <div class="rating">
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
+                            <a href="{% url 'cotizacion_orden_de_trabajo:crear' orden.id %}"><i class="fa fa-2x fa-calculator"></i></a>
+                            &nbsp;
+                            <a href="{% url 'orden_de_trabajo:actualizar' orden.id %}"><i class="fa fa-2x fa-gears"></i></i></a>
                         </div>
                         <div class="desc">
                             {{ orden.observacion }}
@@ -66,59 +64,38 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% for cotizacion in cotizaciones_ordenes_de_trabajo %}
+                <div class="image gallery-group-2">
+                    <div class="image-inner">
+                        <a href="assets/img/gallery/gallery-1.jpg" data-lightbox="gallery-group-1">
+                            {% if cotizacion.orden_de_trabajo.vehiculo.imagen %}
+                                <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} alt=""/> 
+                            {% else %}
+                                <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
+                            {% endif %}
+                        </a>
+                        <p class="image-caption">
+                            {{ cotizacion.orden_de_trabajo.cliente.nombre }}
+                        </p>
+                    </div>
+                    <div class="image-info">
+                        <h5 class="title">
+                            {{ cotizacion.orden_de_trabajo.vehiculo.marca }}
+                            {{ cotizacion.orden_de_trabajo.vehiculo.modelo }}
+                        </h5>
+                        <div class="pull-right">
+
+                            <a href=""><i class="fa fa-2x fa-wrench"></i></a>
+                            &nbsp;
+                            <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.id %}"><i class="fa fa-2x fa-gears"></i></i></a>
+                        </div>
+                        <div class="desc">
+                            {{ cotizacion.orden_de_trabajo.observacion }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
                 
-                <div class="image gallery-group-2">
-                    <div class="image-inner">
-                        <a href="assets/img/gallery/gallery-4.jpg" data-lightbox="gallery-group-2">
-                            <img src="assets/img/gallery/gallery-4.jpg" alt="" />
-                        </a>
-                        <p class="image-caption">
-                            #4123 - Scottwills Pinecone
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">Donec mi quis volutpat ornare</h5>
-                        <div class="pull-right">
-                            <small>by</small> <a href="javascript:;">Richard Leong</a>
-                        </div>
-                        <div class="rating">
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                        </div>
-                        <div class="desc">
-                            Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut et augue luctus libero dignissim sodales, sapien consequat lacinia fringilla.
-                        </div>
-                    </div>
-                </div>
-                <div class="image gallery-group-2">
-                    <div class="image-inner">
-                        <a href="assets/img/gallery/gallery-5.jpg" data-lightbox="gallery-group-2">
-                            <img src="assets/img/gallery/gallery-5.jpg" alt="" />
-                        </a>
-                        <p class="image-caption">
-                            #9200 Kariminal Rider
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">Donec pretium volutpat ornare</h5>
-                        <div class="pull-right">
-                            <small>by</small> <a href="javascript:;">Derrick Wong</a>
-                        </div>
-                        <div class="rating">
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star"></span>
-                        </div>
-                        <div class="desc">
-                            Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut et augue luctus libero, feugiat sapien consequat lacinia fringilla.
-                        </div>
-                    </div>
-                </div>
                 <div class="image gallery-group-3">
                     <div class="image-inner">
                         <a href="assets/img/gallery/gallery-6.jpg" data-lightbox="gallery-group-3">

@@ -12,7 +12,7 @@ class OrdenDeTrabajoCreateView(CreateView):
 	fields = [
 	'sucursal','empleado','cliente',
 	'vehiculo','placa','observacion']
-	success_url = reverse_lazy('cuenta:perfil')
+	success_url = reverse_lazy('orden_de_trabajo:listar')
 	template_name = 'orden_de_trabajo/form.html'
 
 	def get_context_data(self,**kwargs):
@@ -35,9 +35,8 @@ class OrdenDeTrabajoUpdateView(UpdateView):
 	fields = fields = [
 	'sucursal','empleado','cliente',
 	'vehiculo','placa','observacion',
-	'fecha_entrada','fecha_salida',
-	'habilitado']
-	success_url = reverse_lazy('cuenta:perfil')
+	'fecha_salida','habilitado']
+	success_url = reverse_lazy('orden_de_trabajo:listar')
 	template_name = 'orden_de_trabajo/form.html'
 
 	def get_context_data(self,**kwargs):

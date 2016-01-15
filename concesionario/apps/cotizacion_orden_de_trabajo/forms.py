@@ -28,5 +28,16 @@ class CotizacionOrdenDeTrabajoCreateView(CreateView):
         sucursal_id = orden_de_trabajo.sucursal.id
         cotizacion_orden_de_trabajo = CotizacionOrdenDeTrabajo.objects.get(id=self.object.id)
         cotizacion_orden_de_trabajo.orden_de_trabajo.estado_reparacion = COTIZADO
-        cotizacion_orden_de_trabajo.save()
-        return reverse_lazy('orden_de_trabajo:listar',kwargs={'spk':sucursal_id})
+        cotizacion_orden_de_trabajo.orden_de_trabajo.save()
+        return reverse_lazy('orden_de_trabajo:listar')
+
+class CotizacionOrdenDeTrabajoUpdateView(UpdateView):
+    model = CotizacionOrdenDeTrabajo
+    fields = ['orden_de_trabajo','repuestos','detalles','costo','fecha_vencimiento']
+    template_name = 'cotizacion_orden_de_trabajo/form.html'
+    success_url = reverse_lazy('orden_de_trabajo:listar')
+
+    def get_context_data(self,**kwargs):
+        context = super(CotizacionOrdenDeTrabajoUpdateView,self).get_context_data(**kwargs)
+        context['section_title'] = 'Actualizar Cotización'
+        return context    
