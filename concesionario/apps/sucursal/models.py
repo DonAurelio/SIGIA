@@ -57,6 +57,12 @@ class SucursalVehiculo(models.Model):
 		verbose_name_plural = 'Vehiculos Sucursal'
 		unique_together = ("sucursal", "vehiculo", "color")
 
+	def __str__(self):
+		return self.vehiculo.marca + " " + self.vehiculo.modelo + " " + self.color
+
+	def __unicode__(self):
+		return self.vehiculo.marca + " " + self.vehiculo.modelo + " " + self.color
+
 	def nombre_sucursal(self):
 		return self.sucursal.nombre
 

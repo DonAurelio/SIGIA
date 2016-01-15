@@ -76,7 +76,7 @@
                                         {% if lista_clientes %} 
                                             {% for cliente  in lista_clientes %}
                                             <tr>
-                                                <td><a class="clienteID" href="{% url 'cliente:actualizar' cliente.pk %}"> {{ cliente.identificacion }}</a></td>
+                                                <td><a class="clienteID" name="{{cliente.pk}}"> {{ cliente.identificacion }}</a></td>
                                                 <td>{{ cliente.nombre }}</td>
                                                 <td>{{ cliente.apellido }}</td>
                                                 <td>{{ cliente.ciudad }}</td>
@@ -105,26 +105,22 @@
                                         <table class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Nº de serie</th>
                                                     <th>Marca</th>
                                                     <th>Modelo</th>
-                                                    <th>Imagen</th>
                                                     <th>Precio</th>
-
+                                                    <th>Color</th>
+                                                    <th>Cantidad</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% for vehiculo  in vehiculos %}
+                                            {% for sucursal_vehiculo in sucursal_vehiculos %}
                                                 <tr>
-                                                    <td><a class="vehiculoID" href="{% url 'vehiculo:actualizar' vehiculo.pk %}"> {{ vehiculo.numero_serie }}</a></td>
-                                                    <td>{{ vehiculo.marca }}</td>
-                                                    <td>{{ vehiculo.modelo }}</td>
-                                                    <td>{% if  vehiculo.imagen %}
-                                                            <img src={{ vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner"/> 
-                                                        {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
-                                                        {% endif %} </td>
-                                                        <td>{{ vehiculo.precio }}</td>
+
+                                                    <td><a class="suc_vehiculoID" name="{{sucursal_vehiculo.pk}}"> {{ sucursal_vehiculo.vehiculo.marca }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.modelo }}</td>
+                                                    <td>{{ sucursal_vehiculo.vehiculo.precio }}</td>
+                                                    <td>{{ sucursal_vehiculo.color }}</td>
+                                                    <td>{{ sucursal_vehiculo.cantidad }}</td>
                                                 </tr >
                                             {% endfor %}
                                             </tbody>
@@ -141,12 +137,12 @@
                             <fieldset>
                                 <div class="row">
                                     {% bootstrap_form form %}
-                                    <button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i>Aceptar</button>
                                 </div>
                             </fieldset>
                         </div>
                         <!-- end wizard step-1 -->
                     </div>
+                <button type="submit" class="btn btn-inverse pull-right"><i class="fa fa-cog"></i>Finalizar venta</button>
                 </form>
             </div>
         </div>
@@ -154,13 +150,17 @@
     </div>
     <!-- end col-12 -->
 </div>
-<!-- end row -->>
+<!-- end row -->
             <!-- end row -->
 {% endblock %}
 
 {% block javascript %}
 {{ block.super }}
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<!-- Para funcionamiento de tablas -->
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script> 
+
 <script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
@@ -173,21 +173,20 @@
     $(document).ready(function() {
         App.init();
         FormWizardValidation.init();
-        $("#id_empleado").attr('readonly','readonly');
-        $("#id_cliente").attr('readonly','readonly');
-        $("#id_vehiculo").attr('readonly','readonly');
+        // $("#id_empleado").attr('readonly','readonly');
+        // $("#id_cliente").attr('readonly','readonly');
+        // $("#id_vehiculo").attr('readonly','readonly');
 
         $(".clienteID").click( function (event){
             event.preventDefault();
-            var clickedClienteId = $(this).attr('href').split("/")[2];
+            var clickedClienteId = $(this).attr('name');
             $("#id_cliente").val(clickedClienteId);
             $(".next").click();
         });
-        $(".vehiculoID").click( function (event){
+        $(".suc_vehiculoID").click( function (event){
             event.preventDefault();
-            var clickedVehiculoId = $(this).attr('href').split("/")[2];
-            $("#id_vehiculo").val(clickedVehiculoId);
-
+            var clickedVehiculoId = $(this).attr('name');
+            $("#id_sucursal_vehiculo").val(clickedVehiculoId);
             $(".next").click();
         });
 
