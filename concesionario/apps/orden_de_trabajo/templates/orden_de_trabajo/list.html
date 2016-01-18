@@ -23,13 +23,13 @@
                         Ordenes
                     </a>
                     <a href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
-                        Ordenes Cotizadas
+                        Cotizaciones
                     </a>
                     <a href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
-                        Ordenes Realizadas
+                        Reparados
                     </a>
                     <a href="#gallery-group-4" class="btn btn-default btn-xs" data-option-value=".gallery-group-4">
-                        Gallery Group 4
+                        Retirados
                     </a>
                 </span>
             </div>
@@ -39,7 +39,7 @@
                     <div class="image-inner">
                         <a href="assets/img/gallery/gallery-1.jpg" data-lightbox="gallery-group-1">
                             {% if orden.vehiculo.imagen %}
-                                <img src={{ orden.vehiculo.imagen.url }} alt=""/> 
+                                <img src={{ orden.vehiculo.imagen.url }} alt=""/>
                             {% else %}
                                 <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
                             {% endif %}
@@ -69,7 +69,7 @@
                     <div class="image-inner">
                         <a href="assets/img/gallery/gallery-1.jpg" data-lightbox="gallery-group-1">
                             {% if cotizacion.orden_de_trabajo.vehiculo.imagen %}
-                                <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} alt=""/> 
+                                <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
                             {% else %}
                                 <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
                             {% endif %}
@@ -85,7 +85,7 @@
                         </h5>
                         <div class="pull-right">
 
-                            <a href=""><i class="fa fa-2x fa-wrench"></i></a>
+                            <a href="{% url 'factura_orden_de_trabajo:facturar' cotizacion.id %}"><i class="fa fa-2x fa-wrench"></i></a>
                             &nbsp;
                             <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.id %}"><i class="fa fa-2x fa-gears"></i></i></a>
                         </div>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                
+
                 <div class="image gallery-group-3">
                     <div class="image-inner">
                         <a href="assets/img/gallery/gallery-6.jpg" data-lightbox="gallery-group-3">
@@ -243,4 +243,3 @@
     </script>
 
 {% endblock %}
-            

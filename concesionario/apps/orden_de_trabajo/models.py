@@ -27,15 +27,15 @@ tipo_choice = (
 class OrdenDeTrabajo(models.Model):
 	"""Define la organizacion del los datos de una orden de trabajo en la base de datos."""
 
-	#Empleado que realiza la orden de trabajo, relacion uno a muchos 
+	#Empleado que realiza la orden de trabajo, relacion uno a muchos
 	empleado = models.ForeignKey(Empleado,default=None)
 	#Sucursal a la que ingresa el vehiculo
 	sucursal = models.ForeignKey(Sucursal,default=None)
-	#dueno del auto que entra al taller, relacion uno a muchos 
+	#dueno del auto que entra al taller, relacion uno a muchos
 	cliente = models.ForeignKey(Cliente,default=None)
 	#vehiculo que va a ser reparado
 	vehiculo = models.ForeignKey(Vehiculo,default=None)
-	#placa del vehiculo que entra al taller 
+	#placa del vehiculo que entra al taller
 	placa = models.CharField(null=True,blank=True,max_length=7)
 	#Fecha de entrada al taller
 	fecha_entrada = models.DateField(auto_now_add=True,blank=True, null=True)
@@ -47,8 +47,8 @@ class OrdenDeTrabajo(models.Model):
 	observacion = models.TextField(null=True,blank=True,max_length=200)
 	#Estado de la OrdenDeTrabajo, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
-	
-	#Permite hacer modificaciones agregadas a la representacion del modelo 
+
+	#Permite hacer modificaciones agregadas a la representacion del modelo
 	class Meta:
 		ordering = ['fecha_entrada']
 		verbose_name_plural = "Orden de Trabajo"
@@ -59,10 +59,4 @@ class OrdenDeTrabajo(models.Model):
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
-		return self.vehiculo.marca 
-
-
-
-
-
-
+		return self.vehiculo.marca

@@ -52,7 +52,7 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	#Para utilizar imagekit
 	'imagekit',
-	#Para dar estilos usando bootstrap a los campos de los formularios 
+	#Para dar estilos usando bootstrap a los campos de los formularios
 	'bootstrap3',
 	'django.contrib.humanize',
 	#Apps
@@ -73,11 +73,12 @@ INSTALLED_APPS = (
 	#Administrad el crud de orden de trabajo
 	'apps.orden_de_trabajo',
 	'apps.cotizacion_orden_de_trabajo',
+	'apps.factura_orden_de_trabajo',
 	#Administra el crud de venta
 	'apps.venta',
 	#Administra el crud de cotizacion
 	'apps.cotizacion',
-	#Administra el crud de proveedores 
+	#Administra el crud de proveedores
 	'apps.proveedor',
 )
 
@@ -130,7 +131,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-#Idioma castellano 
+#Idioma castellano
 LANGUAGE_CODE = 'es'
 #Idioma ingles
 #LANGUAGE_CODE = 'en-us'
@@ -158,5 +159,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 #MEDIA_URL = 'http://localhost:8000/media/'
 MEDIA_URL = '/media/'
 
-#Humanize settings 
+#Humanize settings
 USE_THOUSAND_SEPARATOR = True
