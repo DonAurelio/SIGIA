@@ -11,15 +11,7 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
         cotizacion = CotizacionOrdenDeTrabajo.objects.get(id=kwargs['pk'])
         cotizacion.orden_de_trabajo.estado_reparacion = REPARADO
         cotizacion.orden_de_trabajo.save()
-        costo_total_respuestos = 0
-        for repuesto in cotizacion.repuestos.all():
-            costo_total_respuestos += repuesto.precio
-
-        costo_total_reparacion = costo_total_respuestos + cotizacion.costo
-        context = {
-            'costo_total_respuestos':costo_total_respuestos,
-            'costo_total_reparacion':costo_total_reparacion
-        }
+        context = {}
 
         return render_to_response(
             'factura_orden_de_trabajo/form.html',

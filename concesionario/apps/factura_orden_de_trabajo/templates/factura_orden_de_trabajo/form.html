@@ -14,35 +14,34 @@
                     <a href="javascript:;" class="btn btn-sm btn-success m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
                     <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a>
                     </span>
-                    Company Name, Inc
+                    {{ user.empleado.sucursal.nombre }}, Inc
                 </div>
                 <div class="invoice-header">
                     <div class="invoice-from">
-                        <small>from</small>
+                        <small>de</small>
                         <address class="m-t-5 m-b-5">
-                            <strong>Twitter, Inc.</strong><br />
-                            Street Address<br />
-                            City, Zip Code<br />
-                            Phone: (123) 456-7890<br />
-                            Fax: (123) 456-7890
+                            <strong>{{ user.empleado.sucursal.nombre }}, Inc.</strong><br />
+                            {{ user.empleado.sucursal.direccion }}<br />
+                            {{ user.empleado.sucursal.ciudad }}<br />
+                            Telefono: (032) {{ user.empleado.sucursal.telefono }}<br />
                         </address>
                     </div>
                     <div class="invoice-to">
-                        <small>to</small>
+                        <small>Para</small>
                         <address class="m-t-5 m-b-5">
-                            <strong>Company Name</strong><br />
+                            <strong>{{ cotizacion.orden_de_trabajo.cliente.nombre }} {{ cotizacion.orden_de_trabajo.cliente.apellido }}</strong><br />
                             Street Address<br />
-                            City, Zip Code<br />
-                            Phone: (123) 456-7890<br />
-                            Fax: (123) 456-7890
+                            {{ cotizacion.orden_de_trabajo.cliente.ciudad }}, {{ cotizacion.orden_de_trabajo.cliente.departamento }}<br />
+                            Telefono: (032) {{ cotizacion.orden_de_trabajo.cliente.telefono }}<br />
+                            Celular: {{ cotizacion.orden_de_trabajo.cliente.celular }}
                         </address>
                     </div>
                     <div class="invoice-date">
-                        <small>Invoice / July period</small>
-                        <div class="date m-t-5">August 3,2012</div>
+                        <small>Factuta / Orden de Trabajo</small>
+                        <div class="date m-t-5">{% now 'SHORT_DATE_FORMAT' %}</div>
                         <div class="invoice-detail">
-                            #0000123DSS<br />
-                            Services Product
+                            #Orden de Trabajo: {{ cotizacion.orden_de_trabajo.id }}<br />
+                            Servicio de Mecanica Automotriz
                         </div>
                     </div>
                 </div>
@@ -51,7 +50,7 @@
                         <table class="table table-invoice">
                             <thead>
                                 <tr>
-                                    <th>TASK DESCRIPTION</th>
+                                    <th>DESCRIPCIÓN DE REPUESTOS</th>
                                     <th>RATE</th>
                                     <th>HOURS</th>
                                     <th>LINE TOTAL</th>
