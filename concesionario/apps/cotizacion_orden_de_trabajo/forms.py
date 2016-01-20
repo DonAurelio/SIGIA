@@ -10,7 +10,6 @@ from apps.orden_de_trabajo.models import COTIZADO
 from django.forms import inlineformset_factory
 from django.forms import ModelForm
 
-
 class CotizacionOrdenDeTrabajoForm(ModelForm):
     class Meta:
         model = CotizacionOrdenDeTrabajo
@@ -25,12 +24,11 @@ RepuestoCantidadFormSet = inlineformset_factory(
     CotizacionOrdenDeTrabajo,
     RepuestoCantidad,
     fields=('repuesto','cantidad'),
-    extra=1)
+    extra=2)
 
 class CotizacionOrdenDeTrabajoCreateView(CreateView):
     model = CotizacionOrdenDeTrabajo
     form_class = CotizacionOrdenDeTrabajoForm
-    #fields = ['orden_de_trabajo','detalles','costo','fecha_vencimiento']
     template_name = 'cotizacion_orden_de_trabajo/form.html'
 
     def get_context_data(self,**kwargs):

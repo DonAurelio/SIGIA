@@ -1,6 +1,18 @@
 <li class="has-sub">
 	<a href="javascript:;">
 		<b class="caret pull-right"></b>
+		<i class="fa fa-tasks"></i>
+		<span>
+			Tareas
+		</span>
+	</a>
+	<ul class="sub-menu">
+		<li><a href="{% url 'orden_de_trabajo:listar' %}"> Listar/Editar</a></li>
+	</ul>
+</li>
+<li class="has-sub">
+	<a href="javascript:;">
+		<b class="caret pull-right"></b>
 		<i class="fa fa-users"></i>
 		<span >Clientes</span>
 	</a>
@@ -19,7 +31,6 @@
 	</a>
 	<ul class="sub-menu">
 		<li><a href="{% url 'orden_de_trabajo:crear' %}"> Nuevo </a></li>
-		<li><a href="{% url 'orden_de_trabajo:listar' %}"> Listar/Editar</a></li>
 	</ul>
 </li>
 <!-- Factura orden de trabajo -->
@@ -28,7 +39,7 @@
 		<b class="caret pull-right"></b>
 		<i class="fa fa-money"></i>
 		<span>
-			Factura 
+			Factura
 		</span>
 	</a>
 	<ul class="sub-menu">
