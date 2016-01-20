@@ -47,7 +47,7 @@ class CotizacionOrdenDeTrabajoCreateView(CreateView):
             self.object = form.save()
             formset.instance = self.object
             formset.save()
-            return redirect(self.get_success_url)
+            return redirect(self.get_success_url())
         else:
             return self.render_to_response(
                 self.get_context_data(form=form)
