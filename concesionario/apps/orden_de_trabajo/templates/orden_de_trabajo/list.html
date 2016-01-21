@@ -56,7 +56,9 @@
                         <div class="pull-right">
                             <a href="{% url 'cotizacion_orden_de_trabajo:crear' orden.id %}"><i class="fa fa-2x fa-calculator"></i></a>
                             &nbsp;
-                            <a href="{% url 'orden_de_trabajo:actualizar' orden.id %}"><i class="fa fa-2x fa-gears"></i></i></a>
+                            <a href="{% url 'orden_de_trabajo:actualizar' orden.id %}"><i class="fa fa-2x fa-pencil-square-o"></i></i></a>
+                            &nbsp;
+                            <a href=""><i class="fa fa-2x fa-external-link"></i></i></a>
                         </div>
                         <div class="desc">
                             {{ orden.observacion }}
@@ -84,10 +86,13 @@
                             {{ cotizacion.orden_de_trabajo.vehiculo.modelo }}
                         </h5>
                         <div class="pull-right">
-
+                            <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.id %}"><i class="fa fa-2x fa-calculator"></i></i></a>
+                            &nbsp;
                             <a href="{% url 'factura_orden_de_trabajo:facturar' cotizacion.id %}"><i class="fa fa-2x fa-wrench"></i></a>
                             &nbsp;
-                            <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.id %}"><i class="fa fa-2x fa-gears"></i></i></a>
+                            <a href="{% url 'orden_de_trabajo:actualizar' cotizacion.orden_de_trabajo.id %}"><i class="fa fa-2x fa-pencil-square-o"></i></i></a>
+                            &nbsp;
+                            <a href=""><i class="fa fa-2x fa-external-link"></i></i></a>
                         </div>
                         <div class="desc">
                             {{ cotizacion.orden_de_trabajo.observacion }}
