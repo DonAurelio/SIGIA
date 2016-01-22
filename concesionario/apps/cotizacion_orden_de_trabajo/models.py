@@ -3,6 +3,7 @@
 from django.db import models
 from apps.orden_de_trabajo.models import OrdenDeTrabajo
 from apps.repuesto.models import Repuesto
+from datetime import datetime
 
 
 class CotizacionOrdenDeTrabajo(models.Model):
@@ -27,6 +28,17 @@ class CotizacionOrdenDeTrabajo(models.Model):
 
 	def __unicode__(self):
 		return u"Cotizacion"
+
+	def es_valida(self):
+		""" Documentacion es_valida
+
+			Determina se la cotizacion es valida o no se ha vencido
+			hasta la fecha actual.
+		"""
+		if datetime.now().date() > self.fecha_vencimiento:
+			return False
+		return True
+
 
 class RepuestoCantidad(models.Model):
 	# identificacion de la Cotizacion orden de trabajo

@@ -24,7 +24,7 @@
 		$(document).ready(function() {
 			App.init();
 			Dashboard.init();
-			{% if messages and modal_messages %}
+			{% if messages %}
 			$(".modal").modal('toggle');
 			{% endif %}
 

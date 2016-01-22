@@ -57,6 +57,9 @@
                   {% endfor %}
                   </div>
                 </fieldset>
+                <p class="text-right m-b-0">
+                  <a href="javascript:;" id="add-repuesto" class="btn btn-primary m-r-5"><i class="fa fa-plus"></i> Repuesto</a>
+                </p>
               </div>
               <!-- end wizard step-1 -->
               <!-- begin wizard step-2 -->
@@ -64,13 +67,12 @@
                 <fieldset>
                 {% bootstrap_form form %}
                 </fieldset>
+                <p class="text-right m-b-0">
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </p>
               </div>
               <!-- end wizard step-2 -->
               </div>
-              <p class="text-right m-b-0">
-                <a href="javascript:;" id="add-repuesto" class="btn btn-primary m-r-5">Nuevo Repuesto</a>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-              </p>
             </div>
 
           </div>

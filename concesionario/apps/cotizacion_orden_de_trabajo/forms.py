@@ -24,7 +24,8 @@ RepuestoCantidadFormSet = inlineformset_factory(
     CotizacionOrdenDeTrabajo,
     RepuestoCantidad,
     fields=('repuesto','cantidad'),
-    extra=1)
+    extra=1,
+    can_delete=False)
 
 class CotizacionOrdenDeTrabajoCreateView(CreateView):
     model = CotizacionOrdenDeTrabajo
