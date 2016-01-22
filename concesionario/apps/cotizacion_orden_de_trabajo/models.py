@@ -38,3 +38,4 @@ class RepuestoCantidad(models.Model):
 
 	class Meta:
 		verbose_name_plural = "Repuestos Cantidad"
+		unique_together = (("cotizacion_orden_de_trabajo", "repuesto"),)

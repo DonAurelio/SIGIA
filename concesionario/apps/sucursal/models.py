@@ -6,9 +6,9 @@ from apps.repuesto.models import Repuesto
 
 class Sucursal(models.Model):
 	"""Define la organizacion de los datos de una sucursal en la base de datos"""
-	
+
 	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
-	
+
 	#Nombre de la sucursal
 	nombre = models.CharField(null=True,blank=True,max_length=20,unique=True)
 	#Direccion en la cual queda ubicada la sucursal
@@ -19,12 +19,12 @@ class Sucursal(models.Model):
 	ciudad = models.CharField(null=True,blank=True,max_length = 50)
 	#Estado de la sucursa, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
-	#Vehiculos que tiene la sucursal en venta 
+	#Vehiculos que tiene la sucursal en venta
 	vehiculos = models.ManyToManyField(Vehiculo,through='SucursalVehiculo')
-	#Repuestos que tiene la sucursal 
+	#Repuestos que tiene la sucursal
 	repuestos = models.ManyToManyField(Repuesto,through='SucursalRepuesto')
-		
-	#Permite hacer modificaciones agregadas a la representacion del modelo 
+
+	#Permite hacer modificaciones agregadas a la representacion del modelo
 	class Meta:
 		ordering = ['nombre']
 		verbose_name_plural = "Sucursales"
@@ -40,7 +40,7 @@ class Sucursal(models.Model):
 
 class SucursalVehiculo(models.Model):
 	"""Define la cantidad que existe de cada vehiculo por sucursal."""
-	
+
 	#Sucursal a la que pertenece el vehiculo
 	sucursal = models.ForeignKey(Sucursal,default=None)
 	#Vehiculo
@@ -51,7 +51,7 @@ class SucursalVehiculo(models.Model):
 	cantidad = models.IntegerField(null=True,blank=True)
 	#Estado de la vehiculo, Activa/inactiva
 	habilitado = models.BooleanField(default=True)
-	
+
 	class Meta:
 		ordering = ['cantidad']
 		verbose_name_plural = 'Vehiculos Sucursal'
@@ -78,7 +78,7 @@ class SucursalVehiculo(models.Model):
 
 class SucursalRepuesto(models.Model):
 	"""Define la cantidad que existe de cada repuesto por sucursal."""
-	
+
 	#Sucursal a la que pertenece el repuesto
 	sucursal = models.ForeignKey(Sucursal,default=None)
 	#Repuesto
@@ -100,11 +100,12 @@ class SucursalRepuesto(models.Model):
 	class Meta:
 		ordering = ['cantidad']
 		verbose_name_plural = 'Repuestos Sucursal'
+		unique_together = (("sucursal", "repuesto"),)
 
 	#Permite determinar una representacion en string del objeto SucursalRepuesto
 	def __str__(self):
-		return self.sucursal.nombre + " " + self.repuesto.nombre 
+		return self.sucursal.nombre + " " + self.repuesto.nombre
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
-		return self.sucursal.nombre + " " + self.repuesto.nombre 
+		return self.sucursal.nombre + " " + self.repuesto.nombre
