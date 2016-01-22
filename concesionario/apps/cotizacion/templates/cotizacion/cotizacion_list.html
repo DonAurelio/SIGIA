@@ -1,24 +1,19 @@
 
 {% extends "base.html" %}
 {% load staticfiles %}
-
+ 
 {% block css %}
 {{ block.super }}
-<!-- ================== BEGIN PAGE LEVEL STYLE TABLE================== -->
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
-
-{% block section_title %}Listado de Cotizaciones Realizadas{% endblock %}
+{% block breadcrumb %}
+Gestion de Cotizaciones
+{% endblock %}
+{% block section_title %}{% endblock %}
 {% block section_subtitle %}Seleccione la cotización que desea editar{% endblock %}
 {% block content %}
                 <!-- begin col-12 -->
                 <div class="col-md-12">
-                    
-                    <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'cotizacion:crear' %}" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i>Nueva Cotización</a>
-                    </div>
-
                     <!-- begin panel -->
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
@@ -42,7 +37,6 @@
                                         <th>Fecha Vencimiento</th>
                                         <th>Forma Pago</th>
                                         <th>Vendedor</th>
-                                        <th>PDF</th>
                                          </tr>
                                     </thead>
                                      <tbody>
@@ -55,9 +49,7 @@
                                     <td>{{ cotizacion.fecha_vencimiento }}</td>
                                     <td>{{ cotizacion.forma_pago }}</td>
                                     <td>{{ cotizacion.empleado }}</td>
-                                    <td><a href="{% url 'vehiculo:listar-vehiculos-inventario' %}">
-                                                            <button type="button" class="btn btn-info btn-xs"><i class="fa fa-file"></i> ver</button>                                
-                                                        </a></td>                                     
+                                                                         
                             {% endfor %} 
                         {% else %} 
                             <p><h2>No hay Cotizaciones Realizadas.</h2></p>

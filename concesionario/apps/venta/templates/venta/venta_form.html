@@ -10,9 +10,10 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-{% block css %}
+{% block css %} 
 {{ block.super }}
-    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+
+       <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
         <!-- Para gestionar Fechas -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css'%}" rel="stylesheet" />
@@ -21,9 +22,14 @@
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
+{% block breadcrumb %}
+Gestión de Ventas
+{% endblock %}
 {% block section_title %}{{ section_title }}{% endblock %}
- 
+{% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
+
+ 
     <!-- begin col-12 --><div class="row">
     <!-- begin col-12 -->
     <div class="col-md-12">
@@ -171,7 +177,6 @@
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
-        App.init();
         FormWizardValidation.init();
         // $("#id_empleado").attr('readonly','readonly');
         // $("#id_cliente").attr('readonly','readonly');

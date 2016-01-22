@@ -1,23 +1,20 @@
 
 {% extends "base.html" %}
 {% load staticfiles %}
-
+ 
 {% block css %}
 {{ block.super }}
-<!-- ================== BEGIN PAGE LEVEL STYLE TABLE================== -->
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
-
-{% block section_title %}Listado de Ventas {% endblock %}
-{% block section_subtitle %}Seleccione un elemento para modificar su información{% endblock %}
+{% block breadcrumb %}
+Gestion de Ventas
+{% endblock %} 
+{% block section_title %}{% endblock %}
+{% block section_subtitle %} {% endblock %}
 {% block content %}
                 <!-- begin col-12 -->
                 <div class="col-md-12">
                     
-                    <div class="email-btn-row hidden-xs">
-                        <a href="{% url 'venta:crear' %}" class="btn btn-sm btn-inverse"><i class="fa fa-plus m-r-5"></i>Nueva Venta</a>
-                    </div>
 
                     <!-- begin panel -->
                     <div class="panel panel-inverse">
@@ -28,7 +25,7 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
-                            <h4 class="panel-title">Clientes</h4>
+                            <h4 class="panel-title">Ventas</h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">

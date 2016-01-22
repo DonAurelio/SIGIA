@@ -10,20 +10,27 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-{% block css %}
+{% block css %} 
 {{ block.super }}
-    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+
+        <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
 
-    	<!-- Para gestionar Fechas -->
-	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css'%}" rel="stylesheet" />
- 	<link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css'%}" rel="stylesheet" />
- 	<!-- fin Para gestionar Fechas -->
+        <!-- Para gestionar Fechas -->
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css'%}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css'%}" rel="stylesheet" />
+    <!-- fin Para gestionar Fechas -->
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
 
+{% block breadcrumb %}
+Gestión de Cotizaciones
+{% endblock %}
 {% block section_title %}{{ section_title }}{% endblock %}
+{% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
+
+ 
     
 <div class="row">
     <div class="col-md-12">
@@ -193,7 +200,6 @@
     } );
 
     $(document).ready(function() {
-        App.init();
         FormWizardValidation.init();
     });
 

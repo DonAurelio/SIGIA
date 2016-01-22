@@ -55,6 +55,8 @@ INSTALLED_APPS = (
 	#Para dar estilos usando bootstrap a los campos de los formularios
 	'bootstrap3',
 	'django.contrib.humanize',
+	#para el pdf 
+	'easy_pdf',
 	#Apps
 	#Administra el inicio y cierre de sesion
 	'apps.inicio',

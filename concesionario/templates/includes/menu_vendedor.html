@@ -1,24 +1,48 @@
 <!-- Opcione del menu para el vendedor -->
 
-<!-- Clientes -->
+<!-- Clientes --> 
 
-
-<li>
-	<a href="{% url 'cliente:listar' %}"><i class="fa fa-users"></i><span >Gestionar Clientes</span></a>
-</li>
-
+	<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-users"></i>
+							<span >Gestionar Clientes</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'cliente:crear' %}">Nuevo</a></li>
+							<li><a href="{% url 'cliente:listar' %}">Listar/Editar</a></li>
+						</ul>
+					</li>
 
 
 <!-- Cotizacion -->
-<li>
-	<a href="{% url 'cotizacion:listar' %}"><i class="fa fa-calculator"></i><span >Cotizacion</span></a>
-</li>
+	<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-calculator"></i>
+							<span >Gestionar Cotizaciones</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'cotizacion:crear' %}">Nueva</a></li>
+							<li><a href="{% url 'cotizacion:listar' %}">Ver Cotizaciones</a></li>
+						</ul>
+					</li>
 
  
 <!-- Ventas -->
- <li class="has-sub">
-	<li><a href="{% url 'venta:listar' %}"><i class="fa fa-car"></i><span >Ventas</span></a></li>
-</li>
+	<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-shopping-cart"></i>
+							<span >Gestionar Venta</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'venta:crear' %}">Nueva</a></li>
+							<li><a href="{% url 'venta:listar' %}">Ver Ventas</a></li>
+						</ul>
+					</li>
+
+
 
 
 <!-- Inventario Carros-->
