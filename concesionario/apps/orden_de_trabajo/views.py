@@ -3,8 +3,10 @@
 from django.views.generic import ListView
 from .models import OrdenDeTrabajo
 from .models import COTIZADO
+from .models import REPARADO
 from apps.sucursal.models import Sucursal
 from apps.cotizacion_orden_de_trabajo.models import CotizacionOrdenDeTrabajo
+from apps.factura_orden_de_trabajo.models import FacturaOrdenDeTrabajo
 
 class OrdenDeTrabajoListView(ListView):
 	model = OrdenDeTrabajo
@@ -19,8 +21,8 @@ class OrdenDeTrabajoListView(ListView):
 		context = super(OrdenDeTrabajoListView,self).get_context_data()
 		sucursal = Sucursal.objects.get(id=self.request.user.empleado.sucursal.id)
 		context['cotizaciones_ordenes_de_trabajo'] = CotizacionOrdenDeTrabajo.objects.filter(orden_de_trabajo__sucursal=sucursal)
+		context['facturas_ordenes_de_trabajo'] = FacturaOrdenDeTrabajo.objects.filter(
+			cotizacion__orden_de_trabajo__sucursal=sucursal,
+			cotizacion__orden_de_trabajo__estado_reparacion=REPARADO
+		)
 		return context
-
-
-
-

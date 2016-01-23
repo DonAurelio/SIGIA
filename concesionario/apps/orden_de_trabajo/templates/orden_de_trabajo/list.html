@@ -16,9 +16,6 @@
 {% block content %}
             <div id="options" class="m-b-10">
                 <span class="gallery-option-set" id="filter" data-option-key="filter">
-                    <a href="#show-all" class="btn btn-default btn-xs active" data-option-value="*">
-                        Todos
-                    </a>
                     <a href="#gallery-group-1" class="btn btn-default btn-xs" data-option-value=".gallery-group-1">
                         Ordenes
                     </a>
@@ -100,137 +97,36 @@
                     </div>
                 </div>
                 {% endfor %}
-
+                {% for factura in facturas_ordenes_de_trabajo %}
                 <div class="image gallery-group-3">
                     <div class="image-inner">
-                        <a href="assets/img/gallery/gallery-6.jpg" data-lightbox="gallery-group-3">
-                            <img src="assets/img/gallery/gallery-6.jpg" alt="" />
+                        <a href="assets/img/gallery/gallery-1.jpg" data-lightbox="gallery-group-1">
+                            {% if factura.cotizacion.orden_de_trabajo.vehiculo.imagen %}
+                                <img src={{ factura.cotizacion.orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
+                            {% else %}
+                                <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
+                            {% endif %}
                         </a>
                         <p class="image-caption">
-                            #1832 Scottwills Autumn
+                            {{ factura.cotizacion.orden_de_trabajo.cliente.nombre }}
                         </p>
                     </div>
                     <div class="image-info">
-                        <h5 class="title">Mi quis volutpat ornare sodales</h5>
+                        <h5 class="title">
+                            {{ factura.cotizacion.orden_de_trabajo.vehiculo.marca }}
+                            {{ factura.cotizacion.orden_de_trabajo.vehiculo.modelo }}
+                        </h5>
                         <div class="pull-right">
-                            <small>by</small> <a href="javascript:;">Apple Tong</a>
-                        </div>
-                        <div class="rating">
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
+                            <a href=""><i class="fa fa-2x fa-file-text-o"></i></a>
+                            &nbsp;
+                            <a href=""><i class="fa fa-2x fa-external-link"></i></i></a>
                         </div>
                         <div class="desc">
-                            Ut et augue luctus libero dignissim sodales. Fusce feugiat sapien consequat lacinia fringilla. Vivamus eget ultricies arcu.
+                            {{ factura.cotizacion.orden_de_trabajo.observacion }}
                         </div>
                     </div>
                 </div>
-                <div class="image gallery-group-3">
-                    <div class="image-inner">
-                        <a href="assets/img/gallery/gallery-7.jpg" data-lightbox="gallery-group-3">
-                            <img src="assets/img/gallery/gallery-7.jpg" alt="" />
-                        </a>
-                        <p class="image-caption">
-                            #0229 Scottwills Autumn 2
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">Vestibulum ante ipsum primis</h5>
-                        <div class="pull-right">
-                            <small>by</small> <a href="javascript:;">Thomas Wong</a>
-                        </div>
-                        <div class="rating">
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                        </div>
-                        <div class="desc">
-                            Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut et augue luctus libero dignissim sodales, sapien consequat lacinia fringilla.
-                        </div>
-                    </div>
-                </div>
-                <div class="image gallery-group-4">
-                    <div class="image-inner">
-                        <a href="assets/img/gallery/gallery-8.jpg" data-lightbox="gallery-group-4">
-                            <img src="assets/img/gallery/gallery-8.jpg" alt="" />
-                        </a>
-                        <p class="image-caption">
-                            #5721 Scottwills Snow
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">Nunc eget hendrerit nisi sodales</h5>
-                        <div class="pull-right">
-                            <small>by</small> <a href="javascript:;">Andy Wong</a>
-                        </div>
-                        <div class="rating">
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                        </div>
-                        <div class="desc">
-                            Ut et augue nisi sodales luctus libero dignissim sodales. Fusce feugiat nisi sodales sapien consequat lacinia fringilla.
-                        </div>
-                    </div>
-                </div>
-                <div class="image gallery-group-4">
-                    <div class="image-inner">
-                        <a href="assets/img/gallery/gallery-9.jpg" data-lightbox="gallery-group-4">
-                            <img src="assets/img/gallery/gallery-9.jpg" alt="" />
-                        </a>
-                        <p class="image-caption">
-                            #9921 Scottwills Riverbank
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">Nunc eget hendrerit nisi dignissim</h5>
-                        <div class="pull-right">
-                            <small>by</small> <a href="javascript:;">William Tan</a>
-                        </div>
-                        <div class="rating">
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                        </div>
-                        <div class="desc">
-                            Ut et augue luctus libero dignissim sodales. Fusce feugiat sapien consequat libero dignissim lacinia fringilla.
-                        </div>
-                    </div>
-                </div>
-                <div class="image gallery-group-4">
-                    <div class="image-inner">
-                        <a href="assets/img/gallery/gallery-10.jpg" data-lightbox="gallery-group-4">
-                            <img src="assets/img/gallery/gallery-10.jpg" alt="" />
-                        </a>
-                        <p class="image-caption">
-                            #6436 Scottwills Buss
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">Sed mollis nisi sed auctor</h5>
-                        <div class="pull-right">
-                            <small>by</small> <a href="javascript:;">David King</a>
-                        </div>
-                        <div class="rating">
-                            <span class="star active"></span>
-                            <span class="star active"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                        </div>
-                        <div class="desc">
-                            Vestibulum dictum pharetra leo sed euismod. Lorem ipsum dolor sit amet, consectetur adipiscing feugiat sapien elit.
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
 {% endblock %}
 {% block javascript %}

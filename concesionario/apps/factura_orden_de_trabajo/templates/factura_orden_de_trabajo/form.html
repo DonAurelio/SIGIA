@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load factura_tags %}
 {% block css %}
 {{ block.super }}
   <link href="{% static 'color_admin/assets/css/invoice-print.min.css' %}" rel="stylesheet" />
@@ -29,18 +30,18 @@
                     <div class="invoice-to">
                         <small>Para</small>
                         <address class="m-t-5 m-b-5">
-                            <strong>{{ cotizacion.orden_de_trabajo.cliente.nombre }} {{ cotizacion.orden_de_trabajo.cliente.apellido }}</strong><br />
+                            <strong>{{ factura.cotizacion.orden_de_trabajo.cliente.nombre }} {{ factura.cotizacion.orden_de_trabajo.cliente.apellido }}</strong><br />
                             Street Address<br />
-                            {{ cotizacion.orden_de_trabajo.cliente.ciudad }}, {{ cotizacion.orden_de_trabajo.cliente.departamento }}<br />
-                            Telefono: (032) {{ cotizacion.orden_de_trabajo.cliente.telefono }}<br />
-                            Celular: {{ cotizacion.orden_de_trabajo.cliente.celular }}
+                            {{ factura.cotizacion.orden_de_trabajo.cliente.ciudad }}, {{ factura.cotizacion.orden_de_trabajo.cliente.departamento }}<br />
+                            Telefono: (032) {{ factura.cotizacion.orden_de_trabajo.cliente.telefono }}<br />
+                            Celular: {{ factura.cotizacion.orden_de_trabajo.cliente.celular }}
                         </address>
                     </div>
                     <div class="invoice-date">
                         <small>Factuta / Orden de Trabajo</small>
                         <div class="date m-t-5">{% now 'SHORT_DATE_FORMAT' %}</div>
                         <div class="invoice-detail">
-                            #Orden de Trabajo: {{ cotizacion.orden_de_trabajo.id }}<br />
+                            #Orden de Trabajo: {{ factura.cotizacion.orden_de_trabajo.id }}<br />
                             Servicio de Mecanica Automotriz
                         </div>
                     </div>
@@ -57,33 +58,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for repuesto_cantidad in repuestos_cantidad %}
                                 <tr>
                                     <td>
-                                        Website design &amp; development<br />
-                                        <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
+                                        <small>{{ repuesto_cantidad.repuesto.nombre }}</small>
                                     </td>
-                                    <td>$50.00</td>
-                                    <td>50</td>
-                                    <td>$2,500.00</td>
+                                    <td>${{ repuesto_cantidad.repuesto.precio }}</td>
+                                    <td>{{ repuesto_cantidad.cantidad }}</td>
+                                    <td>${% multiply repuesto_cantidad.repuesto.precio repuesto_cantidad.cantidad %}</td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        Branding<br />
-                                        <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
-                                    </td>
-                                    <td>$50.00</td>
-                                    <td>40</td>
-                                    <td>$2,000.00</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Redesign Service<br />
-                                        <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
-                                    </td>
-                                    <td>$50.00</td>
-                                    <td>50</td>
-                                    <td>$2,500.00</td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

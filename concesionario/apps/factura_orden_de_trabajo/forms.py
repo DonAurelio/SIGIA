@@ -36,7 +36,12 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
                     costo_total=self.calular_costo_total_reparacion(cotizacion)
                 )
                 factura.save()
-                context={'factura':factura,'cotizacion':cotizacion}
+
+                repuestos_cantidad = RepuestoCantidad.objects.filter(
+                    cotizacion_orden_de_trabajo=cotizacion
+                )
+
+                context={'factura':factura,'repuestos_cantidad':repuestos_cantidad}
                 return render_to_response(
                     'factura_orden_de_trabajo/form.html',
                     context,
