@@ -14,6 +14,8 @@ PENDIENTE = 'Pendiente'
 COTIZADO = 'Cotizado'
 #El vehiculo esta reparado
 REPARADO = 'Reparado'
+#El vehiuclo fue reparado y entregado al cliente
+REPARADO_Y_ENTREGADO = 'Reparado y entregado'
 #El vehiculo fue retirado ya que el cliente no acepto su reparacion
 RETIRADO = 'Retirado'
 
@@ -21,6 +23,7 @@ tipo_choice = (
 	(PENDIENTE, 'Pendiente'),
 	(COTIZADO, 'Cotizado'),
 	(REPARADO, 'Reparado'),
+	(REPARADO_Y_ENTREGADO, 'Reparado y entregado'),
 	(RETIRADO, 'Retirado'),
  )
 
@@ -52,6 +55,7 @@ class OrdenDeTrabajo(models.Model):
 	class Meta:
 		ordering = ['fecha_entrada']
 		verbose_name_plural = "Orden de Trabajo"
+		unique_together = ('placa','fecha_salida')
 
 	#Permite determinar una representacion en string del objeto repuesto
 	def __str__(self):

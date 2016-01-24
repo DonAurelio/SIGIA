@@ -3,9 +3,13 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.contrib import messages
 from .models import OrdenDeTrabajo
+from .models import RETIRADO
+from .models import REPARADO_Y_ENTREGADO
 from apps.cliente.models import Cliente
 from apps.vehiculo.models import Vehiculo
+
 
 class OrdenDeTrabajoCreateView(CreateView):
 	model = OrdenDeTrabajo
@@ -14,6 +18,19 @@ class OrdenDeTrabajoCreateView(CreateView):
 	'vehiculo','placa','observacion']
 	success_url = reverse_lazy('orden_de_trabajo:listar')
 	template_name = 'orden_de_trabajo/form.html'
+
+	def post(self,request,*args,**kwargs):
+		form = self.get_form(self.get_form_class())
+		if form.is_valid():
+			placa = form.cleaned_data['placa']
+			ordenes_de_trabajo = OrdenDeTrabajo.objects.filter(placa=placa,fecha_salida=None)
+			if ordenes_de_trabajo:
+				messages.info(request,"El vehiculo con placa {} ya tiene una orden de trabajo".format(placa))
+				return self.get(request,args,kwargs)
+			else:
+				return super(OrdenDeTrabajoCreateView,self).post(request,args,kwargs)
+		else:
+			return super(OrdenDeTrabajoCreateView,self).post(request,args,kwargs)
 
 	def get_context_data(self,**kwargs):
 		context = super(OrdenDeTrabajoCreateView,self).get_context_data(**kwargs)
@@ -35,7 +52,7 @@ class OrdenDeTrabajoUpdateView(UpdateView):
 	fields = fields = [
 	'sucursal','empleado','cliente',
 	'vehiculo','placa','observacion',
-	'fecha_salida','habilitado']
+	'habilitado']
 	success_url = reverse_lazy('orden_de_trabajo:listar')
 	template_name = 'orden_de_trabajo/form.html'
 
@@ -45,4 +62,3 @@ class OrdenDeTrabajoUpdateView(UpdateView):
 		context['vehiculos'] = Vehiculo.objects.all()
 		context['clientes'] = Cliente.objects.all()
 		return context
-

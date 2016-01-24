@@ -20,9 +20,11 @@ class Sucursal(models.Model):
 	#Estado de la sucursa, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
 	#Vehiculos que tiene la sucursal en venta
-	vehiculos = models.ManyToManyField(Vehiculo,through='SucursalVehiculo')
+	#related_name para poder acceder desde una instancia vehiculo a su sucursal
+	vehiculos = models.ManyToManyField(Vehiculo,through='SucursalVehiculo',related_name='sucursal')
 	#Repuestos que tiene la sucursal
-	repuestos = models.ManyToManyField(Repuesto,through='SucursalRepuesto')
+	#related_name para poder acceder desde una instancia repuesto a su sucursal
+	repuestos = models.ManyToManyField(Repuesto,through='SucursalRepuesto',related_name='sucursal')
 
 	#Permite hacer modificaciones agregadas a la representacion del modelo
 	class Meta:
@@ -100,7 +102,7 @@ class SucursalRepuesto(models.Model):
 	class Meta:
 		ordering = ['cantidad']
 		verbose_name_plural = 'Repuestos Sucursal'
-		unique_together = (("sucursal", "repuesto"),)
+		unique_together = ("sucursal", "repuesto")
 
 	#Permite determinar una representacion en string del objeto SucursalRepuesto
 	def __str__(self):

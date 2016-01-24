@@ -3,7 +3,8 @@ from apps.cotizacion_orden_de_trabajo.models import CotizacionOrdenDeTrabajo
 
 class FacturaOrdenDeTrabajo(models.Model):
     # Cotizacion de la cual se hace la factura de la orden de trabajo
-    cotizacion = models.OneToOneField(CotizacionOrdenDeTrabajo)
+    # related_name para poder acceder desde la cotizacion orden de trabaja hacia la factura
+    cotizacion = models.OneToOneField(CotizacionOrdenDeTrabajo,related_name='factura')
     # Costo de la reparacion + la suma del costo de los repuestos
     costo_total = models.FloatField()
 

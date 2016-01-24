@@ -83,21 +83,25 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
 
         """
 
-        #Obtenemos la sucursal implicada en la cotizacion de la orden de trabajo
+        # Obtenemos la sucursal implicada en la cotizacion de la orden de trabajo
         sucursal = cotizacion.orden_de_trabajo.sucursal
-        #obtenemos los repuestos que estan ligados a una determinada cotizacion de orden de trabajo
-        cotizacion_repuestos = RepuestoCantidad.objects.filter(cotizacion_orden_de_trabajo=cotizacion)
 
+        # Obtenemos cada uno de los repuestos de la cotizacion y comparamos las
+        # cantidades con las unidades existente en la sucursal, para determinar
+        # si en el inventario de la sucursal hay la cantidad de cada repuesto
+        # necesaria para reparar el vehiculo y efectuar lo facturacion
 
-        #Obtenemos cada uno de los repuestos de la cotizacion y comparamos las
-        #cantidades con las unidades existente en la sucursal, para determinar
-        #si en el inventario de la sucursal hay la cantidad de cada repuesto
-        #necesaria para reparar el vehiculo y efectuar lo facturacion
+        # En caso de que no haya la cantidad necesaria de un repuesto, se coloca en una lista
+        # para reportar al usuario por medio de un mensaje
 
-        #En caso de que no haya la cantidad necesaria de un repuesto, se coloca en una lista
         info_repuestos_faltantes = []
-        for cotizacion_repuesto in cotizacion_repuestos:
-            sucursal_repuesto = SucursalRepuesto.objects.filter(sucursal=sucursal,repuesto=cotizacion_repuesto.repuesto)[0]
+        # Obtenemos los repuestos que estan ligados a una determinada cotizacion de orden de trabajo
+        # luego se comparan con la cantidad de repuestos en el inventario de la sucursal
+        for cotizacion_repuesto in cotizacion.repuestos.all():
+            sucursal_repuesto = SucursalRepuesto.objects.filter(
+                sucursal=sucursal,
+                repuesto=cotizacion_repuesto.repuesto
+            )[0]
             if cotizacion_repuesto.cantidad > sucursal_repuesto.cantidad:
                 nombre_repuesto = cotizacion_repuesto.repuesto.nombre
                 unidades_faltantes = cotizacion_repuesto.cantidad - sucursal_repuesto.cantidad

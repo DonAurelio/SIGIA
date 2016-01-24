@@ -8,7 +8,8 @@ from datetime import datetime
 
 class CotizacionOrdenDeTrabajo(models.Model):
 	#Orden de trabajo para la cual se relizara la cotizacion
-	orden_de_trabajo = models.OneToOneField(OrdenDeTrabajo)
+	#related_name para poder acceder desde orden de trabajo a CotizacionOrdenDeTrabajo
+	orden_de_trabajo = models.OneToOneField(OrdenDeTrabajo,related_name='cotizacion')
 	#Detalles de la reparacion del vehiculo
 	detalles = models.TextField()
 	#Costo de la reparacion del vehiculo
@@ -24,10 +25,10 @@ class CotizacionOrdenDeTrabajo(models.Model):
 		verbose_name_plural = "Cotizaciones Ordenes de Trabajo"
 
 	def __str__(self):
-		return "Cotizacion"
+		return "Cotizacion {}".format(self.id)
 
 	def __unicode__(self):
-		return u"Cotizacion"
+		return u"Cotizacion {}".format(self.id)
 
 	def es_valida(self):
 		""" Documentacion es_valida
@@ -42,7 +43,8 @@ class CotizacionOrdenDeTrabajo(models.Model):
 
 class RepuestoCantidad(models.Model):
 	# identificacion de la Cotizacion orden de trabajo
-	cotizacion_orden_de_trabajo = models.ForeignKey(CotizacionOrdenDeTrabajo)
+	# related_name para poder acceder desde una instancia de CotizacionOrdenDeTrabajo a RepuestoCantidad
+	cotizacion_orden_de_trabajo = models.ForeignKey(CotizacionOrdenDeTrabajo, related_name='repuestos')
 	# Repuesto a usar
 	repuesto = models.ForeignKey(Repuesto)
 	# Cantidad del repuesto a usar en la reparación
