@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery=1 %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
 {% block css %}
 {{ block.super }}
     <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
@@ -14,185 +26,196 @@
 {% block section_subtitle %} Seleccione la orden de trabajo que desea revisar{% endblock %}
 
 {% block content %}
-            <div id="options" class="m-b-10">
-                <span class="gallery-option-set" id="filter" data-option-key="filter">
-                    <a href="#gallery-group-1" class="btn btn-default btn-xs active" data-option-value=".gallery-group-1">
-                        Ordenes
-                    </a>
-                    <a href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
-                        Cotizaciones
-                    </a>
-                    <a href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
-                        Reparados
-                    </a>
-                    <a href="#gallery-group-4" class="btn btn-default btn-xs" data-option-value=".gallery-group-4">
-                        Reparado y entregado
-                    </a>
-                    <a href="#gallery-group-5" class="btn btn-default btn-xs" data-option-value=".gallery-group-5">
-                        Retirados
-                    </a>
-                </span>
-            </div>
-            <div id="gallery" class="gallery">
-                {% for orden in ordenes_de_trabajo %}
-                <div class="image gallery-group-1">
-                    <div class="image-inner">
-                        <a href={{ orden.vehiculo.imagen.url }}  data-lightbox="gallery-group-1">
-                            {% if orden.vehiculo.imagen %}
-                                <img src={{ orden.vehiculo.imagen.url }} alt=""/>
-                            {% else %}
-                                <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
-                            {% endif %}
+
+                <div id="options" class="m-b-10">
+                    <span class="gallery-option-set" id="filter" data-option-key="filter">
+                        <a href="#gallery-group-1" class="btn btn-default btn-xs active" data-option-value=".gallery-group-1">
+                            Ordenes
                         </a>
-                        <p class="image-caption">
-                            {{ orden.cliente.nombre }}
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">
-                        {{ orden.vehiculo.marca }}
-                        {{ orden.vehiculo.modelo }}
-                        <strong>{{ orden.placa }}</strong>
-                        </h5>
-                        <div class="pull-right">
-                            <a href="{% url 'cotizacion_orden_de_trabajo:crear' orden.id %}"><i class="fa fa-2x fa-calculator"></i></a>
-                            &nbsp;
-                            <a href="{% url 'orden_de_trabajo:actualizar' orden.id %}"><i class="fa fa-2x fa-pencil-square-o"></i></i></a>
-                            &nbsp;
-                            <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' orden.id %}"><i class="fa fa-2x fa-external-link"></i></i></a>
-                        </div>
-                        <div class="desc">
-                            {{ orden.observacion }}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for cotizacion in cotizaciones %}
-                <div class="image gallery-group-2">
-                    <div class="image-inner">
-                        <a href={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} data-lightbox="gallery-group-2">
-                            {% if cotizacion.orden_de_trabajo.vehiculo.imagen %}
-                                <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
-                            {% else %}
-                                <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
-                            {% endif %}
+                        <a href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
+                            Cotizaciones
                         </a>
-                        <p class="image-caption">
-                            {{ cotizacion.orden_de_trabajo.cliente.nombre }}
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">
-                            {{ cotizacion.orden_de_trabajo.vehiculo.marca }}
-                            {{ cotizacion.orden_de_trabajo.vehiculo.modelo }}
-                            <strong>{{ cotizacion.orden_de_trabajo.placa }}</strong>
-                        </h5>
-                        <div class="pull-right">
-                            <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.id %}"><i class="fa fa-2x fa-calculator"></i></i></a>
-                            &nbsp;
-                            <a href="{% url 'factura_orden_de_trabajo:facturar' cotizacion.id %}"><i class="fa fa-2x fa-wrench"></i></a>
-                            &nbsp;
-                            <a href="{% url 'orden_de_trabajo:actualizar' cotizacion.orden_de_trabajo.id %}"><i class="fa fa-2x fa-pencil-square-o"></i></i></a>
-                            &nbsp;
-                            <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' cotizacion.orden_de_trabajo.id %}"><i class="fa fa-2x fa-external-link"></i></i></a>
-                        </div>
-                        <div class="desc">
-                            {{ cotizacion.orden_de_trabajo.observacion }}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for factura in facturas %}
-                <div class="image gallery-group-3">
-                    <div class="image-inner">
-                        <a href={{ factura.cotizacion.orden_de_trabajo.vehiculo.imagen.url }} data-lightbox="gallery-group-3">
-                            {% if factura.cotizacion.orden_de_trabajo.vehiculo.imagen %}
-                                <img src={{ factura.cotizacion.orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
-                            {% else %}
-                                <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
-                            {% endif %}
+                        <a href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
+                            Reparados
                         </a>
-                        <p class="image-caption">
-                            {{ factura.cotizacion.orden_de_trabajo.cliente.nombre }}
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">
-                            {{ factura.cotizacion.orden_de_trabajo.vehiculo.marca }}
-                            {{ factura.cotizacion.orden_de_trabajo.vehiculo.modelo }}
-                            <strong>{{ factura.cotizacion.orden_de_trabajo.placa }}</strong>
-                        </h5>
-                        <div class="pull-right">
-                            <a href=""><i class="fa fa-2x fa-file-text-o"></i></a>
-                            &nbsp;
-                            <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' factura.cotizacion.orden_de_trabajo.id %}"><i class="fa fa-2x fa-external-link"></i></i></a>
-                        </div>
-                        <div class="desc">
-                            {{ factura.cotizacion.orden_de_trabajo.observacion }}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for orden_de_trabajo in reparados_entregados %}
-                <div class="image gallery-group-4">
-                    <div class="image-inner">
-                        <a href={{ orden_de_trabajo.vehiculo.imagen.url }} data-lightbox="gallery-group-4">
-                            {% if orden_de_trabajo.vehiculo.imagen %}
-                                <img src={{ orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
-                            {% else %}
-                                <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
-                            {% endif %}
+                        <a href="#gallery-group-4" class="btn btn-default btn-xs" data-option-value=".gallery-group-4">
+                            Reparado y entregado
                         </a>
-                        <p class="image-caption">
-                            {{ orden_de_trabajo.cliente.nombre }}
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">
-                            {{ orden_de_trabajo.vehiculo.marca }}
-                            {{ orden_de_trabajo.vehiculo.modelo }}
-                            <strong>{{ orden_de_trabajo.placa }}</strong>
-                        </h5>
-                        <div class="pull-right">
-                            <a href=""><i class="fa fa-2x fa-file-text-o"></i></a>
-                            &nbsp;
-                            <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' orden_de_trabajo.id %}"><i class="fa fa-2x fa-external-link"></i></i></a>
-                        </div>
-                        <div class="desc">
-                            {{ orden_de_trabajo.observacion }}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for orden_de_trabajo in retirados %}
-                <div class="image gallery-group-5">
-                    <div class="image-inner">
-                        <a href={{ orden_de_trabajo.vehiculo.imagen.url }} data-lightbox="gallery-group-5">
-                            {% if orden_de_trabajo.vehiculo.imagen %}
-                                <img src={{ orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
-                            {% else %}
-                                <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
-                            {% endif %}
+                        <a href="#gallery-group-5" class="btn btn-default btn-xs" data-option-value=".gallery-group-5">
+                            Retirados
                         </a>
-                        <p class="image-caption">
-                            {{ orden_de_trabajo.cliente.nombre }}
-                        </p>
-                    </div>
-                    <div class="image-info">
-                        <h5 class="title">
-                            {{ orden_de_trabajo.vehiculo.marca }}
-                            {{ orden_de_trabajo.vehiculo.modelo }}
-                            <strong>{{ orden_de_trabajo.placa }}</strong>
-                        </h5>
-                        <div class="pull-right">
-                        </div>
-                        <div class="desc">
-                            {{ orden_de_trabajo.observacion }}
-                        </div>
-                    </div>
+                    </span>
                 </div>
-                {% endfor %}
-            </div>
+                <!-- begin row -->
+                <div class="row">
+                    <!-- begin col-12 -->
+                    <div class="col-xs-12">
+                        <div id="gallery" class="gallery">
+                            {% for orden in ordenes_de_trabajo %}
+                            <div class="image gallery-group-1">
+                                <div class="image-inner">
+                                    <a href={{ orden.vehiculo.imagen.url }}  data-lightbox="gallery-group-1">
+                                        {% if orden.vehiculo.imagen %}
+                                            <img src={{ orden.vehiculo.imagen.url }} alt=""/>
+                                        {% else %}
+                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
+                                        {% endif %}
+                                    </a>
+                                    <p class="image-caption">
+                                        {{ orden.cliente.nombre }}
+                                    </p>
+                                </div>
+                                <div class="image-info">
+                                    <h5 class="title">
+                                    {{ orden.vehiculo.marca }}
+                                    {{ orden.vehiculo.modelo }}
+                                    <strong>{{ orden.placa }}</strong>
+                                    </h5>
+                                    <div class="pull-right">
+                                        <a href="{% url 'cotizacion_orden_de_trabajo:crear' orden.id %}"><i class="fa fa-2x fa-calculator"></i></a>
+                                        &nbsp;
+                                        <a href="{% url 'orden_de_trabajo:actualizar' orden.id %}"><i class="fa fa-2x fa-pencil-square-o"></i></a>
+                                        &nbsp;
+                                        <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' orden.id %}"><i class="fa fa-2x fa-external-link"></i></a>
+                                    </div>
+                                    <div class="desc">
+                                        {{ orden.observacion }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% for cotizacion in cotizaciones %}
+                            <div class="image gallery-group-2">
+                                <div class="image-inner">
+                                    <a href={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} data-lightbox="gallery-group-2">
+                                        {% if cotizacion.orden_de_trabajo.vehiculo.imagen %}
+                                            <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
+                                        {% else %}
+                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
+                                        {% endif %}
+                                    </a>
+                                    <p class="image-caption">
+                                        {{ cotizacion.orden_de_trabajo.cliente.nombre }}
+                                    </p>
+                                </div>
+                                <div class="image-info">
+                                    <h5 class="title">
+                                        {{ cotizacion.orden_de_trabajo.vehiculo.marca }}
+                                        {{ cotizacion.orden_de_trabajo.vehiculo.modelo }}
+                                        <strong>{{ cotizacion.orden_de_trabajo.placa }}</strong>
+                                    </h5>
+                                    <div class="pull-right">
+                                        <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.id %}"><i class="fa fa-2x fa-calculator"></i></a>
+                                        &nbsp;
+                                        <a href="{% url 'factura_orden_de_trabajo:facturar' cotizacion.id %}"><i class="fa fa-2x fa-wrench"></i></a>
+                                        &nbsp;
+                                        <a href="{% url 'orden_de_trabajo:actualizar' cotizacion.orden_de_trabajo.id %}"><i class="fa fa-2x fa-pencil-square-o"></i></a>
+                                        &nbsp;
+                                        <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' cotizacion.orden_de_trabajo.id %}"><i class="fa fa-2x fa-external-link"></i></a>
+                                    </div>
+                                    <div class="desc">
+                                        {{ cotizacion.orden_de_trabajo.observacion }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% for factura in facturas %}
+                            <div class="image gallery-group-3">
+                                <div class="image-inner">
+                                    <a href={{ factura.cotizacion.orden_de_trabajo.vehiculo.imagen.url }} data-lightbox="gallery-group-3">
+                                        {% if factura.cotizacion.orden_de_trabajo.vehiculo.imagen %}
+                                            <img src={{ factura.cotizacion.orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
+                                        {% else %}
+                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
+                                        {% endif %}
+                                    </a>
+                                    <p class="image-caption">
+                                        {{ factura.cotizacion.orden_de_trabajo.cliente.nombre }}
+                                    </p>
+                                </div>
+                                <div class="image-info">
+                                    <h5 class="title">
+                                        {{ factura.cotizacion.orden_de_trabajo.vehiculo.marca }}
+                                        {{ factura.cotizacion.orden_de_trabajo.vehiculo.modelo }}
+                                        <strong>{{ factura.cotizacion.orden_de_trabajo.placa }}</strong>
+                                    </h5>
+                                    <div class="pull-right">
+                                        <a href=""><i class="fa fa-2x fa-file-text-o"></i></a>
+                                        &nbsp;
+                                        <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' factura.cotizacion.orden_de_trabajo.id %}"><i class="fa fa-2x fa-external-link"></i></a>
+                                    </div>
+                                    <div class="desc">
+                                        {{ factura.cotizacion.orden_de_trabajo.observacion }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% for orden_de_trabajo in reparados_entregados %}
+                            <div class="image gallery-group-4">
+                                <div class="image-inner">
+                                    <a href={{ orden_de_trabajo.vehiculo.imagen.url }} data-lightbox="gallery-group-4">
+                                        {% if orden_de_trabajo.vehiculo.imagen %}
+                                            <img src={{ orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
+                                        {% else %}
+                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
+                                        {% endif %}
+                                    </a>
+                                    <p class="image-caption">
+                                        {{ orden_de_trabajo.cliente.nombre }}
+                                    </p>
+                                </div>
+                                <div class="image-info">
+                                    <h5 class="title">
+                                        {{ orden_de_trabajo.vehiculo.marca }}
+                                        {{ orden_de_trabajo.vehiculo.modelo }}
+                                        <strong>{{ orden_de_trabajo.placa }}</strong>
+                                    </h5>
+                                    <div class="pull-right">
+                                        <a href=""><i class="fa fa-2x fa-file-text-o"></i></a>
+                                        &nbsp;
+                                        <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' orden_de_trabajo.id %}"><i class="fa fa-2x fa-external-link"></i></a>
+                                    </div>
+                                    <div class="desc">
+                                        {{ orden_de_trabajo.observacion }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% for orden_de_trabajo in retirados %}
+                            <div class="image gallery-group-5">
+                                <div class="image-inner">
+                                    <a href={{ orden_de_trabajo.vehiculo.imagen.url }} data-lightbox="gallery-group-5">
+                                        {% if orden_de_trabajo.vehiculo.imagen %}
+                                            <img src={{ orden_de_trabajo.vehiculo.imagen.url }} alt=""/>
+                                        {% else %}
+                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" alt=""/>
+                                        {% endif %}
+                                    </a>
+                                    <p class="image-caption">
+                                        {{ orden_de_trabajo.cliente.nombre }}
+                                    </p>
+                                </div>
+                                <div class="image-info">
+                                    <h5 class="title">
+                                        {{ orden_de_trabajo.vehiculo.marca }}
+                                        {{ orden_de_trabajo.vehiculo.modelo }}
+                                        <strong>{{ orden_de_trabajo.placa }}</strong>
+                                    </h5>
+                                    <div class="pull-right">
+                                    </div>
+                                    <div class="desc">
+                                        {{ orden_de_trabajo.observacion }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- end col-12 -->
+
+                </div>
+                <!-- end row -->
+                
 {% endblock %}
 {% block javascript %}
 {{ block.super }}

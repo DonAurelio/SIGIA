@@ -98,14 +98,18 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
         # Obtenemos los repuestos que estan ligados a una determinada cotizacion de orden de trabajo
         # luego se comparan con la cantidad de repuestos en el inventario de la sucursal
         for cotizacion_repuesto in cotizacion.repuestos.all():
-            sucursal_repuesto = SucursalRepuesto.objects.filter(
-                sucursal=sucursal,
-                repuesto=cotizacion_repuesto.repuesto
-            )[0]
-            if cotizacion_repuesto.cantidad > sucursal_repuesto.cantidad:
-                nombre_repuesto = cotizacion_repuesto.repuesto.nombre
-                unidades_faltantes = cotizacion_repuesto.cantidad - sucursal_repuesto.cantidad
-                info_repuestos_faltantes.append("Faltan {} unidades de \t {}".format(unidades_faltantes,nombre_repuesto))
+            try:
+                sucursal_repuesto = SucursalRepuesto.objects.filter(
+                    sucursal=sucursal,
+                    repuesto=cotizacion_repuesto.repuesto
+                )[0]
+                if cotizacion_repuesto.cantidad > sucursal_repuesto.cantidad:
+                    nombre_repuesto = cotizacion_repuesto.repuesto.nombre
+                    unidades_faltantes = cotizacion_repuesto.cantidad - sucursal_repuesto.cantidad
+                    info_repuestos_faltantes.append("Faltan {} unidades de \t {}".format(unidades_faltantes,nombre_repuesto))
+            except IndexError:
+                info_repuestos_faltantes.append(
+                    "El repuesto \t {} no esta disponible en esta sucursal".format(cotizacion_repuesto.repuesto.nombre))
 
         if info_repuestos_faltantes == []:
             return None
