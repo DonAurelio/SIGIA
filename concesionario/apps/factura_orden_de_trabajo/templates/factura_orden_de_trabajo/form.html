@@ -12,8 +12,7 @@
             <div class="invoice">
                 <div class="invoice-company">
                     <span class="pull-right hidden-print">
-                    <a href="javascript:;" class="btn btn-sm btn-success m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
-                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a>
+                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Imprimir</a>
                     </span>
                     {{ user.empleado.sucursal.nombre }}, Inc
                 </div>
@@ -58,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for repuesto_cantidad in repuestos_cantidad %}
+                                {% for repuesto_cantidad in factura.cotizacion.repuestos_cantidad.all %}
                                 <tr>
                                     <td>
                                         <small>{{ repuesto_cantidad.repuesto.nombre }}</small>
@@ -75,36 +74,34 @@
                         <div class="invoice-price-left">
                             <div class="invoice-price-row">
                                 <div class="sub-price">
-                                    <small>SUBTOTAL</small>
-                                    $4,500.00
+                                    <small>COSTO EN REPUESTOS</small>
+                                    ${{ factura.cotizacion.costo_repuestos }}
                                 </div>
                                 <div class="sub-price">
                                     <i class="fa fa-plus"></i>
                                 </div>
                                 <div class="sub-price">
-                                    <small>PAYPAL FEE (5.4%)</small>
-                                    $108.00
+                                    <small>COSTO DE LA REPARACIÓN</small>
+                                    ${{ factura.cotizacion.costo_reparacion }}
                                 </div>
                             </div>
                         </div>
                         <div class="invoice-price-right">
-                            <small>TOTAL</small> $4508.00
+                            <small>TOTAL</small> {{ factura.costo_total }}
                         </div>
                     </div>
                 </div>
                 <div class="invoice-note">
-                    * Make all cheques payable to [Your Company Name]<br />
-                    * Payment is due within 30 days<br />
-                    * If you have any questions concerning this invoice, contact  [Name, Phone Number, Email]
+
                 </div>
                 <div class="invoice-footer text-muted">
                     <p class="text-center m-b-5">
-                        THANK YOU FOR YOUR BUSINESS
+                        GRACIAS POR PREFERIRNOS
                     </p>
                     <p class="text-center">
-                        <span class="m-r-10"><i class="fa fa-globe"></i> matiasgallipoli.com</span>
+                        <span class="m-r-10"><i class="fa fa-globe"></i> sigia.com</span>
                         <span class="m-r-10"><i class="fa fa-phone"></i> T:016-18192302</span>
-                        <span class="m-r-10"><i class="fa fa-envelope"></i> rtiemps@gmail.com</span>
+                        <span class="m-r-10"><i class="fa fa-envelope"></i> sigia@gmail.com</span>
                     </p>
                 </div>
             </div>

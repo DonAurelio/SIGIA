@@ -12,8 +12,6 @@ from .models import FacturaOrdenDeTrabajo
 from apps.sucursal.models import SucursalRepuesto
 from apps.cotizacion_orden_de_trabajo.models import RepuestoCantidad
 
-
-
 class FacturaOrdenDeTrabajoCreateView(TemplateView):
 
     def get(self,request,*args,**kwargs):
@@ -33,7 +31,7 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
 
                 factura = FacturaOrdenDeTrabajo(
                     cotizacion=cotizacion,
-                    costo_total=self.calular_costo_total_reparacion(cotizacion)
+                    costo_total=cotizacion.costo_total()
                 )
                 factura.save()
 
@@ -41,7 +39,8 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
                     cotizacion_orden_de_trabajo=cotizacion
                 )
 
-                context={'factura':factura,'repuestos_cantidad':repuestos_cantidad}
+                context={ 'factura':factura }
+
                 return render_to_response(
                     'factura_orden_de_trabajo/form.html',
                     context,
@@ -53,22 +52,6 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
             context = {'modal_messages':True}
             return HttpResponseRedirect(reverse_lazy('orden_de_trabajo:listar'))
 
-    def calular_costo_total_reparacion(self,cotizacion):
-        """ Documentacion calular_costo_total_reparacion
-
-            Determina el costo total de la reparacion del vehiculo dependiendo de la
-            de la cantidad usuada de cada repuesto y su respectivo precio, a esta
-            cantidad se adiciona el costo de la reparacion que se encuentra en la
-            CotizacionOrdenDeTrabajo.
-        """
-        #obtenemos los repuestos que estan ligados a una determinada cotizacion de orden de trabajo
-        repuestos_cantidad = RepuestoCantidad.objects.filter(cotizacion_orden_de_trabajo=cotizacion)
-        costo_reparacion = cotizacion.costo
-        costo_total_repuestos = 0
-        for repuesto_cantidad in repuestos_cantidad:
-            costo_total_repuestos += (repuesto_cantidad.repuesto.precio * repuesto_cantidad.cantidad)
-
-        return costo_reparacion + costo_total_repuestos
 
     def verificar_inventario_sucursal(self,cotizacion):
         """ Documentacion verificar_inventario_sucursal
@@ -97,15 +80,19 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
         info_repuestos_faltantes = []
         # Obtenemos los repuestos que estan ligados a una determinada cotizacion de orden de trabajo
         # luego se comparan con la cantidad de repuestos en el inventario de la sucursal
-        for cotizacion_repuesto in cotizacion.repuestos.all():
-            sucursal_repuesto = SucursalRepuesto.objects.filter(
-                sucursal=sucursal,
-                repuesto=cotizacion_repuesto.repuesto
-            )[0]
-            if cotizacion_repuesto.cantidad > sucursal_repuesto.cantidad:
-                nombre_repuesto = cotizacion_repuesto.repuesto.nombre
-                unidades_faltantes = cotizacion_repuesto.cantidad - sucursal_repuesto.cantidad
-                info_repuestos_faltantes.append("Faltan {} unidades de \t {}".format(unidades_faltantes,nombre_repuesto))
+        for cotizacion_repuesto in cotizacion.repuestos_cantidad.all():
+            try:
+                sucursal_repuesto = SucursalRepuesto.objects.filter(
+                    sucursal=sucursal,
+                    repuesto=cotizacion_repuesto.repuesto
+                )[0]
+                if cotizacion_repuesto.cantidad > sucursal_repuesto.cantidad:
+                    nombre_repuesto = cotizacion_repuesto.repuesto.nombre
+                    unidades_faltantes = cotizacion_repuesto.cantidad - sucursal_repuesto.cantidad
+                    info_repuestos_faltantes.append("Faltan {} unidades de \t {}".format(unidades_faltantes,nombre_repuesto))
+            except IndexError:
+                info_repuestos_faltantes.append(
+                "EL repuesto {} no esta disponible en esta sucursal".format(cotizacion_repuesto.repuesto.nombre))
 
         if info_repuestos_faltantes == []:
             return None

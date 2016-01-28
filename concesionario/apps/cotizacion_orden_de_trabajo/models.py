@@ -5,7 +5,6 @@ from apps.orden_de_trabajo.models import OrdenDeTrabajo
 from apps.repuesto.models import Repuesto
 from datetime import datetime
 
-
 class CotizacionOrdenDeTrabajo(models.Model):
 	#Orden de trabajo para la cual se relizara la cotizacion
 	#related_name para poder acceder desde orden de trabajo a CotizacionOrdenDeTrabajo
@@ -13,7 +12,7 @@ class CotizacionOrdenDeTrabajo(models.Model):
 	#Detalles de la reparacion del vehiculo
 	detalles = models.TextField()
 	#Costo de la reparacion del vehiculo
-	costo = models.FloatField()
+	costo_reparacion = models.FloatField()
 	#Fecha hasta la cual es valida la cotizacion
 	fecha_vencimiento = models.DateField()
 	#Se inhabilita una cotizacion cuando el vehiculo ha sido reparado
@@ -40,11 +39,32 @@ class CotizacionOrdenDeTrabajo(models.Model):
 			return False
 		return True
 
+	def costo_repuestos(self):
+		""" Documentacion calcular_costo_total_repuestos
+
+			Determina el costo total de los repuesto implicados en la
+			cotizcion de la reparacion del vehiculo
+		"""
+		costo_repuestos = 0
+		for repuesto_cantidad in self.repuestos_cantidad.all():
+			costo_repuestos += (repuesto_cantidad.repuesto.precio * repuesto_cantidad.cantidad)
+		return costo_repuestos
+
+
+	def costo_total(self):
+		""" Documentacion calular_costo_total_reparacion
+
+			Determina el costo total de la reparacion del vehiculo que es igual
+			a costo de la reparacion + costo total en repuestos.
+		"""
+
+		return self.costo_reparacion + self.costo_repuestos()
+
 
 class RepuestoCantidad(models.Model):
 	# identificacion de la Cotizacion orden de trabajo
 	# related_name para poder acceder desde una instancia de CotizacionOrdenDeTrabajo a RepuestoCantidad
-	cotizacion_orden_de_trabajo = models.ForeignKey(CotizacionOrdenDeTrabajo, related_name='repuestos')
+	cotizacion_orden_de_trabajo = models.ForeignKey(CotizacionOrdenDeTrabajo, related_name='repuestos_cantidad')
 	# Repuesto a usar
 	repuesto = models.ForeignKey(Repuesto)
 	# Cantidad del repuesto a usar en la reparación
