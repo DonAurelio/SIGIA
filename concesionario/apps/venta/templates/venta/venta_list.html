@@ -42,7 +42,7 @@ Gestion de Ventas
                        {% if lista_ventas %} 
                                             {% for venta  in lista_ventas %}
                                                 <tr>
-                                                    <td>{{ venta.pk }}</td>
+                                                    <td><a href="{% url 'venta:factura' venta.pk %}">{{ venta.pk }}</td>
                                                     <td>{{ venta.cliente}}</a></td>
                                                     <td>{{ venta.sucursal_vehiculo }}</td>
                                                     <td>{{ venta.fecha_venta }}</td>

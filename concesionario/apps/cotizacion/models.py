@@ -50,7 +50,7 @@ class Cotizacion(models.Model):
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
 		return self.fecha 
-
+ 
 
 
 
