@@ -34,7 +34,8 @@ class OrdenDeTrabajoListView(ListView):
 		# Se listan las cotizaciones de las ordenes de trabajo, con el fin de mostrar
 		# en el template las ordenes de trabajo cuyas repeparaciones han sido cotizadas
 		context['cotizaciones'] = CotizacionOrdenDeTrabajo.objects.filter(
-			orden_de_trabajo__sucursal=sucursal
+			orden_de_trabajo__sucursal=sucursal,
+			orden_de_trabajo__estado_reparacion=COTIZADO
 		)
 
 		# Se listan las facturas de las ordenes de trabajo, con el fin de mostrar
@@ -65,9 +66,14 @@ class RetirarEntregarVehiculoTemplateView(TemplateView):
 		try:
 			# Si la orden de trabajo, no tiene cotizacion o
 			# si tiene cotziacion y no tiene factura, se genera
-			# una exepcion, se guarda la fecha de retiro del vehiculo
-			# y se indica que fue retirado
+			# una exepcion al hacer el siguiente llamado
+			# orden_de_trabajo.cotizacion.factura
 			orden_de_trabajo.cotizacion.factura
+
+			# En el caso de que no se lance la excepcion entonces el
+			# vehiculo tiene cotizacion y factura, por lo tanto ya fue
+			# reparado y se cambia el estado de la cotizacion a
+			# REPARADO_Y_ENTREGADO al momento de ser retirado
 			orden_de_trabajo.estado_reparacion = REPARADO_Y_ENTREGADO
 			messages.info(request,'El vehiculo fue entregado con exito')
 		except ObjectDoesNotExist:
