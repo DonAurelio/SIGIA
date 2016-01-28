@@ -1,49 +1,27 @@
-<li class="has-sub">
-	<a href="javascript:;">
-		<b class="caret pull-right"></b>
-		<i class="fa fa-tasks"></i>
+<li>
+	<a href="{% url 'orden_de_trabajo:crear' %}">
+		<i class="fa fa-archive"></i>
 		<span>
-			Tareas
+			 Orden de Trabajo
 		</span>
 	</a>
-	<ul class="sub-menu">
-		<li><a href="{% url 'orden_de_trabajo:listar' %}"> Listar/Editar</a></li>
-	</ul>
+</li>
+<li>
+	<a href="{% url 'orden_de_trabajo:listar' %}">
+		<i class="fa fa-tasks"></i>
+		<span>
+			Gestionar Tareas
+		</span>
+	</a>
 </li>
 <li class="has-sub">
 	<a href="javascript:;">
 		<b class="caret pull-right"></b>
 		<i class="fa fa-users"></i>
-		<span >Clientes</span>
+		<span >Gestionar Clientes</span>
 	</a>
 	<ul class="sub-menu">
 		<li><a href="{% url 'cliente:crear' %}"> Nuevo </a></li>
 		<li><a href="{% url 'cliente:listar' %}"> Listar/Editar</a></li>
-	</ul>
-</li>
-<li class="has-sub">
-	<a href="javascript:;">
-		<b class="caret pull-right"></b>
-		<i class="fa fa-archive"></i>
-		<span>
-			Orden de trabajo
-		</span>
-	</a>
-	<ul class="sub-menu">
-		<li><a href="{% url 'orden_de_trabajo:crear' %}"> Nuevo </a></li>
-	</ul>
-</li>
-<!-- Factura orden de trabajo -->
-<li class="has-sub" >
-	<a href="javascript:;">
-		<b class="caret pull-right"></b>
-		<i class="fa fa-money"></i>
-		<span>
-			Factura
-		</span>
-	</a>
-	<ul class="sub-menu">
-		<li><a href="index.html"> Crear nuevo </a></li>
-		<li><a href="index_v2.html"> Listar/Editar </a></li>
 	</ul>
 </li>

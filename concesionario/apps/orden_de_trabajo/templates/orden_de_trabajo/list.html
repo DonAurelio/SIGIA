@@ -140,7 +140,7 @@
                                         <strong>{{ factura.cotizacion.orden_de_trabajo.placa }}</strong>
                                     </h5>
                                     <div class="pull-right">
-                                        <a href=""><i class="fa fa-2x fa-file-text-o"></i></a>
+                                        <a href="{% url 'factura_orden_de_trabajo:detalle' factura.id %}"><i class="fa fa-2x fa-file-text-o"></i></a>
                                         &nbsp;
                                         <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' factura.cotizacion.orden_de_trabajo.id %}"><i class="fa fa-2x fa-external-link"></i></a>
                                     </div>
@@ -171,9 +171,6 @@
                                         <strong>{{ orden_de_trabajo.placa }}</strong>
                                     </h5>
                                     <div class="pull-right">
-                                        <a href=""><i class="fa fa-2x fa-file-text-o"></i></a>
-                                        &nbsp;
-                                        <a href="{% url 'orden_de_trabajo:entregar-retirar-vehiculo' orden_de_trabajo.id %}"><i class="fa fa-2x fa-external-link"></i></a>
                                     </div>
                                     <div class="desc">
                                         {{ orden_de_trabajo.observacion }}
@@ -215,7 +212,7 @@
 
                 </div>
                 <!-- end row -->
-                
+
 {% endblock %}
 {% block javascript %}
 {{ block.super }}

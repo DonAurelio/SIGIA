@@ -29,10 +29,7 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
                 cotizacion.orden_de_trabajo.estado_reparacion = REPARADO
                 cotizacion.orden_de_trabajo.save()
 
-                factura = FacturaOrdenDeTrabajo(
-                    cotizacion=cotizacion,
-                    costo_total=cotizacion.costo_total()
-                )
+                factura = FacturaOrdenDeTrabajo( cotizacion=cotizacion )
                 factura.save()
 
                 repuestos_cantidad = RepuestoCantidad.objects.filter(
@@ -100,3 +97,13 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
             return None
         else:
             return info_repuestos_faltantes
+
+class FacturaOrdenDeTrabajoDetailView(TemplateView):
+
+    def get(self,request,*args,**kwargs):
+        factura = FacturaOrdenDeTrabajo.objects.get(id=kwargs['pk'])
+        context = {'factura':factura}
+        return render_to_response(
+            'factura_orden_de_trabajo/form.html',
+            context,
+            context_instance=RequestContext(request))
