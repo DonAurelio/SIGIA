@@ -1,0 +1,46 @@
+							<!-- #modal-dialog -->
+							<div class="modal fade" id="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+											<h4 class="modal-title">Mensaje</h4>
+										</div>
+										<div class="modal-body">
+											{% for message in messages %}
+												{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+												<div class="alert alert-success fade in m-b-15">
+													<strong>Exito!</strong>
+													{{ message }}
+													<span class="close" data-dismiss="alert">&times;</span>
+												</div>
+												{% endif %}
+												{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+												<div class="alert alert-info fade in m-b-15">
+													<strong>Información!</strong>
+													{{ message }}
+													<span class="close" data-dismiss="alert">&times;</span>
+												</div>
+												{% endif %}
+												{% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+												<div class="alert alert-warning fade in m-b-15">
+													<strong>Advertencia!</strong>
+													{{ message }}
+													<span class="close" data-dismiss="alert">&times;</span>
+												</div>
+												{% endif %}
+												{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+												<div class="alert alert-danger fade in m-b-15">
+													<strong>Error!</strong>
+													{{ message }}
+													<span class="close" data-dismiss="alert">&times;</span>
+												</div>
+												{% endif %}
+											{% endfor %}
+										</div>
+										<div class="modal-footer">
+											<a href="javascript:;" class="btn btn-sm btn-success" data-dismiss="modal">Aceptar</a>
+										</div>
+									</div>
+								</div>
+							</div>

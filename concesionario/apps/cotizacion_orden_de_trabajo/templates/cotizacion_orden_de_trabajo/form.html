@@ -22,10 +22,7 @@
 
 {% block content %}
 <!-- begin col-12 -->
-    <div class="col-md-12">
-      <div class="tab-pane fade active in" id="default-tab-1">
-        <h3 class="m-t-10"><i class="fa fa-cog"></i> Lorem ipsum dolor sit amet</h3>
-        <p>
+    <div class="col-md-8">
         <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
           <!-- begin panel -->
           <div class="panel panel-inverse">
@@ -36,18 +33,18 @@
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
               </div>
-            <h4 class="panel-title">Form Wizards</h4>
+            <h4 class="panel-title">Cotización Orden de Trabajo</h4>
             </div>
             <div class="panel-body">
               <div id="wizard">
               <ol>
                 <li>
-                  Identification
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
+                  Repuestos
+                  <small>Seleccione los repuestos necesarios para la reparación</small>
                 </li>
                 <li>
-                  Contact Information
-                  <small>Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin.</small>
+                  Cotización
+                  <small>Diligencie los sigueintes datos para completar la cotización de daños</small>
                 </li>
               </ol>
               <!-- begin wizard step-1 -->
@@ -60,6 +57,9 @@
                   {% endfor %}
                   </div>
                 </fieldset>
+                <p class="text-right m-b-0">
+                  <a href="javascript:;" id="add-repuesto" class="btn btn-primary m-r-5"><i class="fa fa-plus"></i> Repuesto</a>
+                </p>
               </div>
               <!-- end wizard step-1 -->
               <!-- begin wizard step-2 -->
@@ -67,14 +67,14 @@
                 <fieldset>
                 {% bootstrap_form form %}
                 </fieldset>
+                <p class="text-right m-b-0">
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </p>
               </div>
               <!-- end wizard step-2 -->
               </div>
             </div>
-            <p class="text-right m-b-0">
-              <a href="javascript:;" id="add-repuesto" class="btn btn-white m-r-5">Agregar</a>
-              <button type="submit" class="btn btn-primary"/>
-            </p>
+
           </div>
           <!-- end panel -->
         </form>

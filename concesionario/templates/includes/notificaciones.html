@@ -6,36 +6,31 @@
 						</a>
 						<ul class="dropdown-menu media-list pull-right animated fadeInDown">
 							<li class="dropdown-header">Notifications ({{ messages | length }})</li>
-							
 							{% for message in messages %}
 								{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
 									<li class="media">
 									    <a href="javascript:;">
-		                                    <div class="pull-left media-object bg-green"><i class="fa fa-plus"></i></div>
-		                                    <div class="media-body">
-		                                        <h6 class="media-heading"> Informacion </h6>
-		                                        <p> {{ message }} </p>
-		                                        <div class="text-muted">1 segundo</div>
-		                                    </div>
-		                                </a>
-		                            </li>
+				                          <div class="pull-left media-object bg-green"><i class="fa fa-plus"></i></div>
+				                          <div class="media-body">
+				                              <h6 class="media-heading"> Informacion </h6>
+				                              <p> {{ message }} </p>
+				                              <div class="text-muted">1 segundo</div>
+				                          </div>
+				                      </a>
+				                  </li>
 								{% endif %}
-
 								{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
 									<li class="media">
 									    <a href="javascript:;">
-		                                    <div class="pull-left media-object bg-red"><i class="fa fa-bug"></i></div>
-		                                    <div class="media-body">
-		                                        <h6 class="media-heading"> Error </h6>
-		                                        <p> {{ message }} </p>
-		                                        <div class="text-muted">1 segundo</div>
-		                                    </div>
-		                                </a>
-		                            </li>
+					                        <div class="pull-left media-object bg-red"><i class="fa fa-bug"></i></div>
+					                        <div class="media-body">
+					                            <h6 class="media-heading"> Error </h6>
+					                            <p> {{ message }} </p>
+					                            <div class="text-muted">1 segundo</div>
+					                        </div>
+					                    </a>
+					                </li>
 								{% endif %}
-							
-                            {% endfor %}
+				            {% endfor %}
 						</ul>
 					</li>
-
-				

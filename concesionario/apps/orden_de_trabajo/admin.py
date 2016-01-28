@@ -6,8 +6,9 @@ from .models import OrdenDeTrabajo
 
 class AdminOrdenDeTrabajo(admin.ModelAdmin):
 	#atributos
-	list_display = ('id', 'empleado', 'cliente',
-		 'placa', 'fecha_entrada', 'fecha_salida','estado_reparacion')
+	list_display = ('id', 'empleado', 'cliente','sucursal','vehiculo',
+		 'placa', 'fecha_entrada', 'fecha_salida','estado_reparacion',
+		 'observacion','habilitado')
 	#atributos por los que se buscara
 	search_fields = ('id', 'placa')
 

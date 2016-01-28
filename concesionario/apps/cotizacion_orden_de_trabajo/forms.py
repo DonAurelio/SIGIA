@@ -24,7 +24,8 @@ RepuestoCantidadFormSet = inlineformset_factory(
     CotizacionOrdenDeTrabajo,
     RepuestoCantidad,
     fields=('repuesto','cantidad'),
-    extra=2)
+    extra=1,
+    can_delete=False)
 
 class CotizacionOrdenDeTrabajoCreateView(CreateView):
     model = CotizacionOrdenDeTrabajo
@@ -70,11 +71,28 @@ class CotizacionOrdenDeTrabajoCreateView(CreateView):
 
 class CotizacionOrdenDeTrabajoUpdateView(UpdateView):
     model = CotizacionOrdenDeTrabajo
-    fields = ['orden_de_trabajo','repuestos','detalles','costo','fecha_vencimiento']
+    form_class = CotizacionOrdenDeTrabajoForm
     template_name = 'cotizacion_orden_de_trabajo/form.html'
     success_url = reverse_lazy('orden_de_trabajo:listar')
 
     def get_context_data(self,**kwargs):
         context = super(CotizacionOrdenDeTrabajoUpdateView,self).get_context_data(**kwargs)
         context['section_title'] = 'Actualizar Cotización'
+        if self.request.POST:
+            context['formset'] = RepuestoCantidadFormSet(self.request.POST,instance=self.object)
+        else:
+            context['formset'] = RepuestoCantidadFormSet(instance=self.object)
         return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['formset']
+        if formset.is_valid():
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()
+            return redirect(self.get_success_url())
+        else:
+            return self.render_to_response(
+                self.get_context_data(form=form)
+            )
