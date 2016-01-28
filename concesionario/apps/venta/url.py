@@ -2,7 +2,6 @@
 
 from django.conf.urls import include, url
 from .forms import CrearVenta
-from .forms import ActualizarVenta
 from .views import ListaVentas
 from .views import FacturaCreateView
 

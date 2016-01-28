@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.views.generic.edit import CreateView, UpdateView
 from .models import Venta
 from apps.cliente.models import Cliente
@@ -42,10 +44,9 @@ class CrearVenta(CreateView):
         
         sucursal_vehiculo.cantidad = sucursal_vehiculo.cantidad-1
         sucursal_vehiculo.save()
-
-        return HttpResponseRedirect(reverse_lazy('venta:listar') )
-
-class ActualizarVenta(UpdateView):
-    model = Venta
-    fields = ['empleado', 'cliente', 'vehiculo', 'precio_venta', 'forma_pago']
-    success_url = reverse_lazy('venta:listar')  
+        context = {'venta':venta}
+        return render_to_response(
+            'venta/factura.html',
+            context,
+            context_instance=RequestContext(request)
+        )
