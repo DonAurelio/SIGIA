@@ -11,7 +11,7 @@ from apps.cliente.models import Cliente
 from apps.empleado.models import Empleado
 from apps.vehiculo.models import Vehiculo
 from apps.sucursal.models import SucursalVehiculo
-  
+   
 class CrearVenta(CreateView):
     model = Venta
     #precio_venta: no se incluye este campo en el formulario pero
@@ -31,7 +31,7 @@ class CrearVenta(CreateView):
         sucursal_vehiculo = SucursalVehiculo.objects.filter(sucursal=sucursal)
         context['sucursal_vehiculos'] = sucursal_vehiculo
         return context
-
+ 
     def post(self, request, *args, **kwargs):
         
         empleado = Empleado.objects.get(user_id=self.request.user.id)

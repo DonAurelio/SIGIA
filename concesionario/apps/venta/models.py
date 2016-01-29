@@ -19,7 +19,7 @@ forma_pago_choices = (
 	(EFECTIVO, 'Efectivo'),
 	(TARJETA_CREDITO, 'Tarjeta de credito'),
 	(TARJETA_DEBITO, 'Tarjeta de debito'),
-)
+) 
 
 class Venta(models.Model):
 	"""Define como se organizaran las ventas en la base de datos."""
