@@ -1,10 +1,12 @@
 # -*- encoding: utf-8 -*-
 
 from django.db import models
+from .validators import validador_placa
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 from apps.sucursal.models import Sucursal
 from apps.vehiculo.models import Vehiculo
+
 
 #Estados de la reparacion del vehiculo
 
@@ -39,7 +41,7 @@ class OrdenDeTrabajo(models.Model):
 	#vehiculo que va a ser reparado
 	vehiculo = models.ForeignKey(Vehiculo,default=None)
 	#placa del vehiculo que entra al taller
-	placa = models.CharField(null=True,blank=True,max_length=7)
+	placa = models.CharField(validators=[validador_placa],null=True,blank=True,max_length=7)
 	#Fecha de entrada al taller
 	fecha_entrada = models.DateField(auto_now_add=True,blank=True, null=True)
 	#Fecha de salida del taller
