@@ -13,7 +13,8 @@ from apps.vehiculo.models import Vehiculo
   
   
 class CrearCotizacion(CreateView): 
-
+    fecha_vencimiento=forms.DateField(
+        widget=forms.widgets.DateInput(format="%y-%m-%d"))
     model = Cotizacion 
     fields = [ 'cliente', 'vehiculo', 'fecha_vencimiento', 'forma_pago'] 
     #readonly_fields = ['empleado', 'cliente', 'vehiculo']

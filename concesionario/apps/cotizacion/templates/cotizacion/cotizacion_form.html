@@ -13,9 +13,8 @@
 {% block css %} 
 {{ block.super }}
 
-        <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+       <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-
         <!-- Para gestionar Fechas -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css'%}" rel="stylesheet" />
     <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css'%}" rel="stylesheet" />
@@ -29,10 +28,9 @@ Gestión de Cotizaciones
 {% block section_title %}{{ section_title }}{% endblock %}
 {% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
-
  
-    
-<div class="row">
+    <!-- begin col-12 --><div class="row">
+    <!-- begin col-12 -->
     <div class="col-md-12">
         <!-- begin panel -->
         <div class="panel panel-inverse">
@@ -42,13 +40,13 @@ Gestión de Cotizaciones
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                </div>Nueva Cotización</h4>
+              </div>Nueva Cotización</h4>
             </div>
             <div class="panel-body">
                 <form action="{{ request.path }}" method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data" >{% csrf_token %}
                     <div id="wizard">
                         <ol>
-                            <li>
+                           <li>
                                 Seleccione el Cliente
                                 <small></small>
                             </li>
@@ -83,7 +81,7 @@ Gestión de Cotizaciones
                                         {% if lista_clientes %} 
                                             {% for cliente  in lista_clientes %}
                                             <tr>
-                                                <td><a class="clienteID" href="{% url 'cliente:actualizar' cliente.pk %}"> {{ cliente.identificacion }}</a></td>
+                                                <td><a class="clienteID" name="{{cliente.pk}}"> {{ cliente.identificacion }}</a></td>
                                                 <td>{{ cliente.nombre }}</td>
                                                 <td>{{ cliente.apellido }}</td>
                                                 <td>{{ cliente.ciudad }}</td>
@@ -102,9 +100,8 @@ Gestión de Cotizaciones
                                 </div>
                             </fieldset>
                         </div>
-                        <!-- end wizard step-1 -->
-                        <!-- begin wizard step-2 -->
-                        <div class="wizard-step-2">
+ 
+                          <div class="wizard-step-2">
                             <fieldset>
                                 <div class="row">
                                 
@@ -160,8 +157,6 @@ Gestión de Cotizaciones
     <!-- end col-8-->
 
 </div>
-<!-- end row -->
-
 {% endblock %}
 
 {% block javascript %}
@@ -176,17 +171,19 @@ Gestión de Cotizaciones
 <script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script> 
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
-        $('.table').DataTable();
-        $("#id_empleado").attr('readonly','readonly');
-        $("#id_cliente").attr('readonly','readonly');
-        $("#id_vehiculo").attr('readonly','readonly');
+        FormWizardValidation.init();
+         $("#id_empleado").attr('readonly','readonly');
+         $("#id_cliente").attr('readonly','readonly');
+         $("#id_vehiculo").attr('readonly','readonly');
 
         $(".clienteID").click( function (event){
             event.preventDefault();
-            var clickedClienteId = $(this).attr('href').split("/")[2];
+            var clickedClienteId = $(this).attr('name');
             $("#id_cliente").val(clickedClienteId);
             $(".next").click();
         });
@@ -196,25 +193,9 @@ Gestión de Cotizaciones
             $("#id_vehiculo").val(clickedVehiculoId);
             $(".next").click();
         });
+        $('#id_fecha_vencimiento').datepicker({todayHighlight:true,autoclose:true});
 
-    } );
-
-    $(document).ready(function() {
-        FormWizardValidation.init();
     });
-
-    $(document).ready(function(){
-			$('#id_fecha').datepicker({todayHighlight:true,autoclose:true});
-            $('#id_fecha').datepicker('option', {dateFormat: 'dd/mm/yy'});
-			$('#id_fecha_vencimiento').datepicker({todayHighlight:true,autoclose:true});
-            $('#id_fecha_vencimiento')..datepicker({ dateFormat: 'yyyy-mm-dd' });
-
-              });
-		});
 </script>
 
-<script type="text/javascript">
-
-</script>
-
-{% endblock %}
+{% endblock %} 
