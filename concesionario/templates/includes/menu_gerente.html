@@ -1,16 +1,11 @@
 					<!-- Opcione del menu para el gerente -->
 
 					<!-- Sucursal -->
-					<li class="has-sub">
-						<a href="javascript:;">
-							<b class="caret pull-right"></b>
+					<li>
+						<a href="{% url 'sucursal:listar' %}">
 							<i class="fa fa-building"></i>
-							<span >Sucursales</span>
+							<span >Gestionar Sucursales</span>
 						</a>
-						<ul class="sub-menu">
-							<li><a href="#modal-dialog" data-toggle="modal">Nuevo</a></li>
-							<li><a href="{% url 'sucursal:listar' %}">Listar/Editar</a></li>
-						</ul>
 					</li>
 
 					<!-- Vehiculos -->

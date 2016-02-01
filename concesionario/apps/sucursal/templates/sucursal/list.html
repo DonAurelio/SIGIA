@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block css %}
+{{ block.super }}
+<!-- ================== BEGIN PAGE LEVEL STYLE TABLE================== -->
+    <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
+{% endblock %}
+{% block breadcrumb %}
+Gestion de Sucursales
+{% endblock %}
+{% block section_title %}Sucursales{% endblock %}
+{% block section_subtitle %}Seleccione el nombre de la sucursal que desea editar{% endblock %}
+{% block content %}
+                <!-- begin col-12 -->
+                <div class="col-md-12">
+                    <div class="email-btn-row hidden-xs">
+                        <a id="btn-nuevo" class="btn btn-success btn-circle btn-xl" href="{% url 'sucursal:crear' %}" ><i class="fa fa-plus m-r-5"></i></a>
+                    </div>
+                   
+                    <div id="section-content" class="row">
+                        {% include 'sucursal/parciales/tabla.html' %}
+                    </div>
+                </div>
+                <!-- end col-12 --> 
+                
+                <!-- #modal-dialog -->
+                <div id="sucursal-modal" class="modal fade" >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <form method="post" action="{% url 'sucursal:crear' %}" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> 
+                                {% csrf_token %}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Nueva Sucursal</h4>
+                                </div>
+                                <div id="sucursal-modal-body" class="modal-body">
+                                    {% bootstrap_form form %}
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+                                    <button id="submit" type="submit" class="btn btn-sm btn-success">Guardar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script> 
+<script src="{% static 'color_admin/assets/js/jquery.form.min.js' %}"></script>
+<script>
+    $("#btn-nuevo").click(function(event){
+        event.preventDefault();
+        alert($(this).attr('href'));
+        $.ajax({
+            type: 'GET',
+            url: $(this).attr('href'),
+            dataType: 'json',
+            success: function (data) {
+                alert("exito");
+                $("#sucursal-modal-body").html(data.html);
+                $("#sucursal-modal").modal("toggle");
+            }
+        });
+    });
+</script>
+<script>
+    $("#submit").click(function(event){
+        event.preventDefault();
+        var $form = $("form");
+        $form.ajaxSubmit({
+            url: $form.attr('action'),
+            dataType: 'json',
+            success: function(response, status, xhr, $form) {
+                if(response.status==true){
+                    $("#section-content").html(response.html);
+                }else{
+                    $("#sucursal-modal-body").html(response.html);
+                };
+            }
+        });
+    });
+</script>
+{% endblock %}
