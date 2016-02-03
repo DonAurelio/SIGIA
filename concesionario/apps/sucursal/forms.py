@@ -34,6 +34,7 @@ class SucursalAjaxCreateView(TemplateView):
 	def post(self,request,*args,**kwargs):
 		form = SucursalCreateForm(request.POST)
 		if form.is_valid():
+			form.save()
 			template = loader.get_template('sucursal/parciales/tabla.html')
 			context = {'sucursales':Sucursal.objects.all()}
 			html = template.render(context)

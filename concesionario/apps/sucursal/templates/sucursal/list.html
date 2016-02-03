@@ -45,7 +45,7 @@ Gestion de Sucursales
                                     <h4 class="modal-title">Nueva Sucursal</h4>
                                 </div>
                                 <div id="sucursal-modal-body" class="modal-body">
-                                    {% bootstrap_form form %}
+                                   
                                 </div>
                                 <div class="modal-footer">
                                     <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
@@ -67,37 +67,5 @@ Gestion de Sucursales
 <script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script> 
 <script src="{% static 'color_admin/assets/js/jquery.form.min.js' %}"></script>
-<script>
-    $("#btn-nuevo").click(function(event){
-        event.preventDefault();
-        alert($(this).attr('href'));
-        $.ajax({
-            type: 'GET',
-            url: $(this).attr('href'),
-            dataType: 'json',
-            success: function (data) {
-                alert("exito");
-                $("#sucursal-modal-body").html(data.html);
-                $("#sucursal-modal").modal("toggle");
-            }
-        });
-    });
-</script>
-<script>
-    $("#submit").click(function(event){
-        event.preventDefault();
-        var $form = $("form");
-        $form.ajaxSubmit({
-            url: $form.attr('action'),
-            dataType: 'json',
-            success: function(response, status, xhr, $form) {
-                if(response.status==true){
-                    $("#section-content").html(response.html);
-                }else{
-                    $("#sucursal-modal-body").html(response.html);
-                };
-            }
-        });
-    });
-</script>
+<script src="{% static 'concesionario/assets/js/apps.sucursal.js' %}"></script>
 {% endblock %}
