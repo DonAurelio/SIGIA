@@ -55,17 +55,44 @@ class SucursalAjaxCreateView(TemplateView):
 		data = json.dumps(response)
 		return HttpResponse(data,content_type='application/json')
 			
+
+class SucursalAjaxUpdateView(TemplateView):
+
+	def get(self,request,*args,**kwargs):
+		template = loader.get_template('sucursal/parciales/form.html')
+		sucursal = Sucursal.objects.get(id=kwargs['pk'])
+		form = SucursalCreateForm(instance=sucursal)
+		context = {'form':form}
+		html = template.render(context)
+		response = {
+			'status':True,
+			'html':html
+		}
+		data = json.dumps(response)
+		return HttpResponse(data,content_type='application/json')
+
+	
+	def post(self,request,*args,**kwargs):
+		sucursal = Sucursal.objects.get(id=kwargs['pk'])
+		form = SucursalCreateForm(request.POST,instance=sucursal)
+		if form.is_valid():
+			form.save()
+			template = loader.get_template('sucursal/parciales/tabla.html')
+			context = {'sucursales':Sucursal.objects.all()}
+			html = template.render(context)
+			response = {
+				'status':True,
+				'html':html
+			}
+			data = json.dumps(response)
+			return HttpResponse(data,content_type='application/json')
 		
-
-class SucursalUpdateView(UpdateView):
-	model = Sucursal
-	fields = ['nombre', 'direccion', 'telefono', 'ciudad','habilitado']
-	success_url = reverse_lazy('sucursal:listar')
-	template_name = 'sucursal/sucursal_list.html' 
-
-	def get_context_data(self,**kwargs):
-		context = super(SucursalUpdateView,self).get_context_data(**kwargs)
-		context['sucursales'] = Sucursal.objects.all()
-		context['form_mode'] = 'update'
-		return context
-
+		template = loader.get_template('sucursal/parciales/form.html')
+		context = {'form':form}
+		html = template.render(context)
+		response = {
+			'status':False,
+			'html':html
+		}
+		data = json.dumps(response)
+		return HttpResponse(data,content_type='application/json')

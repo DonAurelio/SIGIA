@@ -6,7 +6,7 @@
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 											<h4 class="modal-title">Mensaje</h4>
 										</div>
-										<div class="modal-body">
+										<div id="dialog-modal-body" class="modal-body">
 											{% for message in messages %}
 												{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
 												<div class="alert alert-success fade in m-b-15">
