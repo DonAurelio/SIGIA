@@ -1,0 +1,65 @@
+                        <!-- begin panel -->
+                        <div class="panel panel-inverse">
+                            <div class="panel-heading">
+                                <div class="panel-heading-btn">
+                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                </div>
+                                <h4 class="panel-title">Cotizaciones</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Número orden de Trabajo</th>
+                                                <th>Costo reparación</th>
+                                                <th>Fecha de vencimiento</th>
+                                                <th>Activo</th>
+                                                <th>Placa</th>
+                                                <th>Vehiculo</th>
+                                                <th>Cotización</th>
+                                        </thead>
+                                        <tbody>
+                                            {% for cotizacion  in cotizaciones %}
+                                                <tr>
+                                                    <td>
+                                                        <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.pk %}"> 
+                                                        {{ cotizacion.orden_de_trabajo.id }}
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ cotizacion.costo_reparacion }}</td>
+                                                    <td>{{ cotizacion.fecha_vencimiento }}</td>
+                                                    <td>
+                                                        {% if cotizacion.habilitado %}
+                                                        <ul class="fa-ul">
+                                                            <li><i class="fa-li fa fa-check-square text-success"></i></li>
+                                                        </ul>
+                                                        {% else %}
+                                                        <ul class="fa-ul">
+                                                            <li><i class="fa-li fa fa-square"></i></li>
+                                                        </ul>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ cotizacion.orden_de_trabajo.placa }}</td>
+                                                    <td>
+                                                        {% if  cotizacion.orden_de_trabajo.vehiculo.imagen %}
+                                                            <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                        {% else %}
+                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
+                                                        {% endif %} 
+                                                    </td>
+                                                    <td class="text-center" >
+                                                        <a href="{% url 'cotizacion_orden_de_trabajo:detalle' cotizacion.pk %}">
+                                                            <button type="button" class="btn btn-white "><i class="fa fa-2x fa-file-text-o"></i></button>
+                                                        </a>
+                                                        
+                                                    </td>
+                                                </tr>
+                                            {% endfor %} 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end panel -->

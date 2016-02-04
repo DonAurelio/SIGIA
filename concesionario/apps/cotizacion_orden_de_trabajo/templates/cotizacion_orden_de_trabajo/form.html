@@ -21,64 +21,74 @@
 {% block section_subtitle %}Por favor diligencie el siguiente formulario{% endblock %}
 
 {% block content %}
-<!-- begin col-12 -->
-    <div class="col-md-8">
-        <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
-          <!-- begin panel -->
-          <div class="panel panel-inverse">
-            <div class="panel-heading">
-              <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-              </div>
-            <h4 class="panel-title">Cotización Orden de Trabajo</h4>
-            </div>
-            <div class="panel-body">
-              <div id="wizard">
-              <ol>
-                <li>
-                  Repuestos
-                  <small>Seleccione los repuestos necesarios para la reparación</small>
-                </li>
-                <li>
-                  Cotización
-                  <small>Diligencie los sigueintes datos para completar la cotización de daños</small>
-                </li>
-              </ol>
-              <!-- begin wizard step-1 -->
-              <div>
-                <fieldset>
-                  <div class="repuestos">
-                  {{ formset.management_form }}
-                  {% for form in formset %}
-                      {% bootstrap_form form %}
-                  {% endfor %}
-                  </div>
-                </fieldset>
-                <p class="text-right m-b-0">
-                  <a href="javascript:;" id="add-repuesto" class="btn btn-primary m-r-5"><i class="fa fa-plus"></i> Repuesto</a>
-                </p>
-              </div>
-              <!-- end wizard step-1 -->
-              <!-- begin wizard step-2 -->
-              <div>
-                <fieldset>
-                {% bootstrap_form form %}
-                </fieldset>
-                <p class="text-right m-b-0">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                </p>
-              </div>
-              <!-- end wizard step-2 -->
-              </div>
-            </div>
-
-          </div>
-          <!-- end panel -->
-        </form>
-      </div>
+                <!-- begin col-12 -->
+                <div class="col-md-12">
+                  <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
+                    <!-- begin panel -->
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                            <h4 class="panel-title">Cotización</h4>
+                        </div>
+                        <div class="panel-body">
+                          <div id="wizard">
+                            <ol>
+                              <li id="step-1" >
+                                  Repuestos 
+                                  <small>Seleccione los repuestos necesarios para la reparación</small>
+                              </li>
+                              <li id="step-2" >
+                                  Orden de Trabajo
+                                  <small>Complete el formulario de orden de trabao.</small>
+                              </li>
+                            </ol>
+                            <!-- begin wizard step-1 -->
+                            <div>
+                                <fieldset>
+                                    <!-- begin row -->
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <div id="forms">
+                                              {{ formset.management_form }}
+                                              {% for form in formset %}
+                                                  {% bootstrap_form form %}
+                                              {% endfor %}
+                                            </div>
+                                            <div class="pull-right" >
+                                                <button id="btn-add" type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end row -->
+                                </fieldset>
+                            </div>
+                            <!-- end wizard step-1 -->
+                            <!-- begin wizard step-3 -->
+                            <div>
+                              <fieldset>
+                                <!-- begin row -->
+                                  <div class="row">
+                                      <div class="col-md-8 col-md-offset-2">
+                                          {% bootstrap_form form %}
+                                          <div class="pull-right" >
+                                            <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- end row -->
+                              </fieldset>
+                            </div>
+                            <!-- end wizard step-3 -->
+                          </div>
+                        </div>
+                    </div>
+                    <!-- end panel -->
+                    </form>
+                </div>
+                <!-- end col-12 -->
 {% endblock %}
 
 {% block javascript %}
@@ -100,13 +110,13 @@
     </script>
     <script>
     $(function() {
-        $('#add-repuesto').click(function(event){
+        $('#btn-add').click(function(event){
             event.preventDefault();
             var count = parseInt($('#id_repuestocantidad_set-TOTAL_FORMS').attr('value'), 10);
             var tmplMarkup = $('#repuestocantidad-template').html();
             var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count)
             console.log(compiledTmpl);
-            $('div.repuestos').append(compiledTmpl);
+            $('#forms').append(compiledTmpl);
             $('#id_repuestocantidad_set-TOTAL_FORMS').attr('value', count + 1);
         });
     });

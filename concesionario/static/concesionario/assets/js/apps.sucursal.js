@@ -25,7 +25,7 @@ $(document).ready(function(){
     });
 
     /* Actualización de sucursal */
-    $("tr > td > a").click(function(event){
+    $(".update").click(function(event){
         event.preventDefault();
 
         var $form = $("form");

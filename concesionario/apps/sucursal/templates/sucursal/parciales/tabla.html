@@ -26,7 +26,11 @@
                                         <tbody>
                                             {% for sucursal  in sucursales %}
                                                 <tr>
-                                                    <td><a href="{% url 'sucursal:actualizar' sucursal.pk %}"> {{ sucursal.nombre }}</a></td>
+                                                    <td >
+                                                        <a class="update" href="{% url 'sucursal:actualizar' sucursal.pk %}"> 
+                                                        {{ sucursal.nombre }}
+                                                        </a>
+                                                    </td>
                                                     <td>{{ sucursal.direccion }}</td>
                                                     <td>{{ sucursal.telefono }}</td>
                                                     <td>{{ sucursal.ciudad }}</td>
@@ -59,7 +63,11 @@
                                                         <div class="btn-group btn-xs">
                                                             <a href="javascript:;" data-toggle="dropdown" class="btn btn-white dropdown-toggle btn-xs">Opciones <span class="caret"></span></a>
                                                             <ul class="dropdown-menu">
-                                                                <li><a href="javascript:;">Cotizaciones</a></li>
+                                                                <li>
+                                                                    <a href="{% url 'cotizacion_orden_de_trabajo:listar' sucursal.pk %}">
+                                                                        Cotizaciones
+                                                                    </a>
+                                                                </li>
                                                                 <li><a href="javascript:;">Facturas</a></li>
                                                             </ul>
                                                         </div>

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load factura_tags %}
+{% block css %}
+{{ block.super }}
+  <link href="{% static 'color_admin/assets/css/invoice-print.min.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block section_title %}{% endblock %}
+{% block section_subtitle %}{% endblock %}
+{% block content %}
+            <!-- begin invoice -->
+            <div class="invoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Imprimir</a>
+                    </span>
+                    {{ cotizacion.orden_de_trabajo.empleado.sucursal.nombre }}, Inc
+                </div>
+                <div class="invoice-header">
+                    <div class="invoice-from">
+                        <small>de</small>
+                        <address class="m-t-5 m-b-5">
+                            <strong>{{ cotizacion.orden_de_trabajo.empleado.sucursal.nombre }}, Inc.</strong><br />
+                            {{ cotizacion.orden_de_trabajo.empleado.sucursal.direccion }}<br />
+                            {{ cotizacion.orden_de_trabajo.empleado.sucursal.ciudad }}<br />
+                            Telefono: (032) {{ cotizacion.orden_de_trabajo.empleado.sucursal.telefono }}<br />
+                        </address>
+                    </div>
+                    <div class="invoice-to">
+                        <small>Para</small>
+                        <address class="m-t-5 m-b-5">
+                            <strong>{{ cotizacion.orden_de_trabajo.cliente.nombre }} {{ cotizacion.orden_de_trabajo.cliente.apellido }}</strong><br />
+                            Street Address<br />
+                            {{ cotizacion.orden_de_trabajo.cliente.ciudad }}, {{ cotizacion.orden_de_trabajo.cliente.departamento }}<br />
+                            Telefono: (032) {{ cotizacion.orden_de_trabajo.cliente.telefono }}<br />
+                            Celular: {{ cotizacion.orden_de_trabajo.cliente.celular }}
+                        </address>
+                    </div>
+                    <div class="invoice-date">
+                        <small>Factuta / Orden de Trabajo</small>
+                        <div class="date m-t-5">{% now 'SHORT_DATE_FORMAT' %}</div>
+                        <div class="invoice-detail">
+                            #Orden de Trabajo: {{ cotizacion.orden_de_trabajo.id }}<br />
+                            Servicio de Mecanica Automotriz
+                        </div>
+                    </div>
+                </div>
+                <div class="invoice-content">
+                    <div class="table-responsive">
+                        <table class="table table-invoice">
+                            <thead>
+                                <tr>
+                                    <th>DESCRIPCIÓN DE REPUESTOS</th>
+                                    <th>PRECIO</th>
+                                    <th>CANTIDAD</th>
+                                    <th>TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for repuesto_cantidad in cotizacion.repuestos_cantidad.all %}
+                                <tr>
+                                    <td>
+                                        <small>{{ repuesto_cantidad.repuesto.nombre }}</small>
+                                    </td>
+                                    <td>${{ repuesto_cantidad.repuesto.precio }}</td>
+                                    <td>{{ repuesto_cantidad.cantidad }}</td>
+                                    <td>${% multiply repuesto_cantidad.repuesto.precio repuesto_cantidad.cantidad %}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="invoice-price">
+                        <div class="invoice-price-left">
+                            <div class="invoice-price-row">
+                                <div class="sub-price">
+                                    <small>COSTO EN REPUESTOS</small>
+                                    ${{ cotizacion.costo_repuestos }}
+                                </div>
+                                <div class="sub-price">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="sub-price">
+                                    <small>COSTO DE LA REPARACIÓN</small>
+                                    ${{ cotizacion.costo_reparacion }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="invoice-note">
+
+                </div>
+                <div class="invoice-footer text-muted">
+                    <p class="text-center m-b-5">
+                        GRACIAS POR PREFERIRNOS
+                    </p>
+                    <p class="text-center">
+                        <span class="m-r-10"><i class="fa fa-globe"></i> sigia.com</span>
+                        <span class="m-r-10"><i class="fa fa-phone"></i> T:016-18192302</span>
+                        <span class="m-r-10"><i class="fa fa-envelope"></i> sigia@gmail.com</span>
+                    </p>
+                </div>
+            </div>
+            <!-- end invoice -->
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+{% endblock %}

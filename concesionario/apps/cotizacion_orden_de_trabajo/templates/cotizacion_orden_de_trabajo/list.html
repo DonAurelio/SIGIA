@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block css %}
+{{ block.super }}
+    <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block breadcrumb %}
+Sucursal {{ sucursal.nombre }}
+{% endblock %}
+{% block section_title %}Cotizacones para Ordenes de Trabajo{% endblock %}
+{% block section_subtitle %}Seleccione el número de la orden de trabajo para la cotización que desea editar{% endblock %}
+{% block content %}
+                <!-- begin col-12 -->
+                <div class="col-md-12">
+                    <div id="section-content" class="row">
+                        {% include 'cotizacion_orden_de_trabajo/parciales/tabla.html' %}
+                    </div>
+                </div>
+                <!-- end col-12 --> 
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
+<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script> 
+<script src="{% static 'color_admin/assets/js/jquery.form.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".table").DataTable();
+    });
+</script>
+{% endblock %}
