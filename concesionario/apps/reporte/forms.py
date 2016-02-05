@@ -74,10 +74,3 @@ class ReporteGananciasSucursal(View):
 
 		return render (request, 'reporte/reporte_GananciasSucursales.html',{'ventas':ventas})
 
-
-#class ReporteCantidadVehiculosSucursal(View):
-
-#	cantidad=[]
-
-
-#	return render(request, 'reporte/reporte_CantidadVehiculosSucursal.html',{'cantidad':cantidad})
