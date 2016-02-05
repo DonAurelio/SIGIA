@@ -9,5 +9,6 @@ urlpatterns = [
 	url(r'^reporte/MejoresVendedores/$',ReporteVendedores.as_view(), name='MejoresVendedores'),
 	url(r'^reporte/VentasSucursal/$',ReporteVentasSucursal.as_view(), name='VentasSucursal'),
 	url(r'^reporte/GananciasSucursal/$',ReporteGananciasSucursal.as_view(), name='GananciasSucursal'),
+	#url(r'^reporte/GananciasSucursal/$',ReporteGananciasSucursal.as_view(), name='GananciasSucursal'),
 
 	]
