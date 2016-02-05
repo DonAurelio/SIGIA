@@ -2,7 +2,7 @@
 
 from django.views.generic.edit import CreateView, UpdateView
 import json
-from django.db.models import Count
+from django.db.models import Count, Sum
 
 from django.views.generic import View
 from .models import Reporte
@@ -48,3 +48,28 @@ class ReporteVentasSucursal(View):
 
 		print ventas
 		return render (request, 'reporte/reporte_VentasSucursal.html',{'ventas':ventas})
+
+
+class ReporteGananciasSucursal(View):
+
+	def get(self, request, **kwargs):
+
+		gananciasVentas=Venta.objects.values("empleado__sucursal__nombre").annotate(ganancia=Sum('precio_venta')).order_by(Coalesce('ganancia', 'ganancia').desc())
+		ventas = []
+		for x in range(len(gananciasVentas)):
+			if x == 0:
+				ven = {}
+				ven['sucursal']=str(gananciasVentas[x]['empleado__sucursal__nombre'])
+				ven['ganancia']=gananciasVentas[x]['ganancia']
+				ventas.append(ven)
+			elif gananciasVentas[x]['empleado__sucursal__nombre'] == gananciasVentas[x-1]['empleado__sucursal__nombre']:
+				ventas[x-1]['ganancia']=ventas[x-1]['ganancia']+gananciasVentas[x]['ganancia']
+			else:
+				ven = {}
+				ven['sucursal']=str(gananciasVentas[x]['empleado__sucursal__nombre'])
+				ven['ganancia']=gananciasVentas[x]['ganancia']
+				ventas.append(ven) 
+
+		print ventas
+
+		return render (request, 'reporte/reporte_GananciasSucursales.html',{'ventas':ventas})
