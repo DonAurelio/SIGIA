@@ -5,7 +5,6 @@ import json
 from django.db.models import Count, Sum
 
 from django.views.generic import View
-from .models import Reporte
 from apps.vehiculo.models import Vehiculo
 from django.shortcuts import render
 from apps.venta.models import Venta
