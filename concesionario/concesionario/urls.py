@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'', include('apps.vehiculo.url',namespace='vehiculo')),
     url(r'', include('apps.venta.url',namespace='venta')),
     url(r'', include('apps.proveedor.url',namespace='proveedor')),
+     url(r'', include('apps.reporte.url',namespace='reporte')),
     url(r'', include('apps.orden_de_trabajo.url',namespace='orden_de_trabajo')),
     url(r'', include('apps.cotizacion_orden_de_trabajo.url',namespace='cotizacion_orden_de_trabajo')),
 	url(r'', include('apps.factura_orden_de_trabajo.url',namespace='factura_orden_de_trabajo')),

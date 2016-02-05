@@ -82,6 +82,7 @@ INSTALLED_APPS = (
 	'apps.cotizacion',
 	#Administra el crud de proveedores
 	'apps.proveedor',
+	'apps.reporte',
 )
 
 MIDDLEWARE_CLASSES = (
