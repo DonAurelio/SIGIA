@@ -5,7 +5,7 @@
                                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 </div>
-                                <h4 class="panel-title">Cotizaciones</h4>
+                                <h4 class="panel-title">Facturas Ordenes de Trabajo</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -23,19 +23,15 @@
                                                 <th>Cotización</th>
                                         </thead>
                                         <tbody>
-                                            {% for cotizacion  in cotizaciones %}
+                                            {% for factura in facturas %}
                                                 <tr>
+                                                    <td>{{ factura.cotizacion.orden_de_trabajo.id }}</td>
+                                                    <td>{{ factura.cotizacion.costo_repuestos }}</td>
+                                                    <td>{{ factura.cotizacion.costo_reparacion }}</td>
+                                                    <td>{{ factura.cotizacion.costo_total }}</td>
+                                                    <td>{{ factura.cotizacion.fecha_vencimiento }}</td>
                                                     <td>
-                                                        <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.pk %}"> 
-                                                        {{ cotizacion.orden_de_trabajo.id }}
-                                                        </a>
-                                                    </td>
-                                                    <td>{{ cotizacion.costo_repuestos }}</td>
-                                                    <td>{{ cotizacion.costo_reparacion }}</td>
-                                                    <td>{{ cotizacion.costo_total }}</td>
-                                                    <td>{{ cotizacion.fecha_vencimiento }}</td>
-                                                    <td>
-                                                        {% if cotizacion.habilitado %}
+                                                        {% if factura.cotizacion.habilitado %}
                                                         <ul class="fa-ul">
                                                             <li><i class="fa-li fa fa-check-square text-success"></i></li>
                                                         </ul>
@@ -45,16 +41,16 @@
                                                         </ul>
                                                         {% endif %}
                                                     </td>
-                                                    <td>{{ cotizacion.orden_de_trabajo.placa }}</td>
+                                                    <td>{{ factura.cotizacion.orden_de_trabajo.placa }}</td>
                                                     <td>
-                                                        {% if  cotizacion.orden_de_trabajo.vehiculo.imagen %}
-                                                            <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                        {% if  factura.cotizacion.orden_de_trabajo.vehiculo.imagen %}
+                                                            <img src={{ factura.cotizacion.orden_de_trabajo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
                                                         {% else %}
                                                             <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
                                                         {% endif %} 
                                                     </td>
                                                     <td class="text-center" >
-                                                        <a href="{% url 'cotizacion_orden_de_trabajo:detalle' cotizacion.pk %}">
+                                                        <a href="{% url 'factura_orden_de_trabajo:detalle' factura.pk %}">
                                                             <button type="button" class="btn btn-white "><i class="fa fa-2x fa-file-text-o"></i></button>
                                                         </a>
                                                         

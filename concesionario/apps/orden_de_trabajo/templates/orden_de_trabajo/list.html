@@ -29,19 +29,22 @@
 
                 <div id="options" class="m-b-10">
                     <span class="gallery-option-set" id="filter" data-option-key="filter">
-                        <a href="#gallery-group-1" class="btn btn-default btn-xs active" data-option-value=".gallery-group-1">
+                        <a href="#show-all" class="btn btn-default btn-xs active" data-option-value="*">
+                            Todo
+                        </a>
+                        <a id="a-orders" href="#gallery-group-1" class="btn btn-default btn-xs" data-option-value=".gallery-group-1">
                             Ordenes
                         </a>
-                        <a href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
+                        <a id="a-quotations" href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
                             Cotizaciones
                         </a>
-                        <a href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
+                        <a id="a-repaired" href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
                             Reparados
                         </a>
-                        <a href="#gallery-group-4" class="btn btn-default btn-xs" data-option-value=".gallery-group-4">
-                            Reparado y entregado
+                        <a id="a-repaired-and-delivered" href="#gallery-group-4" class="btn btn-default btn-xs" data-option-value=".gallery-group-4">
+                            Entregados
                         </a>
-                        <a href="#gallery-group-5" class="btn btn-default btn-xs" data-option-value=".gallery-group-5">
+                        <a id="a-retired" href="#gallery-group-5" class="btn btn-default btn-xs" data-option-value=".gallery-group-5">
                             Retirados
                         </a>
                     </span>
@@ -225,6 +228,7 @@
     <script>
         $(document).ready(function() {
             Gallery.init();
+            $("#a-orders").click();
         });
     </script>
 

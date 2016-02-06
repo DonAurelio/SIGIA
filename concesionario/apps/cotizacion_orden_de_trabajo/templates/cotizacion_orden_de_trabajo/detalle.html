@@ -12,6 +12,8 @@
             <div class="invoice">
                 <div class="invoice-company">
                     <span class="pull-right hidden-print">
+                    
+                    <a href="javascript:;" onclick="window.history.back()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-arrow-circle-left"></i> Volver</a>
                     <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Imprimir</a>
                     </span>
                     {{ cotizacion.orden_de_trabajo.empleado.sucursal.nombre }}, Inc
@@ -37,7 +39,7 @@
                         </address>
                     </div>
                     <div class="invoice-date">
-                        <small>Factuta / Orden de Trabajo</small>
+                        <small>Cotización / Orden de Trabajo</small>
                         <div class="date m-t-5">{% now 'SHORT_DATE_FORMAT' %}</div>
                         <div class="invoice-detail">
                             #Orden de Trabajo: {{ cotizacion.orden_de_trabajo.id }}<br />

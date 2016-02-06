@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from .models import CotizacionOrdenDeTrabajo
 from .models import RepuestoCantidad
@@ -67,14 +67,16 @@ class CotizacionOrdenDeTrabajoCreateView(CreateView):
         cotizacion_orden_de_trabajo = CotizacionOrdenDeTrabajo.objects.get(id=self.object.id)
         cotizacion_orden_de_trabajo.orden_de_trabajo.estado_reparacion = COTIZADO
         cotizacion_orden_de_trabajo.orden_de_trabajo.save()
-        return reverse_lazy('orden_de_trabajo:listar')
+        return reverse(
+            'cotizacion_orden_de_trabajo:listar', 
+            kwargs={'pk':self.object.orden_de_trabajo.sucursal.id}
+            )
 
 class CotizacionOrdenDeTrabajoUpdateView(UpdateView):
     model = CotizacionOrdenDeTrabajo
     form_class = CotizacionOrdenDeTrabajoForm
     template_name = 'cotizacion_orden_de_trabajo/form.html'
-    success_url = reverse_lazy('orden_de_trabajo:listar')
-
+    
     def get_context_data(self,**kwargs):
         context = super(CotizacionOrdenDeTrabajoUpdateView,self).get_context_data(**kwargs)
         context['section_title'] = 'Actualizar Cotización'
@@ -87,12 +89,18 @@ class CotizacionOrdenDeTrabajoUpdateView(UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['formset']
+        
         if formset.is_valid():
-            self.object = form.save()
-            formset.instance = self.object
-            formset.save()
+            form.save(commit=True)
+            formset.save(commit=True)
             return redirect(self.get_success_url())
         else:
             return self.render_to_response(
                 self.get_context_data(form=form)
             )
+
+    def get_success_url(self):
+        return reverse(
+        'cotizacion_orden_de_trabajo:listar',
+        kwargs={'pk':self.object.orden_de_trabajo.sucursal.id}
+        )

@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import TemplateView
@@ -39,7 +40,7 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
                 context={ 'factura':factura }
 
                 return render_to_response(
-                    'factura_orden_de_trabajo/form.html',
+                    'factura_orden_de_trabajo/detalle.html',
                     context,
                     context_instance=RequestContext(request)
                 )
@@ -92,11 +93,39 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
                 info_repuestos_faltantes.append(
                 "EL repuesto {} no esta disponible en esta sucursal".format(cotizacion_repuesto.repuesto.nombre))
 
+        return info_repuestos_faltantes
 
-        if info_repuestos_faltantes == []:
-            return None
-        else:
-            return info_repuestos_faltantes
+    def descontar_repuestos_inventario_sucursal(self,cotizacion):
+        """ Documentacion descontar_repuestos_inventario_sucursal
+
+            Dada una cotizacion, permite descontar del inventario de la sucursal
+            la cantidad de repuestos especificados en la cotizacion.
+
+        """
+        # Errores
+        errores = []
+
+        # Obtenemos la sucursal de la cual se hara el descuento en el inventario
+        sucursal = cotizacion.orden_de_trabajo.sucursal
+
+        # Hacemos un recorrdio por los repuestos_cantidad que hay en la cotizacion
+        for cotizacion_repuesto in cotizacion.repuestos_cantidad.all():
+            try:
+                sucursal_repuesto = SucursalRepuesto.objects.filter(
+                    sucursal=sucursal,
+                    repuesto=cotizacion_repuesto.repuesto
+                )[0]
+
+                sucursal_repuesto.cantidad = sucursal_repuesto.cantidad - cotizacion_repuesto.cantidad
+                sucursal_repuesto.save()
+                
+            except IndexError:
+                errores.append(
+                "Se prento un error al consultar el repuesto {} no esta disponible en esta sucursal".format(
+                    cotizacion_repuesto.repuesto.nombre))
+
+        return errores
+
 
 class FacturaOrdenDeTrabajoDetailView(TemplateView):
 
@@ -104,6 +133,6 @@ class FacturaOrdenDeTrabajoDetailView(TemplateView):
         factura = FacturaOrdenDeTrabajo.objects.get(id=kwargs['pk'])
         context = {'factura':factura}
         return render_to_response(
-            'factura_orden_de_trabajo/form.html',
+            'factura_orden_de_trabajo/detalle.html',
             context,
             context_instance=RequestContext(request))

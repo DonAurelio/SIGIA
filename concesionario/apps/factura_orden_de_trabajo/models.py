@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.db import models
 from apps.cotizacion_orden_de_trabajo.models import CotizacionOrdenDeTrabajo
 

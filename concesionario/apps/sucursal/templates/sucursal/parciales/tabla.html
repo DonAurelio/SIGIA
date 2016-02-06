@@ -68,7 +68,11 @@
                                                                         Cotizaciones
                                                                     </a>
                                                                 </li>
-                                                                <li><a href="javascript:;">Facturas</a></li>
+                                                                <li>
+                                                                    <a href="{% url 'factura_orden_de_trabajo:listar' sucursal.pk %}">
+                                                                        Facturas
+                                                                    </a>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </td>
