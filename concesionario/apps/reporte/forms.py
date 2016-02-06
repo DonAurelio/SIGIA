@@ -3,7 +3,7 @@
 from django.views.generic.edit import CreateView, UpdateView
 import json
 from django.db.models import Count, Sum
-
+import random
 from django.views.generic import View
 from apps.vehiculo.models import Vehiculo
 from django.shortcuts import render
@@ -16,40 +16,49 @@ from apps.sucursal.models import SucursalRepuesto
 from apps.proveedor.models import Proveedor
 from apps.repuesto.models import Repuesto 
 
+
 class ReporteVendedores(View):
 
-	
 	def get(self, request, **kwargs):
-
+	 
 		ventas = Venta.objects.all()
  		
 		ventasPorEmpleado =ventas.values("empleado").annotate(cuantos=Count('empleado_id')).order_by(Coalesce('cuantos', 'cuantos').desc())
 		for m in ventasPorEmpleado:
+			color="#%06x" % random.randint(0, 0xFFFFFF)
 			m['empleado'] = str(Empleado.objects.get(id=m["empleado"]).user.first_name)+" "+str(Empleado.objects.get(id=m["empleado"]).user.last_name)+"("+str(Empleado.objects.get(id=m["empleado"]).sucursal)+")"
+			m['color']=color
 		print ventasPorEmpleado[1]
 		return render (request, 'reporte/reporte_VentasVendedor.html',{'ventasPorEmpleado':ventasPorEmpleado})
+
 
 
 class ReporteVentasSucursal(View):
 
 	def get(self, request, **kwargs):
+		
 		ventasPorSucursal =Venta.objects.values("empleado__sucursal__nombre").annotate(cuantos=Count('empleado_id')).order_by(Coalesce('cuantos', 'cuantos').desc())
 		ventas = []
 		for x in range(len(ventasPorSucursal)):
+			
 			if x == 0:
+				color="#%06x" % random.randint(0, 0xFFFFFF)
 				ven = {}
 				ven['sucursal']=str(ventasPorSucursal[x]['empleado__sucursal__nombre'])
 				ven['cuantos']=ventasPorSucursal[x]['cuantos']
+				ven['color']=color
 				ventas.append(ven)
 			elif ventasPorSucursal[x]['empleado__sucursal__nombre'] == ventasPorSucursal[x-1]['empleado__sucursal__nombre']:
 				ventas[x-1]['cuantos']=ventas[x-1]['cuantos']+ventasPorSucursal[x]['cuantos']
 			else:
+				color="#%06x" % random.randint(0, 0xFFFFFF)
 				ven = {}
 				ven['sucursal']=str(ventasPorSucursal[x]['empleado__sucursal__nombre'])
 				ven['cuantos']=ventasPorSucursal[x]['cuantos']
+				ven['color']=color
 				ventas.append(ven)
-
-		print ventas
+			#	print color
+		#print ventas
 		return render (request, 'reporte/reporte_VentasSucursal.html',{'ventas':ventas})
 
 
