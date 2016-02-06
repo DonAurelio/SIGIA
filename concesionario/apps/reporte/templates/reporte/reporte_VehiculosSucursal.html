@@ -1,0 +1,118 @@
+ {% extends "base.html" %}
+{% load staticfiles %}
+{% block css %}
+{{ block.super }}
+    <link href="{% static 'color_admin/assets/css/invoice-print.min.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block section_title %} {% endblock %}
+{% block section_subtitle %}{% endblock %}
+{% block content %}
+            <!-- begin invoice -->
+            
+            <div class="invoice">
+                    
+                <div class="invoice-company" align="left">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a>
+                 </span> 
+                    <br> </br>
+                    <div ALIGN=center> <strong> CANTIDAD DE VEHICULOS DISPONIBLES POR SUCURSAL</strong> </div>
+                    <br> </br>
+                    <br> </br>
+                  
+                                                         
+                    <div  ALING=CENTER>
+                    <script src="{% static 'amcharts/amcharts.js' %}"></script>
+    
+                   <script src="{% static 'amcharts/serial.js' %}"></script>
+                         <script type="text/javascript">
+
+                                    var chart;
+                                    var chartData = {{ vehiculo| safe }}
+
+
+                                    AmCharts.ready(function () {
+                                        // SERIAL CHART
+                                        chart = new AmCharts.AmSerialChart();
+                                        chart.dataProvider = chartData;
+                                        chart.categoryField = "sucursal";
+                                        chart.angle = 30;
+                                        chart.depth3D = 15;
+
+                                        chart.startDuration=1;
+                                        
+
+                                        // GRAPH
+                                        var graph = new AmCharts.AmGraph();
+                                        graph.title = "Ventas por empleado";
+                                        graph.valueField = "cuantos";
+                                        graph.type = "column";
+                                        graph.topRadius=1;
+                                        graph.balloonText = "[[category]]:[[value]]";
+                                        graph.lineAlpha = 0;
+
+                                        graph.fillColors = "#1c77bf";
+                                        graph.fillAlphas = 1;
+                                        //graph.lineThickness = 2;
+                                        //graph.bullet = "round";
+                                        chart.addGraph(graph);
+
+                                        //valores
+                                        var valueAxis = new AmCharts.ValueAxis();
+                                        valueAxis.position = "left";
+                                        valueAxis.title = "Cantidad de Autos";
+                                        valueAxis.minimum=0;
+                                        chart.addValueAxis(valueAxis);
+
+
+                                        // WRITE
+                                        chart.write("chartdiv");
+                                    });
+                                </script></div>
+                                  
+<div>
+                              <div   id="chartdiv" style="width: 640px; height: 400px;"></div>
+                                    
+                                    <div class="table-responsive" align="center">
+                                         <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                            <th>Sucursal</th>
+                                            <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if vehiculo %} 
+                                            {% for cantidad  in vehiculo %}
+                                            <tr>
+                                                <td>{{ cantidad.sucursal }}</td>
+                                                <td>{{ cantidad.cuantos }}</td>
+                                                
+                                            {% endfor %} 
+                                        {% else %} 
+                                        <p><h2>No hay Datos.</h2></p>
+                                            {% endif %}                       
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+      
+                             </div>
+                               
+                                <div class="invoice-footer text-muted">
+                                    <p class="text-center m-b-5">
+                                       Sistema de Gestion de Inventario Automotriz
+                                    </p>
+                                    <p class="text-center">
+                                        <span class="m-r-10"><i class="fa fa-globe"></i> www.SIGIA.com</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- end invoice -->
+            
+            
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+{% endblock %}

@@ -10,6 +10,7 @@ from django.shortcuts import render
 from apps.venta.models import Venta
 from apps.empleado.models import Empleado
 from apps.sucursal.models import Sucursal
+from apps.sucursal.models import SucursalVehiculo
 from django.db.models.functions import Coalesce
 
 class ReporteVendedores(View):
@@ -73,3 +74,31 @@ class ReporteGananciasSucursal(View):
 
 		return render (request, 'reporte/reporte_GananciasSucursales.html',{'ventas':ventas})
 
+class ReporteVehiculosSucursal(View):
+
+	def get(self, request, **kwargs):
+		vehiculos=SucursalVehiculo.objects.values("sucursal__nombre").annotate(cuantos=Sum('cantidad')).order_by(Coalesce('cuantos', 'cuantos').desc())
+		
+		vehiculo=[]
+		for x in range(len(vehiculos)):
+			if x == 0:
+				veh = {}
+				veh['sucursal']=str(vehiculos[x]['sucursal__nombre'])
+				veh['cuantos']=vehiculos[x]['cuantos']
+				vehiculo.append(veh)
+			elif vehiculos[x]['sucursal__nombre'] == vehiculos[x-1]['sucursal__nombre']:
+				vehiculo[x-1]['cuantos']=vehiculo[x-1]['cuantos']+vehiculos[x]['cuantos']
+			else:
+				veh = {}
+				veh['sucursal']=str(vehiculos[x]['sucursal__nombre'])
+				veh['cuantos']=vehiculos[x]['cuantos']
+				vehiculo.append(veh) 
+
+
+				print vehiculo
+
+		return render (request, 'reporte/reporte_VehiculosSucursal.html',{'vehiculo':vehiculo})
+
+
+
+		
