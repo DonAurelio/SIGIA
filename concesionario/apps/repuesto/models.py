@@ -59,6 +59,8 @@ class Repuesto(models.Model):
 	class Meta:
 		ordering = ['nombre']
 		verbose_name_plural = "Repuestos"
+		unique_together = ("nombre", "proveedor")
+
 
 	#Permite determinar una representacion en string del objeto repuesto
 	def __str__(self):
