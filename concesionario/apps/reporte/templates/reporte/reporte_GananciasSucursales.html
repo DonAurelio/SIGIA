@@ -17,17 +17,12 @@
                  </span> 
                     <br> </br>
                     <div ALIGN=center> <strong> GANANCIAS POR SUCURSAL </strong> </div>
+                    <HR width=50% align="center">
                     <br> </br>
-                    <br> </br>
-                    <font face="univers" size="4" color="#1c77bf"> 
-                            La Sucursal de mayor ganancias es:
-                                            
-                                        {% for sucursal in ventas%}
-                                             {% if forloop.first %}  {{ sucursal.sucursal }}  {% endif %}
-                                                        {% endfor %}
-                                </font> 
-                               <br> </br>
-                    <div  ALING=CENTER>
+                     
+                     <div class="container-fluid">
+                     <div class="row" align="center">
+                              
                     <script src="{% static 'amcharts/amcharts.js' %}"></script>
     
                    <script src="{% static 'amcharts/serial.js' %}"></script>
@@ -72,12 +67,15 @@
                                         // WRITE
                                         chart.write("chartdiv");
                                     });
-                                </script></div>
-                                  
-                            <div>
+                                </script>
                               <div   id="chartdiv" style="width: 640px; height: 400px;"></div>
+                                </div>
+                                 <br> </br>
+                                <br> </br>
+
+                             <div class="row">
+                               <div class="table-responsive" align="center"> 
                                     
-                                    <div class="table-responsive" align="center">
                                          <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
@@ -100,9 +98,10 @@
                                     </table>
                                 </div>
 
-
-      
-                             </div>
+                            </div>
+                           </div>
+                 
+                        <br> </br>
                                
                                 <div class="invoice-footer text-muted">
                                     <p class="text-center m-b-5">
