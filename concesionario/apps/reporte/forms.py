@@ -12,6 +12,9 @@ from apps.empleado.models import Empleado
 from apps.sucursal.models import Sucursal
 from apps.sucursal.models import SucursalVehiculo
 from django.db.models.functions import Coalesce
+from apps.sucursal.models import SucursalRepuesto
+from apps.proveedor.models import Proveedor
+from apps.repuesto.models import Repuesto 
 
 class ReporteVendedores(View):
 
@@ -93,12 +96,38 @@ class ReporteVehiculosSucursal(View):
 				veh['sucursal']=str(vehiculos[x]['sucursal__nombre'])
 				veh['cuantos']=vehiculos[x]['cuantos']
 				vehiculo.append(veh) 
-
-
 				print vehiculo
 
 		return render (request, 'reporte/reporte_VehiculosSucursal.html',{'vehiculo':vehiculo})
 
 
+class ReporteProveedoresUsados(View):
 
+	
+	def get(self, request, **kwargs):
+
+		repuestos = Repuesto.objects.all()
+ 		
+		proveedores =repuestos.values("proveedor").annotate(usados=Count('proveedor')).order_by(Coalesce('usados', 'usados').desc())
+		for m in proveedores:
+			m['proveedor'] = str(Proveedor.objects.get(id=m["proveedor"]).nombre)
 		
+		return render (request, 'reporte/reporte_Provedoores.html',{'proveedores':proveedores})
+
+
+class ReporteSucursalRepuestos(View):
+
+	
+	def get(self, request, **kwargs):
+
+		repuestosSucursal = SucursalRepuesto.objects.all()
+ 		
+		cantidadRepuestos = repuestosSucursal.values("sucursal").annotate(cantidad=Sum('cantidad')).order_by(Coalesce('cantidad', 'cantidad').desc())
+		for m in cantidadRepuestos:
+			m['sucursal'] = str(Sucursal.objects.get(id=m["sucursal"]).nombre)
+
+		print cantidadRepuestos
+		return render (request, 'reporte/reporte_RepuestosSucursales.html',{'cantidadRepuestos':cantidadRepuestos})
+
+
+
