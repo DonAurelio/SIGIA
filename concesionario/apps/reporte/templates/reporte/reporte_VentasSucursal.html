@@ -17,20 +17,14 @@
                  </span> 
                     <br> </br>
                     <div ALIGN=center> <strong> VENTAS POR SUCURSAL</strong> </div>
+                    <HR width=50% align="center">
                     <br> </br>
                     <br> </br>
-                  
-                 <font face="univers" size="4" color="#1c77bf"> 
-                           La sucursal que tuvo mayor ventas es :
-                                            
-                                        {% for sucursal in ventas %}
-                                             {% if forloop.first %}  {{ sucursal.sucursal }}  {% endif %}
-                                                        {% endfor %}
-                                </font> 
-                               <br> </br>
-                                                         
-                    <div  ALING=CENTER>
-                    <script src="{% static 'amcharts/amcharts.js' %}"></script>
+                    <div class="container">
+             <div class="container-fluid">
+                <div class="row" align="center">
+           
+                <script src="{% static 'amcharts/amcharts.js' %}"></script>
     
                    <script src="{% static 'amcharts/serial.js' %}"></script>
                          <script type="text/javascript">
@@ -57,7 +51,7 @@
                                         graph.type = "column";
                                         graph.balloonText = "[[category]]:[[value]]";
                                         graph.lineAlpha = 0;
-                                        graph.fillColors = "#1c77bf";
+                                        graph.fillColorsField= "color";
                                         graph.fillAlphas = 1;
                                         //graph.lineThickness = 2;
                                         //graph.bullet = "round";
@@ -74,12 +68,15 @@
                                         // WRITE
                                         chart.write("chartdiv");
                                     });
-                                </script></div>
-                                  
-<div>
-                              <div   id="chartdiv" style="width: 640px; height: 400px;"></div>
-                                    
-                                    <div class="table-responsive" align="center">
+                                </script>
+                                 <div   id="chartdiv" style="width: 640px; height: 400px;"></div>
+                     
+                                </div>
+                                 <br> </br>
+                                    <br> </br>
+
+                             <div class="row">
+                               <div class="table-responsive" align="center">
                                          <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
@@ -102,11 +99,12 @@
                                     </table>
                                 </div>
 
-
-      
-                             </div>
-                               
-                                <div class="invoice-footer text-muted">
+                            </div>
+                           </div>
+                 
+                        <br> </br>   
+                                    
+                         <div class="invoice-footer text-muted">
                                     <p class="text-center m-b-5">
                                        Sistema de Gestion de Inventario Automotriz
                                     </p>

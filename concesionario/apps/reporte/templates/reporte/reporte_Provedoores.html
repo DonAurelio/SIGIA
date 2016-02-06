@@ -17,66 +17,45 @@
                  </span> 
                     <br> </br>
                     <div ALIGN=center> <strong> PROVEEDORES MAS USADOS </strong> </div>
+                    <HR width=50% align="center">
                     <br> </br>
                     <br> </br>
                   
-                 <font face="univers" size="4" color="#1c77bf"> 
-                             El proveedor más utilizado es:
-                                            
-                                        {% for proveedor in proveedores %}
-                                             {% if forloop.first %}  {{ proveedor.proveedor }}  {% endif %}
-                                                        {% endfor %}
-                                </font> 
-                               <br> </br>
                                                          
-                    <div  ALING=CENTER>
+                     <div class="container-fluid">
+                     <div class="row" align="center">
                     <script src="{% static 'amcharts/amcharts.js' %}"></script>
+                    <script src="{% static 'amcharts/pie.js' %}"></script>
+                    <script src="{% static 'amcharts/themes/light.js' %}"></script>  
+                    <script src="{% static 'amcharts/serial.js' %}"></script>
+                    <script type="text/javascript">
     
-                   <script src="{% static 'amcharts/serial.js' %}"></script>
-                         <script type="text/javascript">
-
                                     var chart;
                                     var chartData = {{ proveedores | safe }}
                                     AmCharts.ready(function () {
+
                                         // SERIAL CHART
-                                        chart = new AmCharts.AmSerialChart();
+                                        chart = new AmCharts.AmPieChart();
                                         chart.dataProvider = chartData;
-                                        chart.categoryField = "proveedor";
+                                        chart.titleField = "proveedor"
+                                        chart.valueField = "usados";
                                         chart.angle = 30;
                                         chart.depth3D = 15;
-
                                         chart.startDuration=1;
-                                        
 
-                                        // GRAPH
-                                        var graph = new AmCharts.AmGraph();
-                                        graph.title = "Proveedores más usados";
-                                        graph.valueField = "usados";
-                                        graph.type = "column";
-                                        graph.balloonText = "[[category]]:[[value]]";
-                                        graph.lineAlpha = 0;
-                                        graph.fillColors = "#1c77bf";
-                                        graph.fillAlphas = 1;
-                                        //graph.lineThickness = 2;
-                                        //graph.bullet = "round";
-                                        chart.addGraph(graph);
-
-                                        //valores
-                                        var valueAxis = new AmCharts.ValueAxis();
-                                        valueAxis.position = "left";
-                                        valueAxis.title = "Proveedores más usados";
-                                        valueAxis.minimum=0;
-                                        chart.addValueAxis(valueAxis);
 
                                         // WRITE
                                         chart.write("chartdiv");
 });
-                                </script></div>
-                                  
-<div>
-                              <div   id="chartdiv" style="width: 640px; height: 400px;"></div>
-                                    
-                                    <div class="table-responsive" align="center">
+                                </script>                  
+                                <div   id="chartdiv" style="width: 100%; height: 500px;"></div>
+                                     </div>
+                                 <br> </br>
+                                <br> </br>
+
+                             <div class="row">
+                               <div class="table-responsive" align="center"> 
+                                   
                                          <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
@@ -97,11 +76,12 @@
                                             {% endif %}                       
                                         </tbody>
                                     </table>
-                                </div>
+                               </div>
 
-
-      
-                             </div>
+                            </div>
+                           </div>
+                 
+                        <br> </br>
                                
                                 <div class="invoice-footer text-muted">
                                     <p class="text-center m-b-5">
