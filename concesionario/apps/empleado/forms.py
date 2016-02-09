@@ -76,7 +76,7 @@ class EmpleadoCreateView(TemplateView):
 			new_empleado.user = new_user
 			new_empleado.save()
 			
-			messages.info(request,'Nuevo empleado creado')
+			messages.info(request,'Nuevo empleado creado con exito')
 					
 			url = reverse(
 				'empleado:listar-empleados-sucursal', 
@@ -90,11 +90,10 @@ class EmpleadoCreateView(TemplateView):
 		empleado_form = EmpleadoForm(request.POST)
 		
 		
-		messages.error(request,'Hay errores en algun campo')
+		messages.error(request,'Hay errores en algun campo, revise el formulario')
 		
 		context = {
 		'section_title':'Nuevo Empleado',
-		'button_text':'Crear',
 		'sucursal':sucursal,
 		'user_form':user_form,
 		'empleado_form':empleado_form }
@@ -118,7 +117,6 @@ class EmpleadoUpdateView(TemplateView):
 		
 		context = {
 		'section_title':'Actualizar Empleado',
-		'button_text':'Actualizar',
 		'sucursal':sucursal,
 		'user_form':user_form,
 		'empleado_form':empleado_form }
@@ -178,7 +176,6 @@ class EmpleadoUpdateView(TemplateView):
 			
 			context = {
 			'section_title':'Actualizar Empleado',
-			'button_text':'Actualizar',
 			'sucursal':sucursal,
 			'user_form':user_form,
 			'empleado_form':empleado_form }
