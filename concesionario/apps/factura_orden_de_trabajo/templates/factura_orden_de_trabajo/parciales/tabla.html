@@ -20,7 +20,7 @@
                                                 <th>Activo</th>
                                                 <th>Placa</th>
                                                 <th>Vehiculo</th>
-                                                <th>Cotización</th>
+                                                <th>Factura</th>
                                         </thead>
                                         <tbody>
                                             {% for factura in facturas %}
@@ -51,7 +51,7 @@
                                                     </td>
                                                     <td class="text-center" >
                                                         <a href="{% url 'factura_orden_de_trabajo:detalle' factura.pk %}">
-                                                            <button type="button" class="btn btn-white "><i class="fa fa-2x fa-file-text-o"></i></button>
+                                                            <button type="button" class="btn btn-white "><i class="fa fa-bar-chart-o"></i></button>
                                                         </a>
                                                         
                                                     </td>

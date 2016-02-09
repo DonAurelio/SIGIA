@@ -78,9 +78,10 @@ class Editar(TemplateView):
 			empleado_form.save()
 
 			#Se coloca un mensaje en el request, para que sea mostrado en el template 
-			messages.info(request,'Tu cuenta ha sido modificada')
+			messages.info(request,'Tu cuenta ha sido modificada con exito')
 			context = {}
-			return render_to_response('cuenta/perfil.html',context,context_instance=RequestContext(request))
+			return HttpResponseRedirect(reverse('inicio:login')) 
+			
 		else:
 			#En caso de que haya algun error, se vuelve a mostrar el formulario con los errores
 			user_form = UserUpdateForm(request.POST,instance=request.user)
@@ -93,7 +94,3 @@ class Editar(TemplateView):
 			'empleado_form':empleado_form
 			}
 			return render_to_response('cuenta/editar.html',context,context_instance=RequestContext(request))
-
-
-
-

@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from apps.empleado.models import Empleado
+from django.forms.widgets import ClearableFileInput
 
 #Este formulario permitira actualizar la informacion del User en la base de datos
 class UserUpdateForm(forms.ModelForm):
@@ -31,3 +32,5 @@ class EmpleadoUpdateForm(forms.ModelForm):
 		model = Empleado
 		#Definimos que campos del modelo pueden ser modificados
 		fields = ('identificacion','direccion','telefono','salario','imagen')
+
+		

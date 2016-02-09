@@ -16,34 +16,57 @@ from apps.cotizacion_orden_de_trabajo.models import RepuestoCantidad
 class FacturaOrdenDeTrabajoCreateView(TemplateView):
 
     def get(self,request,*args,**kwargs):
+        """ Documentacion get
+
+            Permite generar la factura que es el paso siguiente a una cotización
+            de una orden de trabajo, antes de generarse la factura, se comprueba
+            si la cotización no esta vencida, luego se verifica que en inventario 
+            de la sucursal esten todos los repuestos necesarios para reparar el 
+            vehiculo, luego se hace el descuento de las unidades del inventario
+            de la sucursal. Finalmente se muestra la factura.
+
+        """
+        
         context = {}
         cotizacion = CotizacionOrdenDeTrabajo.objects.get(id=kwargs['pk'])
 
+        # S e verifica si la cotizacion esta vencida
         if cotizacion.es_valida():
+
+            # Verificacion de repuestos faltantes
             info_repuestos_faltantes = self.verificar_inventario_sucursal(cotizacion)
+            
+            # Si faltan repuestos, se cargan los repuestso faltantes en django.contrib.messages
             if info_repuestos_faltantes:
-                messages.info(request,'No es posible reparar el vehiculo en este momento')
-                for info in info_repuestos_faltantes:
-                    messages.info(request,info)
+                self.cargar_mensajes_de_errores(info_repuestos_faltantes)
                 return HttpResponseRedirect(reverse_lazy('orden_de_trabajo:listar'))
-            else:
-                cotizacion.orden_de_trabajo.estado_reparacion = REPARADO
-                cotizacion.orden_de_trabajo.save()
+            
+            # Si todos los repuestos estan disponibles, se hace el descuento de los repuestos
+            # Si hay algun errorr se carga en django.contrib.message
+            errores = []
+            errores = self.descontar_repuestos_inventario_sucursal(cotizacion)
 
-                factura = FacturaOrdenDeTrabajo( cotizacion=cotizacion )
-                factura.save()
+            if errores:
+                self.cargar_mensajes_de_errores(errores)
+                return HttpResponseRedirect(reverse_lazy('orden_de_trabajo:listar'))
+                
 
-                repuestos_cantidad = RepuestoCantidad.objects.filter(
-                    cotizacion_orden_de_trabajo=cotizacion
-                )
+            # Si no hay errores, se coloca el estado de la cotizacion del vehiculo como REPARADO
+            cotizacion.orden_de_trabajo.estado_reparacion = REPARADO
+            cotizacion.orden_de_trabajo.save()
 
-                context={ 'factura':factura }
+            # Se crea la factura 
+            factura = FacturaOrdenDeTrabajo( cotizacion=cotizacion )
+            factura.save()
 
-                return render_to_response(
-                    'factura_orden_de_trabajo/detalle.html',
-                    context,
-                    context_instance=RequestContext(request)
-                )
+            # Se incluye la factuar en el contexto para ser visualizada
+            context={ 'factura':factura }
+
+            return render_to_response(
+                'factura_orden_de_trabajo/detalle.html',
+                context,
+                context_instance=RequestContext(request)
+            )
 
         else:
             messages.info(request,'La cotización esta vencida, debe actualizarla para efectuar la reparacion')
@@ -126,10 +149,28 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
 
         return errores
 
+    def cargar_mensajes_de_errores(self,errores):
+        """
+            Documentacion cargar_mensajes_de_errores
+
+            Permite cargar una lista de errores a django.contrib.messages
+            para que sean visualizados en el template.
+
+        """
+
+        messages.info(request,'No es posible reparar el vehiculo en este momento')
+        for info in errores:
+            messages.info(request,info)
+
 
 class FacturaOrdenDeTrabajoDetailView(TemplateView):
 
     def get(self,request,*args,**kwargs):
+        """
+            Documentacion get
+
+            Permite visualizar una factura dada su identificacíon.
+        """
         factura = FacturaOrdenDeTrabajo.objects.get(id=kwargs['pk'])
         context = {'factura':factura}
         return render_to_response(
