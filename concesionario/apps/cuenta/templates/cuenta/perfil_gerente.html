@@ -1,10 +1,224 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block css %}{{ block.super }}{% endblock %}
-{% block breadcrumb %} {% endblock %}
-{% block section_title %}{% endblock %}
-{% block section_subtitle %}{% endblock %}
-{% block content %}
-{% include 'includes/indicadores_v1.html' %}
+
+{% block css %}
+{{ block.super }}
+    <link href="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker.css' %}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+    <link href="{% static 'color_admin/assets/plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />
 {% endblock %}
-{% block javascript %}{{ block.super }}{% endblock %}
+
+{% block breadcrumb %}{% endblock %}
+{% block section_title %}Panel de Administración{% endblock %}
+{% block section_subtitle %} Estadisticas recientes de las sucursales{% endblock %}
+{% block content %}
+            <!-- begin row -->
+            <div class="row">
+                <!-- begin col-3 -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget widget-stats bg-green">
+                        <div class="stats-icon"><i class="fa fa-desktop"></i></div>
+                        <div class="stats-info">
+                            <h4>VENTAS</h4>
+                            <p>${{ valor_ventas }}</p>    
+                        </div>
+                        <div class="stats-link">
+                            <a href="javascript:;">Ver Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+                <!-- begin col-3 -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget widget-stats bg-blue">
+                        <div class="stats-icon"><i class="fa fa-chain-broken"></i></div>
+                        <div class="stats-info">
+                            <h4>REPARACIONES</h4>
+                            <p>${{ valor_ordenes_de_trabajo }}</p>   
+                        </div>
+                        <div class="stats-link">
+                            <a href="javascript:;">Ver Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+                <!-- begin col-3 -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget widget-stats bg-purple">
+                        <div class="stats-icon"><i class="fa fa-users"></i></div>
+                        <div class="stats-info">
+                            <h4>CANTIDAD EMPLEADOS</h4>
+                            <p>{{ num_empleados }}</p>    
+                        </div>
+                        <div class="stats-link">
+                            <a href="javascript:;">Ver Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+                <!-- begin col-3 -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget widget-stats bg-red">
+                        <div class="stats-icon"><i class="fa fa-clock-o"></i></div>
+                        <div class="stats-info">
+                            <h4>ULTIMO LOGIN</h4>
+                            <p>{{ user.last_login |date:"M d, Y" }}</p> 
+                        </div>
+                        <div class="stats-link">
+                            <a href="javascript:;">Ver Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+            </div>
+            <!-- end row -->
+
+            <!-- begin row -->
+            <div class="row">
+                <!-- begin col-8 -->
+                <div class="col-md-8">
+                    <ul class="nav nav-tabs nav-tabs-inverse nav-justified nav-justified-mobile">
+                        <li class="active"><a href="#latest-post" data-toggle="tab"><i class="fa fa-shopping-cart m-r-5"></i> <span class="hidden-xs"> Ranking Vendedores</span></a></li>
+                        <li class=""><a href="#purchase" data-toggle="tab"><i class="fa  fa-car m-r-5"></i> <span class="hidden-xs"> Ranking vehículos</span></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="latest-post">
+                            <div class="height-sm" data-scrollbar="true">
+                                {% if vendedores %}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Foto</th>
+                                            <th>Nombre</th>
+                                            <th>Sucursal</th>
+                                            <th>Total Ventas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for vendedor in vendedores %}
+                                        <tr>
+                                            <td>
+                                                {% if  vendedor.imagen %}
+                                                        <img src={{ vendedor.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                    {% else %}
+                                                        <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=50 height=50 class="media-object rounded-corner" />
+                                                    {% endif %}
+                                            </td>
+                                            <td>{{ vendedor.user.first_name }} {{ vendedor.user.last_name }} </td>
+                                            <td>{{ vendedor.sucursal.nombre }}</td>
+                                            <td>{{ vendedor.num_ventas }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="purchase">
+                            <div class="height-sm" data-scrollbar="true">
+                                {% if sucursales_vehiculos %}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Foto</th>
+                                            <th>Marca</th>
+                                            <th>Color</th>
+                                            <th>Sucursal</th>
+                                            <th>Total Ventas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for sucursal_vehiculo in sucursales_vehiculos %}
+                                        <tr>
+                                            <td>
+                                                {% if  sucursal_vehiculo.vehiculo.imagen %}
+                                                        <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                    {% else %}
+                                                        <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=50 height=50 class="media-object rounded-corner" />
+                                                    {% endif %}
+                                            </td>
+                                            <td>{{ sucursal_vehiculo.vehiculo.marca }} </td>
+                                            <td>{{ sucursal_vehiculo.color }} </td>
+                                            <td>{{ sucursal_vehiculo.sucursal.nombre }}</td>
+                                            <td>{{ sucursal_vehiculo.num_ventas }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-8 -->
+                <!-- begin col-4 -->
+                <div class="col-md-4">
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Detalle Sucursales</h4>
+                        </div>
+                        <div class="panel-body p-t-0">
+                            {% if sucursales %}
+                            <table class="table table-valign-middle m-b-0">
+                                <thead>
+                                    <tr>    
+                                        <th>Nombre</th>
+                                        <th>Total</th>
+                                        <th>Tendencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for sucursal in sucursales %}
+                                    <tr>
+                                        <td><label class="label label-danger">{{ sucursal.nombre }}</label></td>
+                                        <td>${{ sucursal.valor_ventas }}<span class="text-success"><i class="fa fa-arrow-up"></i></span></td>
+                                        <td><div id="sparkline-unique-visitor"></div></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Calendar</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div id="datepicker-inline" class="datepicker-full-width"><div></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-4 -->
+            </div>
+            <!-- end row -->
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+
+    <script src="{% static 'color_admin/assets/plugins/gritter/js/jquery.gritter.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/flot/jquery.flot.min.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/flot/jquery.flot.time.min.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/flot/jquery.flot.resize.min.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/flot/jquery.flot.pie.min.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/sparkline/jquery.sparkline.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <script src="{% static 'color_admin/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+
+{% endblock %}

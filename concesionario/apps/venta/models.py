@@ -24,11 +24,11 @@ forma_pago_choices = (
 class Venta(models.Model):
 	"""Define como se organizaran las ventas en la base de datos."""
 	#Llave foranea al empleado que realiza la venta
-	empleado = models.ForeignKey(Empleado)
+	empleado = models.ForeignKey(Empleado,related_name='ventas')
 	#Cliente que realiza la compra
 	cliente = models.ForeignKey(Cliente)
 	#Vehiculo de la venta
-	sucursal_vehiculo = models.ForeignKey(SucursalVehiculo, null=True, default=None, blank=True)
+	sucursal_vehiculo = models.ForeignKey(SucursalVehiculo,related_name='ventas',null=True, default=None, blank=True)
 	#Fecha en que se realiza la venta
 	fecha_venta=models.DateField(auto_now_add=True, blank=True, null=True)	
 	#Precio final de la venta, precio vehiculo - descuento
@@ -50,3 +50,11 @@ class Venta(models.Model):
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
 		return self.sucursal_vehiculo.vehiculo.marca + " " + self.sucursal_vehiculo.vehiculo.modelo
+
+	@staticmethod
+	def dinero_acumulado(self):
+		ventas = self.objects.all()
+		total = 0
+		for venta in ventas:
+			total += venta.precio_venta
+		return total

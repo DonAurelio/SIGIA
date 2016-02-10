@@ -77,7 +77,11 @@
                                                         <ul class="media-list">
                                                             <li class="media media-sm">
                                                                 <a class="pull-left" href="javascript:;">
-                                                                    <img src="{{ empleado_form.instance.imagen.url }}" alt="" class="media-object rounded-corner" />
+                                                                    {% if  empleado_form.instance.imagen %}
+                                                                        <img src={{ empleado_form.instance.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                                    {% else %}
+                                                                        <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=50 height=50 class="media-object rounded-corner" />
+                                                                    {% endif %} 
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <h4 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h4>

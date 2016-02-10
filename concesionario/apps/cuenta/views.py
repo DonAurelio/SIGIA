@@ -13,7 +13,7 @@ from apps.empleado.models import Empleado
 
 #Permite mostrar el perfil de usuario
 class Perfil(TemplateView):
-	template_name = 'cuenta/perfil.html'
+	#template_name = 'cuenta/perfil.html'
 
 	def get(self,request,*args,**kwargs):
 		return HttpResponseRedirect(reverse('inicio:login'))

@@ -16,3 +16,12 @@ class FacturaOrdenDeTrabajo(models.Model):
 	def save(self,*args,**kwargs):
 		self.costo_total = self.cotizacion.costo_total()
 		super(FacturaOrdenDeTrabajo,self).save(*args,**kwargs)
+
+	@staticmethod
+	def dinero_en_facturas(self):
+		facturas = self.objects.all()
+		total = 0
+		for factura in facturas: 
+			total += factura.costo_total
+		return total
+
