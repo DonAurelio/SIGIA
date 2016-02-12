@@ -35,7 +35,7 @@
                                     AmCharts.ready(function () {
 
                                         // SERIAL CHART
-                                        chart = new AmCharts.AmPieChart();
+                                        chart = new AmCharts.AmPieChart(AmCharts.themes.light);
                                         chart.dataProvider = chartData;
                                         chart.titleField = "proveedor"
                                         chart.valueField = "usados";

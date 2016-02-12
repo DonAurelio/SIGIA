@@ -25,7 +25,7 @@ class ReporteVendedores(View):
  		
 		ventasPorEmpleado =ventas.values("empleado").annotate(cuantos=Count('empleado_id')).order_by(Coalesce('cuantos', 'cuantos').desc())
 		for m in ventasPorEmpleado:
-			color="#%06x" % random.randint(0, 0xFFFFFF)
+			color="#%03x" % random.randint(0, 0xFFF)
 			m['empleado'] = str(Empleado.objects.get(id=m["empleado"]).user.first_name)+" "+str(Empleado.objects.get(id=m["empleado"]).user.last_name)+"("+str(Empleado.objects.get(id=m["empleado"]).sucursal)+")"
 			m['color']=color
 		print ventasPorEmpleado[1]
@@ -34,15 +34,17 @@ class ReporteVendedores(View):
 
 
 class ReporteVentasSucursal(View):
+	
 
 	def get(self, request, **kwargs):
-		
+		levels = range(32,256,32)
+
 		ventasPorSucursal =Venta.objects.values("empleado__sucursal__nombre").annotate(cuantos=Count('empleado_id')).order_by(Coalesce('cuantos', 'cuantos').desc())
 		ventas = []
 		for x in range(len(ventasPorSucursal)):
 			
 			if x == 0:
-				color="#%06x" % random.randint(0, 0xFFFFFF)
+				color="#%03x" % random.randint(0, 0xFFF)
 				ven = {}
 				ven['sucursal']=str(ventasPorSucursal[x]['empleado__sucursal__nombre'])
 				ven['cuantos']=ventasPorSucursal[x]['cuantos']
@@ -51,7 +53,7 @@ class ReporteVentasSucursal(View):
 			elif ventasPorSucursal[x]['empleado__sucursal__nombre'] == ventasPorSucursal[x-1]['empleado__sucursal__nombre']:
 				ventas[x-1]['cuantos']=ventas[x-1]['cuantos']+ventasPorSucursal[x]['cuantos']
 			else:
-				color="#%06x" % random.randint(0, 0xFFFFFF)
+				color="#%03x" % random.randint(0, 0xFFF)
 				ven = {}
 				ven['sucursal']=str(ventasPorSucursal[x]['empleado__sucursal__nombre'])
 				ven['cuantos']=ventasPorSucursal[x]['cuantos']
