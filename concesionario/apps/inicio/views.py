@@ -61,9 +61,8 @@ class Login(TemplateView):
 	def get_user_template(self,request):
 		if request.user.empleado.tipo == GERENTE:
 
-			sucursales = Sucursal.objects.aggregate(
-				valor_ventas=Sum('sucursalvehiculo__ventas__precio_venta')
-				)
+			sucursales = Venta.objects.values(
+				'sucursal_vehiculo__sucursal__nombre','sucursal_vehiculo__sucursal__ciudad').annotate(total=Sum('precio_venta'))
 
 			print "sucursales", sucursales
 
@@ -80,7 +79,7 @@ class Login(TemplateView):
 				num_ventas=Count('ventas')).order_by('-num_ventas')
 			
 			context = {
-				'sucursales':sucursales,
+				'ventas':sucursales,
 				'valor_ordenes_de_trabajo':valor_ordenes_de_trabajo,
 				'valor_ventas':valor_ventas,
 				'num_empleados':num_empleados,

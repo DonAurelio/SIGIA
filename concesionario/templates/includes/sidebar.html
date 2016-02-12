@@ -6,7 +6,7 @@
 				<ul class="nav">
 					<li class="nav-profile">
 						<div class="image">
-							<a href="javascript:;"> 
+							<a href="{% url 'cuenta:perfil' %}"> 
 							{% if  user.empleado.imagen %}
 								<img src={{ user.empleado.imagen.url }} alt="" /> 
 							{% else %}

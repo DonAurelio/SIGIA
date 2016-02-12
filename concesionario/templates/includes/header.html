@@ -24,7 +24,7 @@
 					<li class="dropdown navbar-user">
 
 						<!-- begin user picture and name-->
-						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+						<a href="{% url 'cuenta:perfil' %}" class="dropdown-toggle" data-toggle="dropdown">
 							{% if  user.empleado.imagen %}
 								<img src={{ user.empleado.imagen.url }} alt="" /> 
 							{% else %}

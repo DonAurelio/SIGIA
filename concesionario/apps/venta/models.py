@@ -45,11 +45,11 @@ class Venta(models.Model):
 
 	#Permite determinar una representacion en string del objeto empleado
 	def __str__(self):
-		return self.sucursal_vehiculo.vehiculo.marca + " " + self.sucursal_vehiculo.vehiculo.modelo
+		return self.sucursal_vehiculo.sucursal.nombre + " " + self.sucursal_vehiculo.vehiculo.marca
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
-		return self.sucursal_vehiculo.vehiculo.marca + " " + self.sucursal_vehiculo.vehiculo.modelo
+		return self.sucursal_vehiculo.sucursal.nombre + " " + self.sucursal_vehiculo.vehiculo.marca
 
 	@staticmethod
 	def dinero_acumulado(self):
@@ -58,3 +58,9 @@ class Venta(models.Model):
 		for venta in ventas:
 			total += venta.precio_venta
 		return total
+
+	def nombre_sucursal(self):
+		return self.sucursal_vehiculo.sucursal.nombre
+
+	def marca_vehiculo(self):
+		return self.sucursal_vehiculo.vehiculo.marca

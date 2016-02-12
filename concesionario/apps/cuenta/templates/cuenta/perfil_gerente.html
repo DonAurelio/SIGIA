@@ -100,10 +100,10 @@
                                         <tr>
                                             <td>
                                                 {% if  vendedor.imagen %}
-                                                        <img src={{ vendedor.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
-                                                    {% else %}
-                                                        <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=50 height=50 class="media-object rounded-corner" />
-                                                    {% endif %}
+                                                    <img src={{ vendedor.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                {% else %}
+                                                    <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=50 height=50 class="media-object rounded-corner" />
+                                                {% endif %}
                                             </td>
                                             <td>{{ vendedor.user.first_name }} {{ vendedor.user.last_name }} </td>
                                             <td>{{ vendedor.sucursal.nombre }}</td>
@@ -165,26 +165,32 @@
                             <h4 class="panel-title">Detalle Sucursales</h4>
                         </div>
                         <div class="panel-body p-t-0">
-                            {% if sucursales %}
+                            <div class="height-sm" data-scrollbar="true">
+                            {% if ventas %}
                             <table class="table table-valign-middle m-b-0">
                                 <thead>
                                     <tr>    
                                         <th>Nombre</th>
+                                        <th>Ciudad</th>
                                         <th>Total</th>
-                                        <th>Tendencia</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for sucursal in sucursales %}
+                                    {% for venta in ventas %}
                                     <tr>
-                                        <td><label class="label label-danger">{{ sucursal.nombre }}</label></td>
-                                        <td>${{ sucursal.valor_ventas }}<span class="text-success"><i class="fa fa-arrow-up"></i></span></td>
-                                        <td><div id="sparkline-unique-visitor"></div></td>
+                                        <td>
+                                            <label class="{% cycle 'label label-success' 'label label-primary' 'label label-warning' 'label label-danger' %} ">
+                                                {{ venta.sucursal_vehiculo__sucursal__nombre }}
+                                            </label>
+                                        </td>
+                                        <td>{{ venta.sucursal_vehiculo__sucursal__ciudad }}</td>
+                                        <td>${{ venta.total }}<span class="text-success"><i class="fa fa-arrow-up"></i></span></td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
                             {% endif %}
+                            </div>
                         </div>
                     </div>
                     

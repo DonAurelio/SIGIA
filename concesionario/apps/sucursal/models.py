@@ -74,6 +74,9 @@ class SucursalVehiculo(models.Model):
 	def color_vehiculo(self):
 		return self.color
 
+	def marca_vehiculo(self):
+		return sefl.vehiculo.marca
+
 	def cantidad_vehiculo(self):
 		return self.cantidad
 
