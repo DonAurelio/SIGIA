@@ -66,7 +66,7 @@ class VehiculoSucursalAjaxCreateView(TemplateView):
 		sucursal = Sucursal.objects.get(id=kwargs['spk']).id
 		vehiculo = Vehiculo.objects.get(id=kwargs['vpk']).id
 
-		template = loader.get_template('vehiculo/parciales/inventario_form.html')
+		template = loader.get_template('parciales/form.html')
 		form = VehiculoSucursalCreateForm({'sucursal':sucursal,'vehiculo':vehiculo})
 		context = {'form':form}
 		html = template.render(context)
@@ -78,48 +78,85 @@ class VehiculoSucursalAjaxCreateView(TemplateView):
 		data = json.dumps(response)
 		return HttpResponse(data,content_type='application/json')
 
+	def post(self,request,*args,**kwargs):
+		form = VehiculoSucursalCreateForm(request.POST)
+		if form.is_valid():
+			form.save()
+			template = loader.get_template('vehiculo/parciales/inventario.html')
+			vehiculos = Vehiculo.objects.all()
+			sucursal = Sucursal.objects.get(id=kwargs['spk'])
+			sucursal_vehiculos = SucursalVehiculo.objects.filter(sucursal=sucursal)
+			context = {
+				'vehiculos':vehiculos,
+				'sucursal':sucursal,
+				'sucursal_vehiculos':sucursal_vehiculos
+			}
+			html = template.render(context)
+			response = {
+				'status':True,
+				'html':html
+			}
+			data = json.dumps(response)
+			return HttpResponse(data,content_type='application/json')
+		
+		template = loader.get_template('parciales/form.html')
+		context = {'form':form}
+		html = template.render(context)
+		response = {
+			'status':False,
+			'html':html
+		}
+		data = json.dumps(response)
+		return HttpResponse(data, content_type='application/json')
 
 
-class VehiculoSucursalCreateView(CreateView):
-	model = SucursalVehiculo
-	template_name  = 'vehiculo/inventario_list.html'
-	fields = ['vehiculo','sucursal','color','cantidad','habilitado']
+class VehiculoSucursalAjaxUpdateView(TemplateView):
+
 	
-	def get_context_data(self,**kwargs):
-		context = super(VehiculoSucursalCreateView,self).get_context_data(**kwargs)
-		# Vehiculos que no estan en la sucursal con id = self.kwargs['pk']
-		#context['vehiculos']  = Vehiculo.objects.exclude(sucursalvehiculo__sucursal__id=self.kwargs['pk'])
-		context['vehiculos'] =  Vehiculo.objects.all()
-		context['form_mode'] = 'create'
-		context['sucursal'] = Sucursal.objects.get(id=self.kwargs['pk'])
-		return context
+	def get(self,request,*args,**kwargs):
 
-	def get_success_url(self):
-		messages.info(self.request,"El vehiculo ha sido agregado la inventario con exito")
-		return reverse_lazy('vehiculo:listar-vehiculos-sucursal',kwargs={'pk':self.kwargs['pk']})
+		sucursal_vehiculo = SucursalVehiculo.objects.get(id=kwargs['pk'])
+		
+		template = loader.get_template('parciales/form.html')
+		form = VehiculoSucursalCreateForm(instance=sucursal_vehiculo)
+		context = {'form':form}
+		html = template.render(context)
+		response = {
+			'status':True,
+			'html':html
+		}
 
+		data = json.dumps(response)
+		return HttpResponse(data,content_type='application/json')
 
-class VehiculoSucursalUpdateView(UpdateView):
-	model = SucursalVehiculo
-	template_name  = 'vehiculo/inventario_list.html'
-	fields = ['vehiculo','sucursal','color','cantidad','habilitado']
-	
-	def get_context_data(self,**kwargs):
-		context = super(VehiculoSucursalUpdateView,self).get_context_data(**kwargs)
-		# Vehiculos que no estan en la sucursal con id = self.kwargs['pk']
-		#context['vehiculos']  = Vehiculo.objects.exclude(sucursalvehiculo__sucursal__id=self.kwargs['pk'])
-		context['vehiculos'] =  Vehiculo.objects.all()
-		context['form_mode'] = 'update'
-		sucursal_vehiculo = SucursalVehiculo.objects.get(id=self.kwargs['pk'])
-		sucursal_id = sucursal_vehiculo.sucursal_id
-		sucursal = Sucursal.objects.get(id=sucursal_id)
-		context['sucursal'] = sucursal
-		#context['sucursal_vehiculo'] = sucursal_vehiculo
-		context['sucursal_vehiculos'] = SucursalVehiculo.objects.filter(sucursal=sucursal)
-
-		return context
-
-	def get_success_url(self):
-		messages.info(self.request,"El vehiculo del inventario ha sido actualizado con exito")
-		sucursal_vehiculo = SucursalVehiculo.objects.get(id=self.kwargs['pk'])
-		return reverse_lazy('vehiculo:listar-vehiculos-sucursal',kwargs={'pk':sucursal_vehiculo.sucursal.id})
+	def post(self,request,*args,**kwargs):
+		sucursal_vehiculo = SucursalVehiculo.objects.get(id=kwargs['pk'])
+		form = VehiculoSucursalCreateForm(request.POST,instance=sucursal_vehiculo)
+		if form.is_valid():
+			form.save()
+			template = loader.get_template('vehiculo/parciales/inventario.html')
+			vehiculos = Vehiculo.objects.all()
+			sucursal = sucursal_vehiculo.sucursal
+			sucursal_vehiculos = SucursalVehiculo.objects.filter(sucursal=sucursal)
+			context = {
+				'vehiculos':vehiculos,
+				'sucursal':sucursal,
+				'sucursal_vehiculos':sucursal_vehiculos
+			}
+			html = template.render(context)
+			response = {
+				'status':True,
+				'html':html
+			}
+			data = json.dumps(response)
+			return HttpResponse(data,content_type='application/json')
+		
+		template = loader.get_template('parciales/form.html')
+		context = {'form':form}
+		html = template.render(context)
+		response = {
+			'status':False,
+			'html':html
+		}
+		data = json.dumps(response)
+		return HttpResponse(data, content_type='application/json')

@@ -44,8 +44,7 @@ class VehiculoSucursalListView(ListView):
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		context['sucursal'] = sucursal
 		context['vehiculos'] = Vehiculo.objects.all()
-		context['form'] = VehiculoSucursalCreateForm()
-		context['form_mode'] = 'create'
+		
 
 		return context
 

@@ -7,19 +7,12 @@ $(document).ready(function(){
         event.preventDefault();
         
         var $form = $("form");
-
-        //Se obtiene la url del vehiculo a agergar a la sucursal
         var url = $(this).attr('href');
-        alert(url);
-        //Se modifica el atributo action del formulario 
+        
         $form.attr('action',url);
-
-        //Se cambia el titulo del modal
         $("#inventory-modal-title").html("Nuevo Vehiculo en Inventario");
-        //Se activa el boton de submit
         $("#submit").show();
 
-        //Se trae el formulario del servidor 
         $.ajax({
             type: 'GET',
             url: $form.attr('action'),
@@ -32,10 +25,33 @@ $(document).ready(function(){
         });
     });
 
+    /* Actualización de sucursal */
+    $(".update").click(function(event){
+        event.preventDefault();
+
+        var $form = $("form");
+        $form.attr('action',$(this).attr("href"));
+        $("#inventory-modal-title").html("Actualizar Sucursal");
+        $("#submit").show();
+        
+        $.ajax({
+            type: 'GET',
+            url: $(this).attr("href"),
+            dataType: 'json',
+            success: function (data) {
+
+                $("#inventory-modal-body").html(data.html);
+                $("#inventory-modal").modal("toggle");
+            },
+            error: error
+        });
+    });
+
     /* submit del formulario */
     $("#submit").click(function(event){
         event.preventDefault();
         var $form = $("form");
+        alert($form.attr('action'));
         $form.ajaxSubmit({
             url: $form.attr('action'),
             dataType: 'json',
@@ -43,9 +59,9 @@ $(document).ready(function(){
                 if(response.status==true){
                     $("#section-content").html(response.html);
                     $('.table').DataTable();
-                    $("#sucursal-modal").modal("toggle");
+                    $("#inventory-modal").modal("toggle");
                 }else{
-                    $("#sucursal-modal-body").html(response.html);
+                    $("#inventory-modal-body").html(response.html);
                 };
             },
             error: error

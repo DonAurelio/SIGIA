@@ -6,7 +6,7 @@ from .forms import VehiculoUpdateView
 from .views import VehiculosListView
 
 from .forms import VehiculoSucursalAjaxCreateView
-from .forms import VehiculoSucursalUpdateView
+from .forms import VehiculoSucursalAjaxUpdateView
 from .views import VehiculoSucursalListView
 
 from .views import VehiculosListSucursal
@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^vehiculos/$', VehiculosListView.as_view(), name='listar-vehiculos'),
     
     url(r'^vehiculos/sucursal/(?P<spk>\d+)/agregar/(?P<vpk>\d+)/$', VehiculoSucursalAjaxCreateView.as_view(), name='agregar-vehiculo-sucursal'),
-    url(r'^vehiculos/sucursal/actualizar/(?P<pk>\d+)/$', VehiculoSucursalUpdateView.as_view(), name='actualizar-vehiculo-sucursal'),
+    url(r'^vehiculos/sucursal/actualizar/(?P<pk>\d+)/$', VehiculoSucursalAjaxUpdateView.as_view(), name='actualizar-vehiculo-sucursal'),
     url(r'^vehiculos/sucursal/(?P<pk>\d+)/$', VehiculoSucursalListView.as_view(), name='listar-vehiculos-sucursal'),
         
     url(r'^vehiculos/inventario$', VehiculosListSucursal.as_view(), name='listar-vehiculos-inventario'),
