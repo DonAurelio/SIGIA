@@ -21,7 +21,7 @@ class SucursalCreateForm(forms.ModelForm):
 class SucursalAjaxCreateView(TemplateView):
 
 	def get(self,request,*args,**kwargs):
-		template = loader.get_template('sucursal/parciales/form.html')
+		template = loader.get_template('sucursal/includes/form.html')
 		form = SucursalCreateForm()
 		context = {'form':form}
 		html = template.render(context)
@@ -37,7 +37,7 @@ class SucursalAjaxCreateView(TemplateView):
 		form = SucursalCreateForm(request.POST)
 		if form.is_valid():
 			form.save()
-			template = loader.get_template('sucursal/parciales/tabla.html')
+			template = loader.get_template('sucursal/includes/tabla.html')
 			context = {'sucursales':Sucursal.objects.all()}
 			html = template.render(context)
 			response = {
@@ -47,7 +47,7 @@ class SucursalAjaxCreateView(TemplateView):
 			data = json.dumps(response)
 			return HttpResponse(data,content_type='application/json')
 		
-		template = loader.get_template('sucursal/parciales/form.html')
+		template = loader.get_template('sucursal/includes/form.html')
 		context = {'form':form}
 		html = template.render(context)
 		response = {
@@ -61,7 +61,7 @@ class SucursalAjaxCreateView(TemplateView):
 class SucursalAjaxUpdateView(TemplateView):
 
 	def get(self,request,*args,**kwargs):
-		template = loader.get_template('sucursal/parciales/form.html')
+		template = loader.get_template('sucursal/includes/form.html')
 		sucursal = Sucursal.objects.get(id=kwargs['pk'])
 		form = SucursalCreateForm(instance=sucursal)
 		context = {'form':form}
@@ -79,7 +79,7 @@ class SucursalAjaxUpdateView(TemplateView):
 		form = SucursalCreateForm(request.POST,instance=sucursal)
 		if form.is_valid():
 			form.save()
-			template = loader.get_template('sucursal/parciales/tabla.html')
+			template = loader.get_template('sucursal/includes/tabla.html')
 			context = {'sucursales':Sucursal.objects.all()}
 			html = template.render(context)
 			response = {
@@ -89,7 +89,7 @@ class SucursalAjaxUpdateView(TemplateView):
 			data = json.dumps(response)
 			return HttpResponse(data,content_type='application/json')
 		
-		template = loader.get_template('sucursal/parciales/form.html')
+		template = loader.get_template('sucursal/includes/form.html')
 		context = {'form':form}
 		html = template.render(context)
 		response = {

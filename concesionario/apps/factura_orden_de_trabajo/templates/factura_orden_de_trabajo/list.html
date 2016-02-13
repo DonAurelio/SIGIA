@@ -23,7 +23,7 @@ Sucursal {{ sucursal.nombre }}
                 <!-- begin col-12 -->
                 <div class="col-md-12">
                     <div id="section-content" class="row">
-                        {% include 'factura_orden_de_trabajo/parciales/tabla.html' %}
+                        {% include 'factura_orden_de_trabajo/includes/tabla.html' %}
                     </div>
                 </div>
                 <!-- end col-12 --> 
@@ -33,9 +33,7 @@ Sucursal {{ sucursal.nombre }}
 {{ block.super }}
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
-<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
-<script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script> 
 <script src="{% static 'color_admin/assets/js/jquery.form.min.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function(){

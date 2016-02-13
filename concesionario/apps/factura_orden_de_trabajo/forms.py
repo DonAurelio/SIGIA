@@ -158,9 +158,9 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
 
         """
 
-        messages.info(request,'No es posible reparar el vehiculo en este momento')
+        messages.info(self.request,'No es posible reparar el vehiculo en este momento')
         for info in errores:
-            messages.info(request,info)
+            messages.info(self.request,info)
 
 
 class FacturaOrdenDeTrabajoDetailView(TemplateView):
