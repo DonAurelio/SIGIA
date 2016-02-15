@@ -28,7 +28,7 @@
                                             {% for sucursal  in sucursales %}
                                                 <tr>
                                                     <td >
-                                                        <a class="update" href="{% url 'sucursal:actualizar' sucursal.pk %}"> 
+                                                        <a class="update" href="{% url 'sucursal:actualizar' sucursal.pk %}">
                                                         {{ sucursal.nombre }}
                                                         </a>
                                                     </td>
@@ -47,7 +47,7 @@
                                                         {% endif %}
                                                     <td>
                                                         <a href="{% url 'empleado:listar-empleados-sucursal' sucursal.id %}">
-                                                            <button type="button" class="btn btn-info btn-xs"><i class="fa fa-cog"></i> Administrar</button>                                
+                                                            <button type="button" class="btn btn-info btn-xs"><i class="fa fa-cog"></i> Administrar</button>
                                                         </a>
                                                     </td>
                                                     <td>
@@ -78,7 +78,7 @@
                                                         </div>
                                                     </td>
                                                 </tr >
-                                            {% endfor %} 
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -86,4 +86,4 @@
                         </div>
                         <!-- end panel -->
 
-                        <script src="{% static 'concesionario/assets/js/apps.sucursal.js' %}"></script>
+              
