@@ -1,13 +1,16 @@
 function listeners(){
   /* Incializacion DataTable */
   $('.table').DataTable();
-  /* Creacion de sucursal */
-  $("body").on('click', "#btn-nuevo", function(event){
+
+  /* Agregar vehiculo al inventario de una sucursal*/
+  $("body").on('click', ".create", function(event){
       event.preventDefault();
 
       var $form = $("form");
-      $form.attr('action','/sucursal/crear');
-      $("#sucursal-modal-title").html("Nueva Sucursal");
+      var url = $(this).attr('href');
+
+      $form.attr('action',url);
+      $("#inventory-modal-title").html("Nuevo Vehiculo en Inventario");
       $("#submit").show();
 
       $.ajax({
@@ -15,21 +18,20 @@ function listeners(){
           url: $form.attr('action'),
           dataType: 'json',
           success: function (data) {
-
-              $("#sucursal-modal-body").html(data.html);
-              $("#sucursal-modal").modal("toggle");
+              $("#inventory-modal-body").html(data.html);
+              $("#inventory-modal").modal("toggle");
           },
           error: error
       });
   });
 
-  /* Actualización de sucursal */
-    $("body").on('click',".update", function(event){
+  /* Actualización de un vehiculo del inventario de la sucursal */
+  $("body").on('click',".update", function(event){
       event.preventDefault();
 
       var $form = $("form");
       $form.attr('action',$(this).attr("href"));
-      $("#sucursal-modal-title").html("Actualizar Sucursal");
+      $("#inventory-modal-title").html("Actualizar Sucursal");
       $("#submit").show();
 
       $.ajax({
@@ -38,8 +40,8 @@ function listeners(){
           dataType: 'json',
           success: function (data) {
 
-              $("#sucursal-modal-body").html(data.html);
-              $("#sucursal-modal").modal("toggle");
+              $("#inventory-modal-body").html(data.html);
+              $("#inventory-modal").modal("toggle");
           },
           error: error
       });
@@ -49,6 +51,7 @@ function listeners(){
   $("#submit").click(function(event){
       event.preventDefault();
       var $form = $("form");
+      alert($form.attr('action'));
       $form.ajaxSubmit({
           url: $form.attr('action'),
           dataType: 'json',
@@ -56,21 +59,23 @@ function listeners(){
               if(response.status==true){
                   $("#section-content").html(response.html);
                   $('.table').DataTable();
-                  $("#sucursal-modal").modal("toggle");
+                  $("#inventory-modal").modal("toggle");
               }else{
-                  $("#sucursal-modal-body").html(response.html);
+                  $("#inventory-modal-body").html(response.html);
               };
           },
           error: error
       });
   });
 
+
+
   /* Aviso de error  */
   var error = function (data) {
       var html = '<div class="alert alert-danger fade in m-b-15"> \
                       <strong>Error!</strong> \
                           Se ha presentado un error al intentar obtener información del servidor, \
-                          por favor verifique el archivo apps.sucursal.js \
+                          por favor verifique el archivo apps.sucursal.inventario.js \
                       <span class="close" data-dismiss="alert">&times;</span> \
                   </div>';
 
