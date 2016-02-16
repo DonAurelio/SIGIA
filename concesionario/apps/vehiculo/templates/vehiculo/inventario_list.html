@@ -28,9 +28,8 @@ Sucursal {{ sucursal.nombre }}
                         <li class=""><a href="#default-tab-2" data-toggle="tab">Añadir al Inventario</a></li>
                     </ul>
                     <div id="section-content" class="tab-content">
-                        {% include 'vehiculo/parciales/inventario.html' %}
+                        {% include 'vehiculo/includes/inventario.html' %}
                     </div>
-
                     <!-- #modal-dialog -->
                     <div class="modal fade" id="inventory-modal">
                         <div class="modal-dialog">
@@ -42,7 +41,7 @@ Sucursal {{ sucursal.nombre }}
                                         <h4 id="inventory-modal-title" class="modal-title"></h4>
                                     </div>
                                     <div id="inventory-modal-body" class="modal-body">
-                                        
+
                                     </div>
                                     <div class="modal-footer">
                                         <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cerrar</a>
@@ -66,5 +65,5 @@ Sucursal {{ sucursal.nombre }}
     <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/inbox.demo.min.js' %}"></script>
     <script src="{% static 'color_admin/assets/js/jquery.form.min.js' %}"></script>
-    <script src="{% static 'concesionario/assets/js/apps.sucursal.inventario.js' %}"></script>
+    <script src="{% static 'concesionario/assets/js/apps.sucursal.inventario.vehiculo.js' %}"></script>
 {% endblock %}

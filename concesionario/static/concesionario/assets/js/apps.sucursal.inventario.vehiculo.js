@@ -51,7 +51,6 @@ function listeners(){
   $("#submit").click(function(event){
       event.preventDefault();
       var $form = $("form");
-      alert($form.attr('action'));
       $form.ajaxSubmit({
           url: $form.attr('action'),
           dataType: 'json',

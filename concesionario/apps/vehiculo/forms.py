@@ -16,12 +16,12 @@ from apps.sucursal.models import SucursalVehiculo
 import json
 
 
- 
+
 class VehiculoCreateView(CreateView):
 	model = Vehiculo
 	fields = ['numero_serie', 'marca', 'modelo', 'motor', 'potencia', 'tipo',
 	'capacidad', 'caracteristicas', 'imagen', 'precio']
-	
+
 
 	def get_context_data(self,**kwargs):
 		context = super(VehiculoCreateView,self).get_context_data(**kwargs)
@@ -35,7 +35,7 @@ class VehiculoCreateView(CreateView):
 
 
 class VehiculoUpdateView(UpdateView):
-	model = Vehiculo 
+	model = Vehiculo
 	fields = ['numero_serie', 'marca', 'modelo', 'motor', 'potencia', 'tipo',
 	'capacidad', 'caracteristicas', 'imagen', 'precio']
 	success_url = reverse_lazy('vehiculo:listar-vehiculos')
@@ -52,7 +52,7 @@ class VehiculoUpdateView(UpdateView):
 
 
 class VehiculoSucursalCreateForm(forms.ModelForm):
-	
+
 	class Meta:
 		model = SucursalVehiculo
 		fields = ('vehiculo','sucursal','color','cantidad','habilitado')
@@ -60,13 +60,13 @@ class VehiculoSucursalCreateForm(forms.ModelForm):
 
 class VehiculoSucursalAjaxCreateView(TemplateView):
 
-	
+
 	def get(self,request,*args,**kwargs):
 
 		sucursal = Sucursal.objects.get(id=kwargs['spk']).id
 		vehiculo = Vehiculo.objects.get(id=kwargs['vpk']).id
 
-		template = loader.get_template('parciales/form.html')
+		template = loader.get_template('includes/form.html')
 		form = VehiculoSucursalCreateForm({'sucursal':sucursal,'vehiculo':vehiculo})
 		context = {'form':form}
 		html = template.render(context)
@@ -82,7 +82,7 @@ class VehiculoSucursalAjaxCreateView(TemplateView):
 		form = VehiculoSucursalCreateForm(request.POST)
 		if form.is_valid():
 			form.save()
-			template = loader.get_template('vehiculo/parciales/inventario.html')
+			template = loader.get_template('vehiculo/includes/inventario.html')
 			vehiculos = Vehiculo.objects.all()
 			sucursal = Sucursal.objects.get(id=kwargs['spk'])
 			sucursal_vehiculos = SucursalVehiculo.objects.filter(sucursal=sucursal)
@@ -98,8 +98,8 @@ class VehiculoSucursalAjaxCreateView(TemplateView):
 			}
 			data = json.dumps(response)
 			return HttpResponse(data,content_type='application/json')
-		
-		template = loader.get_template('parciales/form.html')
+
+		template = loader.get_template('includes/form.html')
 		context = {'form':form}
 		html = template.render(context)
 		response = {
@@ -112,12 +112,12 @@ class VehiculoSucursalAjaxCreateView(TemplateView):
 
 class VehiculoSucursalAjaxUpdateView(TemplateView):
 
-	
+
 	def get(self,request,*args,**kwargs):
 
 		sucursal_vehiculo = SucursalVehiculo.objects.get(id=kwargs['pk'])
-		
-		template = loader.get_template('parciales/form.html')
+
+		template = loader.get_template('includes/form.html')
 		form = VehiculoSucursalCreateForm(instance=sucursal_vehiculo)
 		context = {'form':form}
 		html = template.render(context)
@@ -134,7 +134,7 @@ class VehiculoSucursalAjaxUpdateView(TemplateView):
 		form = VehiculoSucursalCreateForm(request.POST,instance=sucursal_vehiculo)
 		if form.is_valid():
 			form.save()
-			template = loader.get_template('vehiculo/parciales/inventario.html')
+			template = loader.get_template('vehiculo/includes/inventario.html')
 			vehiculos = Vehiculo.objects.all()
 			sucursal = sucursal_vehiculo.sucursal
 			sucursal_vehiculos = SucursalVehiculo.objects.filter(sucursal=sucursal)
@@ -150,8 +150,8 @@ class VehiculoSucursalAjaxUpdateView(TemplateView):
 			}
 			data = json.dumps(response)
 			return HttpResponse(data,content_type='application/json')
-		
-		template = loader.get_template('parciales/form.html')
+
+		template = loader.get_template('includes/form.html')
 		context = {'form':form}
 		html = template.render(context)
 		response = {

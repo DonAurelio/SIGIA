@@ -30,7 +30,7 @@
                                                         <th>Cantidad</th>
                                                         <th>Habilitado</th>
                                                         <th>Imagen</th>
-                                                        
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -59,14 +59,14 @@
                                                                     {% endif %}
                                                                 </td>
                                                                 <td>{% if  sucursal_vehiculo.vehiculo.imagen %}
-                                                                        <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                                        <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" />
                                                                     {% else %}
                                                                         <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
-                                                                    {% endif %} 
+                                                                    {% endif %}
                                                                 </td>
                                                             </tr >
-                                                        {% endfor %} 
-                                                        </ul> 
+                                                        {% endfor %}
+                                                        </ul>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -74,7 +74,7 @@
                                 </div>
                                 <!-- end panel -->
                             </p>
-                            
+
                         </div>
                         <div class="tab-pane fade" id="default-tab-2">
                             <h3 class="m-t-10"><i class="fa fa-car"></i> Seleccion vehiculo</h3>
@@ -107,12 +107,12 @@
                                                         <td>{{ vehiculo.marca }}</td>
                                                         <td>{{ vehiculo.modelo }}</td>
                                                         <td>{% if  vehiculo.imagen %}
-                                                                <img src={{ vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner"/> 
+                                                                <img src={{ vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner"/>
                                                             {% else %}
                                                                 <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
                                                             {% endif %} </td>
                                                     </tr >
-                                                {% endfor %} 
+                                                {% endfor %}
                                                 </tbody>
                                             </table>
                                         </div>
