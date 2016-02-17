@@ -83,6 +83,7 @@ INSTALLED_APPS = (
 	#Administra el crud de proveedores
 	'apps.proveedor',
 	'apps.reporte',
+	'apps.movil',
 )
 
 MIDDLEWARE_CLASSES = (
