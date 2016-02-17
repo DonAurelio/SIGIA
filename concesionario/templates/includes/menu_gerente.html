@@ -8,6 +8,19 @@
 						</a>
 					</li>
 
+					<!-- Clientes -->
+					<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-users"></i>
+							<span >Gestionar Clientes</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'cliente:crear' %}">Nuevo</a></li>
+							<li><a href="{% url 'cliente:listar' %}">Listar/Editar</a></li>
+						</ul>
+					</li>
+
 					<!-- Vehiculos -->
 					<li class="has-sub">
 						<a href="javascript:;">
@@ -33,7 +46,7 @@
 							<li><a href="{% url 'repuesto:listar' %}">Listar/Editar</a></li>
 						</ul>
 					</li>
-					
+
 					<!-- Proveedores -->
 					<li class="has-sub">
 						<a href="javascript:;">
@@ -46,7 +59,7 @@
 							<li><a href="{% url 'proveedor:listar' %}">Listar/Editar</a></li>
 						</ul>
 					</li>
-					
+
 					<!--Reportes -->
 					<li class="has-sub">
 						<a href="javascript:;">
@@ -57,11 +70,11 @@
 						<ul class="sub-menu">
 							<li><a href="{% url 'reporte:MejoresVendedores'%}">Mejores Vendedores</a></li>
 							<li><a href="{% url 'reporte:VentasSucursal'%}">Ventas Por Sucursal </a></li>
-							<li><a href="{% url 'reporte:GananciasSucursal'%}">Ganancias por sucursal </a></li>	
+							<li><a href="{% url 'reporte:GananciasSucursal'%}">Ganancias por sucursal </a></li>
 							<li><a href="{% url 'reporte:VehiculosSucursal'%}">Cantidad de Vehiculos por Sucursal </a></li>
-							<li><a href="{% url 'reporte:ProveedoresUsados'%}">Proveedores Usados </a></li>	
-							<li><a href="{% url 'reporte:SucursalRepuestos'%}">Repuestos Por Sucursal</a></li>		
+							<li><a href="{% url 'reporte:ProveedoresUsados'%}">Proveedores Usados </a></li>
+							<li><a href="{% url 'reporte:SucursalRepuestos'%}">Repuestos Por Sucursal</a></li>
 
-							
+
 						</ul>
 					</li>

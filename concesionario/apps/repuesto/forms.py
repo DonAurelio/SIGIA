@@ -19,6 +19,7 @@ class CrearRepuesto(CreateView):
 	fields = ['nombre', 'precio', 'marca', 'clasificacion',
 	'imagen', 'proveedor', 'descripcion']
 	success_url = reverse_lazy('repuesto:listar')
+	template_name = 'repuesto/form.html'
 
 	def get_context_data(self,**kwargs):
 		context = super(CreateView,self).get_context_data(**kwargs)
@@ -32,6 +33,7 @@ class ActualizarRepuesto(UpdateView):
 	fields = ['nombre', 'precio', 'marca', 'clasificacion',
 	'imagen', 'proveedor', 'descripcion']
 	success_url = reverse_lazy('repuesto:listar')
+	template_name = 'repuesto/form.html'
 
 	def get_context_data(self,**kwargs):
 		context = super(ActualizarRepuesto,self).get_context_data(**kwargs)
