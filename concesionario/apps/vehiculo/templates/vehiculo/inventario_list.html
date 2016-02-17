@@ -23,11 +23,7 @@ Sucursal {{ sucursal.nombre }}
             <!-- begin row -->
             <div class="row">
                 <div class="col-md-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#default-tab-1" data-toggle="tab">Inventario</a></li>
-                        <li class=""><a href="#default-tab-2" data-toggle="tab">Añadir al Inventario</a></li>
-                    </ul>
-                    <div id="section-content" class="tab-content">
+                    <div id="section-content">
                         {% include 'vehiculo/includes/inventario.html' %}
                     </div>
                     <!-- #modal-dialog -->
@@ -56,7 +52,6 @@ Sucursal {{ sucursal.nombre }}
                 </div>
             </div>
             <!-- end row -->
-
 {% endblock %}
 
 {% block javascript %}

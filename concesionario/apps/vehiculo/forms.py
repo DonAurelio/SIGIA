@@ -60,14 +60,16 @@ class VehiculoSucursalCreateForm(forms.ModelForm):
 
 class VehiculoSucursalAjaxCreateView(TemplateView):
 
-
 	def get(self,request,*args,**kwargs):
 
-		sucursal = Sucursal.objects.get(id=kwargs['spk']).id
-		vehiculo = Vehiculo.objects.get(id=kwargs['vpk']).id
+		sucursal_id = Sucursal.objects.get(id=kwargs['spk']).id
+		vehiculo_id = Vehiculo.objects.get(id=kwargs['vpk']).id
 
 		template = loader.get_template('includes/form.html')
-		form = VehiculoSucursalCreateForm({'sucursal':sucursal,'vehiculo':vehiculo})
+		form = VehiculoSucursalCreateForm({
+			'sucursal':sucursal_id,
+			'vehiculo':vehiculo_id})
+
 		context = {'form':form}
 		html = template.render(context)
 		response = {

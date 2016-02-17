@@ -2,7 +2,7 @@ function listeners(){
   /* Incializacion DataTable */
   $('.table').DataTable();
 
-  /* Agregar vehiculo al inventario de una sucursal*/
+  /* Agregar repuesto al inventario de una sucursal*/
   $("body").on('click', ".create", function(event){
       event.preventDefault();
 
@@ -10,7 +10,7 @@ function listeners(){
       var url = $(this).attr('href');
 
       $form.attr('action',url);
-      $("#inventory-modal-title").html("Nuevo Vehiculo en Inventario");
+      $("#replacement-modal-title").html("Nuevo Repuesto en Inventario");
       $("#submit").show();
 
       $.ajax({
@@ -18,20 +18,20 @@ function listeners(){
           url: $form.attr('action'),
           dataType: 'json',
           success: function (data) {
-              $("#inventory-modal-body").html(data.html);
-              $("#inventory-modal").modal("toggle");
+              $("#replacement-modal-body").html(data.html);
+              $("#replacement-modal").modal("toggle");
           },
           error: error
       });
   });
 
-  /* Actualización de un vehiculo del inventario de la sucursal */
+  /* Actualización de un repuesto del inventario de la sucursal */
   $("body").on('click',".update", function(event){
       event.preventDefault();
 
       var $form = $("form");
       $form.attr('action',$(this).attr("href"));
-      $("#inventory-modal-title").html("Actualizar Vehiculo en Inventario");
+      $("#replacement-modal-title").html("Actualizar Repuesto en Inventario");
       $("#submit").show();
 
       $.ajax({
@@ -40,8 +40,8 @@ function listeners(){
           dataType: 'json',
           success: function (data) {
 
-              $("#inventory-modal-body").html(data.html);
-              $("#inventory-modal").modal("toggle");
+              $("#replacement-modal-body").html(data.html);
+              $("#replacement-modal").modal("toggle");
           },
           error: error
       });
@@ -58,9 +58,9 @@ function listeners(){
               if(response.status==true){
                   $("#section-content").html(response.html);
                   $('.table').DataTable();
-                  $("#inventory-modal").modal("toggle");
+                  $("#replacement-modal").modal("toggle");
               }else{
-                  $("#inventory-modal-body").html(response.html);
+                  $("#replacement-modal-body").html(response.html);
               };
           },
           error: error
@@ -74,7 +74,7 @@ function listeners(){
       var html = '<div class="alert alert-danger fade in m-b-15"> \
                       <strong>Error!</strong> \
                           Se ha presentado un error al intentar obtener información del servidor, \
-                          por favor verifique el archivo apps.sucursal.inventario.vehiculo.js \
+                          por favor verifique el archivo apps.sucursal.inventario.repuesto.js \
                       <span class="close" data-dismiss="alert">&times;</span> \
                   </div>';
 
