@@ -15,13 +15,10 @@ from apps.sucursal.models import SucursalVehiculo
 
 import json
 
-
-
 class VehiculoCreateView(CreateView):
 	model = Vehiculo
 	fields = ['numero_serie', 'marca', 'modelo', 'motor', 'potencia', 'tipo',
 	'capacidad', 'caracteristicas', 'imagen', 'precio']
-
 
 	def get_context_data(self,**kwargs):
 		context = super(VehiculoCreateView,self).get_context_data(**kwargs)
@@ -114,7 +111,6 @@ class VehiculoSucursalAjaxCreateView(TemplateView):
 
 class VehiculoSucursalAjaxUpdateView(TemplateView):
 
-
 	def get(self,request,*args,**kwargs):
 
 		sucursal_vehiculo = SucursalVehiculo.objects.get(id=kwargs['pk'])
@@ -133,7 +129,9 @@ class VehiculoSucursalAjaxUpdateView(TemplateView):
 
 	def post(self,request,*args,**kwargs):
 		sucursal_vehiculo = SucursalVehiculo.objects.get(id=kwargs['pk'])
-		form = VehiculoSucursalCreateForm(request.POST,instance=sucursal_vehiculo)
+		form = VehiculoSucursalCreateForm(
+			request.POST,
+			instance=sucursal_vehiculo)
 		if form.is_valid():
 			form.save()
 			template = loader.get_template('vehiculo/includes/inventario.html')

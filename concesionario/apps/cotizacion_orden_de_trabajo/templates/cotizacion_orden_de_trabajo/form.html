@@ -21,74 +21,67 @@
 {% block section_subtitle %}Por favor diligencie el siguiente formulario{% endblock %}
 
 {% block content %}
-                <!-- begin col-12 -->
-                <div class="col-md-12">
-                  <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
-                    <!-- begin panel -->
-                    <div class="panel panel-inverse">
-                        <div class="panel-heading">
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            </div>
-                            <h4 class="panel-title">Cotización</h4>
-                        </div>
-                        <div class="panel-body">
-                          <div id="wizard">
-                            <ol>
-                              <li id="step-1" >
-                                  Repuestos 
-                                  <small>Seleccione los repuestos necesarios para la reparación</small>
-                              </li>
-                              <li id="step-2" >
-                                  Orden de Trabajo
-                                  <small>Complete el formulario de orden de trabao.</small>
-                              </li>
-                            </ol>
-                            <!-- begin wizard step-1 -->
-                            <div>
-                                <fieldset>
-                                    <!-- begin row -->
-                                    <div class="row">
-                                        <div class="col-md-8 col-md-offset-2">
-                                            <div id="forms">
-                                              {{ formset.management_form }}
-                                              {% for form in formset %}
-                                                  {% bootstrap_form form %}
-                                              {% endfor %}
-                                            </div>
-                                            <div class="pull-right" >
-                                                <button id="btn-add" type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end row -->
-                                </fieldset>
-                            </div>
-                            <!-- end wizard step-1 -->
-                            <!-- begin wizard step-3 -->
-                            <div>
-                              <fieldset>
-                                <!-- begin row -->
-                                  <div class="row">
-                                      <div class="col-md-8 col-md-offset-2">
-                                          {% bootstrap_form form %}
-                                          <div class="pull-right" >
-                                            <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <!-- end row -->
-                              </fieldset>
-                            </div>
-                            <!-- end wizard step-3 -->
+      <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
+        <!-- begin row -->
+  			<div class="row">
+            <!-- begin col-6 -->
+  			    <div class="col-md-6">
+  			        <!-- begin panel -->
+                      <div class="panel panel-inverse">
+                          <div class="panel-heading">
+                              <div class="panel-heading-btn">
+                                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                              </div>
+                              <h4 class="panel-title">Orden de Trabajo</h4>
                           </div>
-                        </div>
-                    </div>
-                    <!-- end panel -->
-                    </form>
-                </div>
-                <!-- end col-12 -->
+                          <div class="panel-body">
+                            <div class="col-md-10 col-md-offset-1">
+                                {% bootstrap_form form %}
+                                <div class="pull-right" >
+                                  <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-cog"></i> Guardar</button>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                      <!-- end panel -->
+                  </div>
+                  <!-- end col-6 -->
+                  <!-- begin col-6 -->
+                  <div class="col-md-6">
+  			        <!-- begin panel -->
+                      <div class="panel panel-inverse">
+                          <div class="panel-heading">
+                              <div class="panel-heading-btn">
+                                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                              </div>
+                              <h4 class="panel-title">Repuestos</h4>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div id="forms">
+                                  {{ formset.management_form }}
+                                  {% for form in formset %}
+                                      {% bootstrap_form form %}
+                                  {% endfor %}
+                                </div>
+                                <div class="pull-right" >
+                                    <button id="btn-add" type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                      <!-- end panel -->
+                  </div>
+                  <!-- end col-6 -->
+              </div>
+              <!-- end row -->
+            </form>
 {% endblock %}
 
 {% block javascript %}

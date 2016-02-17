@@ -21,7 +21,7 @@
                         <div class="stats-icon"><i class="fa fa-desktop"></i></div>
                         <div class="stats-info">
                             <h4>VENTAS</h4>
-                            <p>${{ valor_ventas }}</p>    
+                            <p>${{ valor_ventas }}</p>
                         </div>
                         <div class="stats-link">
                             <a href="javascript:;">Ver Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -35,7 +35,7 @@
                         <div class="stats-icon"><i class="fa fa-chain-broken"></i></div>
                         <div class="stats-info">
                             <h4>REPARACIONES</h4>
-                            <p>${{ valor_ordenes_de_trabajo }}</p>   
+                            <p>${{ valor_ordenes_de_trabajo }}</p>
                         </div>
                         <div class="stats-link">
                             <a href="javascript:;">Ver Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -49,7 +49,7 @@
                         <div class="stats-icon"><i class="fa fa-users"></i></div>
                         <div class="stats-info">
                             <h4>CANTIDAD EMPLEADOS</h4>
-                            <p>{{ num_empleados }}</p>    
+                            <p>{{ num_empleados }}</p>
                         </div>
                         <div class="stats-link">
                             <a href="javascript:;">Ver Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -63,7 +63,7 @@
                         <div class="stats-icon"><i class="fa fa-clock-o"></i></div>
                         <div class="stats-info">
                             <h4>ULTIMO LOGIN</h4>
-                            <p>{{ user.last_login |date:"M d, Y" }}</p> 
+                            <p>{{ user.last_login |date:"M d, Y" }}</p>
                         </div>
                         <div class="stats-link">
                             <a href="javascript:;">Ver Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -100,7 +100,7 @@
                                         <tr>
                                             <td>
                                                 {% if  vendedor.imagen %}
-                                                    <img src={{ vendedor.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                    <img src={{ vendedor.imagen.url }} width=50 height=50 class="media-object rounded-corner" />
                                                 {% else %}
                                                     <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=50 height=50 class="media-object rounded-corner" />
                                                 {% endif %}
@@ -133,7 +133,7 @@
                                         <tr>
                                             <td>
                                                 {% if  sucursal_vehiculo.vehiculo.imagen %}
-                                                        <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                        <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" />
                                                     {% else %}
                                                         <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png" width=50 height=50 class="media-object rounded-corner" />
                                                     {% endif %}
@@ -169,7 +169,7 @@
                             {% if ventas %}
                             <table class="table table-valign-middle m-b-0">
                                 <thead>
-                                    <tr>    
+                                    <tr>
                                         <th>Nombre</th>
                                         <th>Ciudad</th>
                                         <th>Total</th>
@@ -193,21 +193,8 @@
                             </div>
                         </div>
                     </div>
+
                     
-                    <div class="panel panel-inverse">
-                        <div class="panel-heading">
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                            </div>
-                            <h4 class="panel-title">Calendar</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div id="datepicker-inline" class="datepicker-full-width"><div></div></div>
-                        </div>
-                    </div>
                 </div>
                 <!-- end col-4 -->
             </div>

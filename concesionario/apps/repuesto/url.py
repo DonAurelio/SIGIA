@@ -7,7 +7,7 @@ from .views import RepuestosSucursalListView
 from .views import RepuestosListView
 
 from .forms import RepuestoSucursalAjaxCreateView
-from .forms import RepuestoSucursalUpdateView
+from .forms import RepuestoSucursalAjaxUpdateView
 from .views import RepuestoSucursalListView
 
 urlpatterns = [
@@ -17,6 +17,6 @@ urlpatterns = [
     url(r'^repuestos/$', RepuestosListView.as_view(), name='listar'),
 
     url(r'^repuestos/sucursal/(?P<spk>\d+)/agregar/(?P<rpk>\d+)/$', RepuestoSucursalAjaxCreateView.as_view(), name='agregar-repuesto-sucursal'),
-    url(r'^repuestos/sucursal/actualizar/(?P<pk>\d+)/$', RepuestoSucursalUpdateView.as_view(), name='actualizar-repuesto-sucursal'),
+    url(r'^repuestos/sucursal/actualizar/(?P<pk>\d+)/$', RepuestoSucursalAjaxUpdateView.as_view(), name='actualizar-repuesto-sucursal'),
     url(r'^repuestos/sucursal/(?P<pk>\d+)/$', RepuestoSucursalListView.as_view(), name='listar-repuestos-sucursal'),
 ]
