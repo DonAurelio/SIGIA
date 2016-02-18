@@ -25,8 +25,9 @@ angular.module('starter.controllers', [])
     $scope.data = {};
  
     $scope.login = function() {
-        $scope.data.email = validateService.validate($scope.data.email, $scope.data.identificacion);
-        console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
+        // $scope.data.email = validateService.validate($scope.data.email, $scope.data.identificacion);
+        var response = validateService.validate($scope.data.email, $scope.data.identificacion);
+        console.log(response.valido);
     }
 })
 

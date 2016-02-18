@@ -84,6 +84,7 @@ INSTALLED_APPS = (
 	'apps.proveedor',
 	'apps.reporte',
 	'apps.movil',
+	'corsheaders',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,6 +96,8 @@ MIDDLEWARE_CLASSES = (
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django.middleware.security.SecurityMiddleware',
+	
+	'corsheaders.middleware.CorsMiddleware',
 )
 
 ROOT_URLCONF = 'concesionario.urls'
@@ -165,3 +168,6 @@ MEDIA_URL = '/media/'
 
 #Humanize settings
 USE_THOUSAND_SEPARATOR = True
+
+#http://stackoverflow.com/questions/22476273/no-access-control-allow-origin-header-is-present-on-the-requested-resource-i
+CORS_ORIGIN_ALLOW_ALL = True   
