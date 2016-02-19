@@ -19,10 +19,10 @@ Gestión Ordenes de Trabajo
 {% block section_title %}{{ section_title }}{% endblock %}
 {% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
-			    <!-- begin col-12 -->
-			    <div class="col-md-12">
-			    	<form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
-			        <!-- begin panel -->
+          <!-- begin col-12 -->
+          <div class="col-md-12">
+            <form method="POST" data-parsley-validate="true" name="form-wizard" enctype="multipart/form-data"> {% csrf_token %}
+              <!-- begin panel -->
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
                             <div class="panel-heading-btn">
@@ -34,67 +34,66 @@ Gestión Ordenes de Trabajo
                             <h4 class="panel-title">Orden de Trabajo</h4>
                         </div>
                         <div class="panel-body">
-                        	<div id="wizard">
-								<ol>
-									<li id="step-1" >
-									    Cliente
-									    <small>Seleccione el cliente para la orden de trabajo</small>
-									</li>
-									<li id="step-2" >
-									    Vehículo
-									    <small>Seleccione el vehículo para la orden de trabajo.</small>
-									</li>
-									<li id="step-3" >
-									    Orden de Trabajo
-									    <small>Complete el formulario de orden de trabao.</small>
-									</li>
-								</ol>
-								<!-- begin wizard step-1 -->
-								<div>
-                                    <fieldset>
-                                        <!-- begin row -->
-                                        <div class="row">
-                                            {% include 'orden_de_trabajo/includes/tabla_clientes.html' %}
-                                        </div>
-                                        <!-- end row -->
-									</fieldset>
-								</div>
-								<!-- end wizard step-1 -->
-								<!-- begin wizard step-2 -->
-								<div>
-									<fieldset>
-										<!-- begin row -->
-                                        <div class="row">
-                                            	{% include 'orden_de_trabajo/includes/tabla_vehiculos.html' %}
-                                        </div>
-                                        <!-- end row -->
-									</fieldset>
-								</div>
-								<!-- end wizard step-2 -->
-								<!-- begin wizard step-3 -->
-								<div>
-									<fieldset>
-										<!-- begin row -->
-                                        <div class="row">
-                                            <div class="col-md-8 col-md-offset-2">
-                                                {% bootstrap_form form %}
-                                                <div class="pull-right" >
-                                                    <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end row -->
-                                    </fieldset>
-								</div>
-								<!-- end wizard step-3 -->
-				            </div>
-					
-                        </div>
+                          <div id="wizard">
+                            <ol>
+                              <li id="step-1" >
+                                  Cliente
+                                  <small>Seleccione el cliente para la orden de trabajo</small>
+                              </li>
+                              <li id="step-2" >
+                                  Vehículo
+                                  <small>Seleccione el vehículo para la orden de trabajo.</small>
+                              </li>
+                              <li id="step-3" >
+                                  Orden de Trabajo
+                                  <small>Complete el formulario de orden de trabao.</small>
+                              </li>
+                            </ol>
+                            <!-- begin wizard step-1 -->
+                            <div>
+                              <fieldset>
+                                <!-- begin row -->
+                                <div class="row">
+                                    {% include 'orden_de_trabajo/includes/tabla_clientes.html' %}
+                                </div>
+                                <!-- end row -->
+                              </fieldset>
+                            </div>
+                <!-- end wizard step-1 -->
+                <!-- begin wizard step-2 -->
+                <div>
+                  <fieldset>
+                    <!-- begin row -->
+                    <div class="row">
+                          {% include 'orden_de_trabajo/includes/tabla_vehiculos.html' %}
                     </div>
-                    <!-- end panel -->
-                    </form>
+                    <!-- end row -->
+                  </fieldset>
                 </div>
-                <!-- end col-12 -->
+                <!-- end wizard step-2 -->
+                <!-- begin wizard step-3 -->
+                <div>
+                  <fieldset>
+                    <!-- begin row -->
+                      <div class="row">
+                          <div class="col-md-8 col-md-offset-2">
+                              {% bootstrap_form form %}
+                              <div class="pull-right" >
+                                  <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end row -->
+                  </fieldset>
+                </div>
+                <!-- end wizard step-3 -->
+              </div>
+            </div>
+          </div>
+        <!-- end panel -->
+        </form>
+    </div>
+    <!-- end col-12 -->
 {% endblock %}
 
 {% block javascript %}
@@ -126,6 +125,6 @@ Gestión Ordenes de Trabajo
         var clickedVehicleId = $(this).attr('href').split("/")[2];
         $( "#id_cliente" ).val(clickedVehicleId);
         $( ".next" ).click();
-    });   
+    });
 </script>
 {% endblock %}
