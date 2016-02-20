@@ -1,7 +1,7 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
 
-{# Load the tag library #}
+{# Load the tag library #} 
 {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
@@ -25,7 +25,7 @@
 {% block breadcrumb %}
 Gestión de Ventas
 {% endblock %}
-{% block section_title %}{{ section_title }}{% endblock %}
+{% block section_title %}Venta{{ section_title }}{% endblock %}
 {% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
 
@@ -48,12 +48,12 @@ Gestión de Ventas
                     <div id="wizard">
                         <ol>
                             <li>
-                                Seleccione el Cliente
-                                <small></small>
+                                Cliente
+                                <small>Seleccione el Cliente</small>
                             </li>
                             <li>
-                                Seleccione el Vehículo
-                                <small></small>
+                                Vehículo
+                                <small>Seleccione el Vehículo</small>
                             </li>
                             <li>
                                 Información Adicional
@@ -144,11 +144,14 @@ Gestión de Ventas
                                 <div class="row">
                                     {% bootstrap_form form %}
                                 </div>
+                                 <p class="text-right m-b-0">
+                                   <button type="submit" class="btn btn-sm btn-success m-r-5"><i class="fa fa-cog"></i> Guardar</button>
+                                </p>
                             </fieldset>
                         </div>
                         <!-- end wizard step-1 -->
                     </div>
-                <button type="submit" class="btn btn-inverse pull-right"><i class="fa fa-cog"></i>Finalizar venta</button>
+               
                 </form>
             </div>
         </div>

@@ -30,9 +30,9 @@ class Cotizacion(models.Model):
 	#Vehiculo cotizado, relacion uno a muchos 
 	vehiculo= models.ForeignKey(Vehiculo,default=None)
 	#Fecha en que se realiza la cotizacion
-	fecha=models.DateField(auto_now_add=True,blank=True,null=True)
+	fecha=models.DateField(auto_now_add=True)
 	#Fecha de vencimiento de la cotizacion
-	fecha_vencimiento=models.DateField(blank=True,null=True)
+	fecha_vencimiento=models.DateField()
 	#Forma de pago en la que se realiza la cotizacion
 	forma_pago = models.CharField(max_length=20,choices=forma_pago_choices, default=EFECTIVO)
 	#Estado de la cotizacion, Activa/inactiva

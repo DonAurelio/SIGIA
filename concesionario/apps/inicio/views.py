@@ -9,11 +9,13 @@ from django.contrib.auth.views import password_reset, password_reset_confirm
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
-
+from django.db.models.functions import Coalesce
 from apps.empleado.models import Empleado, VENDEDOR, JEFE_TALLER, GERENTE
 from apps.sucursal.models import SucursalVehiculo
 from apps.venta.models import Venta
+from apps.cotizacion.models import Cotizacion
 from apps.sucursal.models import Sucursal
+
 from apps.factura_orden_de_trabajo.models import FacturaOrdenDeTrabajo
 
 
@@ -57,14 +59,14 @@ class Login(TemplateView):
 				'inicio/login.html',
 				context,
 				context_instance=RequestContext(request))
-
+ 
 	def get_user_template(self,request):
 		if request.user.empleado.tipo == GERENTE:
 
 			sucursales = Venta.objects.values(
 				'sucursal_vehiculo__sucursal__nombre','sucursal_vehiculo__sucursal__ciudad').annotate(total=Sum('precio_venta'))
 
-			print "sucursales", sucursales
+			#print "sucursales", sucursales
 
 			num_empleados = Empleado.objects.all().count()
 
@@ -93,9 +95,29 @@ class Login(TemplateView):
 				context_instance=RequestContext(request))
 
 		elif request.user.empleado.tipo == VENDEDOR:
+			
+			ventasVendedor = Venta.objects.filter(empleado=request.user.empleado).values("empleado").annotate(cantidad=Count('empleado_id')).order_by(Coalesce('cantidad', 'cantidad').desc())
+		 	cantidadVentas=ventasVendedor[0]['cantidad']
+		 	cantidadCotizacion=Cotizacion.objects.filter(empleado=request.user.empleado).values("empleado").annotate(cantidad= Count('empleado_id')).order_by(Coalesce('cantidad', 'cantidad').desc())
+		 	numeroCotizaciones=cantidadCotizacion[0]['cantidad']
+		 	sucursalEmpleado=request.user.empleado.sucursal
+		 	cantidadVehiculos= SucursalVehiculo.objects.filter(sucursal=sucursalEmpleado).values("sucursal").annotate(cantidad= Sum('cantidad')).order_by(Coalesce('cantidad', 'cantidad').desc())
+		 	numeroVehiculos=cantidadVehiculos[0]['cantidad']
+		 	cotizaciones= Cotizacion.objects.filter(empleado=request.user.empleado)
 
+		 	#print cotizaciones.cliente
+
+		 	context = {
+				'cantidadVentas':cantidadVentas,
+				'numeroCotizaciones':numeroCotizaciones,
+				'numeroVehiculos':numeroVehiculos,
+				'cotizaciones':cotizaciones
+
+				}
 			return render_to_response(
 				'cuenta/perfil_vendedor.html',
+				context,
+
 				context_instance=RequestContext(request))
 		
 		elif request.user.empleado.tipo == JEFE_TALLER: 

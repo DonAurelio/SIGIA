@@ -75,7 +75,7 @@ class EmpleadoCreateView(TemplateView):
 			new_empleado = empleado_form.save()
 			new_empleado.user = new_user
 			new_empleado.save()
-			
+			 
 			messages.info(request,'Nuevo empleado creado con exito')
 					
 			url = reverse(

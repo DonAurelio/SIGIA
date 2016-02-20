@@ -11,8 +11,8 @@
 {% bootstrap_messages %}
 
 {% block css %} 
-{{ block.super }}
-
+{{ block.super }} 
+ 
        <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{% static 'color_admin/assets/plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
         <!-- Para gestionar Fechas -->
@@ -25,7 +25,7 @@
 {% block breadcrumb %}
 Gestión de Cotizaciones
 {% endblock %}
-{% block section_title %}{{ section_title }}{% endblock %}
+{% block section_title %} Cotización{{ section_title }}{% endblock %}
 {% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
  
@@ -47,12 +47,13 @@ Gestión de Cotizaciones
                     <div id="wizard">
                         <ol>
                            <li>
-                                Seleccione el Cliente
+                                Cliente
+                                <small>Seleccione el Cliente.</small>
                                 <small></small>
                             </li>
                             <li>
-                                Seleccione el Vehículo
-                                <small></small>
+                                Vehículo
+                                <small> Seleccione el Vehículo</small>
                             </li>
                             <li>
                                 Información General
@@ -143,12 +144,15 @@ Gestión de Cotizaciones
                             <fieldset>
                                 <div class="row">
                                     {% bootstrap_form form %}
-                                    <button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i>Aceptar</button>
                                 </div>
+                                    <p class="text-right m-b-0">
+                                   <button type="submit" class="btn btn-sm btn-success m-r-5"><i class="fa fa-cog"></i> Guardar</button>
+                                </p>
                             </fieldset>
                         </div>
                         <!-- end wizard step-3 -->
                     </div>
+
                 </form>
             </div>
         </div>

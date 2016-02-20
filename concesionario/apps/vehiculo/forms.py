@@ -14,7 +14,7 @@ from apps.sucursal.models import Sucursal
 from apps.sucursal.models import SucursalVehiculo
 
 import json
-
+ 
 
  
 class VehiculoCreateView(CreateView):

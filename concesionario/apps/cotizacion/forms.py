@@ -10,6 +10,7 @@ from .models import Cotizacion
 from apps.cliente.models import Cliente
 from apps.empleado.models import Empleado
 from apps.vehiculo.models import Vehiculo
+from django.contrib import messages
   
   
 class CrearCotizacion(CreateView): 
@@ -17,12 +18,9 @@ class CrearCotizacion(CreateView):
         widget=forms.widgets.DateInput(format="%y-%m-%d"))
     model = Cotizacion 
     fields = [ 'cliente', 'vehiculo', 'fecha_vencimiento', 'forma_pago'] 
-    #readonly_fields = ['empleado', 'cliente', 'vehiculo']
-    success_url = reverse_lazy('cotizacion:listar') 
- 
-  
-        
 
+    
+ 
     def get_context_data(self,**kwargs):
         
         context = super(CrearCotizacion,self).get_context_data(**kwargs)
@@ -46,8 +44,6 @@ class CrearCotizacion(CreateView):
         print fecha_vencimiento
         cotizacion = Cotizacion(empleado = empleado, cliente = cliente, vehiculo = vehiculo, fecha_vencimiento=fecha_vencimiento,forma_pago = forma_pago)
         cotizacion.save()
-        
-         
         context = {'cotizacion':cotizacion}
         return render_to_response(
             'cotizacion/cotizacionPDF.html',
@@ -56,8 +52,12 @@ class CrearCotizacion(CreateView):
         )
 
 
+
 class ActualizarCotizacion(UpdateView): 
     model = Cotizacion 
     fields = ['empleado', 'cliente', 'vehiculo', 'fecha','fecha_vencimiento', 'forma_pago'] 
-    success_url = reverse_lazy('cotizacion:listar') 
+    def get_success_url(self):
+        messages.info(self.request,"Cotización creada con exito")
+        return  reverse_lazy('cotizacion:listar') 
+
     

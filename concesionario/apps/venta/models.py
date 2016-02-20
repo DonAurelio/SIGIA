@@ -28,9 +28,9 @@ class Venta(models.Model):
 	#Cliente que realiza la compra
 	cliente = models.ForeignKey(Cliente)
 	#Vehiculo de la venta
-	sucursal_vehiculo = models.ForeignKey(SucursalVehiculo,related_name='ventas',null=True, default=None, blank=True)
+	sucursal_vehiculo = models.ForeignKey(SucursalVehiculo,related_name='ventas', default=None)
 	#Fecha en que se realiza la venta
-	fecha_venta=models.DateField(auto_now_add=True, blank=True, null=True)	
+	fecha_venta=models.DateField(auto_now_add=True)	
 	#Precio final de la venta, precio vehiculo - descuento
 	precio_venta = models.FloatField()
 	#Forma de pago para la compra del vehiculo	
@@ -63,4 +63,5 @@ class Venta(models.Model):
 		return self.sucursal_vehiculo.sucursal.nombre
 
 	def marca_vehiculo(self):
-		return self.sucursal_vehiculo.vehiculo.marca
+		return self.sucursal_vehiculo.vehiculo.marca 
+  
