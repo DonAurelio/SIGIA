@@ -1,49 +1,47 @@
-		<!-- begin #sidebar -->
-		<div id="sidebar" class="sidebar">
-			<!-- begin sidebar scrollbar -->
-			<div data-scrollbar="true" data-height="100%">
-				<!-- begin sidebar user -->
-				<ul class="nav">
-					<li class="nav-profile">
-						<div class="image">
-							<a href="{% url 'cuenta:perfil' %}"> 
-							{% if  user.empleado.imagen %}
-								<img src={{ user.empleado.imagen.url }} alt="" /> 
-							{% else %}
-								<img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png">
-							{% endif %}
-							</a>
-						</div>
-						<div class="info">
-							{{ user.first_name }} {{ user.last_name }}
-							<small>{{ user.empleado.tipo }}</small>
-						</div>
-					</li>
-				</ul>
-				<!-- end sidebar user -->
+    <!-- begin #sidebar -->
+    <div id="sidebar" class="sidebar">
+      <!-- begin sidebar scrollbar -->
+      <div data-scrollbar="true" data-height="100%">
+        <!-- begin sidebar user -->
+        <ul class="nav">
+          <li class="nav-profile">
+            <div class="image">
+              <a href="{% url 'cuenta:perfil' %}">
+              {% if  user.empleado.imagen %}
+                <img src={{ user.empleado.imagen.url }} alt="" />
+              {% else %}
+                <img src="{{ MEDIA_URL }}imagenes/empleado/imagen_no_disponible.png">
+              {% endif %}
+              </a>
+            </div>
+            <div class="info">
+              {{ user.first_name }} {{ user.last_name }}
+              <small>{{ user.empleado.tipo }}</small>
+            </div>
+          </li>
+        </ul>
+        <!-- end sidebar user -->
 
-				<!-- begin sidebar nav -->
-				<ul class="nav">
-					<li class="nav-header">Navegacion</li>
-					{% if user.empleado.tipo == "Gerente" %}
-						{% include "includes/menu_gerente.html" %}
-					{% elif  user.empleado.tipo == "Jefe de taller"%}
-						{% include "includes/menu_jefe_taller.html" %}
-					{% elif  user.empleado.tipo == "Vendedor"%}
-						{% include "includes/menu_vendedor.html" %}
-					{% endif %}
+        <!-- begin sidebar nav -->
+        <ul class="nav">
+          {% if user.empleado.tipo == "Gerente" %}
+            {% include "includes/menu_gerente.html" %}
+          {% elif  user.empleado.tipo == "Jefe de taller"%}
+            {% include "includes/menu_jefe_taller.html" %}
+          {% elif  user.empleado.tipo == "Vendedor"%}
+            {% include "includes/menu_vendedor.html" %}
+          {% endif %}
 
-					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">
-					<i class="fa fa-angle-double-left"></i>
-					</a>
-					</li>
-					
-				</ul>
-				<!-- end sidebar nav -->
-			
-			</div>
-			<!-- end sidebar scrollbar -->
-		</div>
-		<div class="sidebar-bg"></div>
-		<!-- end #sidebar -->
-		
+          <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">
+          <i class="fa fa-angle-double-left"></i>
+          </a>
+          </li>
+
+        </ul>
+        <!-- end sidebar nav -->
+
+      </div>
+      <!-- end sidebar scrollbar -->
+    </div>
+    <div class="sidebar-bg"></div>
+    <!-- end #sidebar -->

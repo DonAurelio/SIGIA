@@ -1,80 +1,76 @@
-					<!-- Opcione del menu para el gerente -->
+          <!-- Opcione del menu para el gerente -->
+          <li class="nav-header">Navegacion</li>
+          <!-- Sucursal -->
+          <li>
+            <a href="{% url 'sucursal:listar' %}">
+              <i class="fa fa-building"></i>
+              <span>Gestionar Sucursales</span>
+            </a>
+          </li>
 
-					<!-- Sucursal -->
-					<li>
-						<a href="{% url 'sucursal:listar' %}">
-							<i class="fa fa-building"></i>
-							<span>Gestionar Sucursales</span>
-						</a>
-					</li>
+          <!-- Clientes -->
+          <li>
+            <a href="{% url 'cliente:listar' %}">
+              <i class="fa fa-users"></i>
+              <span >Gestionar Clientes</span>
+            </a>
+          </li>
 
-					<!-- Clientes -->
-					<li class="has-sub">
-						<a href="javascript:;">
-							<b class="caret pull-right"></b>
-							<i class="fa fa-users"></i>
-							<span >Gestionar Clientes</span>
-						</a>
-						<ul class="sub-menu">
-							<li><a href="{% url 'cliente:crear' %}">Nuevo</a></li>
-							<li><a href="{% url 'cliente:listar' %}">Listar/Editar</a></li>
-						</ul>
-					</li>
+          <li class="nav-header">Inventarios</li>
+          <!-- Vehiculos -->
+          <li class="has-sub">
+            <a href="javascript:;">
+              <b class="caret pull-right"></b>
+              <i class="fa fa-car"></i>
+              <span>Gestionar Vehículos</span>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="{% url 'vehiculo:crear' %}">Nuevo</a></li>
+              <li><a href="{% url 'vehiculo:listar-vehiculos' %}">Listar/Editar</a></li>
+            </ul>
+          </li>
 
-					<!-- Vehiculos -->
-					<li class="has-sub">
-						<a href="javascript:;">
-							<b class="caret pull-right"></b>
-							<i class="fa fa-car"></i>
-							<span>Gestionar Vehículos</span>
-						</a>
-						<ul class="sub-menu">
-							<li><a href="{% url 'vehiculo:crear' %}">Nuevo</a></li>
-							<li><a href="{% url 'vehiculo:listar-vehiculos' %}">Listar/Editar</a></li>
-						</ul>
-					</li>
+          <!-- Repuestos -->
+          <li class="has-sub">
+            <a href="javascript:;">
+              <b class="caret pull-right"></b>
+              <i class="fa fa-steam-square"></i>
+              <span>Gestionar Repuestos</span>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="{% url 'repuesto:crear' %}">Nuevo</a></li>
+              <li><a href="{% url 'repuesto:listar' %}">Listar/Editar</a></li>
+            </ul>
+          </li>
 
-					<!-- Repuestos -->
-					<li class="has-sub">
-						<a href="javascript:;">
-							<b class="caret pull-right"></b>
-							<i class="fa fa-steam-square"></i>
-							<span>Gestionar Repuestos</span>
-						</a>
-						<ul class="sub-menu">
-							<li><a href="{% url 'repuesto:crear' %}">Nuevo</a></li>
-							<li><a href="{% url 'repuesto:listar' %}">Listar/Editar</a></li>
-						</ul>
-					</li>
-
-					<!-- Proveedores -->
-					<li class="has-sub">
-						<a href="javascript:;">
-							<b class="caret pull-right"></b>
-							<i class="fa fa-steam"></i>
-							<span>Gestionar Proveedores</span>
-						</a>
-						<ul class="sub-menu">
-							<li><a href="{% url 'proveedor:crear' %}">Nuevo</a></li>
-							<li><a href="{% url 'proveedor:listar' %}">Listar/Editar</a></li>
-						</ul>
-					</li>
-
-					<!--Reportes -->
-					<li class="has-sub">
-						<a href="javascript:;">
-							<b class="caret pull-right"></b>
-							<i class="fa fa-area-chart"></i>
-							<span>Reportes</span>
-						</a>
-						<ul class="sub-menu">
-							<li><a href="{% url 'reporte:MejoresVendedores'%}">Mejores Vendedores</a></li>
-							<li><a href="{% url 'reporte:VentasSucursal'%}">Ventas Por Sucursal </a></li>
-							<li><a href="{% url 'reporte:GananciasSucursal'%}">Ganancias por sucursal </a></li>
-							<li><a href="{% url 'reporte:VehiculosSucursal'%}">Cantidad de Vehiculos por Sucursal </a></li>
-							<li><a href="{% url 'reporte:ProveedoresUsados'%}">Proveedores Usados </a></li>
-							<li><a href="{% url 'reporte:SucursalRepuestos'%}">Repuestos Por Sucursal</a></li>
+          <!-- Proveedores -->
+          <li class="has-sub">
+            <a href="javascript:;">
+              <b class="caret pull-right"></b>
+              <i class="fa fa-steam"></i>
+              <span>Gestionar Proveedores</span>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="{% url 'proveedor:crear' %}">Nuevo</a></li>
+              <li><a href="{% url 'proveedor:listar' %}">Listar/Editar</a></li>
+            </ul>
+          </li>
+          <li class="nav-header">Estadisticas</li>
+          <!--Reportes -->
+          <li class="has-sub">
+            <a href="javascript:;">
+              <b class="caret pull-right"></b>
+              <i class="fa fa-area-chart"></i>
+              <span>Reportes</span>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="{% url 'reporte:MejoresVendedores'%}">Mejores Vendedores</a></li>
+              <li><a href="{% url 'reporte:VentasSucursal'%}">Ventas Por Sucursal </a></li>
+              <li><a href="{% url 'reporte:GananciasSucursal'%}">Ganancias por sucursal </a></li>
+              <li><a href="{% url 'reporte:VehiculosSucursal'%}">Cantidad de Vehiculos por Sucursal </a></li>
+              <li><a href="{% url 'reporte:ProveedoresUsados'%}">Proveedores Usados </a></li>
+              <li><a href="{% url 'reporte:SucursalRepuestos'%}">Repuestos Por Sucursal</a></li>
 
 
-						</ul>
-					</li>
+            </ul>
+          </li>

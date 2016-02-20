@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.views import password_reset, password_reset_confirm
 from django.template import RequestContext
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from django.db.models.functions import Coalesce
 from apps.empleado.models import Empleado, VENDEDOR, JEFE_TALLER, GERENTE
@@ -32,19 +33,19 @@ class Login(TemplateView):
 			return render_to_response(
 				'inicio/login.html',
 				context_instance=RequestContext(request))
-		
+
 	#Cunado la peticion es tipo POST se hace el proceso de login con la informacion del formulario de login
 	def post(self,request,*args,**kwargs):
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 
-		#Usando el la funcion authenticate, obtenemos el usuario que corresponde con los datos 
+		#Usando el la funcion authenticate, obtenemos el usuario que corresponde con los datos
 		#pasados como argumentos
 		user = authenticate(username=username,password=password)
 		if user is not None:
 			if user.is_active:
 				login(request,user)
-											
+
 				#Retornamos una respuesta con el perfil del usuario
 				return self.get_user_template(request)
 			else:
@@ -59,7 +60,7 @@ class Login(TemplateView):
 				'inicio/login.html',
 				context,
 				context_instance=RequestContext(request))
- 
+
 	def get_user_template(self,request):
 		if request.user.empleado.tipo == GERENTE:
 
@@ -79,7 +80,7 @@ class Login(TemplateView):
 
 			sucursales_vehiculos = SucursalVehiculo.objects.annotate(
 				num_ventas=Count('ventas')).order_by('-num_ventas')
-			
+
 			context = {
 				'ventas':sucursales,
 				'valor_ordenes_de_trabajo':valor_ordenes_de_trabajo,
@@ -88,7 +89,7 @@ class Login(TemplateView):
 				'vendedores':vendedores,
 				'sucursales_vehiculos':sucursales_vehiculos
 				}
-			
+
 			return render_to_response(
 				'cuenta/perfil_gerente.html',
 				context,
@@ -117,12 +118,10 @@ class Login(TemplateView):
 				'cuenta/perfil_vendedor.html',
 				context,
 				context_instance=RequestContext(request))
-		
-		elif request.user.empleado.tipo == JEFE_TALLER: 
-		
-			return render_to_response(
-				'cuenta/perfil_jefe_taller.html',
-				context_instance=RequestContext(request))
+
+		elif request.user.empleado.tipo == JEFE_TALLER:
+
+			return HttpResponseRedirect(reverse('orden_de_trabajo:listar'))
 
 class Logout(TemplateView):
 
@@ -150,11 +149,11 @@ class RecuperarLoginEmailEnviado(TemplateView):
 class RecuperarLoginConfirmacion(TemplateView):
 
 	def dispatch(self,request,*args,**kwargs):
-		
+
 		return password_reset_confirm(
 			request,
 			template_name = 'inicio/recuperar_login_confirmacion.html',
-			uidb64=kwargs['uidb64'], token=kwargs['token'], 
+			uidb64=kwargs['uidb64'], token=kwargs['token'],
 			post_reset_redirect=reverse('inicio:recuperar_login_terminado'))
 
 class RecuperarLoginTerminado(TemplateView):
