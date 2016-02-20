@@ -10,21 +10,24 @@
 {% block content %}
             <!-- begin invoice -->
             <div class="invoice">
-                <div class="invoice-company">
+
+                <div class="row invoice-company">
+                    <div class="row pull-left">
+                      <img src="{{ MEDIA_URL }}imagenes/logo/logo.png" class="img-circle">
+                    </div>
                     <span class="pull-right hidden-print">
-                    <a href="javascript:;" onclick="window.history.back()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-arrow-circle-left"></i> Volver</a>
-                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Imprimir</a>
+                      <a href="javascript:;" onclick="window.history.back()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-arrow-circle-left"></i> Volver</a>
+                      <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Imprimir</a>
                     </span>
-                    {{ user.empleado.sucursal.nombre }}, Inc
                 </div>
-                <div class="invoice-header">
+                <div class="row invoice-header">
                     <div class="invoice-from">
                         <small>de</small>
                         <address class="m-t-5 m-b-5">
-                            <strong>{{ user.empleado.sucursal.nombre }}, Inc.</strong><br />
-                            {{ user.empleado.sucursal.direccion }}<br />
-                            {{ user.empleado.sucursal.ciudad }}<br />
-                            Telefono: (032) {{ user.empleado.sucursal.telefono }}<br />
+                            <strong>{{ factura.cotizacion.orden_de_trabajo.empleado.sucursal.nombre }}, Inc.</strong><br />
+                            {{ factura.cotizacion.orden_de_trabajo.empleado.sucursal.direccion }}<br />
+                            {{ factura.cotizacion.orden_de_trabajo.empleado.sucursal.ciudad }}<br />
+                            Telefono: (032) {{ factura.cotizacion.orden_de_trabajo.empleado.sucursal.telefono }}<br />
                         </address>
                     </div>
                     <div class="invoice-to">

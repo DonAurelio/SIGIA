@@ -82,7 +82,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id="latest-post">
                             <div class="height-sm" data-scrollbar="true">
-                                {% if cotizaciones %}
+                                {% if cotizacionesEmpleado %}
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -92,11 +92,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for cotizaciones in cotizaciones %}
+                                        {% for cotizacionesEmpleado in cotizacionesEmpleado %}
                                         <tr>
-                                            <td>{{cotizaciones.cliente}}</td>
-                                            <td>{{ cotizaciones.vehiculo }}  </td>
-                                            <td>{{ cotizaciones.fecha }}</td>
+                                            <td>{{cotizacionesEmpleado.cliente}}</td>
+                                            <td>{{ cotizacionesEmpleado.vehiculo }}  </td>
+                                            <td>{{ cotizacionesEmpleado.fecha }}</td>
                                             
                                         </tr>
                                         {% endfor %}

@@ -95,15 +95,14 @@ class Login(TemplateView):
 				context_instance=RequestContext(request))
 
 		elif request.user.empleado.tipo == VENDEDOR:
-			
 			ventasVendedor = Venta.objects.filter(empleado=request.user.empleado).values("empleado").annotate(cantidad=Count('empleado_id')).order_by(Coalesce('cantidad', 'cantidad').desc())
 		 	cantidadVentas=ventasVendedor[0]['cantidad']
-		 	cantidadCotizacion=Cotizacion.objects.filter(empleado=request.user.empleado).values("empleado").annotate(cantidad= Count('empleado_id')).order_by(Coalesce('cantidad', 'cantidad').desc())
-		 	numeroCotizaciones=cantidadCotizacion[0]['cantidad']
+		 	cantidadCotizacion=Cotizacion.objects.filter(empleado=request.user.empleado).values("empleado").annotate(cantidadCo= Count('empleado_id')).order_by(Coalesce('cantidadCo', 'cantidadCo').desc())
+		 	numeroCotizaciones=cantidadCotizacion[0]['cantidadCo']
 		 	sucursalEmpleado=request.user.empleado.sucursal
 		 	cantidadVehiculos= SucursalVehiculo.objects.filter(sucursal=sucursalEmpleado).values("sucursal").annotate(cantidad= Sum('cantidad')).order_by(Coalesce('cantidad', 'cantidad').desc())
 		 	numeroVehiculos=cantidadVehiculos[0]['cantidad']
-		 	cotizaciones= Cotizacion.objects.filter(empleado=request.user.empleado)
+		 	cotizacionesEmpleado= Cotizacion.objects.filter(empleado=request.user.empleado)
 
 		 	#print cotizaciones.cliente
 
@@ -111,13 +110,12 @@ class Login(TemplateView):
 				'cantidadVentas':cantidadVentas,
 				'numeroCotizaciones':numeroCotizaciones,
 				'numeroVehiculos':numeroVehiculos,
-				'cotizaciones':cotizaciones
+				'cotizacionesEmpleado':cotizacionesEmpleado
 
 				}
 			return render_to_response(
 				'cuenta/perfil_vendedor.html',
 				context,
-
 				context_instance=RequestContext(request))
 		
 		elif request.user.empleado.tipo == JEFE_TALLER: 

@@ -9,15 +9,15 @@ class ProveedorCreateView(CreateView):
 	fields = [
 	'nombre','direccion','telefono','ciudad',
 	'email','habilitado']
-	
-	template_name = 'proveedor/proveedor_form.html'
+
+	template_name = 'proveedor/form.html'
 	success_url = reverse_lazy('proveedor:listar')
 
 	def get_context_data(self,**kwargs):
 		context = super(ProveedorCreateView,self).get_context_data(**kwargs)
 		context['section_title'] = 'Nuevo Proveedor'
 		return context
-		
+
 
 class ProveedorUpdateView(UpdateView):
 	model = Proveedor
@@ -25,7 +25,7 @@ class ProveedorUpdateView(UpdateView):
 	'nombre','direccion','telefono','ciudad',
 	'email','habilitado']
 
-	template_name = 'proveedor/proveedor_form.html'
+	template_name = 'proveedor/form.html'
 	success_url = reverse_lazy('proveedor:listar')
 
 	def get_context_data(self,**kwargs):

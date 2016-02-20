@@ -56,8 +56,6 @@ function listeners(){
               if(response.status==true){
                   $("#section-content").html(response.html);
                   $('.table').DataTable();
-                  //$('.update').off();
-                  //listeners();
                   $("#sucursal-modal").modal("toggle");
               }else{
                   $("#sucursal-modal-body").html(response.html);

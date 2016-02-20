@@ -9,8 +9,6 @@ class CotizacionOrdenDeTrabajo(models.Model):
 	#Orden de trabajo para la cual se relizara la cotizacion
 	#related_name para poder acceder desde orden de trabajo a CotizacionOrdenDeTrabajo
 	orden_de_trabajo = models.OneToOneField(OrdenDeTrabajo,related_name='cotizacion')
-	#Detalles de la reparacion del vehiculo
-	detalles = models.TextField()
 	#Costo de la reparacion del vehiculo
 	costo_reparacion = models.FloatField()
 	#Fecha hasta la cual es valida la cotizacion

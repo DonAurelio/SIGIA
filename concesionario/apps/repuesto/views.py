@@ -1,16 +1,17 @@
 # -*- encoding: utf-8 -*-
 
-from django.views.generic import ListView 
-from .models import Repuesto 
+from django.views.generic import ListView
+from .models import Repuesto
 from .forms import RepuestoSucursalCreateForm
 from apps.sucursal.models import Sucursal, SucursalRepuesto
 
 
-class RepuestosSucursalListView(ListView): 
+class RepuestosSucursalListView(ListView):
 	"""Lista los repuestos por sucursal. """
-	
+
 	model = Repuesto
 	context_object_name = 'lista_repuestos'
+	template_name = 'repuesto/list.html'
 
 	def get_queryset(self):
 		"""Obtiene la pk de la sucursal por url
@@ -28,11 +29,12 @@ class RepuestosListView(ListView):
 
 	model = Repuesto
 	context_object_name = 'repuestos'
+	template_name = 'repuesto/list.html'
 
 
-class RepuestoSucursalListView(ListView): 
+class RepuestoSucursalListView(ListView):
 	"""Lista los vehiculos por sucursal."""
-	
+
 	model = SucursalRepuesto
 	context_object_name = 'sucursal_repuestos'
 	template_name = 'repuesto/inventario_list.html'
@@ -48,7 +50,7 @@ class RepuestoSucursalListView(ListView):
 
 		sucursal_id = self.kwargs['pk']
 		sucursal = Sucursal.objects.get(id=sucursal_id)
-		
+
 		sucursal_repuestos = SucursalRepuesto.objects.filter(sucursal=sucursal)
 		return sucursal_repuestos
 
@@ -65,4 +67,3 @@ class RepuestoSucursalListView(ListView):
 		context['form_mode'] = 'create'
 
 		return context
-

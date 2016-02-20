@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'', include('apps.orden_de_trabajo.url',namespace='orden_de_trabajo')),
     url(r'', include('apps.cotizacion_orden_de_trabajo.url',namespace='cotizacion_orden_de_trabajo')),
 	url(r'', include('apps.factura_orden_de_trabajo.url',namespace='factura_orden_de_trabajo')),
+    url(r'', include('apps.movil.url',namespace='movil')),
 
     #url para acceder a la imagenes que estan en la carpeta media del proyecto
     #se deseas colocar imagenes en tu contenido HTML, este link es necesario para que se muestren las imagenes

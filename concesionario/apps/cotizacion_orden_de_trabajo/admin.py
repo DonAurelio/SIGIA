@@ -6,7 +6,7 @@ from .models import RepuestoCantidad
 
 class CotizacionOrdenDeTrabajoAdmin(admin.ModelAdmin):
 	list_display = (
-		'id','orden_de_trabajo','detalles',
+		'id','orden_de_trabajo',
 		'costo_reparacion','fecha_vencimiento','habilitado')
 	search_fields = ('id',)
 

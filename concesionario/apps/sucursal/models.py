@@ -30,6 +30,7 @@ class Sucursal(models.Model):
 	class Meta:
 		ordering = ['nombre']
 		verbose_name_plural = "Sucursales"
+		unique_together = ("nombre","ciudad")
 
 	#Permite determinar una representacion en string del objeto empleado
 	def __str__(self):
