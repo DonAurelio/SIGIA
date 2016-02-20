@@ -63,11 +63,12 @@
                                                           </ul>
                                                           {% endif %}
                                                       </td>
-                                                      <td>{% if  sucursal_vehiculo.vehiculo.imagen %}
-                                                              <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" />
-                                                          {% else %}
-                                                              <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
-                                                          {% endif %}
+                                                      <td>
+                                                      {% if  sucursal_vehiculo.vehiculo.imagen %}
+                                                        <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" />
+                                                      {% else %}
+                                                        <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
+                                                      {% endif %}
                                                       </td>
                                                     </tr >
                                                   {% endfor %}

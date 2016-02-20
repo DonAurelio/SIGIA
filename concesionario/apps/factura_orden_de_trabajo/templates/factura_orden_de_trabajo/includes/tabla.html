@@ -44,19 +44,18 @@
                                                     <td>{{ factura.cotizacion.orden_de_trabajo.placa }}</td>
                                                     <td>
                                                         {% if  factura.cotizacion.orden_de_trabajo.vehiculo.imagen %}
-                                                            <img src={{ factura.cotizacion.orden_de_trabajo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                            <img src={{ factura.cotizacion.orden_de_trabajo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" />
                                                         {% else %}
                                                             <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
-                                                        {% endif %} 
+                                                        {% endif %}
                                                     </td>
                                                     <td class="text-center" >
                                                         <a href="{% url 'factura_orden_de_trabajo:detalle' factura.pk %}">
                                                             <button type="button" class="btn btn-white "><i class="fa fa-bar-chart-o"></i></button>
                                                         </a>
-                                                        
                                                     </td>
                                                 </tr>
-                                            {% endfor %} 
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
