@@ -8,13 +8,16 @@
 {% bootstrap_messages %}
 
 {% block css %}
-{{ block.super }}
+{{ block.super }} 
 <!-- ================== BEGIN PAGE LEVEL STYLE TABLE================== -->
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
-
-{% block section_title %}Vehiculos disponibles {% endblock %}
+{% block breadcrumb %}
+Gestión de Vehículos
+{% endblock %} 
+{% block section_title %}Vehiculos Disponibles{% endblock %}
+{% block section_subtitle %}{% endblock %}
 {% block content %}
                 <!-- begin #content -->
                 <!-- begin col-12 -->
