@@ -19,8 +19,6 @@ from apps.sucursal.models import Sucursal
 
 from apps.factura_orden_de_trabajo.models import FacturaOrdenDeTrabajo
 
-
-
 class Login(TemplateView):
 
 	#Cuando la peticion es tipo GET, se muestra el template de login

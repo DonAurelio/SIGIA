@@ -4,9 +4,12 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from .models import Cliente
+from apps.inicio.mixins import LoginRequiredMixin
 
 # Crea el registro de un cliente mediante la clase generica CreateView
-class CrearCliente(CreateView):
+
+class CrearCliente(LoginRequiredMixin,CreateView):
+
 	model = Cliente
 	fields = ['identificacion', 'nombre', 'apellido', 'ciudad',
 	'departamento', 'telefono', 'celular', 'email']
@@ -19,7 +22,7 @@ class CrearCliente(CreateView):
 		return context
 
 
-class ActualizarCliente(UpdateView):
+class ActualizarCliente(LoginRequiredMixin,UpdateView):
 	model = Cliente
 	fields = ['identificacion', 'nombre', 'apellido', 'ciudad',
 	'departamento', 'telefono', 'celular', 'email']

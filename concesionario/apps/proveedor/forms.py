@@ -3,8 +3,9 @@
 from django.views.generic.edit import CreateView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 from .models import Proveedor
+from apps.inicio.mixins import LoginRequiredMixin
 
-class ProveedorCreateView(CreateView):
+class ProveedorCreateView(LoginRequiredMixin, CreateView):
 	model = Proveedor
 	fields = [
 	'nombre','direccion','telefono','ciudad',
@@ -19,7 +20,7 @@ class ProveedorCreateView(CreateView):
 		return context
 
 
-class ProveedorUpdateView(UpdateView):
+class ProveedorUpdateView(LoginRequiredMixin, UpdateView):
 	model = Proveedor
 	fields = [
 	'nombre','direccion','telefono','ciudad',

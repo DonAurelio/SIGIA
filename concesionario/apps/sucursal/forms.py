@@ -7,18 +7,18 @@ from django.http import HttpResponse
 from django.template import loader
 from django.template import Context
 from django import forms
-
+from apps.inicio.mixins import LoginRequiredMixin
 from .models import Sucursal
 
 import json
 
-class SucursalCreateForm(forms.ModelForm):
+class SucursalCreateForm(LoginRequiredMixin, forms.ModelForm):
 	class Meta:
 		model = Sucursal
 		fields = ('nombre', 'direccion', 'telefono', 'ciudad','habilitado')
 
 
-class SucursalAjaxCreateView(TemplateView):
+class SucursalAjaxCreateView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 		template = loader.get_template('sucursal/includes/form.html')
@@ -32,7 +32,7 @@ class SucursalAjaxCreateView(TemplateView):
 		data = json.dumps(response)
 		return HttpResponse(data,content_type='application/json')
 
-	
+
 	def post(self,request,*args,**kwargs):
 		form = SucursalCreateForm(request.POST)
 		if form.is_valid():
@@ -46,7 +46,7 @@ class SucursalAjaxCreateView(TemplateView):
 			}
 			data = json.dumps(response)
 			return HttpResponse(data,content_type='application/json')
-		
+
 		template = loader.get_template('sucursal/includes/form.html')
 		context = {'form':form}
 		html = template.render(context)
@@ -56,9 +56,9 @@ class SucursalAjaxCreateView(TemplateView):
 		}
 		data = json.dumps(response)
 		return HttpResponse(data,content_type='application/json')
-			
 
-class SucursalAjaxUpdateView(TemplateView):
+
+class SucursalAjaxUpdateView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 		template = loader.get_template('sucursal/includes/form.html')
@@ -73,7 +73,7 @@ class SucursalAjaxUpdateView(TemplateView):
 		data = json.dumps(response)
 		return HttpResponse(data,content_type='application/json')
 
-	
+
 	def post(self,request,*args,**kwargs):
 		sucursal = Sucursal.objects.get(id=kwargs['pk'])
 		form = SucursalCreateForm(request.POST,instance=sucursal)
@@ -88,7 +88,7 @@ class SucursalAjaxUpdateView(TemplateView):
 			}
 			data = json.dumps(response)
 			return HttpResponse(data,content_type='application/json')
-		
+
 		template = loader.get_template('sucursal/includes/form.html')
 		context = {'form':form}
 		html = template.render(context)

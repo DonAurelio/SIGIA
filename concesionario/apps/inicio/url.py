@@ -9,13 +9,13 @@ from .views import RecuperarLoginConfirmacion
 from .views import RecuperarLoginTerminado
 
 urlpatterns = [
-	
+
 	#Para el inicio y cierre que sesion
 	url(r'^$', Login.as_view(), name='login'),
 	url(r'^inicio/login/$', Login.as_view(), name='login'),
 	url(r'^inicio/logout/$', Logout.as_view(), name='logout'),
 
-	#Para la recuperacion de la cuenta 
+	#Para la recuperacion de la cuenta
 
     #Envia al formuario para confirmar el correo de la persona que olvido su login
     url(r'^inicio/recuperar_login/$', RecuperarLogin.as_view(), name='recuperar_login'),

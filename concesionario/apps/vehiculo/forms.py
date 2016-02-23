@@ -8,14 +8,14 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse
 from django.contrib import messages
 from django import forms
-
+from apps.inicio.mixins import LoginRequiredMixin
 from .models import Vehiculo
 from apps.sucursal.models import Sucursal
 from apps.sucursal.models import SucursalVehiculo
 
 import json
 
-class VehiculoCreateView(CreateView):
+class VehiculoCreateView(LoginRequiredMixin, CreateView):
 	model = Vehiculo
 	fields = ['numero_serie', 'marca', 'modelo', 'motor', 'potencia', 'tipo',
 	'capacidad', 'caracteristicas', 'imagen', 'precio']
@@ -31,7 +31,7 @@ class VehiculoCreateView(CreateView):
 		return reverse_lazy('vehiculo:listar-vehiculos')
 
 
-class VehiculoUpdateView(UpdateView):
+class VehiculoUpdateView(LoginRequiredMixin, UpdateView):
 	model = Vehiculo
 	fields = ['numero_serie', 'marca', 'modelo', 'motor', 'potencia', 'tipo',
 	'capacidad', 'caracteristicas', 'imagen', 'precio']
@@ -48,14 +48,14 @@ class VehiculoUpdateView(UpdateView):
 		return reverse_lazy('vehiculo:listar-vehiculos')
 
 
-class VehiculoSucursalCreateForm(forms.ModelForm):
+class VehiculoSucursalCreateForm(LoginRequiredMixin, forms.ModelForm):
 
 	class Meta:
 		model = SucursalVehiculo
 		fields = ('vehiculo','sucursal','color','cantidad','habilitado')
 
 
-class VehiculoSucursalAjaxCreateView(TemplateView):
+class VehiculoSucursalAjaxCreateView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 
@@ -109,7 +109,7 @@ class VehiculoSucursalAjaxCreateView(TemplateView):
 		return HttpResponse(data, content_type='application/json')
 
 
-class VehiculoSucursalAjaxUpdateView(TemplateView):
+class VehiculoSucursalAjaxUpdateView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 

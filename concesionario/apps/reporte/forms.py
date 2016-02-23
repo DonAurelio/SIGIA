@@ -14,15 +14,15 @@ from apps.sucursal.models import SucursalVehiculo
 from django.db.models.functions import Coalesce
 from apps.sucursal.models import SucursalRepuesto
 from apps.proveedor.models import Proveedor
-from apps.repuesto.models import Repuesto 
+from apps.repuesto.models import Repuesto
+from apps.inicio.mixins import LoginRequiredMixin
 
-
-class ReporteVendedores(View):
+class ReporteVendedores(LoginRequiredMixin, View):
 
 	def get(self, request, **kwargs):
-	 
+
 		ventas = Venta.objects.all()
- 		
+
 		ventasPorEmpleado =ventas.values("empleado").annotate(cuantos=Count('empleado_id')).order_by(Coalesce('cuantos', 'cuantos').desc())
 		for m in ventasPorEmpleado:
 			color="#%03x" % random.randint(0, 0xFFF)
@@ -33,8 +33,8 @@ class ReporteVendedores(View):
 
 
 
-class ReporteVentasSucursal(View):
-	
+class ReporteVentasSucursal(LoginRequiredMixin, View):
+
 
 	def get(self, request, **kwargs):
 		levels = range(32,256,32)
@@ -42,7 +42,7 @@ class ReporteVentasSucursal(View):
 		ventasPorSucursal =Venta.objects.values("empleado__sucursal__nombre").annotate(cuantos=Count('empleado_id')).order_by(Coalesce('cuantos', 'cuantos').desc())
 		ventas = []
 		for x in range(len(ventasPorSucursal)):
-			
+
 			if x == 0:
 				color="#%03x" % random.randint(0, 0xFFF)
 				ven = {}
@@ -64,7 +64,7 @@ class ReporteVentasSucursal(View):
 		return render (request, 'reporte/reporte_VentasSucursal.html',{'ventas':ventas})
 
 
-class ReporteGananciasSucursal(View):
+class ReporteGananciasSucursal(LoginRequiredMixin, View):
 
 	def get(self, request, **kwargs):
 
@@ -82,17 +82,17 @@ class ReporteGananciasSucursal(View):
 				ven = {}
 				ven['sucursal']=str(gananciasVentas[x]['empleado__sucursal__nombre'])
 				ven['ganancia']=gananciasVentas[x]['ganancia']
-				ventas.append(ven) 
+				ventas.append(ven)
 
 		print ventas
 
 		return render (request, 'reporte/reporte_GananciasSucursales.html',{'ventas':ventas})
 
-class ReporteVehiculosSucursal(View):
+class ReporteVehiculosSucursal(LoginRequiredMixin, View):
 
 	def get(self, request, **kwargs):
 		vehiculos=SucursalVehiculo.objects.values("sucursal__nombre").annotate(cuantos=Sum('cantidad')).order_by(Coalesce('cuantos', 'cuantos').desc())
-		
+
 		vehiculo=[]
 		for x in range(len(vehiculos)):
 			if x == 0:
@@ -106,39 +106,36 @@ class ReporteVehiculosSucursal(View):
 				veh = {}
 				veh['sucursal']=str(vehiculos[x]['sucursal__nombre'])
 				veh['cuantos']=vehiculos[x]['cuantos']
-				vehiculo.append(veh) 
+				vehiculo.append(veh)
 				print vehiculo
 
 		return render (request, 'reporte/reporte_VehiculosSucursal.html',{'vehiculo':vehiculo})
- 
 
-class ReporteProveedoresUsados(View):
 
-	
+class ReporteProveedoresUsados(LoginRequiredMixin, View):
+
+
 	def get(self, request, **kwargs):
 
 		repuestos = Repuesto.objects.all()
- 		
+
 		proveedores =repuestos.values("proveedor").annotate(usados=Count('proveedor')).order_by(Coalesce('usados', 'usados').desc())
 		for m in proveedores:
 			m['proveedor'] = str(Proveedor.objects.get(id=m["proveedor"]).nombre)
-		
+
 		return render (request, 'reporte/reporte_Provedoores.html',{'proveedores':proveedores})
 
 
-class ReporteSucursalRepuestos(View):
+class ReporteSucursalRepuestos(LoginRequiredMixin, View):
 
-	
+
 	def get(self, request, **kwargs):
 
 		repuestosSucursal = SucursalRepuesto.objects.all()
- 		
+
 		cantidadRepuestos = repuestosSucursal.values("sucursal").annotate(cantidad=Sum('cantidad')).order_by(Coalesce('cantidad', 'cantidad').desc())
 		for m in cantidadRepuestos:
 			m['sucursal'] = str(Sucursal.objects.get(id=m["sucursal"]).nombre)
 
 		print cantidadRepuestos
 		return render (request, 'reporte/reporte_RepuestosSucursales.html',{'cantidadRepuestos':cantidadRepuestos})
-
-
-

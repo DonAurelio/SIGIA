@@ -3,8 +3,9 @@
 from django.views.generic.list import ListView
 from .models import FacturaOrdenDeTrabajo
 from apps.sucursal.models import Sucursal
+from apps.inicio.mixins import LoginRequiredMixin
 
-class FacturaOrdenDeTrabajoListView(ListView):
+class FacturaOrdenDeTrabajoListView(LoginRequiredMixin, ListView):
 
 	model = FacturaOrdenDeTrabajo
 	template_name = 'factura_orden_de_trabajo/list.html'

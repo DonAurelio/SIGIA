@@ -9,13 +9,14 @@ from apps.orden_de_trabajo.models import OrdenDeTrabajo
 from apps.orden_de_trabajo.models import COTIZADO
 from django.forms import inlineformset_factory
 from django.forms import ModelForm
+from apps.inicio.mixins import LoginRequiredMixin
 
-class CotizacionOrdenDeTrabajoForm(ModelForm):
+class CotizacionOrdenDeTrabajoForm(LoginRequiredMixin, ModelForm):
     class Meta:
         model = CotizacionOrdenDeTrabajo
         exclude = ('habilitado',)
 
-class RepuestoCantidadForm(ModelForm):
+class RepuestoCantidadForm(LoginRequiredMixin, ModelForm):
     class Meta:
         model = RepuestoCantidad
         fields = ('cotizacion_orden_de_trabajo','repuesto','cantidad')
@@ -27,7 +28,7 @@ RepuestoCantidadFormSet = inlineformset_factory(
     extra=1,
     can_delete=False)
 
-class CotizacionOrdenDeTrabajoCreateView(CreateView):
+class CotizacionOrdenDeTrabajoCreateView(LoginRequiredMixin, CreateView):
     model = CotizacionOrdenDeTrabajo
     form_class = CotizacionOrdenDeTrabajoForm
     template_name = 'cotizacion_orden_de_trabajo/form.html'
@@ -68,15 +69,15 @@ class CotizacionOrdenDeTrabajoCreateView(CreateView):
         cotizacion_orden_de_trabajo.orden_de_trabajo.estado_reparacion = COTIZADO
         cotizacion_orden_de_trabajo.orden_de_trabajo.save()
         return reverse(
-            'cotizacion_orden_de_trabajo:listar', 
+            'cotizacion_orden_de_trabajo:listar',
             kwargs={'pk':self.object.orden_de_trabajo.sucursal.id}
             )
 
-class CotizacionOrdenDeTrabajoUpdateView(UpdateView):
+class CotizacionOrdenDeTrabajoUpdateView(LoginRequiredMixin, UpdateView):
     model = CotizacionOrdenDeTrabajo
     form_class = CotizacionOrdenDeTrabajoForm
     template_name = 'cotizacion_orden_de_trabajo/form.html'
-    
+
     def get_context_data(self,**kwargs):
         context = super(CotizacionOrdenDeTrabajoUpdateView,self).get_context_data(**kwargs)
         context['section_title'] = 'Actualizar Cotización'
@@ -89,7 +90,7 @@ class CotizacionOrdenDeTrabajoUpdateView(UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['formset']
-        
+
         if formset.is_valid():
             form.save(commit=True)
             formset.save(commit=True)

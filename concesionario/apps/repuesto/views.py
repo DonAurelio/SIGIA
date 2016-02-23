@@ -4,9 +4,9 @@ from django.views.generic import ListView
 from .models import Repuesto
 from .forms import RepuestoSucursalCreateForm
 from apps.sucursal.models import Sucursal, SucursalRepuesto
+from apps.inicio.mixins import LoginRequiredMixin
 
-
-class RepuestosSucursalListView(ListView):
+class RepuestosSucursalListView(LoginRequiredMixin, ListView):
 	"""Lista los repuestos por sucursal. """
 
 	model = Repuesto
@@ -25,14 +25,14 @@ class RepuestosSucursalListView(ListView):
 		sucursal_id = self.kwargs['pk']
 		return Repuesto.objects.filter(sucursal_id=sucursal_id)
 
-class RepuestosListView(ListView):
+class RepuestosListView(LoginRequiredMixin, ListView):
 
 	model = Repuesto
 	context_object_name = 'repuestos'
 	template_name = 'repuesto/list.html'
 
 
-class RepuestoSucursalListView(ListView):
+class RepuestoSucursalListView(LoginRequiredMixin, ListView):
 	"""Lista los vehiculos por sucursal."""
 
 	model = SucursalRepuesto

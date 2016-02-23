@@ -6,27 +6,27 @@ from django.views.generic import TemplateView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
-
+from apps.inicio.mixins import LoginRequiredMixin
 from apps.cotizacion_orden_de_trabajo.models import CotizacionOrdenDeTrabajo
 from apps.orden_de_trabajo.models import REPARADO
 from .models import FacturaOrdenDeTrabajo
 from apps.sucursal.models import SucursalRepuesto
 from apps.cotizacion_orden_de_trabajo.models import RepuestoCantidad
 
-class FacturaOrdenDeTrabajoCreateView(TemplateView):
+class FacturaOrdenDeTrabajoCreateView(LoginRequiredMixin, TemplateView):
 
     def get(self,request,*args,**kwargs):
         """ Documentacion get
 
             Permite generar la factura que es el paso siguiente a una cotización
             de una orden de trabajo, antes de generarse la factura, se comprueba
-            si la cotización no esta vencida, luego se verifica que en inventario 
-            de la sucursal esten todos los repuestos necesarios para reparar el 
+            si la cotización no esta vencida, luego se verifica que en inventario
+            de la sucursal esten todos los repuestos necesarios para reparar el
             vehiculo, luego se hace el descuento de las unidades del inventario
             de la sucursal. Finalmente se muestra la factura.
 
         """
-        
+
         context = {}
         cotizacion = CotizacionOrdenDeTrabajo.objects.get(id=kwargs['pk'])
 
@@ -35,12 +35,12 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
 
             # Verificacion de repuestos faltantes
             info_repuestos_faltantes = self.verificar_inventario_sucursal(cotizacion)
-            
+
             # Si faltan repuestos, se cargan los repuestso faltantes en django.contrib.messages
             if info_repuestos_faltantes:
                 self.cargar_mensajes_de_errores(info_repuestos_faltantes)
                 return HttpResponseRedirect(reverse_lazy('orden_de_trabajo:listar'))
-            
+
             # Si todos los repuestos estan disponibles, se hace el descuento de los repuestos
             # Si hay algun errorr se carga en django.contrib.message
             errores = []
@@ -49,13 +49,13 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
             if errores:
                 self.cargar_mensajes_de_errores(errores)
                 return HttpResponseRedirect(reverse_lazy('orden_de_trabajo:listar'))
-                
+
 
             # Si no hay errores, se coloca el estado de la cotizacion del vehiculo como REPARADO
             cotizacion.orden_de_trabajo.estado_reparacion = REPARADO
             cotizacion.orden_de_trabajo.save()
 
-            # Se crea la factura 
+            # Se crea la factura
             factura = FacturaOrdenDeTrabajo( cotizacion=cotizacion )
             factura.save()
 
@@ -141,7 +141,7 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
 
                 sucursal_repuesto.cantidad = sucursal_repuesto.cantidad - cotizacion_repuesto.cantidad
                 sucursal_repuesto.save()
-                
+
             except IndexError:
                 errores.append(
                 "Se prento un error al consultar el repuesto {} no esta disponible en esta sucursal".format(
@@ -163,7 +163,7 @@ class FacturaOrdenDeTrabajoCreateView(TemplateView):
             messages.info(self.request,info)
 
 
-class FacturaOrdenDeTrabajoDetailView(TemplateView):
+class FacturaOrdenDeTrabajoDetailView(LoginRequiredMixin, TemplateView):
 
     def get(self,request,*args,**kwargs):
         """

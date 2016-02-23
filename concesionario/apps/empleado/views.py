@@ -3,13 +3,13 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import TemplateView
-
+from apps.inicio.mixins import LoginRequiredMixin
 from .models import Empleado
 from apps.sucursal.models import Sucursal
 
 
 
-class EmpleadoListView(TemplateView):
+class EmpleadoListView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 		sucursal_id = kwargs['spk']

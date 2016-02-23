@@ -7,14 +7,14 @@ from django.template import loader
 from django.http import HttpResponse
 from django.contrib import messages
 from django import forms
-
+from apps.inicio.mixins import LoginRequiredMixin
 from .models import Repuesto
 from apps.sucursal.models import Sucursal
 from apps.sucursal.models import SucursalRepuesto
 
 import json
 
-class CrearRepuesto(CreateView):
+class CrearRepuesto(LoginRequiredMixin, CreateView):
 	model = Repuesto
 	fields = ['nombre', 'precio', 'marca', 'clasificacion',
 	'imagen', 'proveedor', 'descripcion']
@@ -28,7 +28,7 @@ class CrearRepuesto(CreateView):
 		return context
 
 
-class ActualizarRepuesto(UpdateView):
+class ActualizarRepuesto(LoginRequiredMixin, UpdateView):
 	model = Repuesto
 	fields = ['nombre', 'precio', 'marca', 'clasificacion',
 	'imagen', 'proveedor', 'descripcion']
@@ -42,13 +42,13 @@ class ActualizarRepuesto(UpdateView):
 		return context
 
 
-class RepuestoSucursalCreateForm(forms.ModelForm):
+class RepuestoSucursalCreateForm(LoginRequiredMixin, forms.ModelForm):
 	class Meta:
 		model = SucursalRepuesto
 		fields = ('sucursal','repuesto','cantidad','habilitado')
 
 
-class RepuestoSucursalAjaxCreateView(TemplateView):
+class RepuestoSucursalAjaxCreateView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 
@@ -104,7 +104,7 @@ class RepuestoSucursalAjaxCreateView(TemplateView):
 		return HttpResponse(data, content_type='application/json')
 
 
-class RepuestoSucursalAjaxUpdateView(TemplateView):
+class RepuestoSucursalAjaxUpdateView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 

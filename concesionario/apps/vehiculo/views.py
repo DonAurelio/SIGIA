@@ -1,21 +1,22 @@
 # -*- encoding: utf-8 -*-
 
-from django.views.generic import ListView 
-from django.views.generic.detail import DetailView 
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
 from apps.sucursal.models import Sucursal, SucursalVehiculo
 from .models import Vehiculo
 from .forms import VehiculoSucursalCreateForm
+from apps.inicio.mixins import LoginRequiredMixin
 
-class VehiculosListView(ListView):
+class VehiculosListView(LoginRequiredMixin, ListView):
 	"""Lista todos los vehiculos."""
 
 	model = Vehiculo
 	context_object_name = 'vehiculos'
 	template_name = 'vehiculo/vehiculo_list.html'
 
-class VehiculoSucursalListView(ListView): 
+class VehiculoSucursalListView(LoginRequiredMixin, ListView):
 	"""Lista los vehiculos por sucursal."""
-	
+
 	model = SucursalVehiculo
 	context_object_name = 'sucursal_vehiculos'
 	template_name = 'vehiculo/inventario_list.html'
@@ -31,7 +32,7 @@ class VehiculoSucursalListView(ListView):
 
 		sucursal_id = self.kwargs['pk']
 		sucursal = Sucursal.objects.get(id=sucursal_id)
-		
+
 		sucursal_vehiculos = SucursalVehiculo.objects.filter(sucursal=sucursal)
 		return sucursal_vehiculos
 
@@ -44,12 +45,12 @@ class VehiculoSucursalListView(ListView):
 		sucursal = Sucursal.objects.get(id=sucursal_id)
 		context['sucursal'] = sucursal
 		context['vehiculos'] = Vehiculo.objects.all()
-		
+
 
 		return context
 
 # Preguntar a Lisa
-class VehiculosListSucursal(ListView):
+class VehiculosListSucursal(LoginRequiredMixin, ListView):
  	"""Lista todos los vehiculos con su respectiva sucursal."""
 
 	model = SucursalVehiculo

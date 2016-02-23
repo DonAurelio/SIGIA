@@ -9,9 +9,9 @@ from .models import RETIRADO
 from .models import REPARADO_Y_ENTREGADO
 from apps.cliente.models import Cliente
 from apps.vehiculo.models import Vehiculo
+from apps.inicio.mixins import LoginRequiredMixin
 
-
-class OrdenDeTrabajoCreateView(CreateView):
+class OrdenDeTrabajoCreateView(LoginRequiredMixin, CreateView):
 	model = OrdenDeTrabajo
 	fields = [
 	'sucursal','empleado','cliente',
@@ -47,7 +47,7 @@ class OrdenDeTrabajoCreateView(CreateView):
 		return initial
 
 
-class OrdenDeTrabajoUpdateView(UpdateView):
+class OrdenDeTrabajoUpdateView(LoginRequiredMixin, UpdateView):
 	model = OrdenDeTrabajo
 	fields = fields = [
 	'sucursal','empleado','cliente',

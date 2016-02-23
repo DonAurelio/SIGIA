@@ -40,6 +40,8 @@ EMAIL_HOST_USER = 'aureliowebpages@gmail.com'
 EMAIL_HOST_PASSWORD = '1143843823'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+LOGIN_URL = "/inicio/login/"
+
 
 # Application definition
 
@@ -55,7 +57,7 @@ INSTALLED_APPS = (
 	#Para dar estilos usando bootstrap a los campos de los formularios
 	'bootstrap3',
 	'django.contrib.humanize',
-	#para el pdf 
+	#para el pdf
 	'easy_pdf',
 	#Apps
 	#Administra el inicio y cierre de sesion
@@ -96,7 +98,7 @@ MIDDLEWARE_CLASSES = (
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django.middleware.security.SecurityMiddleware',
-	
+
 	'corsheaders.middleware.CorsMiddleware',
 )
 
@@ -170,4 +172,4 @@ MEDIA_URL = '/media/'
 USE_THOUSAND_SEPARATOR = True
 
 #http://stackoverflow.com/questions/22476273/no-access-control-allow-origin-header-is-present-on-the-requested-resource-i
-CORS_ORIGIN_ALLOW_ALL = True   
+CORS_ORIGIN_ALLOW_ALL = True

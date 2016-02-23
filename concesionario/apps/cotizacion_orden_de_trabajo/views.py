@@ -3,11 +3,11 @@
 from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
 from django.template import RequestContext
-
+from apps.inicio.mixins import LoginRequiredMixin
 from apps.empleado.models import Empleado
 from .models import CotizacionOrdenDeTrabajo
 
-class CotizacionOrdenDeTrabajoDetailView(TemplateView):
+class CotizacionOrdenDeTrabajoDetailView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 		cotizacion = CotizacionOrdenDeTrabajo.objects.get(id=kwargs['pk'])
@@ -19,7 +19,7 @@ class CotizacionOrdenDeTrabajoDetailView(TemplateView):
 				context_instance = RequestContext(request)
 			)
 
-class CotizacionOrdenDeTrabajoListView(TemplateView):
+class CotizacionOrdenDeTrabajoListView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 		empleado = Empleado.objects.get(id=request.user.empleado.id)

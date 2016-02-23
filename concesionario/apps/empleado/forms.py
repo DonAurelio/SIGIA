@@ -10,12 +10,12 @@ from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from django.core.urlresolvers import reverse
-
+from apps.inicio.mixins import LoginRequiredMixin
 from .models import Empleado
 from apps.sucursal.models import Sucursal
 from django.contrib.auth.models import User
 
-class UserForm(UserCreationForm):
+class UserForm(LoginRequiredMixin, UserCreationForm):
 
 	first_name = forms.CharField(label='Nombre')
 	last_name = forms.CharField(label='Apellido')
@@ -28,7 +28,7 @@ class UserForm(UserCreationForm):
 		model = User
 		fields = ( "username", "email", "first_name", "last_name")
 
-class EmpleadoForm(forms.ModelForm):
+class EmpleadoForm(LoginRequiredMixin, forms.ModelForm):
 
 	identificacion = forms.CharField(label='Numero de Identificación')
 	direccion = forms.CharField(label='Dirección')
@@ -40,7 +40,7 @@ class EmpleadoForm(forms.ModelForm):
 		fields = ['identificacion', 'direccion', 'telefono',
 		'salario','sucursal','imagen', 'tipo','habilitado' ]
 
-class EmpleadoCreateView(TemplateView):
+class EmpleadoCreateView(LoginRequiredMixin, TemplateView):
 	"""Crea un empleado dada una sucursal."""
 
 	def get(self,request,*args,**kwargs):
@@ -103,7 +103,7 @@ class EmpleadoCreateView(TemplateView):
 			context_instance=RequestContext(request))
 
 
-class EmpleadoUpdateView(TemplateView):
+class EmpleadoUpdateView(LoginRequiredMixin, TemplateView):
 
 	def get(self, request, *args, **kwargs):
 

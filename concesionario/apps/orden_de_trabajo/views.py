@@ -18,8 +18,9 @@ from apps.empleado.models import Empleado
 from apps.cotizacion_orden_de_trabajo.models import CotizacionOrdenDeTrabajo
 from apps.factura_orden_de_trabajo.models import FacturaOrdenDeTrabajo
 from datetime import datetime
+from apps.inicio.mixins import LoginRequiredMixin
 
-class OrdenDeTrabajoListView(ListView):
+class OrdenDeTrabajoListView(LoginRequiredMixin, ListView):
 	model = OrdenDeTrabajo
 	context_object_name = 'ordenes_de_trabajo'
 	template_name = 'orden_de_trabajo/list.html'
@@ -62,7 +63,7 @@ class OrdenDeTrabajoListView(ListView):
 		return context
 
 
-class RetirarEntregarVehiculoTemplateView(TemplateView):
+class RetirarEntregarVehiculoTemplateView(LoginRequiredMixin, TemplateView):
 
 	def get(self,request,*args,**kwargs):
 		orden_de_trabajo = OrdenDeTrabajo.objects.get(id=kwargs['pk'])
