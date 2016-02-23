@@ -129,10 +129,17 @@ WSGI_APPLICATION = 'concesionario.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+#sudo apt-get install postgresql
+#sudo apt-get install python-psycopg2
+#sudo apt-get install libpq-dev
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+	'NAME': 'db5v8uejjeduh4', # Or path to database file if using sqlite3.
+	'USER': 'xqapwmdbsdtwbk', # Not used with sqlite3.
+	'PASSWORD': 'm4ygRgcQGDXjUntoIBKkgWRTVW', # Not used with sqlite3.
+	'HOST': 'ec2-107-20-148-211.compute-1.amazonaws.com', # Set to empty string for localhost. Not used with sqlite3.
+	'PORT': '5432', # Set to empty string for default. Not used with sqlite3.
 	}
 }
 

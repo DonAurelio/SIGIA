@@ -7,9 +7,9 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('empleado', '0002_auto_20160114_2042'),
-        ('vehiculo', '0001_initial'),
-        ('cliente', '0002_cliente_habilitado'),
+        ('cliente', '0001_initial'),
+        ('sucursal', '0001_initial'),
+        ('empleado', '0001_initial'),
     ]
 
     operations = [
@@ -17,14 +17,13 @@ class Migration(migrations.Migration):
             name='Venta',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('fecha_venta', models.DateField()),
-                ('descuento', models.FloatField()),
+                ('fecha_venta', models.DateField(auto_now_add=True)),
                 ('precio_venta', models.FloatField()),
                 ('forma_pago', models.CharField(default=b'Efectivo', max_length=20, choices=[(b'Credito', b'Credito'), (b'Efectivo', b'Efectivo'), (b'Tarjeta_credito', b'Tarjeta de credito'), (b'Tarjeta_debito', b'Tarjeta de debito')])),
                 ('habilitado', models.BooleanField(default=True)),
                 ('cliente', models.ForeignKey(to='cliente.Cliente')),
-                ('empleado', models.ForeignKey(to='empleado.Empleado')),
-                ('vehiculo', models.ForeignKey(to='vehiculo.Vehiculo')),
+                ('empleado', models.ForeignKey(related_name='ventas', to='empleado.Empleado')),
+                ('sucursal_vehiculo', models.ForeignKey(related_name='ventas', to='sucursal.SucursalVehiculo')),
             ],
             options={
                 'ordering': ['fecha_venta'],

@@ -16,10 +16,10 @@ class Migration(migrations.Migration):
             name='Sucursal',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('nombre', models.CharField(max_length=20, unique=True, null=True, blank=True)),
-                ('direccion', models.CharField(max_length=50, null=True, blank=True)),
-                ('telefono', models.CharField(max_length=10, null=True, blank=True)),
-                ('ciudad', models.CharField(max_length=50, null=True, blank=True)),
+                ('nombre', models.CharField(unique=True, max_length=20)),
+                ('direccion', models.CharField(max_length=50)),
+                ('telefono', models.CharField(max_length=10)),
+                ('ciudad', models.CharField(max_length=50)),
                 ('habilitado', models.BooleanField(default=True)),
             ],
             options={
@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
             name='SucursalRepuesto',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('cantidad', models.IntegerField(null=True, blank=True)),
+                ('cantidad', models.IntegerField()),
                 ('habilitado', models.BooleanField(default=True)),
                 ('repuesto', models.ForeignKey(to='repuesto.Repuesto')),
                 ('sucursal', models.ForeignKey(to='sucursal.Sucursal')),
@@ -45,8 +45,8 @@ class Migration(migrations.Migration):
             name='SucursalVehiculo',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('color', models.CharField(max_length=20, null=True, blank=True)),
-                ('cantidad', models.IntegerField(null=True, blank=True)),
+                ('color', models.CharField(max_length=20)),
+                ('cantidad', models.IntegerField()),
                 ('habilitado', models.BooleanField(default=True)),
                 ('sucursal', models.ForeignKey(to='sucursal.Sucursal')),
                 ('vehiculo', models.ForeignKey(to='vehiculo.Vehiculo')),
@@ -59,15 +59,23 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='sucursal',
             name='repuestos',
-            field=models.ManyToManyField(to='repuesto.Repuesto', through='sucursal.SucursalRepuesto'),
+            field=models.ManyToManyField(related_name='sucursal', through='sucursal.SucursalRepuesto', to='repuesto.Repuesto'),
         ),
         migrations.AddField(
             model_name='sucursal',
             name='vehiculos',
-            field=models.ManyToManyField(to='vehiculo.Vehiculo', through='sucursal.SucursalVehiculo'),
+            field=models.ManyToManyField(related_name='sucursal', through='sucursal.SucursalVehiculo', to='vehiculo.Vehiculo'),
         ),
         migrations.AlterUniqueTogether(
             name='sucursalvehiculo',
             unique_together=set([('sucursal', 'vehiculo', 'color')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='sucursalrepuesto',
+            unique_together=set([('sucursal', 'repuesto')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='sucursal',
+            unique_together=set([('nombre', 'ciudad')]),
         ),
     ]
