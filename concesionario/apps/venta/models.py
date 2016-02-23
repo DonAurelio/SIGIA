@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from django.db import models
-from datetime import datetime 
+from datetime import datetime
 from apps.empleado.models import Empleado
 from apps.cliente.models import Cliente
 from apps.sucursal.models import SucursalVehiculo
@@ -19,7 +19,7 @@ forma_pago_choices = (
 	(EFECTIVO, 'Efectivo'),
 	(TARJETA_CREDITO, 'Tarjeta de credito'),
 	(TARJETA_DEBITO, 'Tarjeta de debito'),
-) 
+)
 
 class Venta(models.Model):
 	"""Define como se organizaran las ventas en la base de datos."""
@@ -28,17 +28,17 @@ class Venta(models.Model):
 	#Cliente que realiza la compra
 	cliente = models.ForeignKey(Cliente)
 	#Vehiculo de la venta
-	sucursal_vehiculo = models.ForeignKey(SucursalVehiculo,related_name='ventas', default=None)
+	sucursal_vehiculo = models.ForeignKey(SucursalVehiculo,related_name='ventas')
 	#Fecha en que se realiza la venta
-	fecha_venta=models.DateField(auto_now_add=True)	
+	fecha_venta=models.DateField(auto_now_add=True)
 	#Precio final de la venta, precio vehiculo - descuento
 	precio_venta = models.FloatField()
-	#Forma de pago para la compra del vehiculo	
+	#Forma de pago para la compra del vehiculo
 	forma_pago = models.CharField(max_length=20, choices=forma_pago_choices, default=EFECTIVO)
 	#Estado de la venta, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
 
-	#Permite hacer modificaciones agregadas a la representacion del modelo 
+	#Permite hacer modificaciones agregadas a la representacion del modelo
 	class Meta:
 		ordering = ['fecha_venta']
 		verbose_name_plural = "Ventas"
@@ -63,5 +63,4 @@ class Venta(models.Model):
 		return self.sucursal_vehiculo.sucursal.nombre
 
 	def marca_vehiculo(self):
-		return self.sucursal_vehiculo.vehiculo.marca 
-  
+		return self.sucursal_vehiculo.vehiculo.marca

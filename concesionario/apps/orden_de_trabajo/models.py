@@ -33,23 +33,23 @@ class OrdenDeTrabajo(models.Model):
 	"""Define la organizacion del los datos de una orden de trabajo en la base de datos."""
 
 	#Empleado que realiza la orden de trabajo, relacion uno a muchos
-	empleado = models.ForeignKey(Empleado,default=None)
+	empleado = models.ForeignKey(Empleado)
 	#Sucursal a la que ingresa el vehiculo
-	sucursal = models.ForeignKey(Sucursal,default=None)
+	sucursal = models.ForeignKey(Sucursal)
 	#dueno del auto que entra al taller, relacion uno a muchos
-	cliente = models.ForeignKey(Cliente,default=None)
+	cliente = models.ForeignKey(Cliente)
 	#vehiculo que va a ser reparado
-	vehiculo = models.ForeignKey(Vehiculo,default=None)
+	vehiculo = models.ForeignKey(Vehiculo)
 	#placa del vehiculo que entra al taller
-	placa = models.CharField(validators=[validador_placa],null=True,blank=True,max_length=7)
+	placa = models.CharField(validators=[validador_placa],max_length=7)
 	#Fecha de entrada al taller
-	fecha_entrada = models.DateField(auto_now_add=True,blank=True, null=True)
+	fecha_entrada = models.DateField(auto_now_add=True)
 	#Fecha de salida del taller
-	fecha_salida = models.DateField(blank=True, null=True)
+	fecha_salida = models.DateField()
 	#Estado del vehiculo en el taller
-	estado_reparacion = models.TextField(null=True,blank=True,max_length=50,choices=tipo_choice,default=PENDIENTE)
+	estado_reparacion = models.TextField(max_length=50,choices=tipo_choice,default=PENDIENTE)
 	#Observacion de los daños del vehiculo
-	observacion = models.TextField(null=True,blank=True,max_length=200)
+	observacion = models.TextField(max_length=200)
 	#Estado de la OrdenDeTrabajo, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
 

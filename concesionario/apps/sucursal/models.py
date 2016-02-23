@@ -10,13 +10,13 @@ class Sucursal(models.Model):
 	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
 
 	#Nombre de la sucursal
-	nombre = models.CharField(null=True,blank=True,max_length=20,unique=True)
+	nombre = models.CharField(max_length=20,unique=True)
 	#Direccion en la cual queda ubicada la sucursal
-	direccion = models.CharField(null=True,blank=True,max_length=50)
+	direccion = models.CharField(max_length=50)
 	#Telefono de la sucursal
-	telefono = models.CharField(null=True,blank=True,max_length=10)
+	telefono = models.CharField(max_length=10)
 	#Ciudad donde queda ubicada la sucursal
-	ciudad = models.CharField(null=True,blank=True,max_length = 50)
+	ciudad = models.CharField(max_length = 50)
 	#Estado de la sucursa, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
 	#Vehiculos que tiene la sucursal en venta
@@ -45,13 +45,13 @@ class SucursalVehiculo(models.Model):
 	"""Define la cantidad que existe de cada vehiculo por sucursal."""
 
 	#Sucursal a la que pertenece el vehiculo
-	sucursal = models.ForeignKey(Sucursal,default=None)
+	sucursal = models.ForeignKey(Sucursal)
 	#Vehiculo
-	vehiculo = models.ForeignKey(Vehiculo,default=None)
+	vehiculo = models.ForeignKey(Vehiculo)
 	#Color del vehiculo
-	color = models.CharField(null=True,blank=True,max_length=20)
+	color = models.CharField(max_length=20)
 	#Cantidad disponible en stock del repuesto en la sucursal
-	cantidad = models.IntegerField(null=True,blank=True)
+	cantidad = models.IntegerField()
 	#Estado de la vehiculo, Activa/inactiva
 	habilitado = models.BooleanField(default=True)
 
@@ -86,11 +86,11 @@ class SucursalRepuesto(models.Model):
 	"""Define la cantidad que existe de cada repuesto por sucursal."""
 
 	#Sucursal a la que pertenece el repuesto
-	sucursal = models.ForeignKey(Sucursal,default=None)
+	sucursal = models.ForeignKey(Sucursal)
 	#Repuesto
-	repuesto = models.ForeignKey(Repuesto,default=None)
+	repuesto = models.ForeignKey(Repuesto)
 	#Cantidad disponible en stock del repuesto en la sucursal
-	cantidad = models.IntegerField(null=True,blank=True)
+	cantidad = models.IntegerField()
 	#Estado de la repuesto, Activa/inactiva
 	habilitado = models.BooleanField(default = True)
 

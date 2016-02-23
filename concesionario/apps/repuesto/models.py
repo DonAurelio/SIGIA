@@ -32,30 +32,30 @@ tipo_choice = (
 
 class Repuesto(models.Model):
 	"""Define la organizacion del los datos de un repuesto en la base de datos."""
-	
+
 	#Django por defecto, cuando los modelos no tienen primary_key, coloca una llamada "id"
-	
+
 	#Nombre del repuesto
-	nombre = models.CharField(null=True,blank=True,max_length=50)
+	nombre = models.CharField(max_length=50)
 	#Precio del repuesto
-	precio = models.FloatField(null=True,blank=True)
+	precio = models.FloatField()
 	#Marca del repuesto
-	marca = models.CharField(null=True,blank=True,max_length=20) 
+	marca = models.CharField(max_length=20)
 	#Clasificacion del repuesto
-	clasificacion = models.CharField(null=True,blank=True, max_length=20, choices=tipo_choice,default=SELLOS_EMPAQUES)
+	clasificacion = models.CharField(max_length=20, choices=tipo_choice,default=SELLOS_EMPAQUES)
 	#Provedor del repuesto
-	proveedor = models.ForeignKey(Proveedor,default=None)
+	proveedor = models.ForeignKey(Proveedor)
 	#Descripcion del repuesto
-	descripcion = models.CharField(null=True,blank=True,max_length=100)
+	descripcion = models.CharField(max_length=100)
 	#Imagen del repuesto
-	imagen = models.ImageField(null=True,blank=True,upload_to = "imagenes/repuestos/")
-	#Thumbnail que permite reducir la imagen del repuesto 
+	imagen = models.ImageField(upload_to = "imagenes/repuestos/")
+	#Thumbnail que permite reducir la imagen del repuesto
 	thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(100, 50)],
 									  format='JPEG',
 									  options={'quality': 60})
-	
-	#Permite hacer modificaciones agregadas a la representacion del modelo 
+
+	#Permite hacer modificaciones agregadas a la representacion del modelo
 	class Meta:
 		ordering = ['nombre']
 		verbose_name_plural = "Repuestos"
@@ -68,8 +68,4 @@ class Repuesto(models.Model):
 
 	#Permite determinar una represetacion en string para el objeto (Esto es para versiones de Python 2)
 	def __unicode__(self):
-		return self.nombre 
-
-
-	
-
+		return self.nombre

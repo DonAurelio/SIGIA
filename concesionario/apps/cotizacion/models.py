@@ -24,11 +24,11 @@ class Cotizacion(models.Model):
 	"""Define la organizacion del los datos de una cotizacion en la base de datos."""
 
 	#Empleado que realiza la cotizacion, relacion uno a muchos
-	empleado= models.ForeignKey(Empleado,default=None)
+	empleado= models.ForeignKey(Empleado)
 	#Cliente que solicita la cotizacion, relacion uno a muchos
-	cliente= models.ForeignKey(Cliente,default=None)
+	cliente= models.ForeignKey(Cliente)
 	#Vehiculo cotizado, relacion uno a muchos
-	vehiculo= models.ForeignKey(Vehiculo,default=None)
+	vehiculo= models.ForeignKey(Vehiculo)
 	#Fecha en que se realiza la cotizacion
 	fecha=models.DateField(auto_now_add=True)
 	#Fecha de vencimiento de la cotizacion
