@@ -21,7 +21,6 @@
                                                 <th>Empleados</th>
                                                 <th>Vehiculos</th>
                                                 <th>Repuestos</th>
-                                                <th>Orden de Trabajo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,23 +58,6 @@
                                                         <a href="{% url 'repuesto:listar-repuestos-sucursal' sucursal.id %}">
                                                             <button type="button" class="btn btn-xs btn-warning m-r-5"><i class="fa fa-edit"></i> Inventario</button>
                                                         </a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="btn-group btn-xs">
-                                                            <a href="javascript:;" data-toggle="dropdown" class="btn btn-white dropdown-toggle btn-xs">Opciones <span class="caret"></span></a>
-                                                            <ul class="dropdown-menu">
-                                                                <li>
-                                                                    <a href="{% url 'cotizacion_orden_de_trabajo:listar' sucursal.pk %}">
-                                                                        Cotizaciones
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{% url 'factura_orden_de_trabajo:listar' sucursal.pk %}">
-                                                                        Facturas
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
                                                     </td>
                                                 </tr >
                                             {% endfor %}

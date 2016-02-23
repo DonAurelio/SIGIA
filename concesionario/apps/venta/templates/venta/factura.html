@@ -1,24 +1,26 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
+{% load factura_tags %}
 {% block css %}
 {{ block.super }}
-    <link href="{% static 'color_admin/assets/css/invoice-print.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'color_admin/assets/css/invoice-print.min.css' %}" rel="stylesheet" />
 {% endblock %}
-{% block section_title %} {% endblock %}
+{% block section_title %}{% endblock %}
 {% block section_subtitle %}{% endblock %}
 {% block content %}
             <!-- begin invoice -->
-            
             <div class="invoice">
-                    <img src="{{ MEDIA_URL }}imagenes/logo/logo.png" class="img-circle" align="left"> 
-                <div class="invoice-company">
+
+                <div class="row invoice-company">
+                    <div class="row pull-left">
+                      <img src="{{ MEDIA_URL }}imagenes/logo/logo.png" class="img-circle">
+                    </div>
                     <span class="pull-right hidden-print">
-                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a>
-                 </span> 
-                    <div ALIGN=center> <strong>FACTURA DE COMPRA</strong> </div>
-                    
+                      <a href="javascript:;" onclick="window.history.back()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-arrow-circle-left"></i> Volver</a>
+                      <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Imprimir</a>
+                    </span>
                 </div>
-                <div class="invoice-header">
+                <div class="row invoice-header">
                     <div class="invoice-from">
                         <address class="m-t-5 m-b-5">
                             <strong>{{ user.empleado.sucursal.nombre }}, Inc.</strong><br />

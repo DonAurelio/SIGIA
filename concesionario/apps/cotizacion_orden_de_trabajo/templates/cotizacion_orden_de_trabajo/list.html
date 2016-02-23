@@ -15,7 +15,7 @@
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
 {% endblock %}
 {% block breadcrumb %}
-Sucursal {{ sucursal.nombre }}
+Sucursal {{ user.empleado.sucursal.nombre }}
 {% endblock %}
 {% block section_title %}Cotizacones para Ordenes de Trabajo{% endblock %}
 {% block section_subtitle %}Seleccione el número de la orden de trabajo para la cotización que desea editar{% endblock %}
@@ -26,7 +26,7 @@ Sucursal {{ sucursal.nombre }}
                         {% include 'cotizacion_orden_de_trabajo/includes/tabla.html' %}
                     </div>
                 </div>
-                <!-- end col-12 --> 
+                <!-- end col-12 -->
 {% endblock %}
 
 {% block javascript %}

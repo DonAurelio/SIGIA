@@ -1,4 +1,4 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
 
 {# Load the tag library #}
@@ -10,7 +10,7 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-{% block css %} 
+{% block css %}
 {{ block.super }}
 
        <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
@@ -25,11 +25,11 @@
 {% block breadcrumb %}
 Gestión de Ventas
 {% endblock %}
-{% block section_title %}{{ section_title }}{% endblock %}
+{% block section_title %}Nueva Venta{{ section_title }}{% endblock %}
 {% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
 
- 
+
     <!-- begin col-12 --><div class="row">
     <!-- begin col-12 -->
     <div class="col-md-12">
@@ -48,12 +48,12 @@ Gestión de Ventas
                     <div id="wizard">
                         <ol>
                             <li>
-                                Seleccione el Cliente
-                                <small></small>
+                                Cliente
+                                <small>Seleccione el Cliente</small>
                             </li>
                             <li>
-                                Seleccione el Vehículo
-                                <small></small>
+                                Vehículo
+                                <small>Seleccione el Vehículo</small>
                             </li>
                             <li>
                                 Información Adicional
@@ -79,7 +79,7 @@ Gestión de Ventas
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        {% if lista_clientes %} 
+                                        {% if lista_clientes %}
                                             {% for cliente  in lista_clientes %}
                                             <tr>
                                                 <td><a class="clienteID" name="{{cliente.pk}}"> {{ cliente.identificacion }}</a></td>
@@ -90,10 +90,10 @@ Gestión de Ventas
                                                 <td>{{ cliente.telefono }}</td>
                                                 <td>{{ cliente.celular }}</td>
                                                 <td>{{ cliente.email }}</td>
-                                            {% endfor %} 
-                                        {% else %} 
+                                            {% endfor %}
+                                        {% else %}
                                         <p><h2>No hay Clientes registrados.</h2></p>
-                                            {% endif %}                       
+                                            {% endif %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -101,11 +101,11 @@ Gestión de Ventas
                                 </div>
                             </fieldset>
                         </div>
- 
+
                         <div class="wizard-step-2">
                             <fieldset>
                                 <div class="row">
-                                
+
                                 <div class="panel-body">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered">
@@ -133,7 +133,7 @@ Gestión de Ventas
                                         </table>
                                     </div>
                                 </div>
-                                    
+
                                 </div>
                             </fieldset>
                         </div>
@@ -142,13 +142,18 @@ Gestión de Ventas
                         <div class="wizard-step-3">
                             <fieldset>
                                 <div class="row">
-                                    {% bootstrap_form form %}
-                                </div>
-                            </fieldset>
+                                  <div class="col-md-8 col-md-offset-2">
+                                      {% bootstrap_form form %}
+                                      <div class="pull-right" >
+                                          <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-cog"></i> Guardar</button>
+                                      </div>
+                                  </div>
+                                  </div>
+                                </fieldset>
                         </div>
                         <!-- end wizard step-1 -->
                     </div>
-                <button type="submit" class="btn btn-inverse pull-right"><i class="fa fa-cog"></i>Finalizar venta</button>
+
                 </form>
             </div>
         </div>
@@ -165,7 +170,7 @@ Gestión de Ventas
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <!-- Para funcionamiento de tablas -->
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
-<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script> 
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
 
 <script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
@@ -173,7 +178,7 @@ Gestión de Ventas
 <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/bootstrap-datepicker.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
-<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script> 
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
@@ -198,4 +203,4 @@ Gestión de Ventas
     });
 </script>
 
-{% endblock %} 
+{% endblock %}

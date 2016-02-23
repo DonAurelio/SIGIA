@@ -14,6 +14,7 @@ from .models import RETIRADO
 from .models import REPARADO_Y_ENTREGADO
 from .models import OrdenDeTrabajo
 from apps.sucursal.models import Sucursal
+from apps.empleado.models import Empleado
 from apps.cotizacion_orden_de_trabajo.models import CotizacionOrdenDeTrabajo
 from apps.factura_orden_de_trabajo.models import FacturaOrdenDeTrabajo
 from datetime import datetime
@@ -24,36 +25,38 @@ class OrdenDeTrabajoListView(ListView):
 	template_name = 'orden_de_trabajo/list.html'
 
 	def get_queryset(self):
-		sucursal = Sucursal.objects.get(id=self.request.user.empleado.sucursal.id)
-		return OrdenDeTrabajo.objects.filter(sucursal=sucursal,estado_reparacion=PENDIENTE)
+		empleado = Empleado.objects.get(id=self.request.user.empleado.id)
+		return OrdenDeTrabajo.objects.filter(empleado=empleado,estado_reparacion=PENDIENTE)
 
 	def get_context_data(self):
 		context = super(OrdenDeTrabajoListView,self).get_context_data()
-		sucursal = Sucursal.objects.get(id=self.request.user.empleado.sucursal.id)
+		empleado = Empleado.objects.get(id=self.request.user.empleado.id)
 
 		# Se listan las cotizaciones de las ordenes de trabajo, con el fin de mostrar
 		# en el template las ordenes de trabajo cuyas repeparaciones han sido cotizadas
 		context['cotizaciones'] = CotizacionOrdenDeTrabajo.objects.filter(
-			orden_de_trabajo__sucursal=sucursal,
+			orden_de_trabajo__empleado=empleado,
 			orden_de_trabajo__estado_reparacion=COTIZADO
 		)
 
 		# Se listan las facturas de las ordenes de trabajo, con el fin de mostrar
 		# en el template las ordenes de trabajo facturadas
 		context['facturas'] = FacturaOrdenDeTrabajo.objects.filter(
-			cotizacion__orden_de_trabajo__sucursal=sucursal,
+			cotizacion__orden_de_trabajo__empleado=empleado,
 			cotizacion__orden_de_trabajo__estado_reparacion=REPARADO
 		)
 
 		# Se listan las ordenes de trabajo que han sido realizadas y cuyos vehiculos
 		# han sido entregados a sus respectivos clientes
 		context['reparados_entregados'] = OrdenDeTrabajo.objects.filter(
+			empleado=empleado,
 			estado_reparacion=REPARADO_Y_ENTREGADO
 		)
 
 		# Se listan las ordenes de trabajo que cuya reparacion no fue efectuada
 		# ya que el cliente retiro el vehiuclo
 		context['retirados'] = OrdenDeTrabajo.objects.filter(
+			empleado=empleado,
 			estado_reparacion=RETIRADO
 		)
 		return context

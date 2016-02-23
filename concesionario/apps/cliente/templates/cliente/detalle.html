@@ -22,263 +22,330 @@ Gestión de Clientes
 {% block section_subtitle %}Detalle de las transacciones que ha llevado a cabo un cliente{% endblock %}
 
 {% block content %}
-      <!-- begin row -->
-      <div class="row">
-          <!-- begin col-6 -->
-          <div class="col-md-6">
-          <ul class="nav nav-pills">
-            <li class="active"><a href="#nav-pills-tab-1" data-toggle="tab">Informacion de contacto</a></li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane fade active in" id="nav-pills-tab-1">
-              <dl class="dl-horizontal">
-								<dt>Nombre Completo</dt>
-								<dd>{{ cliente.nombre }} {{ cliente.apellido }}</dd>
-                <dt>Identificación</dt>
-								<dd>{{ cliente.nombre }} {{ cliente.identificacion }}</dd>
-								<dt>Ciudad</dt>
-								<dd>{{ cliente.ciudad }}</dd>
-								<dt>Departamento</dt>
-								<dd>{{ cliente.departamento }}</dd>
-                <dt>Teléfono</dt>
-								<dd>{{ cliente.telefono }}</dd>
-                <dt>Celular</dt>
-								<dd>{{ cliente.celular }}</dd>
-                <dt>Correo Electrónico</dt>
-								<dd>{{ cliente.email }}</dd>
-							</dl>
+        <!-- begin row -->
+        <div class="row">
+            <!-- begin col-4 -->
+            <div class="col-md-4">
+            <ul class="nav nav-pills">
+              <li class="active"><a href="#nav-pills-tab-1" data-toggle="tab">Informacion de contacto</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade active in" id="nav-pills-tab-1">
+                <dl class="dl-horizontal">
+                  <dt>Nombre Completo</dt>
+                  <dd>{{ cliente.nombre }} {{ cliente.apellido }}</dd>
+                  <dt>Identificación</dt>
+                  <dd>{{ cliente.nombre }} {{ cliente.identificacion }}</dd>
+                  <dt>Ciudad</dt>
+                  <dd>{{ cliente.ciudad }}</dd>
+                  <dt>Departamento</dt>
+                  <dd>{{ cliente.departamento }}</dd>
+                  <dt>Teléfono</dt>
+                  <dd>{{ cliente.telefono }}</dd>
+                  <dt>Celular</dt>
+                  <dd>{{ cliente.celular }}</dd>
+                  <dt>Correo Electrónico</dt>
+                  <dd>{{ cliente.email }}</dd>
+                </dl>
+              </div>
             </div>
           </div>
-        </div>
-          <!-- end col-6 -->
-          <!-- begin col-6 -->
-          <div class="col-md-6">
-            <div class="panel-group" id="accordion">
-              <div class="panel panel-inverse">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        <i class="fa fa-plus-circle pull-right"></i>
-                      Cotizaciones
-                    </a>
-                  </h3>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                  <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Numero</th>
-                                    <th>Empleado</th>
-                                    <th>Sucursal</th>
-                                    <th>Fecha</th>
-                                    <th>Fecha Vencimiento</th>
-                                    <th>Forma de Pago</th>
-                                    <th>Vehiculo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for cotizacion in cliente.cotizacion_set.all %}
-                                <tr class="odd gradeX">
-                                    <td>
-                                      <a href="{% url 'cotizacion:actualizar' cotizacion.id %}" >
-                                      {{ cotizacion.id }}
-                                      </a>
-                                    </td>
-                                    <td>
-                                      {{ cotizacion.empleado.user.first_name }}
-                                      {{ cotizacion.empleado.user.last_name }}
-                                    </td>
-                                    <td>{{ cotizacion.sucursal.nombre }}</td>
-                                    <td>{{ cotizacion.fecha }}</td>
-                                    <td>{{ cotizacion.fecha_vencimiento}}</td>
-                                    <td>{{ cotizacion.forma_pago }}</td>
-                                    <td>
+
+          <!-- end col-4 -->
+          <!-- begin col-8 -->
+          <div class="col-md-8">
+              <div class="panel-group" id="accordion">
+                <div class="panel panel-inverse">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                          <i class="fa fa-plus-circle pull-right"></i>
+                        Cotizaciones
+                      </a>
+                    </h3>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                          <table class="table table-striped table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>Número</th>
+                                      <th>Sucursal</th>
+                                      <th>Empleado</th>
+                                      <th>Fecha de Cotización</th>
+                                      <th>Fecha de Vencimiento</th>
+                                      <th>Forma de Pago</th>
+                                      <th>Vehículo</th>
+                                      <th>Cotización</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for cotizacion in cliente.cotizacion_set.all %}
+                                  <tr class="odd gradeX">
+                                      <td>
+                                        {{ cotizacion.id }}
+                                      </td>
+                                      <td>
+                                        {{ cotizacion.empleado.sucursal.nombre }}
+                                      </td>
+                                      <td>
+                                        {{ cotizacion.empleado.user.first_name }}
+                                        {{ cotizacion.empleado.user.last_name }}
+                                      </td>
+                                      <td>
+                                        {{ cotizacion.fecha }}
+                                      </td>
+                                      <td>
+                                        {{ cotizacion.fecha_vencimiento }}
+                                      </td>
+                                      <td>
+                                        {{ cotizacion.forma_pago }}
+                                      </td>
+                                      <td>
                                       {% if  cotizacion.vehiculo.imagen %}
-                                          <img src={{ cotizacion.vehiculo.imagen.url }} width=40 height=40 class="media-object rounded-corner"/>
+                                        <img src={{ cotizacion.vehiculo.imagen.url }} width=40 height=40 class="media-object rounded-corner" />
                                       {% else %}
-                                          <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=40 height=40 class="media-object rounded-corner" />
+                                        <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
                                       {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                      </td>
+                                      <td>
+                                        <a href="{% url 'cotizacion:pdf' cotizacion.id %}">
+                                          <button type="button" class="btn btn-white "><i class="fa fa-list"></i></button>
+                                        </a>
+                                      </td>
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="panel panel-inverse">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        <i class="fa fa-plus-circle pull-right"></i>
-                      Compras
-                    </a>
-                  </h3>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Numero</th>
-                                    <th>Empleado</th>
-                                    <th>Sucursal</th>
-                                    <th>Fecha</th>
-                                    <th>Forma de Pago</th>
-                                    <th>Total</th>
-                                    <th>Vehiculo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for compra in cliente.venta_set.all %}
-                                <tr class="odd gradeX">
-                                    <td>{{ compra.id }}</td>
-                                    <td>
-                                      {{ compra.empleado.user.first_name }}
-                                      {{ compra.empleado.user.last_name }}
-                                    </td>
-                                    <td>
-                                      {{ compra.sucursal_vehiculo.sucursal.nombre }}
-                                    </td>
-                                    <td>
-                                      {{ compra.fecha_venta }}
-                                    </td>
-                                    <td>
-                                      {{ compra.forma_pago }}
-                                    </td>
-                                    <td>
-                                      {{ compra.precio_venta }}
-                                    </td>
-                                    <td>
-                                    {% if  compra.sucursal_vehiculo.vehiculo.imagen %}
-                                        <img src={{ compra.sucursal_vehiculo.vehiculo.imagen.url }} width=40 height=40 class="media-object rounded-corner"/>
-                                    {% else %}
-                                        <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=40 height=40 class="media-object rounded-corner" />
-                                    {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+
+                <div class="panel panel-inverse">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                          <i class="fa fa-plus-circle pull-right"></i>
+                        Compras
+                      </a>
+                    </h3>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                          <table class="table table-striped table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>Número</th>
+                                      <th>Sucursal</th>
+                                      <th>Empleado</th>
+                                      <th>Fecha Venta</th>
+                                      <th>Forma de Pago</th>
+                                      <th>Precio de la Venta</th>
+                                      <th>Vehículo</th>
+                                      <th>Factura</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for venta in cliente.venta_set.all %}
+                                  <tr class="odd gradeX">
+                                      <td>
+                                        {{ venta.id }}
+                                      </td>
+                                      <td>
+                                        {{ venta.sucursal_vehiculo.sucursal.nombre }}
+                                      </td>
+                                      <td>
+                                        {{ venta.empleado.first_name }}
+                                        {{ venta.empleado.last_name }}
+                                      </td>
+                                      <td>
+                                        {{ venta.fecha_venta }}
+                                      </td>
+                                      <td>
+                                        {{ venta.forma_pago }}
+                                      </td>
+                                      <td>
+                                        {{ venta.precio_venta }}
+                                      </td>
+                                      <td>
+                                        {% if  venta.sucursal_vehiculo.vehiculo.imagen %}
+                                          <img src={{ venta.sucursal_vehiculo.vehiculo.imagen.url }} width=40 height=40 class="media-object rounded-corner" />
+                                        {% else %}
+                                          <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
+                                        {% endif %}
+                                      </td>
+                                      <td>
+                                        <a href="{% url 'venta:factura' venta.id %}">
+                                          <button type="button" class="btn btn-white "><i class="fa fa-bar-chart-o"></i></button>
+                                        </a>
+                                      </td>
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="panel panel-inverse">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        <i class="fa fa-plus-circle pull-right"></i>
-                      Ordenes de Trabajo
-                    </a>
-                  </h3>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
-                                    <td>4</td>
-                                    <td>X</td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                <div class="panel panel-inverse">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                          <i class="fa fa-plus-circle pull-right"></i>
+                        Ordenes de Trabajo
+                      </a>
+                    </h3>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                          <table class="table table-striped table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>Número</th>
+                                      <th>Sucursal</th>
+                                      <th>Fecha Entrada Vehículo</th>
+                                      <th>Fecha Salida Vehículo</th>
+                                      <th>Estado Reparación</th>
+                                      <th>Observaciones</th>
+                                      <th>Placa</th>
+                                      <th>Vehículo</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for orden in cliente.ordendetrabajo_set.all %}
+                                  <tr class="odd gradeX">
+                                      <td>{{ orden.id }}</td>
+                                      <td>{{ orden.sucursal.nombre }}</td>
+                                      <td>{{ orden.fecha_entrada }}</td>
+                                      <td>{{ orden.fecha_salida }}</td>
+                                      <td>{{ orden.estado_reparacion }}</td>
+                                      <td>{{ orden.observacion }}</td>
+                                      <td>{{ orden.placa }}</td>
+                                      <td>
+                                        {% if  orden.vehiculo.imagen %}
+                                          <img src={{ orden.vehiculo.imagen.url }} width=40 height=40 class="media-object rounded-corner" />
+                                        {% else %}
+                                          <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
+                                        {% endif %}
+                                      </td>
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="panel panel-inverse">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                        <i class="fa fa-plus-circle pull-right"></i>
-                      Cotizaciones Ordenes de Trabajo
-                    </a>
-                  </h3>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
-                                    <td>4</td>
-                                    <td>X</td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                <div class="panel panel-inverse">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                          <i class="fa fa-plus-circle pull-right"></i>
+                        Cotizaciones Ordenes de Trabajo
+                      </a>
+                    </h3>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                          <table class="table table-striped table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>Número Cotización</th>
+                                      <th>Número Orden</th>
+                                      <th>Costo Reparación</th>
+                                      <th>Fecha de Vencimiento</th>
+                                      <th>Cotización</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for orden in cliente.ordendetrabajo_set.all  %}
+                                  {% if orden.cotizacion %}
+                                  <tr class="odd gradeX">
+                                      <td>
+                                        {{ orden.cotizacion.id }}
+                                      </td>
+                                      <td>
+                                        {{ orden.id }}
+                                      </td>
+                                      <td>
+                                        {{ orden.cotizacion.costo_reparacion }}
+                                      </td>
+                                      <td>
+                                        {{ orden.cotizacion.fecha_vencimiento }}
+                                      </td>
+                                      <td>
+                                        <a href="{% url 'cotizacion_orden_de_trabajo:detalle' orden.cotizacion.pk %}">
+                                            <button type="button" class="btn btn-white "><i class="fa fa-list"></i></button>
+                                        </a>
+                                      </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="panel panel-inverse">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        <i class="fa fa-plus-circle pull-right"></i>
-                      Facturas Ordenes de Trabajo
-                    </a>
-                  </h3>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
-                                    <td>4</td>
-                                    <td>X</td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                <div class="panel panel-inverse">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                          <i class="fa fa-plus-circle pull-right"></i>
+                        Facturas Ordenes de Trabajo
+                      </a>
+                    </h3>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                          <table class="table table-striped table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>Número de la factura</th>
+                                      <th>Número Cotización</th>
+                                      <th>Número Orden</th>
+                                      <th>Costo Total</th>
+                                      <th>Factura</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for orden in cliente.ordendetrabajo_set.all %}
+                                  {% if  orden.cotizacion.factura %}
+                                  <tr class="odd gradeX">
+                                      <td>{{ orden.cotizacion.factura.id }}</td>
+                                      <td>{{ orden.cotizacion.id }}</td>
+                                      <td>{{ orden.id }}</td>
+                                      <td>{{ orden.cotizacion.factura.costo_total }}</td>
+                                      <td>
+                                        <a href="{% url 'factura_orden_de_trabajo:detalle' orden.cotizacion.factura.pk %}">
+                                            <button type="button" class="btn btn-white "><i class="fa fa-bar-chart-o"></i></button>
+                                        </a>
+                                      </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+
                     </div>
                   </div>
                 </div>
+
               </div>
-            </div>
+
           </div>
-          <!-- end col-6 -->
+          <!-- end col-8 -->
+
       </div>
       <!-- end row -->
 {% endblock %}
@@ -287,10 +354,11 @@ Gestión de Clientes
 {{ block.super }}
   <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
   <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
-  <script>
-  $(document).ready(function(){
-    $('.table').DataTable();
-  });
+
+  <script type="text/javascript">
+      $(document).ready(function() {
+        $('.table').DataTable();
+      });
   </script>
 
 {% endblock %}

@@ -110,7 +110,7 @@ class ReporteVehiculosSucursal(View):
 				print vehiculo
 
 		return render (request, 'reporte/reporte_VehiculosSucursal.html',{'vehiculo':vehiculo})
-
+ 
 
 class ReporteProveedoresUsados(View):
 

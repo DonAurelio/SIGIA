@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.views.generic import TemplateView
 from django.template import RequestContext
 
-from apps.sucursal.models import Sucursal
+from apps.empleado.models import Empleado
 from .models import CotizacionOrdenDeTrabajo
 
 class CotizacionOrdenDeTrabajoDetailView(TemplateView):
@@ -22,21 +22,15 @@ class CotizacionOrdenDeTrabajoDetailView(TemplateView):
 class CotizacionOrdenDeTrabajoListView(TemplateView):
 
 	def get(self,request,*args,**kwargs):
-		sucursal = Sucursal.objects.get(id=kwargs['pk'])
+		empleado = Empleado.objects.get(id=request.user.empleado.id)
 		cotizaciones = CotizacionOrdenDeTrabajo.objects.filter(
-			orden_de_trabajo__sucursal = sucursal
+			orden_de_trabajo__empleado = empleado
 			)
 
 		context = {
-			'sucursal':sucursal, 
 			'cotizaciones':cotizaciones
 		 }
 		return render_to_response(
 			'cotizacion_orden_de_trabajo/list.html',
 			context,
 			context_instance = RequestContext(request) )
-
-
-
-
-

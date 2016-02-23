@@ -26,7 +26,7 @@
                                             {% for cotizacion  in cotizaciones %}
                                                 <tr>
                                                     <td>
-                                                        <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.pk %}"> 
+                                                        <a href="{% url 'cotizacion_orden_de_trabajo:actualizar' cotizacion.pk %}">
                                                         {{ cotizacion.orden_de_trabajo.id }}
                                                         </a>
                                                     </td>
@@ -48,19 +48,18 @@
                                                     <td>{{ cotizacion.orden_de_trabajo.placa }}</td>
                                                     <td>
                                                         {% if  cotizacion.orden_de_trabajo.vehiculo.imagen %}
-                                                            <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" /> 
+                                                            <img src={{ cotizacion.orden_de_trabajo.vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner" />
                                                         {% else %}
                                                             <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
-                                                        {% endif %} 
+                                                        {% endif %}
                                                     </td>
                                                     <td class="text-center" >
                                                         <a href="{% url 'cotizacion_orden_de_trabajo:detalle' cotizacion.pk %}">
                                                             <button type="button" class="btn btn-white "><i class="fa fa-list"></i></button>
                                                         </a>
-                                                        
                                                     </td>
                                                 </tr>
-                                            {% endfor %} 
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>

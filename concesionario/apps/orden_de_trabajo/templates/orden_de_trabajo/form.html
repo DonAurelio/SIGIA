@@ -52,47 +52,48 @@ Gestión Ordenes de Trabajo
                             <!-- begin wizard step-1 -->
                             <div>
                               <fieldset>
+                                  <!-- begin row -->
+                                  <div class="row">
+                                      {% include 'orden_de_trabajo/includes/tabla_clientes.html' %}
+                                  </div>
+                                  <!-- end row -->
+                              </fieldset>
+                            </div>
+                            <!-- end wizard step-1 -->
+                            <!-- begin wizard step-2 -->
+                            <div>
+                              <fieldset>
                                 <!-- begin row -->
                                 <div class="row">
-                                    {% include 'orden_de_trabajo/includes/tabla_clientes.html' %}
+                                      {% include 'orden_de_trabajo/includes/tabla_vehiculos.html' %}
                                 </div>
                                 <!-- end row -->
                               </fieldset>
                             </div>
-                <!-- end wizard step-1 -->
-                <!-- begin wizard step-2 -->
-                <div>
-                  <fieldset>
-                    <!-- begin row -->
-                    <div class="row">
-                          {% include 'orden_de_trabajo/includes/tabla_vehiculos.html' %}
-                    </div>
-                    <!-- end row -->
-                  </fieldset>
-                </div>
-                <!-- end wizard step-2 -->
-                <!-- begin wizard step-3 -->
-                <div>
-                  <fieldset>
-                    <!-- begin row -->
-                      <div class="row">
-                          <div class="col-md-8 col-md-offset-2">
-                              {% bootstrap_form form %}
-                              <div class="pull-right" >
-                                  <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
-                              </div>
+                            <!-- end wizard step-2 -->
+                            <!-- begin wizard step-3 -->
+                            <div>
+                              <fieldset>
+                                <!-- begin row -->
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-2">
+                                        {% bootstrap_form form %}
+                                        <div class="pull-right" >
+                                            <button type="submit" class="btn btn-sm btn-inverse"><i class="fa fa-cog"></i> Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                              </fieldset>
+                            </div>
+                            <!-- end wizard step-3 -->
                           </div>
-                      </div>
-                      <!-- end row -->
-                  </fieldset>
-                </div>
-                <!-- end wizard step-3 -->
-              </div>
+                        </div>
+
+                    </div>
+                <!-- end panel -->
+                </form>
             </div>
-          </div>
-        <!-- end panel -->
-        </form>
-    </div>
     <!-- end col-12 -->
 {% endblock %}
 
@@ -103,7 +104,7 @@ Gestión Ordenes de Trabajo
 <script src="{% static 'color_admin/assets/js/form-wizards-validation.demo.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         FormWizardValidation.init();
         $('.table').DataTable();

@@ -10,7 +10,7 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-{% block css %} 
+{% block css %}
 {{ block.super }}
 
        <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
@@ -25,10 +25,10 @@
 {% block breadcrumb %}
 Gestión de Cotizaciones
 {% endblock %}
-{% block section_title %}{{ section_title }}{% endblock %}
+{% block section_title %} Nueva Cotización{{ section_title }}{% endblock %}
 {% block section_subtitle %}Diligencie el siguiente formulario{% endblock %}
 {% block content %}
- 
+
     <!-- begin col-12 --><div class="row">
     <!-- begin col-12 -->
     <div class="col-md-12">
@@ -47,12 +47,13 @@ Gestión de Cotizaciones
                     <div id="wizard">
                         <ol>
                            <li>
-                                Seleccione el Cliente
+                                Cliente
+                                <small>Seleccione el Cliente.</small>
                                 <small></small>
                             </li>
                             <li>
-                                Seleccione el Vehículo
-                                <small></small>
+                                Vehículo
+                                <small> Seleccione el Vehículo</small>
                             </li>
                             <li>
                                 Información General
@@ -78,7 +79,7 @@ Gestión de Cotizaciones
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        {% if lista_clientes %} 
+                                        {% if lista_clientes %}
                                             {% for cliente  in lista_clientes %}
                                             <tr>
                                                 <td><a class="clienteID" name="{{cliente.pk}}"> {{ cliente.identificacion }}</a></td>
@@ -89,10 +90,10 @@ Gestión de Cotizaciones
                                                 <td>{{ cliente.telefono }}</td>
                                                 <td>{{ cliente.celular }}</td>
                                                 <td>{{ cliente.email }}</td>
-                                            {% endfor %} 
-                                        {% else %} 
+                                            {% endfor %}
+                                        {% else %}
                                         <p><h2>No hay Clientes registrados.</h2></p>
-                                            {% endif %}                       
+                                            {% endif %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -100,11 +101,11 @@ Gestión de Cotizaciones
                                 </div>
                             </fieldset>
                         </div>
- 
+
                           <div class="wizard-step-2">
                             <fieldset>
                                 <div class="row">
-                                
+
                                 <div class="panel-body">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered">
@@ -123,7 +124,7 @@ Gestión de Cotizaciones
                                                     <td>{{ vehiculo.marca }}</td>
                                                     <td>{{ vehiculo.modelo }}</td>
                                                     <td>{% if  vehiculo.imagen %}
-                                                            <img src={{ vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner"/> 
+                                                            <img src={{ vehiculo.imagen.url }} width=50 height=50 class="media-object rounded-corner"/>
                                                         {% else %}
                                                             <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50 class="media-object rounded-corner" />
                                                         {% endif %} </td>
@@ -133,7 +134,7 @@ Gestión de Cotizaciones
                                         </table>
                                     </div>
                                 </div>
-                                    
+
                                 </div>
                             </fieldset>
                         </div>
@@ -142,13 +143,18 @@ Gestión de Cotizaciones
                         <div class="wizard-step-3">
                             <fieldset>
                                 <div class="row">
-                                    {% bootstrap_form form %}
-                                    <button type="submit" class="btn btn-inverse"><i class="fa fa-cog"></i>Aceptar</button>
-                                </div>
+                                  <div class="col-md-8 col-md-offset-2">
+                                      {% bootstrap_form form %}
+                                      <div class="pull-right" >
+                                          <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-cog"></i> Guardar</button>
+                                      </div>
+                                  </div>
+                                  </div>
                             </fieldset>
                         </div>
                         <!-- end wizard step-3 -->
                     </div>
+
                 </form>
             </div>
         </div>
@@ -164,7 +170,7 @@ Gestión de Cotizaciones
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <!-- Para funcionamiento de tablas -->
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
-<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script> 
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
 
 <script src="{% static 'color_admin/assets/plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
@@ -172,7 +178,7 @@ Gestión de Cotizaciones
 <script src="{% static 'color_admin/assets/js/apps.min.js' %}"></script>
 <script src="{% static 'color_admin/assets/js/bootstrap-datepicker.js' %}"></script>
 <script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js' %}"></script>
-<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script> 
+<script src="{% static 'color_admin/assets/plugins/DataTables-1.9.4/js/data-table.js' %}"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
@@ -198,4 +204,4 @@ Gestión de Cotizaciones
     });
 </script>
 
-{% endblock %} 
+{% endblock %}

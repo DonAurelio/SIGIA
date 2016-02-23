@@ -13,14 +13,17 @@
     <link href="{% static 'color_admin/assets/plugins/DataTables-1.9.4/css/data-table.css' %}" rel="stylesheet" />
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 {% endblock %}
-
-{% block section_title %}Vehiculos disponibles {% endblock %}
+{% block breadcrumb %}
+Catalogo de Vehículos
+{% endblock %}
+{% block section_title %}Vehiculos Disponibles {% endblock %}
+{% block section_subtitle %}{% endblock %}
 {% block content %}
                 <!-- begin #content -->
                 <!-- begin col-12 -->
                 <div class="col-md-12">
-                    
-  
+
+
                     <!-- begin panel -->
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
@@ -53,7 +56,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if sucursal_vehiculos %} 
+                                        {% if sucursal_vehiculos %}
                                             {% for sucursal_vehiculo in sucursal_vehiculos %}
                                                 <tr>
                                                     <td>{{ sucursal_vehiculo.vehiculo.numero_serie }}</td>
@@ -68,19 +71,19 @@
                                                     <td>{{ sucursal_vehiculo.color }}</td>
                                                     <td>{{ sucursal_vehiculo.cantidad }}</td>
                                                     <td>{% if  sucursal_vehiculo.vehiculo.imagen %}
-                                                            <img src={{ sucursal_vehiculo.vehiculo.imagen.url }} width=50 height=50 /> 
+                                                            <img src={{ sucursal_vehiculo.vehiculo.imagen.url }}  width=50 height=50 class="media-object rounded-corner"  />
                                                         {% else %}
-                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg" width=50 height=50>
-                                                        {% endif %} 
+                                                            <img src="{{ MEDIA_URL }}imagenes/vehiculos/imagen_no_disponible.jpg"  width=50 height=50 class="media-object rounded-corner" >
+                                                        {% endif %}
                                                     </td>
                                                     <td>{{ sucursal_vehiculo.sucursal }}</td>
                                                 </tr >
-                                            {% endfor %} 
-                                            </ul> 
-                                            {% else %} 
+                                            {% endfor %}
+                                            </ul>
+                                            {% else %}
                                                 <p><h2>No hay Vehiculos registrados en esta sucursal.</h2></p>
-                                        {% endif %} 
-                                    </tbody>       
+                                        {% endif %}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
