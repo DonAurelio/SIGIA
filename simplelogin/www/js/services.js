@@ -15,8 +15,16 @@ angular.module('starter.services', [])
 })
 
 .factory('WorkOrdersService',function( $http ){
-  var url = ("http://127.0.0.1:8000/validar/"+email+"/"+id+"/");
-  return $http({method: 'GET', url: url});
+  client = {};
+  client.getWorkOrders = getWorkOrders;
+
+  return client
+
+  function getWorkOrders(id){
+    var url = ("http://127.0.0.1:8000/ordenesdetrabajo/"+id+"/json/");
+    return $http({method: 'GET', url: url});
+  }
+  
 })
 
 
