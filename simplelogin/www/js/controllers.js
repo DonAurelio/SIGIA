@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('WorkOrderCtrl', function($scope, ValidateService, Chats) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -10,6 +10,8 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  $scope.client = ValidateService;
+  console.log($scope.client.id);
 
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
@@ -21,20 +23,24 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('LoginCtrl', function($scope, validateService, $location) {
+.controller('LoginCtrl', function($scope, ValidateService, $location) {
     $scope.data = {};
+    $scope.client = ValidateService;
  
     $scope.login = function() {
         // $scope.data.email = validateService.validate($scope.data.email, $scope.data.identificacion);
-        validateService.validate($scope.data.email, $scope.data.identificacion).then(success, error);
+        ValidateService
+          .validate($scope.data.email, $scope.data.identificacion)
+          .then(success, error);
 
         function success(data) {
             
             console.log("success");
             console.log(data.data);
             if (data.data.valido == true){
-
-              $location.url("/account");
+              //$scope.cliente_id = data.data.cliente_id;
+              $scope.client.id = data.data.cliente_id;
+              $location.url("/tab/workorder");
             }
 
         };

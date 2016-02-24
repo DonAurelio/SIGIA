@@ -1,18 +1,25 @@
 angular.module('starter.services', [])
 
+.factory('ValidateService', function( $http ) {
+  client = {};
+  client.id = null;
+  client.validate = validate;
 
-.factory('validateService', function($http) {
-  return {
-    validate: function(email, id) {
-      
-      //http://stackoverflow.com/questions/22476273/no-access-control-allow-origin-header-is-present-on-the-requested-resource-i
-      var url = ("http://127.0.0.1:8000/validar/"+email+"/"+id+"/");
-      
-      return $http({method: 'GET', url: url});
+  return client
 
-    }
-  };
+  function validate(email, id) {
+    //http://stackoverflow.com/questions/22476273/no-access-control-allow-origin-header-is-present-on-the-requested-resource-i
+    var url = ("http://127.0.0.1:8000/validar/"+email+"/"+id+"/");
+    return $http({method: 'GET', url: url});
+  }
 })
+
+.factory('WorkOrdersService',function( $http ){
+  var url = ("http://127.0.0.1:8000/validar/"+email+"/"+id+"/");
+  return $http({method: 'GET', url: url});
+})
+
+
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
