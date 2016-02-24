@@ -21,13 +21,28 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('LoginCtrl', function($scope, validateService) {
+.controller('LoginCtrl', function($scope, validateService, $location) {
     $scope.data = {};
  
     $scope.login = function() {
         // $scope.data.email = validateService.validate($scope.data.email, $scope.data.identificacion);
-        var response = validateService.validate($scope.data.email, $scope.data.identificacion);
-        console.log(response.valido);
+        validateService.validate($scope.data.email, $scope.data.identificacion).then(success, error);
+
+        function success(data) {
+            
+            console.log("success");
+            console.log(data.data);
+            if (data.data.valido == true){
+
+              $location.url("/account");
+            }
+
+        };
+        function error(data) {
+            //your code when fails
+            console.log("error");
+            
+        };
     }
 })
 

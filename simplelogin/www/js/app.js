@@ -85,8 +85,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   });
 
+  
+
+  // .state('infoVehiculo', {
+  //     url: '/infoVehiculo',
+  //     templateUrl: 'templates/infoVehiculo.html',
+  //     controller: 'infoVehiculoCtrl'
+  // })
+
   // if none of the above states are matched, use this as the fallback
-  //$urlRouterProvider.otherwise('/tab/dash');
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/tab/dash');
+  // $urlRouterProvider.otherwise('/login');
 
 });

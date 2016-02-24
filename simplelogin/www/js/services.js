@@ -5,26 +5,10 @@ angular.module('starter.services', [])
   return {
     validate: function(email, id) {
       
-      var response = null;
       //http://stackoverflow.com/questions/22476273/no-access-control-allow-origin-header-is-present-on-the-requested-resource-i
       var url = ("http://127.0.0.1:8000/validar/"+email+"/"+id+"/");
       
-      return $http({
-          method: 'GET',
-          url: url
-      }).
-      success(function(status) {
-          //your code when success
-          console.log("success");
-          response = status;
-          return response;
-      }).
-      error(function(status) {
-          //your code when fails
-          console.log("error");
-          response = status;
-          return response;
-      });
+      return $http({method: 'GET', url: url});
 
     }
   };
