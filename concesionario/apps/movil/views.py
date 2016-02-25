@@ -9,11 +9,10 @@ from apps.sucursal.models import Sucursal
 import json
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+from rest_framework import serializers as rest_serializer
 
-from rest_framework import serializers as r
-
-class VehiculoSerializer(r.ModelSerializer):
-	imagen = r.SerializerMethodField('get_image_url')
+class VehiculoSerializer(rest_serializer.ModelSerializer):
+	imagen = rest_serializer.SerializerMethodField('get_image_url')
 	class Meta:
 		model = Vehiculo
 		fields = ('imagen','marca','modelo')
@@ -21,14 +20,14 @@ class VehiculoSerializer(r.ModelSerializer):
 	def get_image_url(self, obj):
 		return obj.imagen.url
 
-class SucursalSerializer(r.ModelSerializer):
+class SucursalSerializer(rest_serializer.ModelSerializer):
 
 	class Meta:
 		model = Sucursal
 		fields = ('nombre','ciudad')
 		#fields = '__all__'
 
-class OrdenDeTrabajoSerializer(r.ModelSerializer):
+class OrdenDeTrabajoSerializer(rest_serializer.ModelSerializer):
 	vehiculo = VehiculoSerializer()
 	sucursal = SucursalSerializer()
 	class Meta:
@@ -63,4 +62,3 @@ class OrdenDeTrabajoJSONList(TemplateView):
 
 		s = OrdenDeTrabajoSerializer(cliente.ordendetrabajo_set.all(),many=True)
 		return JsonResponse(s.data,safe=False)
-		#return HttpResponse(data,content_type='application/json')
