@@ -9,7 +9,7 @@ angular.module('starter', [
   'ionic',
   'starter.controllers', 
   'starter.services',
-  'LocalStorageModule'])
+  ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -27,9 +27,9 @@ angular.module('starter', [
   });
 })
 
-.config(['localStorageServiceProvider', function(localStorageServiceProvider){
-  localStorageServiceProvider.setPrefix('ls');
-}])
+// .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+//   localStorageServiceProvider.setPrefix('ls');
+// }])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
