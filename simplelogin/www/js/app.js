@@ -40,7 +40,7 @@ angular.module('starter', [
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
@@ -67,12 +67,13 @@ angular.module('starter', [
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+
+  .state('tab.workorder-detail', {
+      url: '/workorder/:orderId',
       views: {
-        'tab-chats': {
+        'tab-workorder': {
           templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+          controller: 'WorkOrderDetailCtrl'
         }
       }
     })
@@ -92,14 +93,6 @@ angular.module('starter', [
       }
     }
   });
-
-  
-
-  // .state('infoVehiculo', {
-  //     url: '/infoVehiculo',
-  //     templateUrl: 'templates/infoVehiculo.html',
-  //     controller: 'infoVehiculoCtrl'
-  // })
 
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/tab/dash');

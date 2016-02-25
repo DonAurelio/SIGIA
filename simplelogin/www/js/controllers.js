@@ -8,8 +8,8 @@ angular.module('starter.controllers', [])
     .then(success,error);
 
   function success(data) {
-    console.log("success");
     $scope.orders = data.data;
+    $localstorage.setObject('orders', data.data);
     console.log($scope.orders);
   };
   function error(data) {
@@ -17,14 +17,15 @@ angular.module('starter.controllers', [])
       console.log("error");
       
   };
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+  // $scope.chats = Chats.all();
+  // $scope.remove = function(chat) {
+  //   Chats.remove(chat);
+  // };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('WorkOrderDetailCtrl', function($scope, $stateParams, $localstorage, Chats, WorkOrdersService) {
+  order = WorkOrdersService.getByID($localstorage.getObject('orders'),$stateParams.orderId);
+  $scope.order = order;
 })
 
 .controller('LoginCtrl', function($scope, $location, $localstorage, ValidateService) {
@@ -39,7 +40,6 @@ angular.module('starter.controllers', [])
             console.log("success");
             console.log(data.data);
             if (data.data.valido == true){
-              // To add to local storage
               $localstorage.set('cliente_id', data.data.cliente_id);
               $location.url("/tab/workorder");
             }
@@ -49,6 +49,9 @@ angular.module('starter.controllers', [])
             console.log("error");
 
         };
+
+
+
     }
 })
 

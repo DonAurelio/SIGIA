@@ -17,6 +17,7 @@ angular.module('starter.services', [])
 .factory('WorkOrdersService',function( $http ){
   client = {};
   client.getWorkOrders = getWorkOrders;
+  client.getByID = getByID;
 
   return client
 
@@ -24,7 +25,16 @@ angular.module('starter.services', [])
     var url = ("http://127.0.0.1:8000/ordenesdetrabajo/"+id+"/json/");
     return $http({method: 'GET', url: url});
   }
-  
+
+  function getByID(orders, workOrderId) {
+    for (var i = 0; i < orders.length; i++) {
+      if (orders[i].id === parseInt(workOrderId)) {
+        return orders[i];
+      }
+    }
+    return null;
+  }
+
 })
 
 .factory('$localstorage', ['$window', function($window) {
