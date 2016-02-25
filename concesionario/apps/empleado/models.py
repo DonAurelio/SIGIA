@@ -29,7 +29,7 @@ class Empleado(models.Model):
 	"""Define la organizacion del los datos de un empleado en la base de datos."""
 
 	#related_name permite hacer una referencia desde user a empleado de la siguiente forma user.empleado
-	user = models.OneToOneField(User,related_name='empleado',default=None)
+	user = models.OneToOneField(User,related_name='empleado',default=None,null=True)
 	#Indentificacion del empleado, debe ser unica
 	identificacion = models.CharField(max_length=20,unique=True)
 	#Direccion de residencia del empleado

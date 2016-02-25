@@ -37,7 +37,7 @@
                                                 {% for sucursal_repuesto in sucursal_repuestos %}
                                                   <tr>
                                                     <td>
-                                                      <a class="update" href="{% url 'repuesto:actualizar-repuesto-sucursal' sucursal_repuesto.repuesto.pk %}">
+                                                      <a class="update" href="{% url 'repuesto:actualizar-repuesto-sucursal' sucursal_repuesto.pk %}">
                                                         {{ sucursal_repuesto.repuesto.nombre }}
                                                       </a>
                                                     </td>

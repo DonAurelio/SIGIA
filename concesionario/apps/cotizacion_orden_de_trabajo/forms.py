@@ -68,10 +68,7 @@ class CotizacionOrdenDeTrabajoCreateView(LoginRequiredMixin, CreateView):
         cotizacion_orden_de_trabajo = CotizacionOrdenDeTrabajo.objects.get(id=self.object.id)
         cotizacion_orden_de_trabajo.orden_de_trabajo.estado_reparacion = COTIZADO
         cotizacion_orden_de_trabajo.orden_de_trabajo.save()
-        return reverse(
-            'cotizacion_orden_de_trabajo:listar',
-            kwargs={'pk':self.object.orden_de_trabajo.sucursal.id}
-            )
+        return reverse('cotizacion_orden_de_trabajo:listar')
 
 class CotizacionOrdenDeTrabajoUpdateView(LoginRequiredMixin, UpdateView):
     model = CotizacionOrdenDeTrabajo
@@ -101,7 +98,4 @@ class CotizacionOrdenDeTrabajoUpdateView(LoginRequiredMixin, UpdateView):
             )
 
     def get_success_url(self):
-        return reverse(
-        'cotizacion_orden_de_trabajo:listar',
-        kwargs={'pk':self.object.orden_de_trabajo.sucursal.id}
-        )
+        return reverse('cotizacion_orden_de_trabajo:listar')

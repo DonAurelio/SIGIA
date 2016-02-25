@@ -13,7 +13,7 @@ admin.site.register(Sucursal,AdminSucursal)
 
 class AdminSucursalRepuesto(admin.ModelAdmin):
 	
-	list_display = ('nombre_sucursal','nombre_repuesto','cantidad_repuesto')
+	list_display = ('id','nombre_sucursal','nombre_repuesto','cantidad_repuesto')
 
 	search_fields = ('nombre_sucursal','nombre_repuesto','cantidad_repuesto')
 	
@@ -21,7 +21,7 @@ admin.site.register(SucursalRepuesto, AdminSucursalRepuesto)
 
 class AdminSucursalVehiculo(admin.ModelAdmin):
 
-	list_display = ('nombre_sucursal','numero_serie','color_vehiculo','cantidad_vehiculo')
+	list_display = ('id','nombre_sucursal','numero_serie','color_vehiculo','cantidad_vehiculo')
 
 	search_fields = ('nombre_sucursal','numero_serie','color_vehiculo','cantidad_vehiculo')
 

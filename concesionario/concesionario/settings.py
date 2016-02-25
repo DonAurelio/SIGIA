@@ -15,6 +15,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print "base",BASE_DIR
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +27,7 @@ SECRET_KEY = 'l^bwzdk8(+z(k31v0^p@vtw!a3qb40n#0wf%z4uy5ix2p#z^kl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Send email for forgotten passwords
 # Is necesary configure your account to allow django use it to send mails
@@ -129,10 +130,17 @@ WSGI_APPLICATION = 'concesionario.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+#sudo apt-get install postgresql
+#sudo apt-get install python-psycopg2
+#sudo apt-get install libpq-dev
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+	'NAME': 'd5c3lpps21qear', # Or path to database file if using sqlite3.
+	'USER': 'xapxdqwklzzdhj', # Not used with sqlite3.
+	'PASSWORD': '_lhlMpEgAl_p9ickzChyLyaM1i', # Not used with sqlite3.
+	'HOST': 'ec2-54-83-198-159.compute-1.amazonaws.com', # Set to empty string for localhost. Not used with sqlite3.
+	'PORT': '5432', # Set to empty string for default. Not used with sqlite3.
 	}
 }
 
@@ -159,14 +167,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, "static"),
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-#MEDIA_URL = 'http://localhost:8000/media/'
+# Form deployment
+STATIC_ROOT = 'staticfiles'
+MEDIA_ROOT = os.path.join(STATIC_ROOT, "media")
 MEDIA_URL = '/media/'
+
+# For debug
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
+#MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+#MEDIA_URL = '/media/'
+
 
 #Humanize settings
 USE_THOUSAND_SEPARATOR = True

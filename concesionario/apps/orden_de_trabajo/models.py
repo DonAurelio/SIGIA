@@ -45,7 +45,7 @@ class OrdenDeTrabajo(models.Model):
 	#Fecha de entrada al taller
 	fecha_entrada = models.DateField(auto_now_add=True)
 	#Fecha de salida del taller
-	fecha_salida = models.DateField()
+	fecha_salida = models.DateField(null=True)
 	#Estado del vehiculo en el taller
 	estado_reparacion = models.TextField(max_length=50,choices=tipo_choice,default=PENDIENTE)
 	#Observacion de los daños del vehiculo

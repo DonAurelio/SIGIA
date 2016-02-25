@@ -2,13 +2,16 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.core.validators
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cliente', '0002_cliente_habilitado'),
+        ('vehiculo', '0001_initial'),
+        ('sucursal', '0001_initial'),
         ('empleado', '0001_initial'),
+        ('cliente', '0001_initial'),
     ]
 
     operations = [
@@ -16,18 +19,24 @@ class Migration(migrations.Migration):
             name='OrdenDeTrabajo',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('placa', models.CharField(max_length=7, null=True, blank=True)),
-                ('fecha_entrada', models.DateField(auto_now_add=True, null=True)),
-                ('fecha_salida', models.DateField(null=True, blank=True)),
-                ('estado_reparacion', models.TextField(default=b'Pendiente', max_length=50, null=True, blank=True, choices=[(b'Pendiente', b'Pendiente'), (b'En observacion', b'En observacion'), (b'En reparacion', b'En reparacion'), (b'Finalizado', b'Finalizado')])),
-                ('observacion', models.TextField(max_length=200, null=True, blank=True)),
+                ('placa', models.CharField(max_length=7, validators=[django.core.validators.RegexValidator(b'^[A-Z]{3}-[0-9]{3}', message=b'Debe ingresar una placa valida ej: ABC-123', code=b'Invalid Key')])),
+                ('fecha_entrada', models.DateField(auto_now_add=True)),
+                ('fecha_salida', models.DateField()),
+                ('estado_reparacion', models.TextField(default=b'Pendiente', max_length=50, choices=[(b'Pendiente', b'Pendiente'), (b'Cotizado', b'Cotizado'), (b'Reparado', b'Reparado'), (b'Reparado y entregado', b'Reparado y entregado'), (b'Retirado', b'Retirado')])),
+                ('observacion', models.TextField(max_length=200)),
                 ('habilitado', models.BooleanField(default=True)),
-                ('cliente', models.ForeignKey(default=None, to='cliente.Cliente')),
-                ('empleado', models.ForeignKey(default=None, to='empleado.Empleado')),
+                ('cliente', models.ForeignKey(to='cliente.Cliente')),
+                ('empleado', models.ForeignKey(to='empleado.Empleado')),
+                ('sucursal', models.ForeignKey(to='sucursal.Sucursal')),
+                ('vehiculo', models.ForeignKey(to='vehiculo.Vehiculo')),
             ],
             options={
                 'ordering': ['fecha_entrada'],
                 'verbose_name_plural': 'Orden de Trabajo',
             },
+        ),
+        migrations.AlterUniqueTogether(
+            name='ordendetrabajo',
+            unique_together=set([('placa', 'fecha_salida')]),
         ),
     ]

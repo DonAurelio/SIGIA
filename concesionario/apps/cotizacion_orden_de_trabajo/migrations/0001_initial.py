@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('repuesto', '0001_initial'),
-        ('orden_de_trabajo', '0005_auto_20160124_0019'),
+        ('orden_de_trabajo', '0001_initial'),
     ]
 
     operations = [
@@ -16,7 +16,6 @@ class Migration(migrations.Migration):
             name='CotizacionOrdenDeTrabajo',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('detalles', models.TextField()),
                 ('costo_reparacion', models.FloatField()),
                 ('fecha_vencimiento', models.DateField()),
                 ('habilitado', models.BooleanField(default=True)),

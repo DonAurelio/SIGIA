@@ -77,7 +77,7 @@ class RepuestoSucursalAjaxCreateView(LoginRequiredMixin, TemplateView):
 			template = loader.get_template('repuesto/includes/inventario.html')
 			repuestos = Repuesto.objects.all()
 			sucursal = Sucursal.objects.get(id=kwargs['spk'])
-			sucursal_repuestos = SucursalRepuesto.objects.get(sucursal=sucursal)
+			sucursal_repuestos = SucursalRepuesto.objects.filter(sucursal=sucursal)
 			context = {
 				'repuestos':repuestos,
 				'sucursal':sucursal,
@@ -130,10 +130,9 @@ class RepuestoSucursalAjaxUpdateView(LoginRequiredMixin, TemplateView):
 		if form.is_valid():
 			form.save()
 			template = loader.get_template('repuesto/includes/inventario.html')
-			template = loader.get_template('repuesto/includes/inventario.html')
 			repuestos = Repuesto.objects.all()
-			sucursal = Sucursal.objects.get(id=kwargs['spk'])
-			sucursal_repuestos = SucursalRepuesto.objects.get(sucursal=sucursal)
+			sucursal = request.user.empleado.sucursal
+			sucursal_repuestos = SucursalRepuesto.objects.filter(sucursal=sucursal)
 			context = {
 				'repuestos':repuestos,
 				'sucursal':sucursal,

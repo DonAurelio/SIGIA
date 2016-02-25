@@ -22,7 +22,7 @@ class VehiculoSerializer(r.ModelSerializer):
 		return obj.imagen.url
 
 class SucursalSerializer(r.ModelSerializer):
-	
+
 	class Meta:
 		model = Sucursal
 		fields = ('nombre','ciudad')
@@ -39,7 +39,7 @@ class OrdenDeTrabajoSerializer(r.ModelSerializer):
 
 # Create your views here.
 class Validar(TemplateView):
-	
+
 	def get(self, request, *args, **kwargs):
 		email = kwargs['email']
 		identificacion = kwargs['id']
@@ -57,7 +57,7 @@ class OrdenDeTrabajoJSONList(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cliente = Cliente.objects.get(id=kwargs['pk'])
 		data = serializers.serialize(
-			"json", 
+			"json",
 			cliente.ordendetrabajo_set.all()
 		)
 
