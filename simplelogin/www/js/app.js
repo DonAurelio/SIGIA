@@ -27,10 +27,6 @@ angular.module('starter', [
   });
 })
 
-// .config(['localStorageServiceProvider', function(localStorageServiceProvider){
-//   localStorageServiceProvider.setPrefix('ls');
-// }])
-
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -62,7 +58,7 @@ angular.module('starter', [
       url: '/workorder',
       views: {
         'tab-workorder': {
-          templateUrl: 'templates/tab-chats.html',
+          templateUrl: 'templates/tab-workorder.html',
           controller: 'WorkOrderCtrl'
         }
       }
@@ -72,7 +68,7 @@ angular.module('starter', [
       url: '/workorder/:orderId',
       views: {
         'tab-workorder': {
-          templateUrl: 'templates/chat-detail.html',
+          templateUrl: 'templates/workorder-detail.html',
           controller: 'WorkOrderDetailCtrl'
         }
       }
@@ -82,20 +78,9 @@ angular.module('starter', [
       url: '/login',
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
-    })
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  });
+    });
 
   // if none of the above states are matched, use this as the fallback
-  //$urlRouterProvider.otherwise('/tab/dash');
   $urlRouterProvider.otherwise('/login');
 
 });

@@ -4,8 +4,11 @@
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="order in orders" type="item-text-wrap" href="#/tab/workorder/{{order.id}}">
         <img ng-src="http://127.0.0.1:8000{{order.vehiculo.imagen}}">
         <h2>Placa: {{order.placa}}</h2>
-        <p>Número de órden: {{order.id}}</p>
-        <ul><li>{{ order.vehiculo.marca }} {{ order.vehiculo.modelo }}</li> <li>fecha de entrada: {{order.fecha_entrada}}</li></ul>
+        <ul>
+          <li>{{ order.vehiculo.marca }} {{ order.vehiculo.modelo }}</li>
+          <li>Fecha de entrada: {{order.fecha_entrada}}</li>
+        </ul>
+        <p>Número orden: {{order.id}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
