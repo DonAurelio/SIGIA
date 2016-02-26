@@ -37,6 +37,8 @@ angular.module('starter.controllers', [])
           .then(success, error);
         function success(data) {
             if (data.data.valido == true){
+              console.log("Success");
+              console.log(data.data.cliente_id);
               $localstorage.set('cliente_id', data.data.cliente_id);
               $location.url("/tab/workorder");
             }
@@ -52,6 +54,8 @@ angular.module('starter.controllers', [])
             }
         };
         function error(data) {
+          console.log("Error");
+          console.log(data.data);
           var alertPopup = $ionicPopup.alert({
             title: 'Error',
             template: 'Se ha producido un error inesperado. Por favor, compruebe su conexión',

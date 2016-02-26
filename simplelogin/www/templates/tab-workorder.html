@@ -2,7 +2,11 @@
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="order in orders" type="item-text-wrap" href="#/tab/workorder/{{order.id}}">
+
+        <!--
         <img ng-src="http://127.0.0.1:8000{{order.vehiculo.imagen}}">
+        -->
+        <img ng-src="http://concesionario-siga-www.herokuapp.com{{order.vehiculo.imagen}}">
         <h2>Placa: {{order.placa}}</h2>
         <ul>
           <li>{{ order.vehiculo.marca }} {{ order.vehiculo.modelo }}</li>

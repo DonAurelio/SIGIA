@@ -3,7 +3,8 @@ angular.module('starter.services', [])
 .factory('ValidateService', function( $http ) {
     return {
       validate: function (email, id) {
-        var url = ("http://127.0.0.1:8000/validar/"+email+"/"+id+"/");
+        //var url = ("http://127.0.0.1:8000/validar/"+email+"/"+id+"/");
+        var url = ("http://concesionario-siga-www.herokuapp.com/validar/"+email+"/"+id+"/");
         return $http({method: 'GET', url: url});
       }
     }
@@ -12,7 +13,8 @@ angular.module('starter.services', [])
 .factory('WorkOrdersService',function( $http ){
   return {
     getWorkOrders: function(id){
-      var url = ("http://127.0.0.1:8000/ordenesdetrabajo/"+id+"/json/");
+      //var url = ("http://127.0.0.1:8000/ordenesdetrabajo/"+id+"/json/");
+      var url = ("http://concesionario-siga-www.herokuapp.com/ordenesdetrabajo/"+id+"/json/");
       return $http({method: 'GET', url: url});
     },
     getByID: function(orders, workOrderId) {
@@ -25,7 +27,7 @@ angular.module('starter.services', [])
     }
   }
 })
-  
+
 .factory('$localstorage', ['$window', function($window) {
   return {
     set: function(key, value) {
